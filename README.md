@@ -1,4 +1,4 @@
-**QuickOps**
+# QuickOps
 Entwicklung eines ERP-Systems von Grund auf
 
 **Projektzeitraum:**  
