@@ -12,7 +12,7 @@ Schuljahr 24/25
 - Schwendtbauer Julian
 
 **Beschreibung:**  
-Im Rahmen dieses Projekts haben wir ein vollständig funktionsfähiges ERP-System von Grund auf neu programmiert. Ziel des Projekts war es, ein System zu schaffen, das Unternehmen dabei unterstützt, ihre Geschäftsprozesse effizienter zu gestalten und zentrale Aufgaben wie Buchhaltung, Lagerverwaltung und Kundenmanagement zu integrieren.
+Im Rahmen dieses Projekts haben wir ein vollständig funktionsfähiges ERP-System von Grund auf neu programmiert. Ziel des Projekts war es, ein System zu schaffen, das Unternehmen dabei unterstützt, ihre Geschäftsprozesse effizienter zu gestalten und zentrale Aufgaben wie Lagerverwaltung und Kundenmanagement zu integrieren.
 
 **Technologien:**
 
