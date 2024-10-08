@@ -12,7 +12,7 @@ Schuljahr 24/25
 - Langeder David
 
 **Beschreibung:**  
-Im Rahmen dieses Projekts wollen wir eine Schulsoftware von Grund auf bauen. Diese Software soll verschiedene Möglichkeiten und Dienste für Schüler bieten. Darunter fallen zum Beispiel eine Wissensdatenbank, eine Möglichkeit um Schulinterne Abstimmungen durchzuführen und vieles mehr.
+Dieses Projekt zielt darauf ab, eine Software zu entwickeln welche den Austausch von Zusammenfassungen, der jewiligen Fächer fördert. Um einen Ansporn für Schüler zu haben, gibt es für gute Bewertungen auf den Upload einer Zusammenfassung Leocoins. Diese Leocoins sind die Basis für eine Rangliste. Zudem gibt es eine Möglichkeit Umfragen zu erstellen, welche von anderen Schülern beantwortet werden kann.
 
 **Technologien:**
 
