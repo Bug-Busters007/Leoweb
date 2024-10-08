@@ -1,28 +1,28 @@
-# QuickOps
-Entwicklung eines ERP-Systems von Grund auf
+# Leoweb
+Entwicklung einer Schulsoftware von Grund auf
 
 **Projektzeitraum:**  
 Schuljahr 24/25
 
 **Team:**
-- Langeder David
-- Mörtendorfer Lukas
 - Groß Manuel
-- Oswald Michael
 - Schwendtbauer Julian
+- Oswald Michael
+- Mörtendorfer Lukas
+- Langeder David
 
 **Beschreibung:**  
-Im Rahmen dieses Projekts haben wir ein vollständig funktionsfähiges ERP-System von Grund auf neu programmiert. Ziel des Projekts war es, ein System zu schaffen, das Unternehmen dabei unterstützt, ihre Geschäftsprozesse effizienter zu gestalten und zentrale Aufgaben wie Lagerverwaltung und Kundenmanagement zu integrieren.
+Im Rahmen dieses Projekts wollen wir eine Schulsoftware von Grund auf bauen. Diese Software soll verschiedene Möglichkeiten und Dienste für Schüler bieten. Darunter fallen zum Beispiel eine Wissensdatenbank, eine Möglichkeit um Schulinterne Abstimmungen durchzuführen und vieles mehr.
 
 **Technologien:**
 
-- **Programmiersprache(n):** [C#]
-- **Datenbank:** [MySQL]
+- **Programmiersprache(n):** [C#, Typescript]
+- **Datenbank:** [MSSQL]
 - **Frameworks:** [Asp.Net]
 - **Tools:** [github.com]
 
 **Besondere Herausforderungen:**  
-Einbindung einer Datenbank, ...
+Validierung der Daten, Verbindung mit einer Datenbank, Validierung der User, Sicherheit von Ergebnissen, ...
 
 **Ergebnis:**  
-Ein Erp System mit verschiedenen Modulen z.B. Kundenmanagement, Auftragsübersicht, ...
+Eine Schulsoftware für die Schüler mit Modulen.
