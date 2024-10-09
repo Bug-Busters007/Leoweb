@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leoweb", "Leoweb.csproj", "{3A6D83DC-83CD-49D0-AEE8-369B7C483DAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeowebAPI", "..\LeowebAPI\LeowebAPI.csproj", "{4BBED303-FEA6-41D9-BB73-A60308AECDD0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A6D83DC-83CD-49D0-AEE8-369B7C483DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A6D83DC-83CD-49D0-AEE8-369B7C483DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A6D83DC-83CD-49D0-AEE8-369B7C483DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A6D83DC-83CD-49D0-AEE8-369B7C483DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BBED303-FEA6-41D9-BB73-A60308AECDD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BBED303-FEA6-41D9-BB73-A60308AECDD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BBED303-FEA6-41D9-BB73-A60308AECDD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BBED303-FEA6-41D9-BB73-A60308AECDD0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA1341A1-8A2C-4C62-933F-9D2647D3B470}
+	EndGlobalSection
+EndGlobal
