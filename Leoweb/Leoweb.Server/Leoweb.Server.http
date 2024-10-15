@@ -1,0 +1,6 @@
+@Leoweb.Server_HostAddress = http://localhost:5171
+
+GET {{Leoweb.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
