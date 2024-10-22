@@ -12,7 +12,7 @@ Schuljahr 24/25
 - Langeder David
 
 **Beschreibung:**  
-Dieses Projekt zielt darauf ab, eine Software zu entwickeln, welche verschiedene Module bietet. Das Hauptmodul, LeoLibrary ist für den den Austausch von Zusammenfassungen der jeweiligen Fächer zuständig. Um einen Ansporn für Schüler zu haben, gibt es für gute Bewertungen auf den Upload einer Zusammenfassung Leocoins. Diese Leocoins sind die Basis für eine Rangliste. Zudem gibt es eine Möglichkeit Umfragen zu erstellen, welche von anderen Schülern beantwortet werden kann.
+Dieses Projekt zielt darauf ab, eine Software zu entwickeln, welche verschiedene Module bietet. Das Hauptmodul, LeoLibrary ist für den den Austausch von Zusammenfassungen der jeweiligen Fächer zuständig. Um einen Ansporn für Schüler zu haben, gibt es für gute Bewertungen auf den Upload einer Zusammenfassung Leocoins. Diese Leocoins sind die Basis für eine Rangliste. Auf Basis dieser Zusammenfassungen wird eine KI trainiert, welche Fragen beantworten kann. Diese Leocoins sind die Basis für eine Rangliste. Zudem gibt es eine Möglichkeit Umfragen zu erstellen, welche von anderen Schülern beantwortet werden können.
 
 **Technologien:**
 
