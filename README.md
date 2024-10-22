@@ -17,6 +17,8 @@ Dieses Projekt zielt darauf ab, eine Software zu entwickeln, welche verschiedene
 **Technologien:**
 
 - **Programmiersprache(n):** [C#, Typescript]
+- **Frontend:** [Angular]
+- **Backend:** [Asp.Net WebAPI] 
 - **Datenbank:** [MSSQL]
 - **Frameworks:** [Asp.Net]
 - **Tools:** [github.com]
