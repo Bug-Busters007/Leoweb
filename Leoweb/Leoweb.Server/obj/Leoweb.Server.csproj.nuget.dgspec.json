@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {}
+    "D:\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {
+    "D:\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+        "projectUniqueName": "D:\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
         "projectName": "Leoweb.Server",
-        "projectPath": "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+        "projectPath": "D:\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
         "packagesPath": "C:\\Users\\manue\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
+        "outputPath": "D:\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -78,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
