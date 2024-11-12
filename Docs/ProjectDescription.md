@@ -23,7 +23,7 @@ Leoweb ist eine interaktive Web-App, die Schülern eine zentrale Plattform für 
 - **Datenbank:** [Postgresql]
 - **Frameworks:** [Asp.Net Web API, Angular]
 - **Tools:** [github.com]
-
+Das gesamte Projekt basiert euf einem Angular und ASP.Net Core Ansatz, um das Backend strickt in C# zu halten. Das Frontend besteht hauptsächlich aus Typesscript, HTML und CSS.
 ### [Hier ist unsere Projektstruktur](./Structure.md)
 
 ## Besondere Herausforderungen:
