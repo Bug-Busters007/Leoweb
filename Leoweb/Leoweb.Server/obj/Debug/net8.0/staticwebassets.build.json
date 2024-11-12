@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "m05muzmlLi47x+8kbF3D9QkKm2KkAdO5Amdyrk7JsiY=",
+  "Source": "Leoweb.Server",
+  "BasePath": "_content/Leoweb.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\HTL\\SYP\\Leoweb\\Leoweb\\leoweb.client\\leoweb.client.esproj",
+      "Version": 2,
+      "Source": "leoweb.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
