@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "VVGBlFK214E=",
   "success": true,
   "projectFilePath": "C:\\HTL\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+=======
+  "dgSpecHash": "QbZd543vpkA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+>>>>>>> 95b6e4000c9ddddaa33b1ea3822ffaa5a000ada6
   "expectedPackageFiles": [
     "C:\\Users\\lange\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.10\\microsoft.aspnetcore.spaproxy.8.0.10.nupkg.sha512",
     "C:\\Users\\lange\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
