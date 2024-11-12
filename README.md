@@ -19,12 +19,12 @@ Dieses Projekt zielt darauf ab, eine Software zu entwickeln, welche verschiedene
 - **Programmiersprache(n):** [C#, Typescript]
 - **Frontend:** [Angular]
 - **Backend:** [Asp.Net WebAPI] 
-- **Datenbank:** [MSSQL]
+- **Datenbank:** [Postgresql]
 - **Frameworks:** [Asp.Net]
-- **Tools:** [github.com]
+- **Tools:** [github.com, Rider, VS, DataGrip]
 
 **Besondere Herausforderungen:**  
 Validierung der Daten, Verbindung mit einer Datenbank, Validierung der User, Sicherheit von Ergebnissen, ...
 
 **Ergebnis:**  
-Eine Schulsoftware für die Schüler mit Modulen.
+Eine Schulsoftware für die Schüler mit Modulen. Hauptmodul: Leolibrary, Nebenmodule: Leopoll, Leocoins
