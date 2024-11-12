@@ -9,19 +9,11 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Leoweb.Server
 build_property.RootNamespace = Leoweb.Server
-<<<<<<< HEAD
-build_property.ProjectDir = C:\HTL\SYP\Leoweb\Leoweb\Leoweb.Server\
-=======
-build_property.ProjectDir = C:\Users\manue\Desktop\SYP_Projekt\Leoweb\Leoweb\Leoweb.Server\
->>>>>>> 95b6e4000c9ddddaa33b1ea3822ffaa5a000ada6
+build_property.ProjectDir = D:\Leoweb\Leoweb\Leoweb\Leoweb.Server\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-<<<<<<< HEAD
-build_property.MSBuildProjectDirectory = C:\HTL\SYP\Leoweb\Leoweb\Leoweb.Server
-=======
-build_property.MSBuildProjectDirectory = C:\Users\manue\Desktop\SYP_Projekt\Leoweb\Leoweb\Leoweb.Server
->>>>>>> 95b6e4000c9ddddaa33b1ea3822ffaa5a000ada6
+build_property.MSBuildProjectDirectory = D:\Leoweb\Leoweb\Leoweb\Leoweb.Server
 build_property._RazorSourceGeneratorDebug = 

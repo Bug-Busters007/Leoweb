@@ -2,11 +2,20 @@
 
 namespace Leoweb.Server.Controllers;
 
+[Route("api/[controller]")]
+[ApiController]
 public class DataController : Controller
 {
-    // GET
-    public IActionResult Index()
+    private readonly ILogger<DataController> _logger;
+
+    public DataController(ILogger<DataController> logger)
     {
-        return View();
+        _logger = logger;
+    }
+
+    [HttpGet("/testCall")]
+    public IActionResult Get()
+    {
+        return Ok("Hello World!");
     }
 }
