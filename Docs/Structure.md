@@ -3,6 +3,6 @@ Leoweb/ <br>
 │   ├── client/                  # Angular Frontend <br>
 │   ├── server/                  # .NET Backend <br>
 │   ├── shared/                  # Gemeinsame Dateien <br>
-├── .gitignore/                  # Das gesamte Angular .NET Projekt <br>
+├── .gitignore/                  <br>
 └── Docs/                        # Dokumentation <br>
 
