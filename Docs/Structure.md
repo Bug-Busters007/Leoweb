@@ -1,5 +1,5 @@
-Leoweb/ \n
-├── Leoweb/                      # Das gesamte Angular .NET Projekt \n
+Leoweb/
+├── Leoweb/                      # Das gesamte Angular .NET Projekt
 │   ├── client/                  # Angular Frontend
 │   ├── server/                  # .NET Backend
 │   ├── shared/                  # Gemeinsame Dateien
