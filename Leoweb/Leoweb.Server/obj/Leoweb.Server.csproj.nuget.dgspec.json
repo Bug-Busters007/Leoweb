@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "C:\\HTL\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {}
   },
   "projects": {
@@ -13,19 +12,6 @@
         "projectPath": "C:\\HTL\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
         "packagesPath": "C:\\Users\\lange\\.nuget\\packages\\",
         "outputPath": "C:\\HTL\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
-=======
-    "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
-        "projectName": "Leoweb.Server",
-        "projectPath": "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
-        "packagesPath": "C:\\Users\\manue\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
->>>>>>> 95b6e4000c9ddddaa33b1ea3822ffaa5a000ada6
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lange\\AppData\\Roaming\\NuGet\\NuGet.Config",

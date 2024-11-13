@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net8.0": {
-      "Microsoft.AspNetCore.SpaProxy/8.0.10": {
+      "Microsoft.AspNetCore.SpaProxy/8.0.11": {
         "type": "package",
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.SpaProxy.dll": {}
@@ -107,10 +107,10 @@
     }
   },
   "libraries": {
-    "Microsoft.AspNetCore.SpaProxy/8.0.10": {
-      "sha512": "8oqu48JT85gDrgkS8nbrIBYY4R+u3twEnycD8zSJJUVfw+Y14BmkymSGtH413ev3hc4hq4le9fD0P5468NlNbg==",
+    "Microsoft.AspNetCore.SpaProxy/8.0.11": {
+      "sha512": "jwE/cg81t/FTZF1DOKpd90ztzZz6NNNHdo+vLUL4I2IzqL3e8Coo+2eR0KeD4ShbJm+3LNPXH9a6gYv/oP+aQQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.spaproxy/8.0.10",
+      "path": "microsoft.aspnetcore.spaproxy/8.0.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -118,7 +118,7 @@
         "THIRD-PARTY-NOTICES.TXT",
         "build/Microsoft.AspNetCore.SpaProxy.targets",
         "lib/net8.0/Microsoft.AspNetCore.SpaProxy.dll",
-        "microsoft.aspnetcore.spaproxy.8.0.10.nupkg.sha512",
+        "microsoft.aspnetcore.spaproxy.8.0.11.nupkg.sha512",
         "microsoft.aspnetcore.spaproxy.nuspec"
       ]
     },
@@ -464,19 +464,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\HTL\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
       "projectName": "Leoweb.Server",
       "projectPath": "C:\\HTL\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
       "packagesPath": "C:\\Users\\lange\\.nuget\\packages\\",
       "outputPath": "C:\\HTL\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
-      "projectName": "Leoweb.Server",
-      "projectPath": "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
-      "packagesPath": "C:\\Users\\manue\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\manue\\Desktop\\SYP_Projekt\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
->>>>>>> 95b6e4000c9ddddaa33b1ea3822ffaa5a000ada6
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\lange\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -541,5 +533,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\HTL\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
