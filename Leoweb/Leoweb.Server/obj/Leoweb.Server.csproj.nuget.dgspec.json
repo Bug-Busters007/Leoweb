@@ -1,25 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\micha\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {}
+    "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\micha\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {
+    "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\micha\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+        "projectUniqueName": "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
         "projectName": "Leoweb.Server",
-        "projectPath": "C:\\Users\\micha\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
-        "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\micha\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
+        "projectPath": "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+        "packagesPath": "C:\\Users\\LMoer\\.nuget\\packages\\",
+        "outputPath": "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
-          "C:\\Users\\micha\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\LMoer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -71,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\micha\\.dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
