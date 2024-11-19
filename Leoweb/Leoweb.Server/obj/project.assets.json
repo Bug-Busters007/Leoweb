@@ -459,26 +459,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lange\\.nuget\\packages\\": {}
+    "C:\\Users\\micha\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\HTL\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+      "projectUniqueName": "C:\\Users\\micha\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
       "projectName": "Leoweb.Server",
-      "projectPath": "C:\\HTL\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
-      "packagesPath": "C:\\Users\\lange\\.nuget\\packages\\",
-      "outputPath": "C:\\HTL\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
+      "projectPath": "C:\\Users\\micha\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+      "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\micha\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\lange\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\micha\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -530,7 +528,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\micha\\.dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
