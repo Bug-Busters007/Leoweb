@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jschw\\Documents\\HTL\\3.Klasse\\SYP\\Leoweb\\Leoweb\\Leoweb.csproj": {}
+    "D:\\Leoweb\\Leoweb\\Leoweb.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jschw\\Documents\\HTL\\3.Klasse\\SYP\\Leoweb\\Leoweb\\Leoweb.csproj": {
+    "D:\\Leoweb\\Leoweb\\Leoweb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jschw\\Documents\\HTL\\3.Klasse\\SYP\\Leoweb\\Leoweb\\Leoweb.csproj",
+        "projectUniqueName": "D:\\Leoweb\\Leoweb\\Leoweb.csproj",
         "projectName": "Leoweb",
-        "projectPath": "C:\\Users\\jschw\\Documents\\HTL\\3.Klasse\\SYP\\Leoweb\\Leoweb\\Leoweb.csproj",
-        "packagesPath": "C:\\Users\\jschw\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jschw\\Documents\\HTL\\3.Klasse\\SYP\\Leoweb\\Leoweb\\obj\\",
+        "projectPath": "D:\\Leoweb\\Leoweb\\Leoweb.csproj",
+        "packagesPath": "C:\\Users\\manue\\.nuget\\packages\\",
+        "outputPath": "D:\\Leoweb\\Leoweb\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\jschw\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\manue\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -49,6 +49,16 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -68,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

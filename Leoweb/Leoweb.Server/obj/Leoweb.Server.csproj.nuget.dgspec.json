@@ -1,21 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {}
+    "D:\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {}
   },
   "projects": {
-    "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {
+    "D:\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+        "projectUniqueName": "D:\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
         "projectName": "Leoweb.Server",
-        "projectPath": "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
-        "packagesPath": "C:\\Users\\LMoer\\.nuget\\packages\\",
-        "outputPath": "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
+        "projectPath": "D:\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+        "packagesPath": "C:\\Users\\manue\\.nuget\\packages\\",
+        "outputPath": "D:\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\LMoer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\manue\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -23,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -50,6 +54,14 @@
               "target": "Package",
               "version": "[8.*-*, )"
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -74,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
