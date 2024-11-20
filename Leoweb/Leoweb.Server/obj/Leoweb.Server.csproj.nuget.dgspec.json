@@ -1,28 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {}
+    "C:\\Users\\Mike\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {}
   },
   "projects": {
-    "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {
+    "C:\\Users\\Mike\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+        "projectUniqueName": "C:\\Users\\Mike\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
         "projectName": "Leoweb.Server",
-        "projectPath": "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
-        "packagesPath": "C:\\Users\\LMoer\\.nuget\\packages\\",
-        "outputPath": "C:\\HTLKlasse3\\Syp\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
+        "projectPath": "C:\\Users\\Mike\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
+        "packagesPath": "C:\\Users\\Mike\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mike\\Documents\\Leoweb\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
-          "C:\\Users\\LMoer\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Mike\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -74,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Mike\\.dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
