@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace Leoweb.Server.Controllers;
 
@@ -13,9 +15,23 @@ public class DataController : Controller
         _logger = logger;
     }
 
-    [HttpGet("/testCall")]
+    [HttpGet("/testDataBaseConnection")]
     public IActionResult Get()
     {
-        return Ok("Hello World!");
+        var connectionString = "Server=tcp:sqlservervonmanuel.database.windows.net,1433;Initial Catalog=LeowebDB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\"";
+
+        using (var connection = new SqlConnection(connectionString))
+        {
+            try
+            {
+                connection.Open();
+                Ok("Connection established");
+            }
+            catch (Exception ex)
+            {
+                Ok($"Fehler bei der Verbindung: {ex.Message}");
+            }
+        }
+        return Ok();
     }
 }
