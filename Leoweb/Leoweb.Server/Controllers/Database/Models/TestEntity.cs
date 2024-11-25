@@ -1,4 +1,4 @@
-﻿namespace Leoweb.Server.Controllers;
+﻿namespace Leoweb.Server.Controllers.Database.Models;
 
 public class TestEntity
 {

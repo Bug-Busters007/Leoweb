@@ -1,4 +1,4 @@
-﻿using Leoweb.Server.Controllers;
+﻿using Leoweb.Server.Controllers.Database;
 using Microsoft.EntityFrameworkCore;
 
 public class ApplicationDbContext : DbContext
