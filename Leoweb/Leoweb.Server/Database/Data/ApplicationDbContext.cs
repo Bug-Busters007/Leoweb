@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 public class ApplicationDbContext : DbContext
 {
+	private const string test = "test";
 	private const string connectionString = "Server=tcp:sqlservervonmanuel.database.windows.net,1433;Initial Catalog=LeowebDB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\"";
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
