@@ -30,6 +30,7 @@ Leoweb ist eine interaktive Web-App, die Schülern eine zentrale Plattform für 
 - LeoPolls fertig stellen, 11.02.2025
 - LeoCoin System integrieren, 25.02.2025
 
+## Projektstruktur
 Das gesamte Projekt basiert euf einem Angular und ASP.Net Core Ansatz, um das Backend strickt in C# zu halten. Das Frontend besteht hauptsächlich aus Typesscript, HTML und CSS.
 ### [Hier ist unsere Projektstruktur](./Structure.md)
 
