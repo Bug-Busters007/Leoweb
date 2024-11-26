@@ -3257,41 +3257,23 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\jschw\\.nuget\\packages\\": {},
-=======
-    "C:\\Users\\mgros\\.nuget\\packages\\": {},
->>>>>>> 058b20f56518291f79d39e60d420d842e5aee983
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\jschw\\Documents\\HTL\\3.Klasse\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
       "projectName": "Leoweb.Server",
       "projectPath": "C:\\Users\\jschw\\Documents\\HTL\\3.Klasse\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
       "packagesPath": "C:\\Users\\jschw\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\jschw\\Documents\\HTL\\3.Klasse\\SYP\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
       "projectStyle": "PackageReference",
-=======
-      "projectUniqueName": "C:\\Users\\mgros\\OneDrive\\Desktop\\Local\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
-      "projectName": "Leoweb.Server",
-      "projectPath": "C:\\Users\\mgros\\OneDrive\\Desktop\\Local\\Leoweb\\Leoweb\\Leoweb.Server\\Leoweb.Server.csproj",
-      "packagesPath": "C:\\Users\\mgros\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mgros\\OneDrive\\Desktop\\Local\\Leoweb\\Leoweb\\Leoweb.Server\\obj\\",
-      "projectStyle": "PackageReference",
-      "UsingMicrosoftNETSdk": false,
->>>>>>> 058b20f56518291f79d39e60d420d842e5aee983
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\jschw\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-        "C:\\Users\\mgros\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 058b20f56518291f79d39e60d420d842e5aee983
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3300,10 +3282,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-<<<<<<< HEAD
         "C:\\Program Files\\dotnet\\library-packs": {},
-=======
->>>>>>> 058b20f56518291f79d39e60d420d842e5aee983
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3320,7 +3299,7 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3363,11 +3342,7 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
->>>>>>> 058b20f56518291f79d39e60d420d842e5aee983
       }
     }
   }
