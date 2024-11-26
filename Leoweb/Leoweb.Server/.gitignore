@@ -1,8 +1,2 @@
-﻿/obj/Debug/net8.0/Leoweb.Server.AssemblyInfo.cs
-/obj/Debug/net8.0/Leoweb.Server.AssemblyInfoInputs.cs
-/obj/Debug/net8.0/Leoweb.Server.GenerateMSBuildEditorConfig.editorconfig
-/obj/Debug/net8.0/Leoweb.Server.assets.cache
-/obj/Debug/net8.0/Leoweb.Server.csproj.nuget.g.props
-/obj/Debug/net8.0/project.assets.json
-/obj/Debug/net8.0/project.nuget.cache
-/obj/Debug/net8.0/rider.project.model.nuget.info
+﻿bin
+obj
