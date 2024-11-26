@@ -1,0 +1,14 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Leoweb.Server.Database.Models
+{
+    public class File
+    {
+        [Key]
+        public int Id { get; set; }
+        public Subject Subject { get; set; }
+        public required string Content { get; set; }
+        public DateOnly Date { get; set; }
+        public required Student Student { get; set; }
+    }
+}
