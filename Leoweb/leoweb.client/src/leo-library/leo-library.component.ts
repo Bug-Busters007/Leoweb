@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-leo-library',
@@ -7,36 +8,33 @@ import { Component } from '@angular/core';
   standalone: true
 })
 export class LeoLibraryComponent {
-  pdfSrc: string | null = null; // URL of the uploaded PDF
+  selectedFile: File | null = null;
 
-  onDragOver(event: DragEvent): void {
-    event.preventDefault(); // Prevent default behavior (e.g., open file in browser)
-  }
+  constructor(private http: HttpClient) {}
 
-  onDragEnter(): void {
-    const dropArea = document.getElementById('drop-area');
-    dropArea?.classList.add('hover');
-  }
-
-  onDragLeave(): void {
-    const dropArea = document.getElementById('drop-area');
-    dropArea?.classList.remove('hover');
-  }
-
-  onDrop(event: DragEvent): void {
-    event.preventDefault();
-    const dropArea = document.getElementById('drop-area');
-    dropArea?.classList.remove('hover');
-
-    const files = event.dataTransfer?.files;
-    if (files && files.length > 0) {
-      const file = files[0];
-
-      if (file.type === 'application/pdf') {
-        this.pdfSrc = URL.createObjectURL(file); // Create URL for the PDF
-      } else {
-        alert('Please upload a valid PDF file.');
-      }
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
     }
+  }
+
+  onSubmit(): void {
+    if (!this.selectedFile) {
+      alert('Please select a file.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+
+    this.http.post('https://localhost:5001/api/upload', formData).subscribe({
+      next: (response) => {
+        console.log('Upload successful!', response);
+      },
+      error: (err) => {
+        console.error('Upload failed!', err);
+      },
+    });
   }
 }

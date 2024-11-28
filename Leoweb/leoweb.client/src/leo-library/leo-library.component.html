@@ -8,10 +8,20 @@
   <link rel="stylesheet" href="leo-library.component.css">
 </head>
 <body id="body">
-<div id="drop-area" (dragover)="onDragOver($event)" (dragenter)="onDragEnter()"
-     (dragleave)="onDragLeave()" (drop)="onDrop($event)">
-  Drag and drop a PDF file here
-</div>
-<iframe id="pdf-viewer" [src]="pdfSrc" *ngIf="pdfSrc"></iframe>
+
+
+
+<form (submit)="onSubmit()" enctype="multipart/form-data">
+  <input type="file" (change)="onFileSelected($event)" />
+  <button type="submit">Upload</button>
+</form>
+
+
+
+
+<button type="button" id="seas button">Seas</button>
+
+
+
 </body>
 </html>
