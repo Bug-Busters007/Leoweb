@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using DotNetEnv;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,3 +45,5 @@ app.MapControllers();
 app.MapFallbackToFile("/index.html");
 
 app.Run();
+
+

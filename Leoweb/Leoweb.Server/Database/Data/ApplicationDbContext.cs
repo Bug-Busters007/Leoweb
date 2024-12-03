@@ -1,14 +1,23 @@
+using DotNetEnv;
 using Leoweb.Server.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
 public class ApplicationDbContext : DbContext
 {
 	//private const string connectionString = "Server=tcp:sqlservervonmanuel.database.windows.net,1433;Initial Catalog=LeowebDB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\"";
-	private const string connectionString = "Host=ionas999.at;Port=9234;Database=leoweb;Username=leoweb;Password=123";
+	private string connectionString 
+	{
+		get
+		{
+			Env.Load();
+			return Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ?? "";
+		}
+	}
 
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
-    { }
+    {
+	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
