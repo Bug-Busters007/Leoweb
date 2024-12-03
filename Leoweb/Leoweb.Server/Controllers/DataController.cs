@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
-using Microsoft.Data.SqlClient;
+using Npgsql;
 
 namespace Leoweb.Server.Controllers;
 
@@ -20,7 +19,7 @@ public class DataController : Controller
     {
         var connectionString = "Server=tcp:sqlservervonmanuel.database.windows.net,1433;Initial Catalog=LeowebDB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\"";
 
-        using (var connection = new SqlConnection(connectionString))
+        using (var connection = new NpgsqlConnection(connectionString))
         {
             try
             {
