@@ -14,15 +14,6 @@
   --span-color: #FFFFFF;
 }
 
-.logo-container img {
-  margin-right: 0.5%;
-}
-
-.logo-container h1 {
-  margin: 0;
-}
-
-
 .module:hover .underline-effect::after {
   width: 100%;
 }
@@ -52,11 +43,13 @@
 }
 
 .module {
-  border: 3px solid var(--accent-color);
-  border-collapse: collapse;
+  width: 50%;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-bottom: 3%;
+  padding: 20px;
+  border: 3px solid orangered;
   border-radius: 10px;
-  margin-bottom: 5%;
-  height: 10rem;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
   background-color: var(--bg-color);
   transition: 0.1s;
@@ -78,6 +71,7 @@
   font-size: 3rem;
 }
 .module-text {
+  padding-top: 1.5%;
   font-family: Helvetica, sans-serif;
   font-size: 1.6rem;
   color: var(--text-color);
