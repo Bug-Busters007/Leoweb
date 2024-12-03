@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "458DDw+xyTCKhPci9Wfd4C3TygNnXaf9h7e6xTqkLsk=",
+  "Hash": "u1umH4r/2Fy5WkilM/8HOyctK7j5fTaW2FEB5El488g=",
   "Source": "Leoweb.Server",
   "BasePath": "_content/Leoweb.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Users\\Mike\\Documents\\Leoweb\\Leoweb\\Leoweb\\leoweb.client\\leoweb.client.esproj",
+      "Identity": "C:\\Users\\jschw\\Documents\\HTL\\3.Klasse\\SYP\\Leoweb\\Leoweb\\leoweb.client\\leoweb.client.esproj",
       "Version": 2,
       "Source": "leoweb.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
@@ -19,5 +19,6 @@
     }
   ],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
