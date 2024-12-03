@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 public class ApplicationDbContext : DbContext
 {
-	//private const string connectionString = "Server=tcp:sqlservervonmanuel.database.windows.net,1433;Initial Catalog=LeowebDB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\"";
 	private string connectionString 
 	{
 		get
 		{
+			// in Leoweb.Server eine .env Datei erstellen und den DB String einfügen
+			// DB_CONNECTION_STRING=string ohne ""
 			Env.Load();
 			return Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ?? "";
 		}
