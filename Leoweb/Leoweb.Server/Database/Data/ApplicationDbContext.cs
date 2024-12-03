@@ -1,17 +1,28 @@
+using DotNetEnv;
 using Leoweb.Server.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
 public class ApplicationDbContext : DbContext
 {
-	private const string test = "test";
-	private const string connectionString = "Server=tcp:sqlservervonmanuel.database.windows.net,1433;Initial Catalog=LeowebDB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\"";
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+	private string connectionString 
+	{
+		get
+		{
+			// in Leoweb.Server eine .env Datei erstellen und den DB String einfügen
+			// DB_CONNECTION_STRING=string ohne ""
+			Env.Load();
+			return Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ?? "";
+		}
+	}
+
+	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
-    { }
+    {
+	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
-		optionsBuilder.UseSqlServer(connectionString);
+		optionsBuilder.UseNpgsql(connectionString);
 	}
 
 	public DbSet<Student> Students { get; set; } = null!;
