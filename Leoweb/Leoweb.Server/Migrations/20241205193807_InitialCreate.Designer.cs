@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Leoweb.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241203092758_InitialCreate")]
+    [Migration("20241205193807_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,6 +24,27 @@ namespace Leoweb.Server.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Leoweb.Server.Database.Models.BinaryFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BinaryFiles");
+                });
+
             modelBuilder.Entity("Leoweb.Server.Database.Models.File", b =>
                 {
                     b.Property<int>("Id")
@@ -32,9 +53,8 @@ namespace Leoweb.Server.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("DataId")
+                        .HasColumnType("integer");
 
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
@@ -46,6 +66,8 @@ namespace Leoweb.Server.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DataId");
 
                     b.HasIndex("StudentId");
 
@@ -104,9 +126,17 @@ namespace Leoweb.Server.Migrations
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.File", b =>
                 {
+                    b.HasOne("Leoweb.Server.Database.Models.File", "Data")
+                        .WithMany()
+                        .HasForeignKey("DataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Leoweb.Server.Database.Models.Student", "Student")
                         .WithMany()
                         .HasForeignKey("StudentId");
+
+                    b.Navigation("Data");
 
                     b.Navigation("Student");
                 });
