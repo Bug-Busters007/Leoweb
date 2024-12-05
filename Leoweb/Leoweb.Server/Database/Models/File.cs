@@ -7,7 +7,7 @@ namespace Leoweb.Server.Database.Models
         [Key]
         public int Id { get; set; }
         public Subject Subject { get; set; }
-        public required string Content { get; set; }
+        public File Data { get; set; } = null!;
         public DateOnly Date { get; set; }
         public required Student Student { get; set; }
     }
