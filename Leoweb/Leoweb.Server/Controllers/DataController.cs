@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DotNetEnv;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Npgsql;
 
 namespace Leoweb.Server.Controllers;
@@ -7,30 +9,27 @@ namespace Leoweb.Server.Controllers;
 [ApiController]
 public class DataController : Controller
 {
-    private readonly ILogger<DataController> _logger;
+    private readonly ApplicationDbContext _dbContext;
 
-    public DataController(ILogger<DataController> logger)
+    public DataController()
     {
-        _logger = logger;
-    }
+        Env.Load();
+        _dbContext = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"))
+                .Options);
 
-    [HttpGet("/testDataBaseConnection")]
-    public IActionResult Get()
+	}    
+
+    [HttpGet("/getFirstPdf")]
+    public IActionResult GetFirstPdf()
     {
-        var connectionString = "Server=tcp:sqlservervonmanuel.database.windows.net,1433;Initial Catalog=LeowebDB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\"";
+        var data = _dbContext.BinaryFiles.FirstOrDefault();
 
-        using (var connection = new NpgsqlConnection(connectionString))
+        if (data == null || data.Data == null)
         {
-            try
-            {
-                connection.Open();
-                Ok("Connection established");
-            }
-            catch (Exception ex)
-            {
-                Ok($"Fehler bei der Verbindung: {ex.Message}");
-            }
+            return NotFound("File not found");
         }
-        return Ok();
+
+        return File(data.Data, "application/pdf", "document.pdf");
     }
 }
