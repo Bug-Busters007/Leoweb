@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {RouterLink, RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-leo-library',
   templateUrl: './leo-library.component.html',
   styleUrls: ['./leo-library.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [RouterLink]
 })
 export class LeoLibraryComponent {
   selectedFile: File | null = null;
