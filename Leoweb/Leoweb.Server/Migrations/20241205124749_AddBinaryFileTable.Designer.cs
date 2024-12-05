@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Leoweb.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241205115358_AddBynaryFile")]
-    partial class AddBynaryFile
+    [Migration("20241205124749_AddBinaryFileTable")]
+    partial class AddBinaryFileTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,23 @@ namespace Leoweb.Server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Leoweb.Server.Database.Models.BinaryFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BinaryFiles");
+                });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.File", b =>
                 {
