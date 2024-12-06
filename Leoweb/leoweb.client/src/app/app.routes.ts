@@ -11,14 +11,18 @@ export const routes: Routes = [
     path: '',
     pathMatch: 'full',
     loadComponent: () => {
-      return import('./home/home.component').then(m => m.HomeComponent)
+      return import('./home/home.component').then(m => m.HomeComponent);
     }
   },
   {
-    path: 'todos',
+    path: 'leolibrary',
     loadComponent: () =>{
       return import('./leo-library/leo-library.component').then(m => m.LeoLibraryComponent)
     }
+  },
+  {
+    path: '**',
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
   }
 ];
 
