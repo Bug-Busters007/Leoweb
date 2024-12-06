@@ -6,11 +6,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Leoweb.Server.Controllers
 {
-	public class NotesToDatabase : ControllerBase
+	public class NotesController : ControllerBase
 	{
 		private readonly ApplicationDbContext _dbContext;
 
-		public NotesToDatabase()
+		public NotesController()
 		{
 			var options = new DbContextOptionsBuilder<ApplicationDbContext>().Options;
 			_dbContext = new ApplicationDbContext(options);
