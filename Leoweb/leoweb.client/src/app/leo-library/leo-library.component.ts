@@ -22,7 +22,9 @@ export class LeoLibraryComponent {
     }
   }
 
-  onSubmit(): void {
+  onSubmit(event: Event): void {
+    event.preventDefault();
+
     if (!this.selectedFile) {
       alert('Please select a file.');
       return;
@@ -31,7 +33,7 @@ export class LeoLibraryComponent {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    this.http.post('https://localhost:5001/api/upload', formData).subscribe({
+    this.http.post('https://localhost:7008/notes', formData).subscribe({
       next: (response) => {
         console.log('Upload successful!', response);
       },
