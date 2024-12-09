@@ -16,23 +16,10 @@ namespace Leoweb.Server.Controllers
 			_dbContext = new ApplicationDbContext(options);
 		}
 
-		[HttpGet("/notes")]
-		public IActionResult GetPdf([FromQuery] int? id)
+		[HttpGet("/notes/{id}")]
+		public IActionResult GetPdf([FromRoute] int id)
 		{
-			BinaryFile? file;
-			if (id != null)
-			{
-				file = _dbContext.BinaryFiles.FirstOrDefault(f => f.Id == id);
-			}
-			else
-			{
-				file = _dbContext.BinaryFiles.FirstOrDefault();
-			}
-
-			if (file == null)
-			{
-				return NotFound("No Files in the Database");
-			}
+			BinaryFile? file = _dbContext.BinaryFiles.Where(f => f.Id == id).First();
 
 			return File(file.Data, "application/pdf", file.Name);
 		}
@@ -62,8 +49,11 @@ namespace Leoweb.Server.Controllers
 		[HttpGet("/allFilenames")]
 		public IActionResult GetAllFileNames()
 		{
-			var names = _dbContext.BinaryFiles.Select(f => f.Name).ToList();
-			return Ok(names);
+			var dict = _dbContext.BinaryFiles
+				.Select(f => new { f.Id, f.Name })
+				.ToDictionary(f => f.Id, f => f.Name);
+
+			return Ok(dict);
 		}
 	}
 }
