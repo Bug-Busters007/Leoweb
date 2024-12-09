@@ -58,5 +58,12 @@ namespace Leoweb.Server.Controllers
 
 			return Ok(binFile);
 		}
+
+		[HttpGet("/allFilenames")]
+		public IActionResult GetAllFileNames()
+		{
+			var names = _dbContext.BinaryFiles.Select(f => f.Name).ToList();
+			return Ok(names);
+		}
 	}
 }
