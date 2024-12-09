@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http'; // HttpClientModule importieren
-import { RouterLink } from '@angular/router';
-import {AsyncPipe, KeyValuePipe} from "@angular/common";
 
 @Component({
   selector: 'app-leo-library',
   templateUrl: './leo-library.component.html',
   styleUrls: ['./leo-library.component.css'],
   standalone: true,
-  imports: [RouterLink, HttpClientModule, AsyncPipe, KeyValuePipe]
+  imports: [HttpClientModule]
 })
 export class LeoLibraryComponent {
   selectedFile: File | null = null;

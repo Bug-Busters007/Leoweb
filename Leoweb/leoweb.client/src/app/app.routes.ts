@@ -17,7 +17,13 @@ export const routes: Routes = [
   {
     path: 'leolibrary',
     loadComponent: () =>{
-      return import('./leo-library/leo-library.component').then(m => m.LeoLibraryComponent)
+      return import('./leo-library/leo-library.component').then(m => m.LeoLibraryComponent);
+    }
+  },
+  {
+    path: 'leopolls',
+    loadComponent: () => {
+      return import('./leo-polls/leo-polls.component').then(m => m.LeoPollsComponent);
     }
   },
   {

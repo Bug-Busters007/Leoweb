@@ -1,0 +1,16 @@
+﻿[
+  {
+    "id": 1,
+    "question": "Which city in Austria has the most HTLs?",
+    "type": "multiple-choice",
+    "options": ["Vienna", "Graz", "Linz", "Salzburg"],
+    "correctAnswer": "Vienna"
+  },
+  {
+    "id": 2,
+    "question": "How many HTLs are there in Austria?",
+    "type": "multiple-choice",
+    "options": ["10", "25", "50", "over 60"],
+    "correctAnswer": "over 60"
+  }
+]
