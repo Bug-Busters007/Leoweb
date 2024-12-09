@@ -18,7 +18,7 @@ namespace Leoweb.Server.Controllers
 			_dbContext = new ApplicationDbContext(options);
 		}
 
-		[HttpGet("/notes/{id}")]
+		[HttpGet("{id}")]
 		public IActionResult GetPdf([FromRoute] int id)
 		{
 			BinaryFile? file = _dbContext.BinaryFiles.Where(f => f.Id == id).First();
@@ -26,7 +26,7 @@ namespace Leoweb.Server.Controllers
 			return File(file.Data, "application/pdf", file.Name);
 		}
 
-		[HttpPost("/notes")]
+		[HttpPost("")]
 		public async Task<IActionResult> UploadPdf(IFormFile file)
 		{
 			if (file == null || file.Length == 0 || !file.ContentType.Equals("application/pdf"))
@@ -48,7 +48,7 @@ namespace Leoweb.Server.Controllers
 			return Ok(binFile);
 		}
 
-		[HttpGet("/allFilenames")]
+		[HttpGet("allFilenames")]
 		public IActionResult GetAllFileNames()
 		{
 			var dict = _dbContext.BinaryFiles
