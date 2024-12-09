@@ -42,4 +42,12 @@ export class LeoLibraryComponent {
       },
     });
   }
+
+  async fileNames(): Promise<Map<number, string>> {
+    const resp = await this.http.get('https://localhost:7008/allFileNames');
+    const fileNames = await resp.json();
+    return JSON.parse(fileNames);
+
+    // https://localhost:7008/notes/:id
+  } 
 }
