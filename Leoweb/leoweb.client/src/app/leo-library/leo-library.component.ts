@@ -33,7 +33,7 @@ export class LeoLibraryComponent {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    this.http.post('https://localhost:7008/notes', formData).subscribe({
+    this.http.post('https://localhost:7008/api/notes', formData).subscribe({
       next: (response) => {
         console.log('Upload successful!', response);
       },
@@ -43,11 +43,13 @@ export class LeoLibraryComponent {
     });
   }
 
+  /*
   async fileNames(): Promise<Map<number, string>> {
-    const resp = await this.http.get('https://localhost:7008/allFileNames');
+    const resp = await this.http.get('https://localhost:7008/api/allFileNames');
     const fileNames = await resp.json();
     return JSON.parse(fileNames);
 
     // https://localhost:7008/notes/:id
-  } 
+  }
+  */
 }
