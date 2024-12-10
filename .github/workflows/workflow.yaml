@@ -28,12 +28,12 @@ jobs:
 
       - name: Run Angular tests
         run: |
-          cd Leoweb/Leoweb.Client
+          cd Leoweb/leoweb.client
           npm test -- --watch=false
 
       - name: Build Angular app
         run: |
-          cd Leoweb/Leoweb.Client
+          cd Leoweb/leoweb.client
           npm run build -- --configuration production
 
   # Build und Test für ASP.NET Web API (Backend)
