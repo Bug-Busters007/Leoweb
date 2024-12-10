@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd Leoweb/Leoweb.Client
+          cd Leoweb/Leoweb.client
           npm install
 
       - name: Run Angular tests
