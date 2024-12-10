@@ -10,10 +10,28 @@ import { HttpClientModule, HttpClient } from '@angular/common/http'; // HttpClie
 })
 export class LeoLibraryComponent {
   selectedFile: File | null = null;
+  fileNames: Map<number, string> | null = null;
+  constructor(private http: HttpClient) {
+  }
 
-  constructor(private http: HttpClient) {}
+  public async ngOnInit() {
+    this.fileNames = await this.getFileNames();
+    const list = document.getElementById("fileNameList");
 
-  onFileSelected(event: Event): void {
+    if (list) {
+      for (const [id, name] of this.fileNames) {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `https://localhost:7008/api/Notes/${id}`;
+        a.textContent = name;
+        li.appendChild(a);
+        list.appendChild(li);
+      }
+    }
+  }
+
+
+  public onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     console.log("file selected")
     if (input.files && input.files.length > 0) {
@@ -21,7 +39,7 @@ export class LeoLibraryComponent {
     }
   }
 
-  onSubmit(event: Event): void {
+  public onSubmit(event: Event): void {
     event.preventDefault();
 
     if (!this.selectedFile) {
@@ -32,7 +50,7 @@ export class LeoLibraryComponent {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    this.http.post('https://localhost:7008/api/notes', formData).subscribe({
+    this.http.post('https://localhost:7008/api/Notes/', formData).subscribe({
       next: (response) => {
         console.log('Upload successful!', response);
       },
@@ -43,22 +61,20 @@ export class LeoLibraryComponent {
   }
 
 
-  async fileNames(): Promise<Map<number, string>> {
-    const fileNames: { id: number; name: string }[] | undefined = await this.http
-      .get<{ id: number; name: string }[]>('https://localhost:7008/api/allFileNames')
-      .toPromise();
-    const result = new Map<number, string>();
-    if (fileNames !== undefined) {
-      fileNames.forEach(file => {
-        result.set(file.id, file.name);
-      });
+  
+  public async getFileNames(): Promise<Map<number, string>> {
+    try {
+      const response: { id: number; name: string }[] | undefined = await this.http
+        .get<{ id: number; name: string }[]>('https://localhost:7008/api/Notes/allFileNames')
+        .toPromise(); // Konvertiert Observable in Promise (RxJS <7)
+
+      if (response) {
+        return new Map(response.map(file => [file.id, file.name]));
+      }
+    } catch (error) {
+      console.error('Error fetching file names:', error);
+      throw new Error('Failed to fetch file names');
     }
-    return result;
-    // https://localhost:7008/notes/:id
-    //wenn man das eingibt, wird die datei heruntergeladen
+    return new Map<number, string>;
   }
-
-  files = this.fileNames();
-  //files is de map mit den ids und den dateinamen
-
 }

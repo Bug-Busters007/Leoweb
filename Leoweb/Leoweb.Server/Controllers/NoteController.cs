@@ -53,7 +53,8 @@ namespace Leoweb.Server.Controllers
 		{
 			var dict = _dbContext.BinaryFiles
 				.Select(f => new { f.Id, f.Name })
-				.ToDictionary(f => f.Id, f => f.Name);
+				//.ToDictionary(f => f.Id, f => f.Name);
+				.ToList();
 
 			return Ok(dict);
 		}
