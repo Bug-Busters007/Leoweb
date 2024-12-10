@@ -30,7 +30,6 @@ export class LeoLibraryComponent {
     }
   }
 
-
   public onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     console.log("file selected")
@@ -59,14 +58,12 @@ export class LeoLibraryComponent {
       },
     });
   }
-
-
   
   public async getFileNames(): Promise<Map<number, string>> {
     try {
       const response: { id: number; name: string }[] | undefined = await this.http
         .get<{ id: number; name: string }[]>('https://localhost:7008/api/Notes/allFileNames')
-        .toPromise(); // Konvertiert Observable in Promise (RxJS <7)
+        .toPromise();
 
       if (response) {
         return new Map(response.map(file => [file.id, file.name]));

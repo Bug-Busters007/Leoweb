@@ -1,4 +1,4 @@
-﻿import {provideRouter, Routes} from '@angular/router';
+import {provideRouter, Routes} from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {bootstrapApplication} from "@angular/platform-browser";
 import {AppComponent} from "./app.component";
@@ -18,12 +18,6 @@ export const routes: Routes = [
     path: 'leolibrary',
     loadComponent: () =>{
       return import('./leo-library/leo-library.component').then(m => m.LeoLibraryComponent);
-    }
-  },
-  {
-    path: 'leopolls',
-    loadComponent: () => {
-      return import('./leo-polls/leo-polls.component').then(m => m.LeoPollsComponent);
     }
   },
   {
