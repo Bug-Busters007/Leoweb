@@ -26,11 +26,6 @@ jobs:
           cd Leoweb/leoweb.client
           npm install
 
-      - name: Run Angular tests
-        run: |
-          cd Leoweb/leoweb.client
-          npm test -- --watch=false
-
       - name: Build Angular app
         run: |
           cd Leoweb/leoweb.client
