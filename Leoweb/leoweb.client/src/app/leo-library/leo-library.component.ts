@@ -18,9 +18,6 @@ export class LeoLibraryComponent {
   }
 
   public clickHandlerPdf(id: number): void {
-    /*
-    es geht noch nicht dass bei gleichen dateien bei beiden der download angezeigt wird
-    */
     const li: HTMLElement | null = document.getElementById(`file-${id}`)
     if (li) {
       if (li.children.length > 0) {
@@ -34,8 +31,14 @@ export class LeoLibraryComponent {
   }
 
   public async ngOnInit() {
-    this.fileNames = await this.getFileNames();
-    const list = document.getElementById("fileNameList");
+    //2 event listener
+    this.fileNames = await this.getFileNames()
+    if (document.body.children.namedItem('fileNameList') != null) {
+      return;
+    }
+    const list = document.createElement("ul");
+    list.id = 'fileNameList';
+    document.body.appendChild(list);
 
     if (list) {
       for (const [id, name] of this.fileNames) {
