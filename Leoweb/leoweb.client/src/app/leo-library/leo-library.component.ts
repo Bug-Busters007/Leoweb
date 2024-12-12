@@ -17,36 +17,18 @@ export class LeoLibraryComponent {
   constructor(private http: HttpClient) {
   }
 
-  public clickHandlerPdf(id: number): void {
-    const li: HTMLElement | null = document.getElementById(`file-${id}`)
-    if (li) {
-      if (li.children.length > 0) {
-        return;
-      }
-      const downloadButton = document.createElement("a");
-      downloadButton.textContent = "Download";
-      downloadButton.href = `https://localhost:7008/api/Notes/${id}`;
-      li.appendChild(downloadButton)
-    }
-  }
-
   public async ngOnInit() {
-    //2 event listener
     this.fileNames = await this.getFileNames()
-    if (document.body.children.namedItem('fileNameList') != null) {
-      return;
-    }
-    const list = document.createElement("ul");
-    list.id = 'fileNameList';
-    document.body.appendChild(list);
+    const list = document.getElementById('fileNameList');
 
     if (list) {
+      list.innerHTML = '';
       for (const [id, name] of this.fileNames) {
         const li = document.createElement("li");
         const a = document.createElement("a");
         a.textContent = name;
-        a.id = `file-${id}`
-        a.onclick = () => {this.clickHandlerPdf(id)}
+        a.id = `${id}`
+        a.href = `https://localhost:7008/api/Notes/${id}`;
         li.appendChild(a);
         list.appendChild(li);
       }
