@@ -1,0 +1,59 @@
+name: CI for Angular and ASP.NET Web API
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # Build und Test für Angular (Frontend)
+  build-angular:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          cd Leoweb/leoweb.client
+          npm install
+
+      - name: Build Angular app
+        run: |
+          cd Leoweb/leoweb.client
+          npm run build -- --configuration production
+
+  # Build und Test für ASP.NET Web API (Backend)
+  build-dotnet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0
+
+      - name: Restore dependencies
+        run: |
+          cd Leoweb/Leoweb.Server
+          dotnet restore
+
+      - name: Build ASP.NET Web API
+        run: |
+          cd Leoweb/Leoweb.Server
+          dotnet build --configuration Release
+
+      - name: Run tests
+        run: |
+          cd Leoweb/Leoweb.Server
+          dotnet test --no-build --verbosity normal

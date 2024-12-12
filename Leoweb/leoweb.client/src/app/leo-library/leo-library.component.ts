@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http'; // HttpClientModule importieren
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {PdfViewerComponent} from "../components/pdf-viewer/pdf-viewer.component";
+import {timeout} from "rxjs";
+import {toNumbers} from "@angular/compiler-cli/src/version_helpers"; // HttpClientModule importieren
 
 @Component({
   selector: 'app-leo-library',
   templateUrl: './leo-library.component.html',
   styleUrls: ['./leo-library.component.css'],
   standalone: true,
-  imports: [HttpClientModule]
+  imports: [HttpClientModule, PdfViewerComponent]
 })
 export class LeoLibraryComponent {
   selectedFile: File | null = null;
@@ -14,16 +17,36 @@ export class LeoLibraryComponent {
   constructor(private http: HttpClient) {
   }
 
+  public clickHandlerPdf(id: number): void {
+    const li: HTMLElement | null = document.getElementById(`file-${id}`)
+    if (li) {
+      if (li.children.length > 0) {
+        return;
+      }
+      const downloadButton = document.createElement("a");
+      downloadButton.textContent = "Download";
+      downloadButton.href = `https://localhost:7008/api/Notes/${id}`;
+      li.appendChild(downloadButton)
+    }
+  }
+
   public async ngOnInit() {
-    this.fileNames = await this.getFileNames();
-    const list = document.getElementById("fileNameList");
+    //2 event listener
+    this.fileNames = await this.getFileNames()
+    if (document.body.children.namedItem('fileNameList') != null) {
+      return;
+    }
+    const list = document.createElement("ul");
+    list.id = 'fileNameList';
+    document.body.appendChild(list);
 
     if (list) {
       for (const [id, name] of this.fileNames) {
         const li = document.createElement("li");
         const a = document.createElement("a");
-        a.href = `https://localhost:7008/api/Notes/${id}`;
         a.textContent = name;
+        a.id = `file-${id}`
+        a.onclick = () => {this.clickHandlerPdf(id)}
         li.appendChild(a);
         list.appendChild(li);
       }
@@ -58,7 +81,7 @@ export class LeoLibraryComponent {
       },
     });
   }
-  
+
   public async getFileNames(): Promise<Map<number, string>> {
     try {
       const response: { id: number; name: string }[] | undefined = await this.http
