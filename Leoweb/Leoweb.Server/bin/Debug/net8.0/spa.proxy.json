@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:4200",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "C:\\HTL\\Syp\\Leoweb\\Leoweb\\Leoweb.Server\\..\\leoweb.client",
+"WorkingDirectory": "E:\\Leoclone\\Leoweb\\Leoweb\\Leoweb.Server\\..\\leoweb.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

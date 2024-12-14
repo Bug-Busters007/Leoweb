@@ -5,12 +5,8 @@ import {environment} from "../environments/environments";
   providedIn: 'root'
 })
 export class ApiService {
-
   private readonly apiUrl : string= environment.apiUrl;
-  constructor() {}
-
-  async getData() : Promise<string>{
-    const response = await fetch(this.apiUrl + 'testCall');
-    return await response.json();
+  getApiUrl(endpoint: string): string {
+    return `${this.apiUrl}/${endpoint}`;
   }
 }

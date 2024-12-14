@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
+using Leoweb.Server;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,12 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
+
+builder.Services.AddLeoAuthentication();
+builder.Services.AddBasicLeoAuthorization();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerWithAuth();
 
 var app = builder.Build();
 
