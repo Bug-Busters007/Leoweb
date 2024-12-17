@@ -24,11 +24,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddLeoAuthentication();
-builder.Services.AddBasicLeoAuthorization();
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerWithAuth();
 
 var app = builder.Build();
 

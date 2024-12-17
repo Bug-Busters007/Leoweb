@@ -1,6 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 
@@ -10,3 +10,6 @@ bootstrapApplication(AppComponent, {
     HttpClientModule,
   ]
 }).catch((err) => console.error(err));
+
+
+
