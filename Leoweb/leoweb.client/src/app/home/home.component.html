@@ -1,5 +1,14 @@
 
 <section class="module-container container" style="margin-top: 3%">
-  <app-module [title]="'LeoLibrary'" [description]="'Wissensdatenbank von und für Schüler'" routerLink="/leolibrary"></app-module>
-  <app-module [title]="'LeoPoll'" [description]="'Abstimmung für die Schüler'" routerLink="/leopolls"></app-module>
+  <app-module
+    [title]="'LeoLibrary'"
+    [description]="'Wissensdatenbank von und für Schüler'"
+    [links]="'/leolibrary'">
+  </app-module>
+
+  <app-module
+    [title]="'LeoPoll'"
+    [description]="'Abstimmung für die Schüler'"
+    [links]="'/leopolls'">
+  </app-module>
 </section>

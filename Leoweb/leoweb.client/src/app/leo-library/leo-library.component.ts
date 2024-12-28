@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {PdfViewerComponent} from "../components/pdf-viewer/pdf-viewer.component";
-import {timeout} from "rxjs";
-import {toNumbers} from "@angular/compiler-cli/src/version_helpers";
+
 import {ApiService} from "../../services/api.service";
 
 @Component({
@@ -14,7 +13,7 @@ import {ApiService} from "../../services/api.service";
 // TODO: `HttpClientModule` should not be imported into a component directly.
 // Please refactor the code to add `provideHttpClient()` call to the provider list in the
 // application bootstrap logic and remove the `HttpClientModule` import from this component.
-HttpClientModule, PdfViewerComponent]
+HttpClientModule]
 })
 export class LeoLibraryComponent {
   selectedFile: File | null = null;
