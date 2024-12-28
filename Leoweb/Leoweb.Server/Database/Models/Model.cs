@@ -22,4 +22,12 @@
         ETHIK,
         CABS
     }
+
+    public enum Branch
+    {
+        Informatik,
+        Medientechnik,
+        Medizintechnik,
+        Elektronik
+    }
 }
