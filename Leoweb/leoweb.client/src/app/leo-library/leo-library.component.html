@@ -1,7 +1,9 @@
-<form (submit)="onSubmit($event)" enctype="multipart/form-data">
-  <input type="file" (change)="onFileSelected($event)" />
-  <button type="submit">Upload</button>
-</form>
+<div class="uploadDiv">
+  <form (submit)="onSubmit($event)" enctype="multipart/form-data">
+    <input type="file" (change)="onFileSelected($event)" />
+    <button type="submit" style="cursor: pointer">Upload</button>
+  </form>
+</div>
 
 
 <ul id="fileNameList"></ul>

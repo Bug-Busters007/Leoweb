@@ -13,5 +13,5 @@ import {RouterLink, RouterOutlet} from "@angular/router";
 export class ModuleComponent {
   title = input("Title");
   description = input("Description");
-  links = input("/home")
+  routerLink = input("/home")
 }
