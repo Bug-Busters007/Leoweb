@@ -19,6 +19,13 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm install
+        working-directory: Leoweb/leoweb.client
       - name: Build the Angular app
         run: npm run build -- --output-path=dist --base-href="/"
         working-directory: Leoweb/leoweb.client
@@ -31,11 +38,9 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_BAY_0F0554A03 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           app_location: "./Leoweb/leoweb.client" # Path to your frontend code
           api_location: "" # Optional, leave empty if you don't have an API
           output_location: "./Leoweb/leoweb.client/dist/leoweb.client" # Correct output path (adjust as needed)
-          ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -46,6 +51,6 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          app_location: "./Leoweb/leoweb.client"  # Path to frontend
+          app_location: "./Leoweb/leoweb.client"
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_BAY_0F0554A03 }}
           action: "close"
