@@ -1,13 +1,10 @@
 name: Azure Static Web Apps CI/CD
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Build Check"]  # Name des Build-Check-Workflows
+    types:
+      - completed
 
 jobs:
   build_and_deploy_job:
@@ -29,10 +26,6 @@ jobs:
       - name: Build the Angular app
         run: npm run build -- --output-path=dist --base-href="/"
         working-directory: Leoweb/leoweb.client
-      - name: List files in dist directory
-        run: ls -la ./Leoweb/leoweb.client/dist
-      - name: List browser folder contents
-        run: ls -la Leoweb/leoweb.client/dist/browser
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
