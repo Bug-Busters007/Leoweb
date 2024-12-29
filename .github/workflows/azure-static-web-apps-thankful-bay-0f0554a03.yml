@@ -1,6 +1,13 @@
 name: Azure Static Web Apps CI/CD
 
 on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
   workflow_run:
     workflows: ["Build Check"]  # Name des Build-Check-Workflows
     types:
