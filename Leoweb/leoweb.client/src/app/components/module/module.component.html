@@ -1,10 +1,10 @@
-<div class="module" style="cursor: pointer" routerLink="{{ routerLink() }}">
+<div class="module" style="cursor: pointer" (click)="navigateTo()">
   <div class="module-body">
     <div class="module-header">
-      <span class="underline-effect">{{ title() }}</span>
+      <span class="underline-effect">{{ title }}</span>
     </div>
     <div class="module-text">
-      {{ description() }}
+      {{ description }}
     </div>
   </div>
 </div>

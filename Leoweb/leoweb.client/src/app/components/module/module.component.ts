@@ -1,5 +1,5 @@
-import {Component, input, signal} from '@angular/core';
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {Component, Input, signal} from '@angular/core';
+import {RouterLink, Router} from "@angular/router";
 
 @Component({
   selector: 'app-module',
@@ -11,7 +11,11 @@ import {RouterLink, RouterOutlet} from "@angular/router";
   ]
 })
 export class ModuleComponent {
-  title = input("Title");
-  description = input("Description");
-  routerLink = input("/home")
+  @Input() title: string = "Title";
+  @Input() description: string = "Description";
+  @Input() link: string = '/home';
+  constructor(private router: Router) {}
+  navigateTo(){
+    this.router.navigate([this.link]);
+  }
 }
