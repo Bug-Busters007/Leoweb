@@ -27,9 +27,9 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          app_location: "./Leoweb/leoweb.client" # Update this path to point to the frontend
-          api_location: "" # Optional, leave empty if you don't have a backend for the Static Web App
-          output_location: "./Leoweb/leoweb.client/dist/browser" # Update this path to match the output folder after build
+          app_location: "./Leoweb/leoweb.client" # Path to your frontend code
+          api_location: "" # Optional, leave empty if you don't have an API
+          output_location: "./Leoweb/leoweb.client/dist/browser" # Correct output path
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
@@ -41,6 +41,6 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          app_location: "./Leoweb/leoweb.client"  # Update path to the frontend
+          app_location: "./Leoweb/leoweb.client"  # Path to frontend
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_BAY_0F0554A03 }}
           action: "close"
