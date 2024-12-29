@@ -31,6 +31,8 @@ jobs:
         working-directory: Leoweb/leoweb.client
       - name: List files in dist directory
         run: ls -la ./Leoweb/leoweb.client/dist
+      - name: List browser folder contents
+        run: ls -la Leoweb/leoweb.client/dist/browser
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -40,7 +42,7 @@ jobs:
           action: "upload"
           app_location: "Leoweb/leoweb.client" # Path to your frontend code
           api_location: "" # Optional, leave empty if you don't have an API
-          output_location: "Leoweb/leoweb.client/dist/browser" # Correct output path for your setup
+          output_location: "dist/leoweb.client/browser" # Correct output path for your setup
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
