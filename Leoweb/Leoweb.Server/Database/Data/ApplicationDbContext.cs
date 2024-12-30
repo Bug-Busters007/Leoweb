@@ -13,16 +13,21 @@ public class ApplicationDbContext : DbContext
 		// DB_CONNECTION_STRING=string ohne ""
 		Env.Load();
 		_connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+		Console.WriteLine(_connectionString);
 	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 	{
+		if (_connectionString == null)
+		{
+			throw new Exception("Connection string is null");
+		}
 		optionsBuilder.UseNpgsql(_connectionString);
 	}
 
 	public DbSet<Student> Students { get; set; } = null!;
 	public DbSet<Leoweb.Server.Database.Models.File> Files { get; set; } = null!;
-	public DbSet<BinaryFile> BinaryFiles { get; set; } = null!;
+	public DbSet<BinaryFile> BinaryFile { get; set; } = null!;
 	public DbSet<Poll> Polls { get; set; } = null!;
 	public DbSet<Vote> Votes { get; set; } = null!;
 }

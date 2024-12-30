@@ -21,7 +21,7 @@ namespace Leoweb.Server.Controllers
 		[HttpGet("{id}")]
 		public IActionResult GetPdf([FromRoute] int id)
 		{
-			BinaryFile? file = _dbContext.BinaryFiles.Where(f => f.Id == id).First();
+			BinaryFile? file = _dbContext.BinaryFile.Where(f => f.Id == id).First();
 
 			return File(file.Data, "application/pdf", file.Name);
 		}
@@ -42,7 +42,7 @@ namespace Leoweb.Server.Controllers
 				Data = str.ToArray()
 			};
 
-			_dbContext.BinaryFiles.Add(binFile);
+			_dbContext.BinaryFile.Add(binFile);
 			_dbContext.SaveChanges();
 
 			return Ok(binFile);
@@ -51,7 +51,7 @@ namespace Leoweb.Server.Controllers
 		[HttpGet("allFilenames")]
 		public IActionResult GetAllFileNames()
 		{
-			var dict = _dbContext.BinaryFiles
+			var dict = _dbContext.BinaryFile
 				.Select(f => new { f.Id, f.Name })
 				//.ToDictionary(f => f.Id, f => f.Name);
 				.ToList();
