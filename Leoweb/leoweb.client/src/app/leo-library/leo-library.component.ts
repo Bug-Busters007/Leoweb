@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {PdfViewerComponent} from "../components/pdf-viewer/pdf-viewer.component";
 
 import {ApiService} from "../../services/api.service";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-leo-library',
@@ -10,11 +10,41 @@ import {ApiService} from "../../services/api.service";
   styleUrls: ['./leo-library.component.css'],
   standalone: true,
   imports: [
-HttpClientModule]
+    HttpClientModule,
+    CommonModule,
+  ]
 })
 export class LeoLibraryComponent {
+  selectedFileName: string= "File";
   selectedFile: File | null = null;
   fileNames: Map<number, string> | null = null;
+  subject: string = "";
+  branch: string = "";
+  year: string = "";
+
+
+  setYear(event: Event): void {
+    this.year = (event.target as HTMLInputElement).value;
+  }
+
+  setSubject(event: Event): void {
+    this.subject = (event.target as HTMLInputElement).value;
+  }
+  zweigSelectOptions = ['Informatik', 'Medientechnik', 'Elektronik', 'Medizintechnik'];
+
+  lessonsSelectOptions: string[] = ['Programmieren', 'Mathe', 'DBI'];
+
+  optionsMap: { [key: string]: string[] } = {
+    Informatik:  ['Programmieren', 'Mathe', 'DBI'],
+    Medientechnik: ['Graphic', 'Deutsch', 'Photoshop'],
+    Elektronik: ['Verarzten', 'Englisch', 'Biologie'],
+    Medizintechnik: ['Türkisch', 'Elektrik', 'Labor']
+  };
+
+  onFirstSelectChange(event: Event): void {
+    this.branch = (event.target as HTMLSelectElement).value;
+    this.lessonsSelectOptions = this.optionsMap[this.branch] || [];
+  }
   constructor(private http: HttpClient, private apiService: ApiService) {
   }
 
@@ -37,11 +67,21 @@ export class LeoLibraryComponent {
     }
   }
 
+  isUploadDivVisible = false;
+
+  toggleUploadDiv(): void {
+    this.isUploadDivVisible = !this.isUploadDivVisible;
+  }
+
   public onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     console.log("file selected")
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
+      this.selectedFileName = input.files[0].name;
+    }
+    else {
+      this.selectedFileName = "File";
     }
   }
 
@@ -53,11 +93,15 @@ export class LeoLibraryComponent {
       alert('Please select a file.');
       return;
     }
-
+    const data: (string| FormData)[] = [];
     const formData = new FormData();
     formData.append('file', this.selectedFile);
+    data.push(formData);
+    data.push(this.subject);
+    data.push(this.year);
+    data.push(this.branch);
 
-    this.http.post(`${url}/`, formData).subscribe({
+    this.http.post(`${url}/`, data).subscribe({
       next: (response) => {
         console.log('Upload successful!', response);
       },

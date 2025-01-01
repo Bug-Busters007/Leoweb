@@ -1,7 +1,36 @@
+<div class="buttondiv">
+  <button (click)="toggleUploadDiv()" style="cursor: pointer">Upload File</button>
+</div>
 
-<div class="uploadDiv">
+
+<div *ngIf="isUploadDivVisible" class="uploadDiv">
+  <select id="year" (change)="setYear($event)">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+  </select>
+
+  <div>
+    <label for="branch">Choose a Zweig:</label>
+    <select id="branch" (change)="onFirstSelectChange($event)">
+      <option *ngFor="let option of zweigSelectOptions" [value]="option">{{ option }}</option>
+    </select>
+
+    <label for="subject">Choose a Subject:</label>
+    <select id="subject" (change)="setSubject($event)">
+      <option *ngFor="let option of lessonsSelectOptions" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+
+
   <form (submit)="onSubmit($event)" enctype="multipart/form-data">
-    <input type="file" (change)="onFileSelected($event)" />
+    <div class="custom-file-container">
+      <input type="file" id="fileInput" (change)="onFileSelected($event)" />
+      <label for="fileInput">Choose File</label>
+      <span *ngIf="selectedFileName" class="file-name">{{ selectedFileName }}</span>
+    </div>
     <button type="submit" style="cursor: pointer">Upload</button>
   </form>
 </div>
