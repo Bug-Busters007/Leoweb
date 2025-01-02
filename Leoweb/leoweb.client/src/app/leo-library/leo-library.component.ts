@@ -37,8 +37,8 @@ export class LeoLibraryComponent {
   optionsMap: { [key: string]: string[] } = {
     Informatik:  ['Programmieren', 'Mathe', 'DBI'],
     Medientechnik: ['Graphic', 'Deutsch', 'Photoshop'],
-    Elektronik: ['Verarzten', 'Englisch', 'Biologie'],
-    Medizintechnik: ['Türkisch', 'Elektrik', 'Labor']
+    Medizintechnik: ['Verarzten', 'Englisch', 'Biologie'],
+    Elektronik: ['Türkisch', 'Elektrik', 'Labor']
   };
 
   onFirstSelectChange(event: Event): void {
