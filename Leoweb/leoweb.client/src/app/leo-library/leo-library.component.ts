@@ -95,9 +95,8 @@ export class LeoLibraryComponent {
     }
     const formData = new FormData();
     formData.append('file', this.selectedFile);
-    formData.append('subject', this.subject);
 
-    this.http.post(`${url}/`, formData).subscribe({
+    this.http.post(`${url}/?subject=${this.subject}`, formData).subscribe({
       next: (response) => {
         console.log('Upload successful!', response);
       },
