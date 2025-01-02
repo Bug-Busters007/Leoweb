@@ -114,7 +114,12 @@ export class LeoLibraryComponent {
         console.log('Upload successful!', response);
       },
       error: (err) => {
-        console.error('Upload failed!', err);
+        if (err.status === 415) {
+          alert("Please upload a .pdf file");
+        }
+        else{
+          console.error('Upload failed!', err);
+        }
       },
     });
   }
