@@ -30,9 +30,14 @@ namespace Leoweb.Server.Controllers
 		[HttpPost("")]
 		public async Task<IActionResult> UploadPdf(IFormFile file, string subject)
 		{
-			if (file == null || file.Length == 0 || !file.ContentType.Equals("application/pdf"))
+			if (file == null || file.Length == 0)
 			{
 				return BadRequest("No file uploaded.");
+			}
+
+			if (!file.ContentType.Equals("application/pdf"))
+			{
+				return StatusCode(415);
 			}
 
 			var str = new MemoryStream();
