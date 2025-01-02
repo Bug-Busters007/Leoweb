@@ -1,5 +1,6 @@
 .uploadDiv{
   text-align: center;
+  font-family: arial, sans-serif;
 }
 
 .uploadDiv button {
@@ -11,7 +12,7 @@
   border: 2px solid orangered;
   border-radius: 10px;
   transition: all 0.3s ease;
-  margin-bottom: 3%;
+  margin-bottom: 0.5%;
 }
 
 .uploadDiv button:hover {
@@ -23,7 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 3%;
 }
 .buttondiv button{
     cursor: pointer;
@@ -34,7 +35,7 @@
     border: 2px solid orangered;
     border-radius: 10px;
     transition: all 0.3s ease;
-    margin-bottom: 3%;
+    margin-bottom: 0.5%;
 }
 
 .buttondiv button:hover {
@@ -44,9 +45,10 @@
 
 .custom-file-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* Ordnet Label und Input vertikal an */
   align-items: center;
-  margin-top: 20px;
+  flex: 1; /* Macht den Container gleich groß wie die anderen */
+  min-width: 150px; /* Optional */
 }
 
 .custom-file-container input[type="file"] {
@@ -84,7 +86,12 @@ select {
 
 select:focus {
   outline: none;
-  border-color: darkorange;
+  border-color: orangered;
+}
+
+select:hover {
+  background-color: orangered;
+  color: white;
 }
 
 label{
@@ -114,19 +121,20 @@ select option:hover {
   color: white;
 }
 
+.select-container {
+  display: flex;
+  justify-content: space-between; /* Gleiche Abstände zwischen den Elementen */
+  gap: 20px; /* Abstand zwischen den Elementen */
+  align-items: center; /* Zentriere die Inhalte vertikal */
+  margin: 20px auto; /* Zentriere das gesamte Container-Div horizontal */
+  max-width: 100%; /* Stelle sicher, dass der Container die volle Breite verwenden kann */
+  flex-wrap: nowrap; /* Elemente sollen nicht umbrechen */
+}
+
 .select-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
-}
-
-.select-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  align-items: center;
-  margin: 20px auto;
-  max-width: 100%;
-  flex-wrap: nowrap;
+  flex: 1; /* Macht alle `.select-wrapper` gleich groß */
+  min-width: 150px; /* Optional: Mindestbreite, um ein schönes Layout zu behalten */
 }

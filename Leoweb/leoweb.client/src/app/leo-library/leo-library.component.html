@@ -28,14 +28,15 @@
           <option *ngFor="let option of lessonsSelectOptions" [value]="option">{{ option }}</option>
         </select>
       </div>
+
+      <div class="custom-file-container">
+        <input type="file" id="fileInput" (change)="onFileSelected($event)" />
+        <label for="fileInput">Wähle Datei</label>
+        <span *ngIf="selectedFileName" class="file-name">{{ selectedFileName }}</span>
+      </div>
     </div>
 
   <form (submit)="onSubmit($event)" enctype="multipart/form-data">
-    <div class="custom-file-container">
-      <input type="file" id="fileInput" (change)="onFileSelected($event)" />
-      <label for="fileInput">Wähle Datei</label>
-      <span *ngIf="selectedFileName" class="file-name">{{ selectedFileName }}</span>
-    </div>
     <button type="submit" style="cursor: pointer">Upload</button>
   </form>
 </div>

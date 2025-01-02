@@ -93,15 +93,11 @@ export class LeoLibraryComponent {
       alert('Please select a file.');
       return;
     }
-    const data: (string| FormData)[] = [];
     const formData = new FormData();
     formData.append('file', this.selectedFile);
-    data.push(formData);
-    data.push(this.subject);
-    data.push(this.year);
-    data.push(this.branch);
+    formData.append('subject', this.subject);
 
-    this.http.post(`${url}/`, data).subscribe({
+    this.http.post(`${url}/`, formData).subscribe({
       next: (response) => {
         console.log('Upload successful!', response);
       },
