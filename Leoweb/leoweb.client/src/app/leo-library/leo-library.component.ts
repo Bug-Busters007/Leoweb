@@ -59,11 +59,24 @@ export class LeoLibraryComponent {
         const li = document.createElement("li");
         const a = document.createElement("a");
         a.textContent = name;
-        a.id = `${id}`
+        a.id = `${id}`;
         a.href = `${url}/${id}`;
+
+        const preview = document.createElement("p");
+        preview.textContent = "preview";
+
+        preview.addEventListener("click", () => {
+          const embed = document.createElement("embed");
+          embed.src = a.href;
+          embed.type = "application/pdf";
+          li.appendChild(embed);
+        });
+
         li.appendChild(a);
+        li.appendChild(preview);
         list.appendChild(li);
       }
+
     }
   }
 
