@@ -18,9 +18,9 @@ export class LeoLibraryComponent {
   selectedFileName: string= "File";
   selectedFile: File | null = null;
   fileNames: Map<number, string> | null = null;
-  subject: string = "";
-  branch: string = "";
-  year: string = "";
+  subject: string = "Programmieren";
+  branch: string = "Informatik";
+  year: string = "1";
 
 
   setYear(event: Event): void {
