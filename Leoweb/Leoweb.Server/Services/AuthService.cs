@@ -14,6 +14,11 @@ public class AuthService
     {
         _context = context;
     }
+
+    public async  Task<Student> GetStudentById(string id)
+    {
+        return await _context.Students.FirstOrDefaultAsync(s => s.Id == id);
+    }
     
     public async Task RegisterStudentAsync(string email, string password)
     {
