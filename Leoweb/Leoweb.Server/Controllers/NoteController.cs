@@ -87,6 +87,10 @@ namespace Leoweb.Server.Controllers
 		{
 			Type type = typeof(Branch);
 			PropertyInfo[] fields = type.GetProperties(BindingFlags.Public | BindingFlags.Static);
+			foreach (var item in fields.Select(f => f.Name).ToArray())
+			{
+				Console.WriteLine(item);
+			}
 			return Ok(fields.Select(f => f.Name).ToArray());
 		}
 	}
