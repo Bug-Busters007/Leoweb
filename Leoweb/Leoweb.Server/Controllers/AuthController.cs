@@ -35,8 +35,7 @@ public class AuthController : Controller
             return BadRequest("Registration failed");
         }
     }
-
-    // Login
+    
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest model)
     {

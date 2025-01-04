@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterLink, RouterModule, RouterOutlet} from "@angular/router";
+import {Router, RouterLink, RouterModule, RouterOutlet} from "@angular/router";
 import {routes} from "../../app.routes";
 
 @Component({
@@ -11,4 +11,8 @@ import {routes} from "../../app.routes";
 })
 export class HeaderComponent {
 
+  constructor(private router: Router) {}
+  navigateToLogin(): void {
+    this.router.navigate(['/login']); // Navigiert zur Login-Seite
+  }
 }
