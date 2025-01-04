@@ -1,6 +1,6 @@
 .uploadDiv{
   text-align: center;
-  font-family: arial, sans-serif;
+  font-family: Consolas, sans-serif;
 }
 
 .uploadDiv button {
@@ -21,6 +21,7 @@
 }
 
 .buttondiv{
+  font-family: Consolas, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,10 +46,10 @@
 
 .custom-file-container {
   display: flex;
-  flex-direction: column; /* Ordnet Label und Input vertikal an */
+  flex-direction: column;
   align-items: center;
-  flex: 1; /* Macht den Container gleich groß wie die anderen */
-  min-width: 150px; /* Optional */
+  flex: 1;
+  min-width: 150px;
 }
 
 .custom-file-container input[type="file"] {
@@ -72,6 +73,7 @@
 }
 
 select {
+  font-family: Consolas, sans-serif;
   cursor: pointer;
   font-size: 1.2rem;
   padding: 10px 20px;
@@ -123,18 +125,18 @@ select option:hover {
 
 .select-container {
   display: flex;
-  justify-content: space-between; /* Gleiche Abstände zwischen den Elementen */
-  gap: 20px; /* Abstand zwischen den Elementen */
-  align-items: center; /* Zentriere die Inhalte vertikal */
-  margin: 20px auto; /* Zentriere das gesamte Container-Div horizontal */
-  max-width: 100%; /* Stelle sicher, dass der Container die volle Breite verwenden kann */
-  flex-wrap: nowrap; /* Elemente sollen nicht umbrechen */
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  margin: 20px auto;
+  max-width: 100%;
+  flex-wrap: nowrap;
 }
 
 .select-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1; /* Macht alle `.select-wrapper` gleich groß */
-  min-width: 150px; /* Optional: Mindestbreite, um ein schönes Layout zu behalten */
+  flex: 1;
+  min-width: 150px;
 }

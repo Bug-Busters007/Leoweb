@@ -1,0 +1,19 @@
+#fileDiv{
+  cursor: pointer;
+  font-size: 2rem;
+  padding: 1%;
+  background-color: white;
+  color: orangered;
+  border: 2px solid orangered;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5%;
+  font-family: Consolas, sans-serif;
+  display: inline-block;
+  width: auto;
+}
+
+#fileDiv:hover{
+  background-color: orangered;
+  color: white;
+}
