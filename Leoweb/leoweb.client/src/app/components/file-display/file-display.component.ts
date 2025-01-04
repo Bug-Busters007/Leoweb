@@ -1,4 +1,5 @@
-import {Component, input} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {ApiService} from "../../../services/api.service";
 
 @Component({
   selector: 'app-file-display',
@@ -7,6 +8,17 @@ import {Component, input} from '@angular/core';
   standalone: true,
 })
 export class FileDisplayComponent {
-  name = input("File Name");
-  id = input("ID");
+  constructor(private apiService: ApiService) {
+  }
+  @Input() id: number = 0;
+  @Input() name: string = "File";
+  url = this.apiService.getApiUrl('Notes');
+
+
+  navigateToFile(): void {
+    const fileUrl = `${this.url}/${this.id}`;
+    window.location.href = fileUrl;
+  }
+
 }
+

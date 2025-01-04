@@ -3,6 +3,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 import {ApiService} from "../../services/api.service";
 import {CommonModule} from "@angular/common";
+import {AppComponent} from "../app.component";
+import {FileDisplayComponent} from "../components/file-display/file-display.component";
 
 @Component({
   selector: 'app-leo-library',
@@ -12,12 +14,14 @@ import {CommonModule} from "@angular/common";
   imports: [
     HttpClientModule,
     CommonModule,
+    FileDisplayComponent,
   ]
 })
 export class LeoLibraryComponent {
   selectedFileName: string= "File";
   selectedFile: File | null = null;
   fileNames: Map<number, string> | null = null;
+  fileArray: { id: number; name: string }[] = [];
   subject: string = "Programmieren";
   branch: string = "Informatik";
   year: string = "1";
@@ -49,35 +53,8 @@ export class LeoLibraryComponent {
   }
 
   public async ngOnInit() {
-    const url = this.apiService.getApiUrl('Notes');
-    this.fileNames = await this.getFileNames()
-    const list = document.getElementById('fileNameList');
-
-    if (list) {
-      list.innerHTML = '';
-      for (const [id, name] of this.fileNames) {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.textContent = name;
-        a.id = `${id}`;
-        a.href = `${url}/${id}`;
-
-        const preview = document.createElement("p");
-        preview.textContent = "preview";
-
-        preview.addEventListener("click", () => {
-          const embed = document.createElement("embed");
-          embed.src = a.href;
-          embed.type = "application/pdf";
-          li.appendChild(embed);
-        });
-
-        li.appendChild(a);
-        li.appendChild(preview);
-        list.appendChild(li);
-      }
-
-    }
+    this.fileNames = await this.getFileNames();
+    this.fileArray = Array.from(this.fileNames, ([id, name]) => ({ id, name }));
   }
 
   isUploadDivVisible = false;

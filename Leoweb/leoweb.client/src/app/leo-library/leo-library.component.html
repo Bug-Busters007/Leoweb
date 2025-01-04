@@ -1,5 +1,5 @@
 <div class="buttondiv">
-  <button (click)="toggleUploadDiv()" style="cursor: pointer">Upload File</button>
+  <button (click)="toggleUploadDiv()" style="cursor: pointer; font-family: Consolas, sans-serif">Upload File</button>
 </div>
 
   <div *ngIf="isUploadDivVisible" class="uploadDiv">
@@ -37,11 +37,13 @@
     </div>
 
   <form (submit)="onSubmit($event)" enctype="multipart/form-data">
-    <button type="submit" style="cursor: pointer">Upload</button>
+    <button type="submit" style="cursor: pointer; font-family: Consolas, sans-serif">Upload</button>
   </form>
 </div>
 
 
-<ul id="fileNameList"></ul>
+<div id="filesListed">
+  <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id"></app-file-display>
+</div>
 
 
