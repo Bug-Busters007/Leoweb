@@ -1,0 +1,14 @@
+@startuml
+
+package "Leoweb System Architecture" {
+
+  [Frontend: Angular (Leoweb.Client)] --> [Backend: ASP.NET Web API (Leoweb.Server)] : REST API
+  [Backend: ASP.NET Web API (Leoweb.Server)] --> [Database: PostgreSQL] : Data Storage
+  [Backend: ASP.NET Web API (Leoweb.Server)] --> [Cloud Storage: Azure Blob Storage] : File Upload/Retrieval
+
+  [Frontend: Angular (Leoweb.Client)] --> [Backend: ASP.NET Web API (Leoweb.Server)] : Login / Registration
+  [Frontend: Angular (Leoweb.Client)] <--> [Backend: ASP.NET Web API (Leoweb.Server)] : Retrieve Knowledge Data
+
+}
+
+@enduml
