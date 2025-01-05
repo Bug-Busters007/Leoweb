@@ -1,2 +1,3 @@
-<p>pdf-viewer not works!</p>
-<iframe src="https://localhost:7008/api/Notes/9" frameborder="0"></iframe>
+<div *ngIf="isVisible" class="pdf-container">
+  <embed [src]="pdfSrc" width="100%" height="100%" type="application/pdf" />
+</div>

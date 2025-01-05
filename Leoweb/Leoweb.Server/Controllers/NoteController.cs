@@ -59,15 +59,15 @@ namespace Leoweb.Server.Controllers
 			};
 
 			_dbContext.BinaryFile.Add(binFile);
-			Student student = await NoteService.GetCurrentStudent();
-			var newFile = new File()
-			{
-				Year = (Year)year,
-				Subject = s,
-				Data = binFile,
-				Date = DateOnly.FromDateTime(DateTime.Now),
-				Student = student
-			};
+			//Student student = await NoteService.GetCurrentStudent();
+			//var newFile = new File()
+			//{
+			//	Year = (Year)year,
+			//	Subject = s,
+			//	Data = binFile,
+			//	Date = DateOnly.FromDateTime(DateTime.Now),
+			//	Student = student
+			//};
 
 			_dbContext.SaveChanges();
 

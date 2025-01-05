@@ -5,6 +5,7 @@ import {ApiService} from "../../services/api.service";
 import {CommonModule} from "@angular/common";
 import {AppComponent} from "../app.component";
 import {FileDisplayComponent} from "../components/file-display/file-display.component";
+import {PdfViewerComponent} from "../components/pdf-viewer/pdf-viewer.component";
 
 @Component({
   selector: 'app-leo-library',
