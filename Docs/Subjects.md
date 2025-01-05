@@ -152,3 +152,57 @@
 - Netzwerksysteme und Verteilte Systeme
 - Betriebswirtschaft und Management
 - Systemplanung und Projektentwicklung
+
+### Zusammenfassung:
+- Religion/Ethik
+- Deutsch
+- Englisch
+- Geografie, Geschichte und Politische Bildung
+- Wirtschaft und Recht
+- Bewegung und Sport
+- Angewandte Mathematik
+- Naturwissenschaften
+- Naturwissenschaftliche Grundlagen
+- Biologie, Medizin und Gesundheitswesen
+- UI und UX Design
+- Computerarchitektur und Betriebssysteme
+- Technische Informatik
+- Programmierung und Software Engineering
+- Softwaretechnik
+- Angewandte Informatik
+- Datenbanken und Informationssysteme
+- Informationssysteme
+- Netzwerksysteme und Cyber Security
+- Netzwerksysteme und Verteilte Systeme
+- Webprogrammierung und Mobile Computing
+- Web- und App-Entwicklung
+- Data Science und Artificial Intelligence
+- Artificial Intelligence und Machine Learning
+- Medientechnik
+- Virtuelle Welten und Spielentwicklung
+- Mediendesign und Medienproduktion
+- Hardwareentwicklung
+- Messtechnik und Regelungssysteme
+- Kommunikationssysteme und -netze
+- Netzwerktechnik
+- IT-Sicherheit
+- Fachspezifische Softwaretechnik
+- Elektronik Design
+- Laboratorium
+- Elektronik-Werkstätte und Produktionstechnik
+- Medizinische Gerätetechnik
+- Biomedizinische Signalverarbeitung
+- Gesundheitsmechatronik
+- Medizin- und Gesundheitsinformatik
+- Prototypenbau elektronischer Systeme
+- Prototypenbau medizintechnischer Systeme
+- Systemplanung und Projektentwicklung
+- Engineering und Projektmanagement
+- Sozial- und Personalkompetenz
+- Unternehmensführung
+- Computerpraktikum
+- Medienpraktikum
+- Informationstechnische Projekte
+- Kommunikationselektronik
+- Automatisierung
+- Software Delivery
