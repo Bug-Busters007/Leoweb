@@ -1,5 +1,6 @@
 ﻿using DotNetEnv;
 using Leoweb.Server.Database.Models;
+using Leoweb.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -58,18 +59,16 @@ namespace Leoweb.Server.Controllers
 			};
 
 			_dbContext.BinaryFile.Add(binFile);
-			//Student student;
-			//var newFile = new File()
-			//{
-			//	Year = (Year)year,
-			//	Subject = s,
-			//	Data = binFile,
-			//	Date = DateOnly.FromDateTime(DateTime.Now)
+			Student student = await NoteService.GetCurrentStudent();
+			var newFile = new File()
+			{
+				Year = (Year)year,
+				Subject = s,
+				Data = binFile,
+				Date = DateOnly.FromDateTime(DateTime.Now),
+				Student = student
+			};
 
-			//};
-			
-			
-			
 			_dbContext.SaveChanges();
 
 			return Ok(binFile);

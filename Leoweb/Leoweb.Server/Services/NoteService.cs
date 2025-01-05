@@ -9,30 +9,19 @@ namespace Leoweb.Server.Services
 		{
 			using (var client = new HttpClient())
 			{
-				client.BaseAddress = new Uri("ht");
+				var configuration = new ConfigurationBuilder()
+					.AddJsonFile("appsettings.json")
+					.Build();
+
+				string apiUrl = string.Join(configuration["ApiSettings:BaseUrl"], "api/auth/");
+				client.BaseAddress = new Uri(apiUrl);
 				var response = await client.GetAsync("userdata");
 				if (response.IsSuccessStatusCode)
 				{
 					return await response.Content.ReadFromJsonAsync<Student>();
 				}
 			}
-		}
-
-		public static string GetApiBase()
-		{
-			string filePath = "environment.prod.ts";
-			string fileContent = System.IO.File.ReadAllText(filePath);
-			string pattern = @"apiUrl:\s*'([^']*)'";
-			Match match = Regex.Match(fileContent, pattern);
-
-			if (match.Success)
-			{
-				return match.Groups[1].Value;
-			}
-			else
-			{
-				return string.Empty;
-			}
+			return new Student();
 		}
 	}
 }
