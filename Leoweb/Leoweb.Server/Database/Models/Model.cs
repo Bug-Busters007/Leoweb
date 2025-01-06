@@ -18,10 +18,9 @@
         DSAI,
         GGPGW,
         GGPGP,
+        NWP,
         NSCS,
         RK,
-        RELIGION_EVG,
-        RI,
         ETH,
         CABS,
         SEW,
@@ -89,6 +88,16 @@
             {
                 return new List<Subject>()
                 { 
+	                Subject.AM,
+	                Subject.RK,
+	                Subject.ETH,
+	                Subject.D,
+	                Subject.E,
+	                Subject.GGPGP,
+	                Subject.GGPGW,
+	                Subject.BSPM,
+	                Subject.NWC,
+	                Subject.NWP,
                     Subject.POSEOO,
                     Subject.POSEPR,
                     Subject.POSETHI, 
@@ -124,7 +133,17 @@
 					Subject.MEDTMC,
 					Subject.MEDTPD,
 					Subject.MEDTSM,
-					Subject.MEDTFI
+					Subject.MEDTFI,
+					Subject.AM,
+					Subject.RK,
+					Subject.ETH,
+					Subject.D,
+					Subject.E,
+					Subject.GGPGP,
+					Subject.GGPGW,
+					Subject.BSPM,
+					Subject.NWC,
+					Subject.NWP,
 				};
 			}
 		}
@@ -134,6 +153,16 @@
 			{
 				return new List<Subject>()
 				{
+					Subject.AM,
+					Subject.RK,
+					Subject.ETH,
+					Subject.D,
+					Subject.E,
+					Subject.GGPGP,
+					Subject.GGPGW,
+					Subject.BSPM,
+					Subject.NWC,
+					Subject.NWP,
 					Subject.HE,
 					Subject.FST,
 					Subject.PBE,
@@ -154,6 +183,16 @@
 			{
 				return new List<Subject>()
 				{
+					Subject.AM,
+					Subject.RK,
+					Subject.ETH,
+					Subject.D,
+					Subject.E,
+					Subject.GGPGP,
+					Subject.GGPGW,
+					Subject.BSPM,
+					Subject.NWC,
+					Subject.NWP,
 					Subject.GME,
 					Subject.BSVE,
 					Subject.PMW,
