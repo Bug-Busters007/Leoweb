@@ -26,6 +26,7 @@
         CABS,
         SEW,
         ITP,
+        ITPBO,
         VERT,
         NWT,
         ITSI,
@@ -44,7 +45,7 @@
         FST,
         MTRS,
         SOPK,
-        PBEU,
+        PBE,
         WRWI,
         LA,
         DIC,
@@ -56,7 +57,6 @@
         MGT,
         PMW,
         BSVU,
-        LAU,
         CNTNT,
         AUTO,
         UNF,
@@ -71,7 +71,15 @@
         BSVE,
         BMG,
         RFKR,
-        EBA_BMG
+        EBA_BMG,
+        MEDTWT,
+        MEDT,
+        SYTAV,
+        MEDTMC,
+        MEDTFI,
+        WRRE,
+        PML,
+        EPMMED
     }
 
     public static class Branch
@@ -90,7 +98,7 @@
                     Subject.BO,
                     Subject.RW,
                     Subject.CABS,
-                    Subject.NSCS,
+                    Subject.NSCS
                 };
             }
         }
@@ -100,7 +108,23 @@
 			{
 				return new List<Subject>()
 				{
-					Subject.SEW
+					Subject.SEW,
+					Subject.ITP,
+					Subject.NWT,
+					Subject.SYTSW,
+					Subject.SYTEL,
+					Subject.SYTAV,
+					Subject.CPR,
+					Subject.ITSI,
+					Subject.MEDTWT,
+					Subject.MEDPR,
+					Subject.INSY,
+					Subject.ITPBO,
+					Subject.MEDT,
+					Subject.MEDTMC,
+					Subject.MEDTPD,
+					Subject.MEDTSM,
+					Subject.MEDTFI
 				};
 			}
 		}
@@ -110,7 +134,17 @@
 			{
 				return new List<Subject>()
 				{
-					Subject.HE
+					Subject.HE,
+					Subject.FST,
+					Subject.PBE,
+					Subject.MTRS,
+					Subject.KSN,
+					Subject.LA,
+					Subject.DIC,
+					Subject.WRWI,
+					Subject.EPMEL,
+					Subject.WRRE,
+					Subject.ROR
 				};
 			}
 		}
@@ -120,7 +154,20 @@
 			{
 				return new List<Subject>()
 				{
-					Subject.GME
+					Subject.GME,
+					Subject.BSVE,
+					Subject.PMW,
+					Subject.BMG,
+					Subject.MGT,
+					Subject.MINF,
+					Subject.BSVU,
+					Subject.BSVB,
+					Subject.LA,
+					Subject.BSV,
+					Subject.WRRE,
+					Subject.PML,
+					Subject.EPMMED,
+					Subject.WRWI
 				};
 			}
 		}
