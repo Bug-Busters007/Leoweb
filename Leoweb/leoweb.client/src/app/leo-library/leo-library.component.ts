@@ -26,7 +26,10 @@ export class LeoLibraryComponent {
   subject: string = "Programmieren";
   branch: string = "Informatik";
   year: string = "1";
-
+  InfoSubjects=[];
+  MedienSubjects=[];
+  MedizinSubjects=[];
+  ElektronikSubjects=[];
 
   setYear(event: Event): void {
     this.year = (event.target as HTMLInputElement).value;
@@ -35,15 +38,15 @@ export class LeoLibraryComponent {
   setSubject(event: Event): void {
     this.subject = (event.target as HTMLInputElement).value;
   }
-  zweigSelectOptions = ['Informatik', 'Medientechnik', 'Elektronik', 'Medizintechnik'];
+  zweigSelectOptions = ['Informatik', 'Medientechnik', 'Medizintechnik','Elektronik'];
 
-  lessonsSelectOptions: string[] = ['Programmieren', 'Mathe', 'DBI'];
+  lessonsSelectOptions: string[] = this.InfoSubjects;
 
   optionsMap: { [key: string]: string[] } = {
-    Informatik:  ['Programmieren', 'Mathe', 'DBI'],
-    Medientechnik: ['Graphic', 'Deutsch', 'Photoshop'],
-    Medizintechnik: ['Verarzten', 'Englisch', 'Biologie'],
-    Elektronik: ['Türkisch', 'Elektrik', 'Labor']
+    Informatik:  this.InfoSubjects,
+    Medientechnik: this.MedienSubjects,
+    Medizintechnik: this.MedizinSubjects,
+    Elektronik: this.ElektronikSubjects,
   };
 
   onFirstSelectChange(event: Event): void {

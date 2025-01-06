@@ -5,9 +5,8 @@
         D,
         E,
         AM,
-        POSEOO,
-        POSEPR,
-        POSETHI,
+        POSE,
+        LOAL,
         SYP,
         WMC,
         DBI,
@@ -19,8 +18,9 @@
         GGPGW,
         GGPGP,
         NSCS,
+        NWP,
+        NWCH,
         RK,
-        RELIGION_EVG,
         RI,
         ETH,
         CABS,
@@ -81,16 +81,26 @@
             {
                 return new List<Subject>()
                 { 
-                    Subject.POSEOO,
-                    Subject.POSEPR,
-                    Subject.POSETHI, 
-                    Subject.SYP,
-                    Subject.WMC,
+                    Subject.AM,
+                    Subject.RK,
+                    Subject.ETH,
+                    Subject.D,
+                    Subject.E,
+                    Subject.GGPGP,
+                    Subject.GGPGW,
+                    Subject.BSPM,
+                    Subject.NWC,
+                    Subject.NWP,
+                    Subject.SOPK,
+                    Subject.CABS,
+                    Subject.POSE,
                     Subject.DBI,
+                    Subject.NSCS,
+                    Subject.WMC,
+                    Subject.DSAI,
                     Subject.BO,
                     Subject.RW,
-                    Subject.CABS,
-                    Subject.NSCS,
+                    Subject.SYP
                 };
             }
         }
@@ -100,7 +110,27 @@
 			{
 				return new List<Subject>()
 				{
-					Subject.SEW
+					Subject.AM,
+					Subject.RK,
+					Subject.ETH,
+					Subject.D,
+					Subject.E,
+					Subject.GGPGP,
+					Subject.GGPGW,
+					Subject.BSPM,
+					Subject.NWC,
+					Subject.NWP,
+					Subject.SOPK,
+					Subject.SEW,
+					Subject.ITP,
+					Subject.INSY,
+					Subject.SYTSW,
+					Subject.MEDTPD,
+					Subject.MEDTSM,
+					Subject.NSCS,
+					Subject.ITSI,
+					Subject.CPR,
+					Subject.MEDPR
 				};
 			}
 		}
@@ -110,7 +140,25 @@
 			{
 				return new List<Subject>()
 				{
-					Subject.HE
+					Subject.AM,
+					Subject.RK,
+					Subject.ETH,
+					Subject.D,
+					Subject.E,
+					Subject.GGPGP,
+					Subject.GGPGW,
+					Subject.BSPM,
+					Subject.NWC,
+					Subject.NWP,
+					Subject.SOPK,
+					Subject.HE,
+					Subject.MEDTSM,
+					Subject.DIC,
+					Subject.KSN,
+					Subject.FST,
+					Subject.LA,
+					Subject.PBEU,
+					Subject.EPMEL
 				};
 			}
 		}
@@ -120,7 +168,24 @@
 			{
 				return new List<Subject>()
 				{
-					Subject.GME
+					Subject.AM,
+					Subject.RK,
+					Subject.ETH,
+					Subject.D,
+					Subject.E,
+					Subject.GGPGP,
+					Subject.GGPGW,
+					Subject.BSPM,
+					Subject.NWC,
+					Subject.NWP,
+					Subject.SOPK,
+					Subject.BMG,
+					Subject.BSV,
+					Subject.MGT,
+					Subject.GME,
+					Subject.LA,
+					Subject.EPMEL,
+					Subject.PBEU
 				};
 			}
 		}
