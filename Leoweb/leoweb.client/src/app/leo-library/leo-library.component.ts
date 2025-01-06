@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 import {AppComponent} from "../app.component";
 import {FileDisplayComponent} from "../components/file-display/file-display.component";
 import {PdfViewerComponent} from "../components/pdf-viewer/pdf-viewer.component";
+import {getAllSubjectsFromBranch} from "./leo-library-helper";
 
 @Component({
   selector: 'app-leo-library',
@@ -26,10 +27,10 @@ export class LeoLibraryComponent {
   subject: string = "Programmieren";
   branch: string = "Informatik";
   year: string = "1";
-  InfoSubjects=[];
-  MedienSubjects=[];
-  MedizinSubjects=[];
-  ElektronikSubjects=[];
+  InfoSubjects: string[]|undefined= [];
+  MedienSubjects: string[]|undefined= [];
+  MedizinSubjects: string[]|undefined= [];
+  ElektronikSubjects: string[]|undefined= [];
 
   setYear(event: Event): void {
     this.year = (event.target as HTMLInputElement).value;
@@ -40,9 +41,9 @@ export class LeoLibraryComponent {
   }
   zweigSelectOptions = ['Informatik', 'Medientechnik', 'Medizintechnik','Elektronik'];
 
-  lessonsSelectOptions: string[] = this.InfoSubjects;
+  lessonsSelectOptions: string[]|undefined = this.InfoSubjects;
 
-  optionsMap: { [key: string]: string[] } = {
+  optionsMap: { [key: string]: string[]|undefined } = {
     Informatik:  this.InfoSubjects,
     Medientechnik: this.MedienSubjects,
     Medizintechnik: this.MedizinSubjects,
@@ -59,6 +60,10 @@ export class LeoLibraryComponent {
   public async ngOnInit() {
     this.fileNames = await this.getFileNames();
     this.fileArray = Array.from(this.fileNames, ([id, name]) => ({ id, name }));
+    this.InfoSubjects = await getAllSubjectsFromBranch(this.http, this.apiService, "Informatik");
+    this.MedienSubjects = await getAllSubjectsFromBranch(this.http, this.apiService, "Medientechnik");
+    this.MedizinSubjects = await getAllSubjectsFromBranch(this.http, this.apiService, "Medizintechnik");
+    this.ElektronikSubjects = await getAllSubjectsFromBranch(this.http, this.apiService, "Elektronik");
   }
 
   isUploadDivVisible = false;
