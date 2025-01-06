@@ -5,8 +5,9 @@
         D,
         E,
         AM,
-        POSE,
-        LOAL,
+        POSEOO,
+        POSEPR,
+        POSETHI,
         SYP,
         WMC,
         DBI,
@@ -18,14 +19,14 @@
         GGPGW,
         GGPGP,
         NSCS,
-        NWP,
-        NWCH,
         RK,
+        RELIGION_EVG,
         RI,
         ETH,
         CABS,
         SEW,
         ITP,
+        ITPBO,
         VERT,
         NWT,
         ITSI,
@@ -44,7 +45,7 @@
         FST,
         MTRS,
         SOPK,
-        PBEU,
+        PBE,
         WRWI,
         LA,
         DIC,
@@ -56,7 +57,6 @@
         MGT,
         PMW,
         BSVU,
-        LAU,
         CNTNT,
         AUTO,
         UNF,
@@ -71,7 +71,15 @@
         BSVE,
         BMG,
         RFKR,
-        EBA_BMG
+        EBA_BMG,
+        MEDTWT,
+        MEDT,
+        SYTAV,
+        MEDTMC,
+        MEDTFI,
+        WRRE,
+        PML,
+        EPMMED
     }
 
     public static class Branch
@@ -81,26 +89,16 @@
             {
                 return new List<Subject>()
                 { 
-                    Subject.AM,
-                    Subject.RK,
-                    Subject.ETH,
-                    Subject.D,
-                    Subject.E,
-                    Subject.GGPGP,
-                    Subject.GGPGW,
-                    Subject.BSPM,
-                    Subject.NWC,
-                    Subject.NWP,
-                    Subject.SOPK,
-                    Subject.CABS,
-                    Subject.POSE,
-                    Subject.DBI,
-                    Subject.NSCS,
+                    Subject.POSEOO,
+                    Subject.POSEPR,
+                    Subject.POSETHI, 
+                    Subject.SYP,
                     Subject.WMC,
-                    Subject.DSAI,
+                    Subject.DBI,
                     Subject.BO,
                     Subject.RW,
-                    Subject.SYP
+                    Subject.CABS,
+                    Subject.NSCS
                 };
             }
         }
@@ -110,27 +108,23 @@
 			{
 				return new List<Subject>()
 				{
-					Subject.AM,
-					Subject.RK,
-					Subject.ETH,
-					Subject.D,
-					Subject.E,
-					Subject.GGPGP,
-					Subject.GGPGW,
-					Subject.BSPM,
-					Subject.NWC,
-					Subject.NWP,
-					Subject.SOPK,
 					Subject.SEW,
 					Subject.ITP,
-					Subject.INSY,
+					Subject.NWT,
 					Subject.SYTSW,
+					Subject.SYTEL,
+					Subject.SYTAV,
+					Subject.CPR,
+					Subject.ITSI,
+					Subject.MEDTWT,
+					Subject.MEDPR,
+					Subject.INSY,
+					Subject.ITPBO,
+					Subject.MEDT,
+					Subject.MEDTMC,
 					Subject.MEDTPD,
 					Subject.MEDTSM,
-					Subject.NSCS,
-					Subject.ITSI,
-					Subject.CPR,
-					Subject.MEDPR
+					Subject.MEDTFI
 				};
 			}
 		}
@@ -140,25 +134,17 @@
 			{
 				return new List<Subject>()
 				{
-					Subject.AM,
-					Subject.RK,
-					Subject.ETH,
-					Subject.D,
-					Subject.E,
-					Subject.GGPGP,
-					Subject.GGPGW,
-					Subject.BSPM,
-					Subject.NWC,
-					Subject.NWP,
-					Subject.SOPK,
 					Subject.HE,
-					Subject.MEDTSM,
-					Subject.DIC,
-					Subject.KSN,
 					Subject.FST,
+					Subject.PBE,
+					Subject.MTRS,
+					Subject.KSN,
 					Subject.LA,
-					Subject.PBEU,
-					Subject.EPMEL
+					Subject.DIC,
+					Subject.WRWI,
+					Subject.EPMEL,
+					Subject.WRRE,
+					Subject.ROR
 				};
 			}
 		}
@@ -168,24 +154,20 @@
 			{
 				return new List<Subject>()
 				{
-					Subject.AM,
-					Subject.RK,
-					Subject.ETH,
-					Subject.D,
-					Subject.E,
-					Subject.GGPGP,
-					Subject.GGPGW,
-					Subject.BSPM,
-					Subject.NWC,
-					Subject.NWP,
-					Subject.SOPK,
-					Subject.BMG,
-					Subject.BSV,
-					Subject.MGT,
 					Subject.GME,
+					Subject.BSVE,
+					Subject.PMW,
+					Subject.BMG,
+					Subject.MGT,
+					Subject.MINF,
+					Subject.BSVU,
+					Subject.BSVB,
 					Subject.LA,
-					Subject.EPMEL,
-					Subject.PBEU
+					Subject.BSV,
+					Subject.WRRE,
+					Subject.PML,
+					Subject.EPMMED,
+					Subject.WRWI
 				};
 			}
 		}
