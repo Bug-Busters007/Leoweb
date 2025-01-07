@@ -1,0 +1,118 @@
+.uploadDiv{
+  text-align: center;
+  font-family: Consolas, sans-serif;
+}
+
+.uploadDiv button {
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  background-color: white;
+  color: orangered;
+  border: 2px solid orangered;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5%;
+}
+
+.uploadDiv button:hover {
+  background-color: orangered;
+  color: white;
+}
+
+.custom-file-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 150px;
+}
+
+.custom-file-container input[type="file"] {
+  display: none;
+}
+
+.custom-file-container label {
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background-color: white;
+  color: orangered;
+  border: 2px solid orangered;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.custom-file-container label:hover {
+  background-color: orangered;
+  color: white;
+}
+
+select {
+  font-family: Consolas, sans-serif;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background-color: white;
+  color: orangered;
+  border: 2px solid orangered;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  margin-bottom: 3%;
+  appearance: none;
+}
+
+select:focus {
+  outline: none;
+  border-color: orangered;
+}
+
+select:hover {
+  background-color: orangered;
+  color: white;
+}
+
+label{
+  font-size: 1.2rem;
+  color: orangered;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+span{
+  font-size: 1.2rem;
+  color: orangered;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+select option {
+  background-color: white;
+  color: orangered;
+  font-size: 1.2rem;
+  padding: 5px;
+}
+
+select option:hover {
+  background-color: orangered;
+  color: white;
+}
+
+.select-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  margin: 20px auto;
+  max-width: 100%;
+  flex-wrap: nowrap;
+}
+
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 150px;
+}

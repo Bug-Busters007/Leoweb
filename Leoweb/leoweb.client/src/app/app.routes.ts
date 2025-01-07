@@ -5,6 +5,7 @@ import {AppComponent} from "./app.component";
 import {LeoLibraryComponent} from "./leo-library/leo-library.component";
 import {ModuleComponent} from "./components/module/module.component";
 import {HeaderComponent} from "./components/header/header.component";
+import {FileUploadComponent} from "./components/file-upload/file-upload.component";
 
 export const routes: Routes = [
   {
