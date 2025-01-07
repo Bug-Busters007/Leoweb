@@ -10,12 +10,12 @@ namespace Leoweb.Server.Services
 			using (var client = new HttpClient())
 			{
 				var configuration = new ConfigurationBuilder()
-					.AddJsonFile("appsettings.json")
+					.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
 					.Build();
 
-				string apiUrl = string.Join(configuration["ApiSettings:BaseUrl"], "api/auth/");
+				string apiUrl = configuration["ApiSettings:BaseUrl"] + "/api/auth/userdata";
 				client.BaseAddress = new Uri(apiUrl);
-				var response = await client.GetAsync("userdata");
+				var response = await client.GetAsync(apiUrl);
 				if (response.IsSuccessStatusCode)
 				{
 					return await response.Content.ReadFromJsonAsync<Student>();

@@ -1,48 +1,11 @@
 <div class="buttondiv">
-  <button (click)="toggleUploadDiv()" style="cursor: pointer; font-family: Consolas, sans-serif">Upload File</button>
+  <button (click)="visibilise()" style="cursor: pointer; font-family: Consolas, sans-serif">Upload File</button>
+</div>
+<div *ngIf="isUploadDivVisible" class="uploadDiv">
+  <app-file-upload></app-file-upload>
 </div>
 
-  <div *ngIf="isUploadDivVisible" class="uploadDiv">
-    <div class="select-container">
-      <div class="select-wrapper">
-        <label for="year">Jahrgang: </label>
-        <select id="year" (change)="setYear($event)">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-
-      <div class="select-wrapper">
-        <label for="branch">Zweig:</label>
-        <select id="branch" (change)="setBranch($event)">
-          <option *ngFor="let option of branchSelectOptions" [value]="option">{{ option }}</option>
-        </select>
-      </div>
-
-      <div class="select-wrapper">
-        <label for="subject">Unterrichtsgegenstand:</label>
-        <select id="subject" (change)="setSubject($event)">
-          <option *ngFor="let option of lessonsSelectOptions" [value]="option">{{ option }}</option>
-        </select>
-      </div>
-
-      <div class="custom-file-container">
-        <input type="file" id="fileInput" (change)="onFileSelected($event)" />
-        <label for="fileInput">Wähle Datei</label>
-        <span *ngIf="selectedFileName" class="file-name">{{ selectedFileName }}</span>
-      </div>
-    </div>
-
-  <form (submit)="onSubmit($event)" enctype="multipart/form-data">
-    <button type="submit" style="cursor: pointer; font-family: Consolas, sans-serif">Upload</button>
-  </form>
-</div>
-
-
-<div id="filesListed">
+<div id="filesListed" >
   <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id"></app-file-display>
 </div>
 

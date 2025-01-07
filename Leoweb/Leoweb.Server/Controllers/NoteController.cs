@@ -68,6 +68,8 @@ namespace Leoweb.Server.Controllers
 			//	Date = DateOnly.FromDateTime(DateTime.Now),
 			//	Student = student
 			//};
+			//_dbContext.File.Add(newFile);
+
 
 			_dbContext.SaveChanges();
 

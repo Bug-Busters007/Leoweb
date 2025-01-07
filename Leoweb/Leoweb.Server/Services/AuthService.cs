@@ -17,7 +17,7 @@ public class AuthService
 
     public async  Task<Student> GetStudentById(string id)
     {
-        return await _context.Students.FirstOrDefaultAsync(s => s.Id == id);
+        return await _context.Student.FirstOrDefaultAsync(s => s.Id == id);
     }
     
     public async Task RegisterStudentAsync(string email, string password)
@@ -29,7 +29,7 @@ public class AuthService
             PasswordHash = HashPassword(password)
         };
 
-        _context.Students.Add(student);
+        _context.Student.Add(student);
         await _context.SaveChangesAsync();
     }
     

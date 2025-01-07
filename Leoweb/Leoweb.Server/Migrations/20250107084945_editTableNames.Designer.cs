@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Leoweb.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250103203000_addStudentSession")]
-    partial class addStudentSession
+    [Migration("20250107084945_editTableNames")]
+    partial class editTableNames
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,10 +53,6 @@ namespace Leoweb.Server.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.PrimitiveCollection<int[]>("Branch")
-                        .IsRequired()
-                        .HasColumnType("integer[]");
-
                     b.Property<int>("DataId")
                         .HasColumnType("integer");
 
@@ -78,7 +74,7 @@ namespace Leoweb.Server.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Files");
+                    b.ToTable("File");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Poll", b =>
@@ -101,7 +97,7 @@ namespace Leoweb.Server.Migrations
 
                     b.HasIndex("VotesChoice");
 
-                    b.ToTable("Polls");
+                    b.ToTable("Poll");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Student", b =>
@@ -117,13 +113,9 @@ namespace Leoweb.Server.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("SessionToken")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Student");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Vote", b =>
@@ -140,7 +132,7 @@ namespace Leoweb.Server.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Votes");
+                    b.ToTable("Vote");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.File", b =>
