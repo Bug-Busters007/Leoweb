@@ -24,7 +24,7 @@
 
       <div class="select-wrapper">
         <label for="subject">Unterrichtsgegenstand:</label>
-        <select id="subject" (change)="setSubject($event)" (click)="loadSubjects()">
+        <select id="subject" (change)="setSubject($event)">
           <option *ngFor="let option of lessonsSelectOptions" [value]="option">{{ option }}</option>
         </select>
       </div>
