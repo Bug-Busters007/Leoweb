@@ -18,7 +18,7 @@
       <div class="select-wrapper">
         <label for="branch">Zweig:</label>
         <select id="branch" (change)="onFirstSelectChange($event)">
-          <option *ngFor="let option of zweigSelectOptions" [value]="option">{{ option }}</option>
+          <option *ngFor="let option of branchSelectOptions" [value]="option">{{ option }}</option>
         </select>
       </div>
 

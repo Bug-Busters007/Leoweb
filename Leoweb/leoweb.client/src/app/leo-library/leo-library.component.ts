@@ -27,32 +27,21 @@ export class LeoLibraryComponent {
   subject: string = "Programmieren";
   branch: string = "Informatik";
   year: string = "1";
-  InfoSubjects: string[]|undefined= [];
-  MedienSubjects: string[]|undefined= [];
-  MedizinSubjects: string[]|undefined= [];
-  ElektronikSubjects: string[]|undefined= [];
 
   setYear(event: Event): void {
     this.year = (event.target as HTMLInputElement).value;
   }
-
+  
   setSubject(event: Event): void {
     this.subject = (event.target as HTMLInputElement).value;
   }
-  zweigSelectOptions = ['Informatik', 'Medientechnik', 'Medizintechnik','Elektronik'];
+  branchSelectOptions = ['Informatik', 'Medientechnik', 'Medizintechnik','Elektronik'];
 
-  lessonsSelectOptions: string[]|undefined = this.InfoSubjects;
+  lessonsSelectOptions: string[]|undefined = undefined;
 
-  optionsMap: { [key: string]: string[]|undefined } = {
-    Informatik:  this.InfoSubjects,
-    Medientechnik: this.MedienSubjects,
-    Medizintechnik: this.MedizinSubjects,
-    Elektronik: this.ElektronikSubjects,
-  };
-
-  onFirstSelectChange(event: Event): void {
+  async onFirstSelectChange(event: Event): Promise<void> {
     this.branch = (event.target as HTMLSelectElement).value;
-    this.lessonsSelectOptions = this.optionsMap[this.branch] || [];
+    this.lessonsSelectOptions = await getAllSubjectsFromBranch(this.http, this.apiService, this.branch) || [];
   }
   constructor(private http: HttpClient, private apiService: ApiService) {
   }
@@ -60,10 +49,6 @@ export class LeoLibraryComponent {
   public async ngOnInit() {
     this.fileNames = await this.getFileNames();
     this.fileArray = Array.from(this.fileNames, ([id, name]) => ({ id, name }));
-    this.InfoSubjects = await getAllSubjectsFromBranch(this.http, this.apiService, "Informatik");
-    this.MedienSubjects = await getAllSubjectsFromBranch(this.http, this.apiService, "Medientechnik");
-    this.MedizinSubjects = await getAllSubjectsFromBranch(this.http, this.apiService, "Medizintechnik");
-    this.ElektronikSubjects = await getAllSubjectsFromBranch(this.http, this.apiService, "Elektronik");
   }
 
   isUploadDivVisible = false;

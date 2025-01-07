@@ -93,11 +93,11 @@ namespace Leoweb.Server.Controllers
 				case "informatik":
 					return Ok(Branch.Informatik.Select(s => s.ToString()).ToArray());
 				case "medientechnik":
-					return Ok(Branch.Medientechnik.Select(s => s.ToString().ToArray()));
+					return Ok(Branch.Medientechnik.Select(s => s.ToString()).ToArray());
 				case "elektronik":
-					return Ok(Branch.Elektronik.Select(s => s.ToString().ToArray()));
+					return Ok(Branch.Elektronik.Select(s => s.ToString()).ToArray());
 				case "medizintechnik":
-					return Ok(Branch.Medizintechnik.Select(s => s.ToString().ToArray()));
+					return Ok(Branch.Medizintechnik.Select(s => s.ToString()).ToArray());
 			}
 			return BadRequest(branch);
 		}
