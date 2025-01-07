@@ -39,9 +39,6 @@ export class LeoLibraryComponent {
 
   lessonsSelectOptions: string[]|undefined = undefined;
 
-  async loadSubjects(){
-    this.lessonsSelectOptions = await getAllSubjectsFromBranch(this.http, this.apiService, this.branch) || [];
-  }
   async setBranch(event: Event) {
     this.branch = (event.target as HTMLSelectElement).value;
     this.lessonsSelectOptions = await getAllSubjectsFromBranch(this.http, this.apiService, this.branch) || [];
@@ -52,7 +49,7 @@ export class LeoLibraryComponent {
   public async ngOnInit() {
     this.fileNames = await this.getFileNames();
     this.fileArray = Array.from(this.fileNames, ([id, name]) => ({ id, name }));
-    await getAllSubjectsFromBranch(this.http, this.apiService, this.branch);
+    this.lessonsSelectOptions=await getAllSubjectsFromBranch(this.http, this.apiService, this.branch);
   }
 
   isUploadDivVisible = false;
