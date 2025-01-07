@@ -31,7 +31,7 @@ export class LeoLibraryComponent {
   setYear(event: Event): void {
     this.year = (event.target as HTMLInputElement).value;
   }
-  
+
   setSubject(event: Event): void {
     this.subject = (event.target as HTMLInputElement).value;
   }
@@ -39,7 +39,7 @@ export class LeoLibraryComponent {
 
   lessonsSelectOptions: string[]|undefined = undefined;
 
-  async onFirstSelectChange(event: Event): Promise<void> {
+  async setBranch(event: Event) {
     this.branch = (event.target as HTMLSelectElement).value;
     this.lessonsSelectOptions = await getAllSubjectsFromBranch(this.http, this.apiService, this.branch) || [];
   }
@@ -49,6 +49,7 @@ export class LeoLibraryComponent {
   public async ngOnInit() {
     this.fileNames = await this.getFileNames();
     this.fileArray = Array.from(this.fileNames, ([id, name]) => ({ id, name }));
+    this.lessonsSelectOptions=await getAllSubjectsFromBranch(this.http, this.apiService, this.branch);
   }
 
   isUploadDivVisible = false;
