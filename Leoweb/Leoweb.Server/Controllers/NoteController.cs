@@ -91,13 +91,13 @@ namespace Leoweb.Server.Controllers
 			switch (branch.ToLower())
 			{
 				case "informatik":
-					return Ok(Branch.Informatik.Select(s => s.ToString()).ToArray());
+					return Ok(Branch.Informatik.Select(s => s.ToString()));
 				case "medientechnik":
-					return Ok(Branch.Medientechnik.Select(s => s.ToString()).ToArray());
+					return Ok(Branch.Medientechnik.Select(s => s.ToString()));
 				case "elektronik":
-					return Ok(Branch.Elektronik.Select(s => s.ToString()).ToArray());
+					return Ok(Branch.Elektronik.Select(s => s.ToString()));
 				case "medizintechnik":
-					return Ok(Branch.Medizintechnik.Select(s => s.ToString()).ToArray());
+					return Ok(Branch.Medizintechnik.Select(s => s.ToString()));
 			}
 			return BadRequest(branch);
 		}

@@ -83,10 +83,10 @@
 
     public static class Branch
     {
-		public static List<Subject> Informatik {
+		public static Subject[] Informatik {
             get
             {
-                return new List<Subject>()
+                return new Subject[]
                 { 
 	                Subject.AM,
 	                Subject.RK,
@@ -111,11 +111,11 @@
                 };
             }
         }
-		public static List<Subject> Medientechnik
+		public static Subject[] Medientechnik
 		{
 			get
 			{
-				return new List<Subject>()
+				return new Subject[]
 				{
 					Subject.SEW,
 					Subject.ITP,
@@ -147,11 +147,11 @@
 				};
 			}
 		}
-		public static List<Subject> Elektronik
+		public static Subject[] Elektronik
 		{
 			get
 			{
-				return new List<Subject>()
+				return new Subject[]
 				{
 					Subject.AM,
 					Subject.RK,
@@ -177,11 +177,11 @@
 				};
 			}
 		}
-		public static List<Subject> Medizintechnik
+		public static Subject[] Medizintechnik
 		{
 			get
 			{
-				return new List<Subject>()
+				return new Subject[]
 				{
 					Subject.AM,
 					Subject.RK,
