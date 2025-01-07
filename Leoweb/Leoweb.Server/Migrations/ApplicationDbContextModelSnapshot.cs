@@ -50,9 +50,6 @@ namespace Leoweb.Server.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Branch")
-                        .HasColumnType("integer");
-
                     b.Property<int>("DataId")
                         .HasColumnType("integer");
 
@@ -74,7 +71,7 @@ namespace Leoweb.Server.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Files");
+                    b.ToTable("File");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Poll", b =>
@@ -97,7 +94,7 @@ namespace Leoweb.Server.Migrations
 
                     b.HasIndex("VotesChoice");
 
-                    b.ToTable("Polls");
+                    b.ToTable("Poll");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Student", b =>
@@ -105,9 +102,17 @@ namespace Leoweb.Server.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Student");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Vote", b =>
@@ -124,7 +129,7 @@ namespace Leoweb.Server.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Votes");
+                    b.ToTable("Vote");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.File", b =>

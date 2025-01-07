@@ -25,9 +25,9 @@ public class ApplicationDbContext : DbContext
 		optionsBuilder.UseNpgsql(_connectionString);
 	}
 
-	public DbSet<Student> Students { get; set; } = null!;
-	public DbSet<Leoweb.Server.Database.Models.File> Files { get; set; } = null!;
+	public DbSet<Student> Student { get; set; } = null!;
+	public DbSet<Leoweb.Server.Database.Models.File> File { get; set; } = null!;
 	public DbSet<BinaryFile> BinaryFile { get; set; } = null!;
-	public DbSet<Poll> Polls { get; set; } = null!;
-	public DbSet<Vote> Votes { get; set; } = null!;
+	public DbSet<Poll> Poll { get; set; } = null!;
+	public DbSet<Vote> Vote { get; set; } = null!;
 }

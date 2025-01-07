@@ -39,7 +39,7 @@ public class AuthController : Controller
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest model)
     {
-        var user = await _context.Students.FirstOrDefaultAsync(u => u.Email == model.Email);
+        var user = await _context.Student.FirstOrDefaultAsync(u => u.Email == model.Email);
         if (user == null || _authService.HashPassword(model.Password) != user.PasswordHash)
         {
             return Unauthorized(new { message = "Ungültige Anmeldedaten" });
