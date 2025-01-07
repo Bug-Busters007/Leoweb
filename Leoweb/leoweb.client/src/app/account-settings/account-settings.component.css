@@ -1,0 +1,57 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.accountSettings-container {
+  transition-duration: 0.5s;
+  text-align: center;
+  background: white;
+  padding: 80px;
+  border-radius: 10px;
+  border: 3px solid orangered;
+  max-width: 600px;
+  width: 90%;
+}
+
+.accountSettings-container:hover{
+  transition-duration: 0.5s;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+h2{
+  color: orangered;
+  margin-bottom: 50px;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+p {
+  color: #333333;
+  font-size: 20px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+button {
+  transition-duration: 0.5s;
+  background-color: orangered;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 25px;
+}
+
+button:hover {
+  transition-duration: 0.5s;
+  background-color: orangered;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}

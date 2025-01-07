@@ -15,4 +15,8 @@ export class HeaderComponent {
   navigateToLogin(): void {
     this.router.navigate(['/login']); // Navigiert zur Login-Seite
   }
+
+  navigateToAccountSettings(): void{
+    this.router.navigate(['/accountSettings']);
+  }
 }

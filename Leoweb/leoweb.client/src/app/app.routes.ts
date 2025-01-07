@@ -30,6 +30,10 @@ export const routes: Routes = [
     loadComponent: () => import('./auth/register/register.component').then(m => m.RegisterComponent)
   },
   {
+    path: 'accountSettings',
+    loadComponent: () => import('./account-settings/account-settings.component').then(m => m.AccountSettingsComponent)
+  },
+  {
     path: '**',
     loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
   }
