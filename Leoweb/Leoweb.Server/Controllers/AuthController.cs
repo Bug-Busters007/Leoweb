@@ -47,7 +47,11 @@ public class AuthController : Controller
 
         var sessionToken = Guid.NewGuid().ToString();
         Console.WriteLine(sessionToken);
-        _sessionService.SaveSession(user.Id, sessionToken);
+        bool success = _sessionService.SaveSession(user.Id, sessionToken);
+        if(!success)
+        {
+            return StatusCode(500);
+        }
         Response.Cookies.Append("SessionToken", sessionToken, new CookieOptions
         {
             HttpOnly = true,
@@ -62,11 +66,8 @@ public class AuthController : Controller
     [HttpGet("userdata")]
     public async Task<IActionResult> GetUserData()
     {
+        Console.WriteLine(Request.Body);
         var sessionToken = Request.Cookies["SessionToken"];
-        Console.WriteLine(sessionToken);
-        Console.WriteLine(string.IsNullOrEmpty(sessionToken) );
-        Console.WriteLine(_sessionService.IsValidSession(sessionToken));
-        Console.WriteLine(_sessionService.GetUserFromSession(sessionToken));
         if (string.IsNullOrEmpty(sessionToken) || !_sessionService.IsValidSession(sessionToken))
         {
             return Unauthorized();
