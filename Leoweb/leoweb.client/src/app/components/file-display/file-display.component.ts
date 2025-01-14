@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ApiService} from "../../../services/api.service";
+import {PdfViewerComponent} from "../pdf-viewer/pdf-viewer.component";
 
 @Component({
   selector: 'app-file-display',
@@ -17,8 +18,7 @@ export class FileDisplayComponent {
 
   navigateToFile(): void {
     const fileUrl = `${this.url}/${this.id}`;
-    window.location.href = fileUrl;
+    PdfViewerComponent.showPdf(fileUrl);
   }
-
 }
 
