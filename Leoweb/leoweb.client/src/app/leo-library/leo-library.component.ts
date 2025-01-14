@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 import {ApiService} from "../../services/api.service";
 import {CommonModule} from "@angular/common";
-import {AppComponent} from "../app.component";
 import {FileDisplayComponent} from "../components/file-display/file-display.component";
-import {PdfViewerComponent} from "../components/pdf-viewer/pdf-viewer.component";
-import {getAllSubjectsFromBranch} from "./leo-library-helper";
-import {RouterLink} from "@angular/router";
 import {FileUploadComponent} from "../components/file-upload/file-upload.component";
 
 @Component({
@@ -18,7 +14,6 @@ import {FileUploadComponent} from "../components/file-upload/file-upload.compone
   imports: [
     CommonModule,
     FileDisplayComponent,
-    RouterLink,
     FileUploadComponent,
   ]
 })
@@ -29,7 +24,7 @@ export class LeoLibraryComponent {
 
   constructor(private http: HttpClient, private apiService: ApiService) {
   }
-  visibilise(){
+  makeVisible(){
     if(this.isUploadDivVisible){
       this.isUploadDivVisible = false;
     }

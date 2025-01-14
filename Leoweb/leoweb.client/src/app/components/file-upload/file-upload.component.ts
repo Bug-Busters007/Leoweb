@@ -19,7 +19,7 @@ import {RouterLink} from "@angular/router";
 export class FileUploadComponent {
   selectedFileName: string= "File";
   selectedFile: File | null = null;
-  subject: string = "Programmieren";
+  subject: string = "AM";
   branch: string = "Informatik";
   year: string = "1";
   lessonsSelectOptions: string[]|undefined = undefined;
@@ -67,7 +67,8 @@ export class FileUploadComponent {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
 
-    this.http.post(`${url}?subject=${this.subject}`, formData).subscribe({
+    console.log(`${url}?subject=${this.subject}&year=${this.year}`);
+    this.http.post(`${url}?subject=${this.subject}&year=${this.year}`, formData).subscribe({
       next: (response) => {
         console.log('Upload successful!', response);
       },
