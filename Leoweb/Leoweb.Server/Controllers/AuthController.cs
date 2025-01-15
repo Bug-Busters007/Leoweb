@@ -44,6 +44,10 @@ public class AuthController : Controller
     [HttpPost("login")]
     public async Task<IActionResult> Login(UserLoginDto loginDto)
     {
+        if(!await _authService.IsValidUser(loginDto.Email, loginDto.Password))
+        {
+            return Unauthorized();
+        }
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, loginDto.Email),
@@ -66,7 +70,8 @@ public class AuthController : Controller
         return Ok(new
         {
             token = new JwtSecurityTokenHandler().WriteToken(token),
-            expiration = token.ValidTo
+            expiration = token.ValidTo,
+            username = loginDto.Email.Substring(0, loginDto.Email.IndexOf('@'))
         });
     }
     
