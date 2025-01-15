@@ -9,11 +9,10 @@ public class ApplicationDbContext : DbContext
 	public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 		: base(options)
 	{
-		// in Leoweb.Server eine .env Datei erstellen und den DB String einfügen
+		// in Leoweb.Server eine .env Datei erstellen und den DB String einfï¿½gen
 		// DB_CONNECTION_STRING=string ohne ""
 		Env.Load();
 		_connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-		Console.WriteLine(_connectionString);
 	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

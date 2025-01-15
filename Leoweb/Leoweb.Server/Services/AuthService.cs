@@ -9,6 +9,7 @@ namespace Leoweb.Server.Services;
 public class AuthService
 {
     private readonly ApplicationDbContext _context;
+    
 
     public AuthService(ApplicationDbContext context)
     {
@@ -18,6 +19,17 @@ public class AuthService
     public async  Task<Student> GetStudentById(string id)
     {
         return await _context.Student.FirstOrDefaultAsync(s => s.Id == id);
+    }
+    
+    public async Task<bool> IsValidUser(string email, string password)
+    {
+        var student = await _context.Student.FirstOrDefaultAsync(s => s.Email == email);
+        if (student == null)
+        {
+            return false;
+        }
+
+        return student.PasswordHash == HashPassword(password);
     }
     
     public async Task RegisterStudentAsync(string email, string password)

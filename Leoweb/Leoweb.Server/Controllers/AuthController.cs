@@ -1,8 +1,13 @@
-﻿using Leoweb.Server.Database.Models;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Leoweb.Server.Database.Models;
 using Leoweb.Server.Services;
 using Leoweb.Server.StaticModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Leoweb.Server.Controllers;
 
@@ -13,15 +18,15 @@ public class AuthController : Controller
 {
     private readonly ApplicationDbContext _context;
     private readonly AuthService _authService;
-    private readonly SessionService _sessionService;
+    private readonly IConfiguration _configuration;
 
-    public AuthController(AuthService authService, ApplicationDbContext context, SessionService sessionService)
+    public AuthController(AuthService authService, ApplicationDbContext context, IConfiguration configuration)
     {
         _authService = authService;
         _context = context;
-        _sessionService = sessionService;
+        _configuration = configuration;
     }
-    
+
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest model)
     {
@@ -37,46 +42,32 @@ public class AuthController : Controller
     }
     
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginRequest model)
+    public async Task<IActionResult> Login(UserLoginDto loginDto)
     {
-        var user = await _context.Student.FirstOrDefaultAsync(u => u.Email == model.Email);
-        if (user == null || _authService.HashPassword(model.Password) != user.PasswordHash)
+        var claims = new[]
         {
-            return Unauthorized(new { message = "Ungültige Anmeldedaten" });
-        }
+            new Claim(JwtRegisteredClaimNames.Sub, loginDto.Email),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        };
 
-        var sessionToken = Guid.NewGuid().ToString();
-        Console.WriteLine(sessionToken);
-        bool success = _sessionService.SaveSession(user.Id, sessionToken);
-        if(!success)
+        // 3. Signaturschlüssel aus der Konfiguration laden
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        // 4. Token erstellen
+        var token = new JwtSecurityToken(
+            issuer: _configuration["Jwt:Issuer"],
+            audience: _configuration["Jwt:Audience"],
+            claims: claims,
+            expires: DateTime.Now.AddHours(1), // Token-Laufzeit
+            signingCredentials: creds
+        );
+        
+        return Ok(new
         {
-            return StatusCode(500);
-        }
-        Response.Cookies.Append("SessionToken", sessionToken, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = false, // HTTPS ====>>>>>> TRUE
-            SameSite = SameSiteMode.Strict
+            token = new JwtSecurityTokenHandler().WriteToken(token),
+            expiration = token.ValidTo
         });
-        await _context.SaveChangesAsync();
-
-        return Ok();
-    }
-    
-    [HttpGet("userdata")]
-    public async Task<IActionResult> GetUserData()
-    {
-        Console.WriteLine(Request.Body);
-        var sessionToken = Request.Cookies["SessionToken"];
-        if (string.IsNullOrEmpty(sessionToken) || !_sessionService.IsValidSession(sessionToken))
-        {
-            return Unauthorized();
-        }
-
-        var userId = _sessionService.GetUserFromSession(sessionToken);
-        var user = await _authService.GetStudentById(userId);
-
-        return Ok(user);
     }
     
     [HttpPost("logout")]
@@ -85,7 +76,7 @@ public class AuthController : Controller
         var sessionToken = Request.Cookies["SessionToken"];
         if (!string.IsNullOrEmpty(sessionToken))
         {
-            _sessionService.RemoveSession(sessionToken);
+            
         }
         
         Response.Cookies.Delete("SessionToken");
