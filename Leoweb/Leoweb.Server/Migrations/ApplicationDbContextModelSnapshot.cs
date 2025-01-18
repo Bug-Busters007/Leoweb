@@ -56,7 +56,8 @@ namespace Leoweb.Server.Migrations
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
 
-                    b.Property<string>("StudentId")
+                    b.Property<string>("Student")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Subject")
@@ -68,8 +69,6 @@ namespace Leoweb.Server.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DataId");
-
-                    b.HasIndex("StudentId");
 
                     b.ToTable("File");
                 });
@@ -140,13 +139,7 @@ namespace Leoweb.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Leoweb.Server.Database.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
-
                     b.Navigation("Data");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Poll", b =>

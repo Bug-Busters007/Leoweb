@@ -10,6 +10,6 @@ namespace Leoweb.Server.Database.Models
 		public Subject Subject { get; set; }
         public BinaryFile Data { get; set; } = null!;
         public DateOnly Date { get; set; }
-        public required Student Student { get; set; }
+        public required string Student { get; set; }
     }
 }

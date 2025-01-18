@@ -29,13 +29,6 @@ namespace Leoweb.Server.Controllers
 			return File(file.Data, "application/pdf", file.Name);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="file"></param>
-		/// <param name="subject"></param>
-		/// <param name="year">0 based</param>
-		/// <returns></returns>
 		[HttpPost("")]
 		public async Task<IActionResult> UploadPdf(IFormFile file, string subject, int year)
 		{
@@ -59,17 +52,16 @@ namespace Leoweb.Server.Controllers
 			};
 
 			_dbContext.BinaryFile.Add(binFile);
-			//Student student = await NoteService.GetCurrentStudent();
-			//var newFile = new File()
-			//{
-			//	Year = (Year)year,
-			//	Subject = s,
-			//	Data = binFile,
-			//	Date = DateOnly.FromDateTime(DateTime.Now),
-			//	Student = student
-			//};
-			//_dbContext.File.Add(newFile);
-
+			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
+			var newFile = new File()
+			{
+				Year = (Year)year,
+				Subject = s,
+				Data = binFile,
+				Date = DateOnly.FromDateTime(DateTime.Now),
+				Student = studentID
+			};
+			_dbContext.File.Add(newFile);
 
 			_dbContext.SaveChanges();
 
@@ -79,9 +71,14 @@ namespace Leoweb.Server.Controllers
 		[HttpGet("allFilenames")]
 		public IActionResult GetAllFileNames()
 		{
-			var dict = _dbContext.BinaryFile
-				.Select(f => new { f.Id, f.Name })
-				//.ToDictionary(f => f.Id, f => f.Name);
+			var dict = _dbContext.File
+				.Select(f => new 
+					{
+						f.Data.Id,
+						f.Data.Name,
+						f.Year,
+						subject = f.Subject.ToString(),
+					})
 				.ToList();
 
 			return Ok(dict);

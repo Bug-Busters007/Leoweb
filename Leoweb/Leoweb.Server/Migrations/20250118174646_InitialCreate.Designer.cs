@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Leoweb.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250107065158_testMigration")]
-    partial class testMigration
+    [Migration("20250118174646_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,7 +59,8 @@ namespace Leoweb.Server.Migrations
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
 
-                    b.Property<string>("StudentId")
+                    b.Property<string>("Student")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Subject")
@@ -72,9 +73,7 @@ namespace Leoweb.Server.Migrations
 
                     b.HasIndex("DataId");
 
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Files");
+                    b.ToTable("File");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Poll", b =>
@@ -97,7 +96,7 @@ namespace Leoweb.Server.Migrations
 
                     b.HasIndex("VotesChoice");
 
-                    b.ToTable("Polls");
+                    b.ToTable("Poll");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Student", b =>
@@ -115,7 +114,7 @@ namespace Leoweb.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Student");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Vote", b =>
@@ -132,7 +131,7 @@ namespace Leoweb.Server.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Votes");
+                    b.ToTable("Vote");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.File", b =>
@@ -143,13 +142,7 @@ namespace Leoweb.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Leoweb.Server.Database.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
-
                     b.Navigation("Data");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Poll", b =>
