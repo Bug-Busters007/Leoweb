@@ -5,6 +5,7 @@ import {ApiService} from "../../services/api.service";
 import {CommonModule} from "@angular/common";
 import {FileDisplayComponent} from "../components/file-display/file-display.component";
 import {FileUploadComponent} from "../components/file-upload/file-upload.component";
+import {HeaderComponent} from "../components/header/header.component";
 
 @Component({
   selector: 'app-leo-library',
@@ -15,6 +16,7 @@ import {FileUploadComponent} from "../components/file-upload/file-upload.compone
     CommonModule,
     FileDisplayComponent,
     FileUploadComponent,
+    HeaderComponent,
   ]
 })
 export class LeoLibraryComponent {

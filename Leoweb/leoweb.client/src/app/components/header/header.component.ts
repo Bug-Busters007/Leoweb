@@ -11,6 +11,7 @@ import {routes} from "../../app.routes";
 })
 export class HeaderComponent {
 
+  username = localStorage.getItem('username');
   constructor(private router: Router) {}
   navigateToLogin(): void {
     this.router.navigate(['/login']); // Navigiert zur Login-Seite
@@ -19,4 +20,6 @@ export class HeaderComponent {
   navigateToAccountSettings(): void{
     this.router.navigate(['/accountSettings']);
   }
+
+  protected readonly localStorage = localStorage;
 }

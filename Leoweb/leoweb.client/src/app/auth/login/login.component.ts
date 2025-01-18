@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule, provideHttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +9,7 @@ import {HttpClientModule, provideHttpClient} from "@angular/common/http";
   styleUrl: './login.component.css',
   imports: [
     FormsModule,
-    HttpClientModule,
+    RouterLink,
   ],
   standalone: true
 })
@@ -20,10 +19,17 @@ export class LoginComponent {
   password: string = '';
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit() {
+  login() {
     this.authService.login(this.email, this.password).subscribe({
-      next: () => this.router.navigate(['/']),
-      error: (err) => console.error('Login fehlgeschlagen:', err)
+      next: (response) => {
+        localStorage.setItem('jwtToken', response.token);
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('expiresAt', response.expiresAt);
+        this.router.navigate(['/main']);
+      },
+      error: (err) => {
+        console.error('Login fehlgeschlagen:', err);
+      },
     });
   }
 }

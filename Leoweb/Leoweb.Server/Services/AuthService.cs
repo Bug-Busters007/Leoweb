@@ -21,19 +21,23 @@ public class AuthService
         return await _context.Student.FirstOrDefaultAsync(s => s.Id == id);
     }
     
-    public async Task<bool> IsValidUser(string email, string password)
+    public async Task<bool> StudentExists(string email)
+    {
+        return await _context.Student.AnyAsync(s => s.Email == email);
+    }
+    
+    public async Task<Student?> IsValidUser(string email, string password)
     {
         var student = await _context.Student.FirstOrDefaultAsync(s => s.Email == email);
-        if (student == null)
+        return student == null || student.PasswordHash == HashPassword(password) ? student : null;
+    }
+    
+    public async Task<bool> RegisterStudentAsync(string email, string password)
+    {
+        if(await StudentExists(email))
         {
             return false;
         }
-
-        return student.PasswordHash == HashPassword(password);
-    }
-    
-    public async Task RegisterStudentAsync(string email, string password)
-    {
         var student = new Student
         {
             Id = Guid.NewGuid().ToString(),
@@ -43,6 +47,7 @@ public class AuthService
 
         _context.Student.Add(student);
         await _context.SaveChangesAsync();
+        return true;
     }
     
     public string HashPassword(string password)

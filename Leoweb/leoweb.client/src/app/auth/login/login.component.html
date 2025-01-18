@@ -1,6 +1,6 @@
 <div class="login-container">
   <h2>Login</h2>
-  <form (submit)="onSubmit()">
+  <form (ngSubmit)="login()">
     <div>
       <label for="email">Email</label>
       <input id="email" type="email" [(ngModel)]="email" name="email" required />

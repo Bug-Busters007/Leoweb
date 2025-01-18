@@ -6,6 +6,7 @@ import {LeoLibraryComponent} from "./leo-library/leo-library.component";
 import {ModuleComponent} from "./components/module/module.component";
 import {HeaderComponent} from "./components/header/header.component";
 import {FileUploadComponent} from "./components/file-upload/file-upload.component";
+import {authGuard} from "./auth.guard";
 
 export const routes: Routes = [
   {
@@ -13,13 +14,15 @@ export const routes: Routes = [
     pathMatch: 'full',
     loadComponent: () => {
       return import('./home/home.component').then(m => m.HomeComponent);
-    }
+    },
+    canActivate: [authGuard]
   },
   {
     path: 'leolibrary',
     loadComponent: () =>{
       return import('./leo-library/leo-library.component').then(m => m.LeoLibraryComponent);
-    }
+    },
+    canActivate: [authGuard]
   },
   {
     path: 'login',
@@ -31,11 +34,13 @@ export const routes: Routes = [
   },
   {
     path: 'accountSettings',
-    loadComponent: () => import('./account-settings/account-settings.component').then(m => m.AccountSettingsComponent)
+    loadComponent: () => import('./account-settings/account-settings.component').then(m => m.AccountSettingsComponent),
+    canActivate: [authGuard]
   },
   {
     path: '**',
-    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
+    canActivate: [authGuard]
   }
 ];
 

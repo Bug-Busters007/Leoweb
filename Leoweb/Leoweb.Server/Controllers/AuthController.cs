@@ -7,6 +7,7 @@ using Leoweb.Server.StaticModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Leoweb.Server.Controllers;
@@ -32,8 +33,8 @@ public class AuthController : Controller
     {
         try
         {
-            await _authService.RegisterStudentAsync(model.Email, model.Password);
-            return Ok("User registered successfully");
+            bool success = await _authService.RegisterStudentAsync(model.Email, model.Password);
+            return success ? Ok() : Problem();
         }
         catch (Exception)
         {
@@ -44,26 +45,29 @@ public class AuthController : Controller
     [HttpPost("login")]
     public async Task<IActionResult> Login(UserLoginDto loginDto)
     {
-        if(!await _authService.IsValidUser(loginDto.Email, loginDto.Password))
+        var user = await _authService.IsValidUser(loginDto.Email, loginDto.Password);
+        if(user == null)
         {
             return Unauthorized();
         }
+        
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, loginDto.Email),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(ClaimTypes.Name, loginDto.Email),
+            new Claim("Role", "User"),
+            new Claim("UserId", user.Id.ToString())
         };
-
-        // 3. Signaturschlüssel aus der Konfiguration laden
+        
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        // 4. Token erstellen
+        
         var token = new JwtSecurityToken(
             issuer: _configuration["Jwt:Issuer"],
             audience: _configuration["Jwt:Audience"],
             claims: claims,
-            expires: DateTime.Now.AddHours(1), // Token-Laufzeit
+            expires: DateTime.Now.AddHours(1),
             signingCredentials: creds
         );
         
@@ -71,7 +75,30 @@ public class AuthController : Controller
         {
             token = new JwtSecurityTokenHandler().WriteToken(token),
             expiration = token.ValidTo,
-            username = loginDto.Email.Substring(0, loginDto.Email.IndexOf('@'))
+            username = loginDto.Email
+        });
+    }
+    
+    [HttpGet("getUserData")]
+    public IActionResult GetUserData()
+    {
+        var email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+        var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId")?.Value;
+        var role = User.Claims.FirstOrDefault(c => c.Type == "Role")?.Value;
+        Console.WriteLine(email);
+        Console.WriteLine(userId);
+        Console.WriteLine(role);
+        
+        if (email == null || userId == null || role == null)
+        {
+            return Unauthorized("Ungültiges Token");
+        }
+        
+        return Ok(new
+        {
+            Email = email,
+            UserId = userId,
+            Role = role
         });
     }
     

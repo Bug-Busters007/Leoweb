@@ -1,11 +1,7 @@
 <div class="accountSettings-container">
   <h2>Account Settings</h2>
-  <div>
-    <label for="email">Change Email</label>
-    <input id="email" type="email" name="email" required />
-  </div>
-  <div>
-    <label for="password">Change Password</label>
-    <input id="password" type="password" name="password" required />
-  </div>
+  <button mat-button (click)="openModal('Modal 1', 'Inhalt von Modal 1')">Change Email</button>
+  <button mat-button (click)="openModal('Modal 2', 'Inhalt von Modal 2')">Change Password</button>
+  <button (click)="logout()">Logout</button>
+  <button (click)="getUserData()">Get User Data</button>
 </div>
