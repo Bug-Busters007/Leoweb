@@ -3,6 +3,7 @@ import { NgIf, NgFor} from "@angular/common";
 import {getAllSubjectsFromBranch} from "../../leo-library/leo-library-helper";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../../services/api.service";
+import {RefreshService} from "../../refresh.service";
 
 @Component({
   selector: 'app-filter-bar',
@@ -21,7 +22,7 @@ export class FilterBarComponent {
     medizintechnik: false,
     elektronik: false,
   };
-  constructor(private http: HttpClient, private apiService: ApiService) {}
+  constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {}
   subjectsInformatik: string[] | undefined= [];
   subjectsMedientechnik: string[] | undefined= [];
   subjectsMedizintechnik: string[] | undefined= [];
@@ -38,7 +39,9 @@ export class FilterBarComponent {
     this.visibilityMap[key] = !this.visibilityMap[key];
   }
 
-
+  /*public getArray(){
+    return this.filteredFiles;
+  }*/
   toggleValue(subject: string, $event: Event) {
     if (event === undefined) {
       return;
@@ -47,8 +50,10 @@ export class FilterBarComponent {
 
     if (isChecked) {
       this.filteredFiles.push(subject);
+      console.log(this.filteredFiles);
     } else {
       this.filteredFiles = this.filteredFiles.filter(s => s !== subject);
     }
+    this.refreshService.triggerRefresh();
   }
 }

@@ -1,7 +1,7 @@
 <div class="container">
   <button (click)="toggleVisibility('informatics')">Informatik</button>
-  <div *ngIf="visibilityMap['informatics']">
-    <div *ngFor="let subject of subjectsInformatik">
+  <div *ngIf="visibilityMap['informatics']" style="margin-top: 2%">
+    <div *ngFor="let subject of subjectsInformatik" class="option">
       <input
         type="checkbox"
         [id]="subject"
@@ -11,8 +11,8 @@
   </div>
 
   <button (click)="toggleVisibility('medien')">Medientechnik</button>
-  <div *ngIf="visibilityMap['medien']">
-    <div *ngFor="let subject of subjectsMedientechnik">
+  <div *ngIf="visibilityMap['medien']" style="margin-top: 2%">
+    <div *ngFor="let subject of subjectsMedientechnik" class="option">
       <input
         type="checkbox"
         [id]="subject"
@@ -22,8 +22,8 @@
   </div>
 
   <button (click)="toggleVisibility('medizin')">Medizintechnik</button>
-  <div *ngIf="visibilityMap['medizin']">
-    <div *ngFor="let subject of subjectsMedizintechnik">
+  <div *ngIf="visibilityMap['medizin']" style="margin-top: 2%">
+    <div *ngFor="let subject of subjectsMedizintechnik" class="option">
       <input
         type="checkbox"
         [id]="subject"
@@ -33,8 +33,8 @@
   </div>
 
   <button (click)="toggleVisibility('electric')">Elektronik</button>
-  <div *ngIf="visibilityMap['electric']">
-    <div *ngFor="let subject of subjectsElektronik">
+  <div *ngIf="visibilityMap['electric']" style="margin-top: 2%">
+    <div *ngFor="let subject of subjectsElektronik" class="option">
       <input
         type="checkbox"
         [id]="subject"

@@ -22,7 +22,6 @@ export class FileUploadComponent {
   branch: string = "Informatik";
   year: string = "1";
   lessonsSelectOptions: string[]|undefined = undefined;
-  isUploadDivVisible = false;
   setYear(event: Event): void {
     this.year = (event.target as HTMLInputElement).value;
   }
@@ -71,6 +70,7 @@ export class FileUploadComponent {
       next: (response) => {
         console.log('Upload successful!', response);
         this.refreshService.triggerRefresh();
+        alert("Upload successful!");
       },
       error: (err) => {
         if (err.status === 415) {
