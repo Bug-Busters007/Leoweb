@@ -26,7 +26,7 @@ namespace Leoweb.Server.Controllers
 		{
 			BinaryFile? file = _dbContext.BinaryFile.Where(f => f.Id == id).First();
 
-			return File(file.Data, "application/pdf", file.Name);
+			return File(file.Data, "application/pdf", file.Name, enableRangeProcessing: true);
 		}
 
 		[HttpPost("")]
