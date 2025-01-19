@@ -4,14 +4,13 @@ import {AuthService} from "../../../services/auth.service";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
-  imports: [
-    FormsModule,
-    RouterLink,
-  ],
-  standalone: true
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css',
+    imports: [
+        FormsModule,
+        RouterLink,
+    ]
 })
 export class LoginComponent {
 

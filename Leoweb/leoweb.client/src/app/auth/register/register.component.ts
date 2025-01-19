@@ -5,15 +5,14 @@ import {AuthService} from "../../../services/auth.service";
 import {CommonModule} from "@angular/common";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule
-  ],
-  styleUrl: './register.component.css'
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule
+    ],
+    styleUrl: './register.component.css'
 })
 export class RegisterComponent {
   email: string = '';

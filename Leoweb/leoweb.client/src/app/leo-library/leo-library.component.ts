@@ -8,16 +8,15 @@ import {FileUploadComponent} from "../components/file-upload/file-upload.compone
 import {HeaderComponent} from "../components/header/header.component";
 
 @Component({
-  selector: 'app-leo-library',
-  templateUrl: './leo-library.component.html',
-  styleUrls: ['./leo-library.component.css'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    FileDisplayComponent,
-    FileUploadComponent,
-    HeaderComponent,
-  ]
+    selector: 'app-leo-library',
+    templateUrl: './leo-library.component.html',
+    styleUrls: ['./leo-library.component.css'],
+    imports: [
+        CommonModule,
+        FileDisplayComponent,
+        FileUploadComponent,
+        HeaderComponent,
+    ]
 })
 export class LeoLibraryComponent {
   fileArray: { id: number; name: string; year: number, subject: string }[] = [];

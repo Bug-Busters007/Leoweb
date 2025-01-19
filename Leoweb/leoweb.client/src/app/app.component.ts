@@ -6,11 +6,10 @@ import {HomeComponent} from "./home/home.component";
 import {FileDisplayComponent} from "./components/file-display/file-display.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [HeaderComponent, RouterLink, RouterOutlet, FileDisplayComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    imports: [HeaderComponent, RouterLink, RouterOutlet, FileDisplayComponent],
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
 
