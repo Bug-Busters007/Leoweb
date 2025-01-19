@@ -108,5 +108,14 @@ namespace Leoweb.Server.Controllers
 			PropertyInfo[] fields = type.GetProperties(BindingFlags.Public | BindingFlags.Static);
 			return Ok(fields.Select(f => f.Name).ToArray());
 		}
+
+		/*
+		[HttpDelete("allFiles")]
+		public IActionResult TruncateAllFiles()
+		{
+			_dbContext.Database.ExecuteSqlRaw("truncate table \"BinaryFile\", \"File\";");
+			return Ok();
+		}
+		*/
 	}
 }
