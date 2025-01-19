@@ -6,17 +6,19 @@ import {CommonModule} from "@angular/common";
 import {FileDisplayComponent} from "../components/file-display/file-display.component";
 import {FileUploadComponent} from "../components/file-upload/file-upload.component";
 import {HeaderComponent} from "../components/header/header.component";
+import {FilterBarComponent} from "../components/filter-bar/filter-bar.component";
 
 @Component({
-    selector: 'app-leo-library',
-    templateUrl: './leo-library.component.html',
-    styleUrls: ['./leo-library.component.css'],
-    imports: [
-        CommonModule,
-        FileDisplayComponent,
-        FileUploadComponent,
-        HeaderComponent,
-    ]
+  selector: 'app-leo-library',
+  templateUrl: './leo-library.component.html',
+  styleUrls: ['./leo-library.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FileDisplayComponent,
+    FileUploadComponent,
+    FilterBarComponent
+  ]
 })
 export class LeoLibraryComponent {
   fileArray: { id: number; name: string; year: number, subject: string }[] = [];

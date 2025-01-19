@@ -3,10 +3,11 @@ import {Router, RouterLink, RouterModule, RouterOutlet} from "@angular/router";
 import {routes} from "../../app.routes";
 
 @Component({
-    selector: 'app-header',
-    imports: [RouterLink],
-    templateUrl: './header.component.html',
-    styleUrl: './header.component.css'
+  selector: 'app-header',
+  imports: [RouterLink],
+  templateUrl: './header.component.html',
+  standalone: true,
+  styleUrl: './header.component.css'
 })
 export class HeaderComponent {
 

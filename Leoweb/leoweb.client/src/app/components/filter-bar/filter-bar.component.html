@@ -1,1 +1,13 @@
-<p>filter-bar works!</p>
+<div class="container">
+  <button (click)="toggleVisibility('informatics')">Toggle Informatics</button>
+  <div *ngIf="visibilityMap['informatics']">Informatics Content</div>
+
+  <button (click)="toggleVisibility('medien')">Toggle Medien</button>
+  <div *ngIf="visibilityMap['medien']">Medien Content</div>
+
+  <button (click)="toggleVisibility('medizin')">Toggle Medizin</button>
+  <div *ngIf="visibilityMap['medizin']">Medizin Content</div>
+
+  <button (click)="toggleVisibility('electric')">Toggle Electric</button>
+  <div *ngIf="visibilityMap['electric']">Electric Content</div>
+</div>

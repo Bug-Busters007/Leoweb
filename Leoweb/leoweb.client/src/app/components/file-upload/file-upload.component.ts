@@ -3,18 +3,16 @@ import {NgForOf, NgIf} from "@angular/common";
 import {getAllSubjectsFromBranch} from "../../leo-library/leo-library-helper";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../../services/api.service";
-import {RouterLink} from "@angular/router";
-import {LeoLibraryComponent} from "../../leo-library/leo-library.component";
 
 @Component({
-    selector: 'app-file-upload',
-    templateUrl: './file-upload.component.html',
-    styleUrl: './file-upload.component.css',
-    imports: [
-        NgForOf,
-        NgIf,
-        RouterLink
-    ]
+  selector: 'app-file-upload',
+  templateUrl: './file-upload.component.html',
+  styleUrl: './file-upload.component.css',
+  standalone: true,
+  imports: [
+    NgForOf,
+    NgIf
+  ]
 })
 export class FileUploadComponent {
   selectedFileName: string= "File";

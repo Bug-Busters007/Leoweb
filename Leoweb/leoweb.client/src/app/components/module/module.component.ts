@@ -2,12 +2,10 @@ import {Component, Input, signal} from '@angular/core';
 import {RouterLink, Router} from "@angular/router";
 
 @Component({
-    selector: 'app-module',
-    templateUrl: './module.component.html',
-    styleUrl: './module.component.css',
-    imports: [
-        RouterLink
-    ]
+  selector: 'app-module',
+  templateUrl: './module.component.html',
+  styleUrl: './module.component.css',
+  standalone: true,
 })
 export class ModuleComponent {
   @Input() title: string = "Title";
