@@ -47,7 +47,7 @@ namespace Leoweb.Server.Controllers
 			await file.CopyToAsync(str);
 			var binFile = new BinaryFile()
 			{
-				Name = DateTime.Now.ToString("yyyyMMdd") + s.ToString() + '_' + file.FileName,
+				Name = file.FileName,
 				Data = str.ToArray()
 			};
 

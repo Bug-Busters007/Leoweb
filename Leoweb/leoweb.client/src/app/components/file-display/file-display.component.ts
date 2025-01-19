@@ -13,6 +13,8 @@ export class FileDisplayComponent {
   }
   @Input() id: number = 0;
   @Input() name: string = "File";
+  @Input() year:number = 1;
+  @Input() subject: string = "AM"
   url = this.apiService.getApiUrl('Notes');
 
 

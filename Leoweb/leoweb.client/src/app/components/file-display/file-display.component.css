@@ -7,10 +7,10 @@
   border: 2px solid orangered;
   border-radius: 10px;
   transition: all 0.3s ease;
-  margin-bottom: 0.5%;
+  margin: 1%;
   font-family: Consolas, sans-serif;
   display: inline-block;
-  width: auto;
+  width: 45%;
 }
 
 #fileDiv:hover{

@@ -1,12 +1,28 @@
-<div class="buttondiv">
-  <button (click)="makeVisible()" style="cursor: pointer; font-family: Consolas, sans-serif">Upload File</button>
-</div>
-<div *ngIf="isUploadDivVisible" class="uploadDiv">
-  <app-file-upload></app-file-upload>
+<div class="container">
+  <aside class="filter-section">
+
+  </aside>
+  <main class="main-Content">
+    <div class="header">
+      <input
+        type="search"
+        class="search-bar"
+        (input)="filterFiles($event)"
+        placeholder="Search for Files, Subjects, ..."
+      />
+      <button (click)="makeVisible()" class="upload-button">Upload File</button>
+    </div>
+    <div *ngIf="isUploadDivVisible" class="uploadDiv">
+      <app-file-upload></app-file-upload>
+    </div>
+
+
+    <div id="filesListed" >
+      <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id" [year]="file.year" [subject]="file.subject"></app-file-display>
+    </div>
+  </main>
 </div>
 
-<div id="filesListed" >
-  <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id"></app-file-display>
-</div>
+
 
 

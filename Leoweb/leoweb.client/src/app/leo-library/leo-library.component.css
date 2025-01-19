@@ -1,23 +1,57 @@
-.buttondiv{
-  font-family: Consolas, sans-serif;
+.upload-button:hover {
+  background-color: orangered;
+  color: white;
+}
+
+.header {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1.5%;
   margin-top: 3%;
+  gap: 10px;
 }
-.buttondiv button{
-  cursor: pointer;
+
+.search-bar {
+  padding: 5px 20px;
+  font-family: Consolas, sans-serif;
   font-size: 1.5rem;
-  padding: 10px 20px;
-  background-color: white;
   color: orangered;
   border: 2px solid orangered;
   border-radius: 10px;
-  transition: all 0.3s ease;
-  margin-bottom: 0.5%;
+  outline: none;
+  flex: 1;
+  max-width: 30%;
 }
 
-.buttondiv button:hover {
-  background-color: orangered;
-  color: white;
+.upload-button {
+  align-self: flex-end;
+  padding: 5px 20px;
+  font-family: Consolas, sans-serif;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: 2px solid orangered;
+  border-radius: 10px;
+  background-color: transparent;
+  color: orangered;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.filter-section {
+  width: 10%;
+  background-color: white;
+  border-right: 2px solid orangered;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
 }
