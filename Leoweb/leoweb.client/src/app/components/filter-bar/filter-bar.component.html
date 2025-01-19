@@ -1,13 +1,45 @@
 <div class="container">
-  <button (click)="toggleVisibility('informatics')">Toggle Informatics</button>
-  <div *ngIf="visibilityMap['informatics']">Informatics Content</div>
+  <button (click)="toggleVisibility('informatics')">Informatik</button>
+  <div *ngIf="visibilityMap['informatics']">
+    <div *ngFor="let subject of subjectsInformatik">
+      <input
+        type="checkbox"
+        [id]="subject"
+        (change)="toggleValue(subject, $event)"/>
+      <label [for]="subject"> {{ subject}}</label>
+    </div>
+  </div>
 
-  <button (click)="toggleVisibility('medien')">Toggle Medien</button>
-  <div *ngIf="visibilityMap['medien']">Medien Content</div>
+  <button (click)="toggleVisibility('medien')">Medientechnik</button>
+  <div *ngIf="visibilityMap['medien']">
+    <div *ngFor="let subject of subjectsMedientechnik">
+      <input
+        type="checkbox"
+        [id]="subject"
+        (change)="toggleValue(subject, $event)"/>
+      <label [for]="subject"> {{ subject}}</label>
+    </div>
+  </div>
 
-  <button (click)="toggleVisibility('medizin')">Toggle Medizin</button>
-  <div *ngIf="visibilityMap['medizin']">Medizin Content</div>
+  <button (click)="toggleVisibility('medizin')">Medizintechnik</button>
+  <div *ngIf="visibilityMap['medizin']">
+    <div *ngFor="let subject of subjectsMedizintechnik">
+      <input
+        type="checkbox"
+        [id]="subject"
+        (change)="toggleValue(subject, $event)"/>
+      <label [for]="subject"> {{ subject}}</label>
+    </div>
+  </div>
 
-  <button (click)="toggleVisibility('electric')">Toggle Electric</button>
-  <div *ngIf="visibilityMap['electric']">Electric Content</div>
+  <button (click)="toggleVisibility('electric')">Elektronik</button>
+  <div *ngIf="visibilityMap['electric']">
+    <div *ngFor="let subject of subjectsElektronik">
+      <input
+        type="checkbox"
+        [id]="subject"
+        (change)="toggleValue(subject, $event)"/>
+      <label [for]="subject"> {{ subject}}</label>
+    </div>
+  </div>
 </div>

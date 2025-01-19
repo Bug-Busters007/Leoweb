@@ -3,6 +3,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {getAllSubjectsFromBranch} from "../../leo-library/leo-library-helper";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../../services/api.service";
+import {RefreshService} from "../../refresh.service";
 
 @Component({
   selector: 'app-file-upload',
@@ -35,7 +36,7 @@ export class FileUploadComponent {
     this.branch = (event.target as HTMLSelectElement).value;
     this.lessonsSelectOptions = await getAllSubjectsFromBranch(this.http, this.apiService, this.branch) || [];
   }
-  constructor(private http: HttpClient, private apiService: ApiService) {
+  constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {
   }
 
   public async ngOnInit() {
@@ -69,6 +70,7 @@ export class FileUploadComponent {
     this.http.post(`${url}?subject=${this.subject}&year=${this.year}`, formData).subscribe({
       next: (response) => {
         console.log('Upload successful!', response);
+        this.refreshService.triggerRefresh();
       },
       error: (err) => {
         if (err.status === 415) {

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
+import {Subscription} from 'rxjs';
 import {ApiService} from "../../services/api.service";
 import {CommonModule} from "@angular/common";
 import {FileDisplayComponent} from "../components/file-display/file-display.component";
 import {FileUploadComponent} from "../components/file-upload/file-upload.component";
 import {HeaderComponent} from "../components/header/header.component";
 import {FilterBarComponent} from "../components/filter-bar/filter-bar.component";
+import {RefreshService} from "../refresh.service";
 
 @Component({
   selector: 'app-leo-library',
@@ -20,17 +21,27 @@ import {FilterBarComponent} from "../components/filter-bar/filter-bar.component"
     FilterBarComponent
   ]
 })
-export class LeoLibraryComponent {
+export class LeoLibraryComponent{
   fileArray: { id: number; name: string; year: number, subject: string }[] = [];
   isUploadDivVisible = false;
+  private refreshSubscription: Subscription|null = null;
 
-  constructor(private http: HttpClient, private apiService: ApiService) {
+  constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {
   }
   makeVisible(){
     this.isUploadDivVisible = !this.isUploadDivVisible;
   }
   public async ngOnInit() {
     this.fileArray = await this.getFileNames();
+    this.refreshSubscription = this.refreshService.refresh$.subscribe(async () => {
+      this.fileArray = await this.getFileNames();
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
   }
 
   filterFiles(event: Event): void {
