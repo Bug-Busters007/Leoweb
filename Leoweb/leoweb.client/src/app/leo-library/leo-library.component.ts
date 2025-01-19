@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs';
 import {ApiService} from "../../services/api.service";
@@ -25,7 +25,9 @@ export class LeoLibraryComponent{
   fileArray: { id: number; name: string; year: number, subject: string }[] = [];
   isUploadDivVisible = false;
   private refreshSubscription: Subscription|null = null;
-
+/*
+  @ViewChild(FilterBarComponent) sidebar!: FilterBarComponent;
+  filteredFilesSubject = this.sidebar.getArray();*/
   constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {
   }
   makeVisible(){
@@ -43,8 +45,24 @@ export class LeoLibraryComponent{
       this.refreshSubscription.unsubscribe();
     }
   }
-
-  filterFiles(event: Event): void {
+/*
+  filterFilesSubject(){
+    if (this.filteredFilesSubject && this.filteredFilesSubject.length > 0) {
+      const newFiles = [];
+      for (const subject of this.filteredFilesSubject) {
+        for (const file of this.fileArray) {
+          if (file.subject.toUpperCase() === subject.toUpperCase()) {
+            newFiles.push(file);
+          }
+        }
+      }
+      return newFiles;
+    }
+    else {
+      return this.fileArray;
+    }
+  }*/
+  filterFilesRegex(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.value === ""){
       this.ngOnInit();
