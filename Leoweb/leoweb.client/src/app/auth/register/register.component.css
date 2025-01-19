@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-.login-container {
+.register-form {
   margin-top: 3%;
   transition-duration: 0.5s;
   text-align: center;
@@ -17,7 +17,7 @@
   width: 90%;
 }
 
-.login-container:hover{
+.register-form:hover{
   transition-duration: 0.5s;
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);

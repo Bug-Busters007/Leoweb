@@ -20,13 +20,56 @@ export class AccountSettingsComponent {
     });
   }
 
+  openPasswordModal(): void{
+    this.dialog.open(ModalComponent, {
+      width: '400px',
+      data: {
+        title: 'Change Password',
+        content: `
+            <div>
+            <label for="currentPW">Aktuelles Passwort:</label>
+            <input type="password" id="currentPW" placeholder="Aktuelles Passwort eingeben" />
+            </div>
+            <div>
+            <label for="newPW">Neues Passwort:</label>
+            <input type="password" id="newPW" placeholder="Neues Passwort eingeben" />
+            </div>
+
+            <div>
+            <label for="confirmPW">Passwort bestätigen:</label>
+            <input type="password" id="confirmPW" placeholder="Neues Passwort bestätigen" />
+            </div>
+        `
+      }
+    })
+  }
+
+  openEmailModal(): void{
+    this.dialog.open(ModalComponent, {
+      width: '400px',
+      data: {
+        title: 'Change Email',
+        content: `
+            <div>
+            <label for="currentPW">Neue Email:</label>
+            <input type="email" id="newEmail" placeholder="Neue Email eingeben" />
+            </div>
+            <div>
+            <label for="newPW">Passwort:</label>
+            <input type="password" id="PW" placeholder="Passwort eingeben" />
+            </div>
+        `
+      }
+    })
+  }
+
   logout() : void {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('username');
     localStorage.removeItem('expiresAt');
     this.router.navigate(['/login']);
   }
-  
+
   getUserData() : void {
     this.authService.getUserData().subscribe({
       next: (response) => {
