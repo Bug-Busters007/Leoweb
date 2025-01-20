@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NgIf, NgFor} from "@angular/common";
-import {getAllSubjectsFromBranch} from "../../leo-library/leo-library-helper";
-import {HttpClient} from "@angular/common/http";
-import {ApiService} from "../../../services/api.service";
-import {RefreshService} from "../../refresh.service";
+import { getAllBranchesWithSubjects} from "../../leo-library/leo-library-helper";
+import { HttpClient} from "@angular/common/http";
+import { ApiService} from "../../../services/api.service";
+import { RefreshService } from "../../refresh.service";
 
 @Component({
   selector: 'app-filter-bar',
@@ -16,32 +16,25 @@ import {RefreshService} from "../../refresh.service";
   ]
 })
 export class FilterBarComponent {
-  visibilityMap: { [key: string]: boolean } = {
-    informatik: false,
-    medientechnik: false,
-    medizintechnik: false,
-    elektronik: false,
-  };
+  visibilityMap: Map<string, boolean> = new Map<string, boolean>();
+  subjectMap: Map<string, string[]> | undefined = new Map<string, string[]>();
   constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {}
-  subjectsInformatik: string[] | undefined= [];
-  subjectsMedientechnik: string[] | undefined= [];
-  subjectsMedizintechnik: string[] | undefined= [];
-  subjectsElektronik: string[] | undefined= [];
+  subjectsInformatik: string[] | undefined = [];
+  subjectsMedientechnik: string[] | undefined = [];
+  subjectsMedizintechnik: string[] | undefined = [];
+  subjectsElektronik: string[] | undefined = [];
   filteredFiles: string[] = [];
   async ngOnInit() {
-    this.subjectsInformatik = await getAllSubjectsFromBranch(this.http, this.apiService, 'Informatik');
-    this.subjectsMedientechnik = await getAllSubjectsFromBranch(this.http, this.apiService, 'Medientechnik');
-    this.subjectsMedizintechnik = await getAllSubjectsFromBranch(this.http, this.apiService, 'Medizintechnik');
-    this.subjectsElektronik = await getAllSubjectsFromBranch(this.http, this.apiService, 'Elektronik');
+    this.subjectMap = await getAllBranchesWithSubjects(this.http, this.apiService);
+    this.visibilityMap = new Map<string, boolean>(
+      Array.from(this.subjectMap!.keys()).map(key => [key, false])
+    );
   }
 
   toggleVisibility(key: string){
-    this.visibilityMap[key] = !this.visibilityMap[key];
+    this.visibilityMap.set(key, !this.visibilityMap.get(key));
   }
 
-  /*public getArray(){
-    return this.filteredFiles;
-  }*/
   toggleValue(subject: string, $event: Event) {
     if (event === undefined) {
       return;
@@ -55,5 +48,12 @@ export class FilterBarComponent {
       this.filteredFiles = this.filteredFiles.filter(s => s !== subject);
     }
     this.refreshService.triggerRefresh();
+  }
+
+  getSubjectsFromBranch(branch: string) {
+    return this.subjectMap!.get(branch.toLowerCase());
+  }
+  get subjectMapKeys() {
+    return Array.from(this.subjectMap!.keys());
   }
 }

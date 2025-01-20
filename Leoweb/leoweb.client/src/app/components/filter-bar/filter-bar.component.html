@@ -1,45 +1,13 @@
 <div class="container">
-  <button (click)="toggleVisibility('informatics')">Informatik</button>
-  <div *ngIf="visibilityMap['informatics']" style="margin-top: 2%">
-    <div *ngFor="let subject of subjectsInformatik" class="option">
-      <input
-        type="checkbox"
-        [id]="subject"
-        (change)="toggleValue(subject, $event)"/>
-      <label [for]="subject"> {{ subject}}</label>
-    </div>
-  </div>
-
-  <button (click)="toggleVisibility('medien')">Medientechnik</button>
-  <div *ngIf="visibilityMap['medien']" style="margin-top: 2%">
-    <div *ngFor="let subject of subjectsMedientechnik" class="option">
-      <input
-        type="checkbox"
-        [id]="subject"
-        (change)="toggleValue(subject, $event)"/>
-      <label [for]="subject"> {{ subject}}</label>
-    </div>
-  </div>
-
-  <button (click)="toggleVisibility('medizin')">Medizintechnik</button>
-  <div *ngIf="visibilityMap['medizin']" style="margin-top: 2%">
-    <div *ngFor="let subject of subjectsMedizintechnik" class="option">
-      <input
-        type="checkbox"
-        [id]="subject"
-        (change)="toggleValue(subject, $event)"/>
-      <label [for]="subject"> {{ subject}}</label>
-    </div>
-  </div>
-
-  <button (click)="toggleVisibility('electric')">Elektronik</button>
-  <div *ngIf="visibilityMap['electric']" style="margin-top: 2%">
-    <div *ngFor="let subject of subjectsElektronik" class="option">
-      <input
-        type="checkbox"
-        [id]="subject"
-        (change)="toggleValue(subject, $event)"/>
-      <label [for]="subject"> {{ subject}}</label>
+  <div *ngFor="let branch of subjectMapKeys">
+    <button (click)="toggleVisibility(branch)">{{ branch }}</button>
+    <div *ngIf="visibilityMap.get(branch)" style="margin-top: 2%">
+      <div *ngFor="let subject of getSubjectsFromBranch(branch)" class="option">
+        <input type="checkbox"
+               [id]="subject"
+               (change)="toggleValue(subject, $event)" />
+        <label [for]="subject">{{ subject }}</label>
+      </div>
     </div>
   </div>
 </div>

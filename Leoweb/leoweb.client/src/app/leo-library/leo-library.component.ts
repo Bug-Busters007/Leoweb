@@ -5,7 +5,6 @@ import {ApiService} from "../../services/api.service";
 import {CommonModule} from "@angular/common";
 import {FileDisplayComponent} from "../components/file-display/file-display.component";
 import {FileUploadComponent} from "../components/file-upload/file-upload.component";
-import {HeaderComponent} from "../components/header/header.component";
 import {FilterBarComponent} from "../components/filter-bar/filter-bar.component";
 import {RefreshService} from "../refresh.service";
 import {FileSearchComponent} from "../components/file-search/file-search.component";

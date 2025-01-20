@@ -84,29 +84,19 @@ namespace Leoweb.Server.Controllers
 			return Ok(dict);
 		}
 
-		[HttpGet("allSubjectsFromBranch")]
-		public IActionResult GetAllSubjectsFromBranch(string branch)
-		{
-			switch (branch.ToLower())
-			{
-				case "informatik":
-					return Ok(Branch.Informatik.Select(s => s.ToString()));
-				case "medientechnik":
-					return Ok(Branch.Medientechnik.Select(s => s.ToString()));
-				case "elektronik":
-					return Ok(Branch.Elektronik.Select(s => s.ToString()));
-				case "medizintechnik":
-					return Ok(Branch.Medizintechnik.Select(s => s.ToString()));
-			}
-			return BadRequest(branch);
-		}
-
 		[HttpGet("allBranches")]
 		public IActionResult GetAllBranches()
 		{
-			Type type = typeof(Branch);
-			PropertyInfo[] fields = type.GetProperties(BindingFlags.Public | BindingFlags.Static);
-			return Ok(fields.Select(f => f.Name).ToArray());
+			return Ok(Branch.GetBranches());
+		}
+
+		[HttpGet("allBranchesWithSubjects")]
+		public IActionResult GetAllBranchesWithSubjects()
+		{
+			return Ok(Branch.GetDictionary().ToDictionary(
+						branch => branch.Key,
+						branch => branch.Value.Select(s => s.ToString()).ToArray()
+					));
 		}
 
 		/*

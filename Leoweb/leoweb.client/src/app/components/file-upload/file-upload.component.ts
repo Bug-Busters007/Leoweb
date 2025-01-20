@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
-import {getAllSubjectsFromBranch} from "../../leo-library/leo-library-helper";
+import {getAllBranchesWithSubjects} from "../../leo-library/leo-library-helper";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../../services/api.service";
 import {RefreshService} from "../../refresh.service";
@@ -16,6 +16,7 @@ import {RefreshService} from "../../refresh.service";
   ]
 })
 export class FileUploadComponent {
+  subjectsMap: Map<string, string[]> | undefined = new Map();
   selectedFileName: string= "File";
   selectedFile: File | null = null;
   subject: string = "AM";
@@ -33,13 +34,13 @@ export class FileUploadComponent {
 
   async setBranch(event: Event) {
     this.branch = (event.target as HTMLSelectElement).value;
-    this.lessonsSelectOptions = await getAllSubjectsFromBranch(this.http, this.apiService, this.branch) || [];
+    this.lessonsSelectOptions = this.subjectsMap!.get(this.branch);
   }
   constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {
   }
 
   public async ngOnInit() {
-    this.lessonsSelectOptions=await getAllSubjectsFromBranch(this.http, this.apiService, this.branch);
+    this.subjectsMap = await getAllBranchesWithSubjects(this.http, this.apiService);
   }
 
   public onFileSelected(event: Event): void {

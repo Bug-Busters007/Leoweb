@@ -83,132 +83,22 @@
 
     public static class Branch
     {
-		public static Subject[] Informatik {
-            get
-            {
-                return new Subject[]
-                { 
-	                Subject.AM,
-	                Subject.RK,
-	                Subject.ETH,
-	                Subject.D,
-	                Subject.E,
-	                Subject.GGPGP,
-	                Subject.GGPGW,
-	                Subject.BSPM,
-	                Subject.NWC,
-	                Subject.NWP,
-                    Subject.POSEOO,
-                    Subject.POSEPR,
-                    Subject.POSETHI, 
-                    Subject.SYP,
-                    Subject.WMC,
-                    Subject.DBI,
-                    Subject.BO,
-                    Subject.RW,
-                    Subject.CABS,
-                    Subject.NSCS
-                };
-            }
-        }
-		public static Subject[] Medientechnik
+		private static readonly Dictionary<string, Subject[]> branchSubjects = new Dictionary<string, Subject[]>
+	    {
+		    { "informatik", new[] { Subject.AM, Subject.RK, Subject.ETH, Subject.D, Subject.E, Subject.GGPGP, Subject.GGPGW, Subject.BSPM, Subject.NWC, Subject.NWP, Subject.POSEOO, Subject.POSEPR, Subject.POSETHI, Subject.SYP, Subject.WMC, Subject.DBI, Subject.BO, Subject.RW, Subject.CABS, Subject.NSCS } },
+		    { "medientechnik", new[] { Subject.SEW, Subject.ITP, Subject.NWT, Subject.SYTSW, Subject.SYTEL, Subject.SYTAV, Subject.CPR, Subject.ITSI, Subject.MEDTWT, Subject.MEDPR, Subject.INSY, Subject.ITPBO, Subject.MEDT, Subject.MEDTMC, Subject.MEDTPD, Subject.MEDTSM, Subject.MEDTFI, Subject.AM, Subject.RK, Subject.ETH, Subject.D, Subject.E, Subject.GGPGP, Subject.GGPGW, Subject.BSPM, Subject.NWC, Subject.NWP } },
+		    { "elektronik", new[] { Subject.AM, Subject.RK, Subject.ETH, Subject.D, Subject.E, Subject.GGPGP, Subject.GGPGW, Subject.BSPM, Subject.NWC, Subject.NWP, Subject.HE, Subject.FST, Subject.PBE, Subject.MTRS, Subject.KSN, Subject.LA, Subject.DIC, Subject.WRWI, Subject.EPMEL, Subject.WRRE, Subject.ROR } },
+		    { "medizintechnik", new[] { Subject.AM, Subject.RK, Subject.ETH, Subject.D, Subject.E, Subject.GGPGP, Subject.GGPGW, Subject.BSPM, Subject.NWC, Subject.NWP, Subject.GME, Subject.BSVE, Subject.PMW, Subject.BMG, Subject.MGT, Subject.MINF, Subject.BSVU, Subject.BSVB, Subject.LA, Subject.BSV, Subject.WRRE, Subject.PML, Subject.EPMMED, Subject.WRWI } }
+	    };
+
+		public static string[] GetBranches()
 		{
-			get
-			{
-				return new Subject[]
-				{
-					Subject.SEW,
-					Subject.ITP,
-					Subject.NWT,
-					Subject.SYTSW,
-					Subject.SYTEL,
-					Subject.SYTAV,
-					Subject.CPR,
-					Subject.ITSI,
-					Subject.MEDTWT,
-					Subject.MEDPR,
-					Subject.INSY,
-					Subject.ITPBO,
-					Subject.MEDT,
-					Subject.MEDTMC,
-					Subject.MEDTPD,
-					Subject.MEDTSM,
-					Subject.MEDTFI,
-					Subject.AM,
-					Subject.RK,
-					Subject.ETH,
-					Subject.D,
-					Subject.E,
-					Subject.GGPGP,
-					Subject.GGPGW,
-					Subject.BSPM,
-					Subject.NWC,
-					Subject.NWP,
-				};
-			}
+            return branchSubjects.Keys.ToArray();
 		}
-		public static Subject[] Elektronik
-		{
-			get
-			{
-				return new Subject[]
-				{
-					Subject.AM,
-					Subject.RK,
-					Subject.ETH,
-					Subject.D,
-					Subject.E,
-					Subject.GGPGP,
-					Subject.GGPGW,
-					Subject.BSPM,
-					Subject.NWC,
-					Subject.NWP,
-					Subject.HE,
-					Subject.FST,
-					Subject.PBE,
-					Subject.MTRS,
-					Subject.KSN,
-					Subject.LA,
-					Subject.DIC,
-					Subject.WRWI,
-					Subject.EPMEL,
-					Subject.WRRE,
-					Subject.ROR
-				};
-			}
-		}
-		public static Subject[] Medizintechnik
-		{
-			get
-			{
-				return new Subject[]
-				{
-					Subject.AM,
-					Subject.RK,
-					Subject.ETH,
-					Subject.D,
-					Subject.E,
-					Subject.GGPGP,
-					Subject.GGPGW,
-					Subject.BSPM,
-					Subject.NWC,
-					Subject.NWP,
-					Subject.GME,
-					Subject.BSVE,
-					Subject.PMW,
-					Subject.BMG,
-					Subject.MGT,
-					Subject.MINF,
-					Subject.BSVU,
-					Subject.BSVB,
-					Subject.LA,
-					Subject.BSV,
-					Subject.WRRE,
-					Subject.PML,
-					Subject.EPMMED,
-					Subject.WRWI
-				};
-			}
+
+        public static Dictionary<string, Subject[]> GetDictionary()
+        {
+            return branchSubjects;
 		}
 	}
 }
