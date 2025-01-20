@@ -115,4 +115,18 @@ public class AuthController : Controller
 
         return Ok();
     }
+    
+    [HttpPatch("changePassword")]
+    public async Task<IActionResult> ChangePassword(ChangePasswordUser usermodel)
+    {
+        try
+        {
+            bool success = await _authService.ChangePassword(usermodel.Email, usermodel.OldPassword, usermodel.NewPassword);
+            return success ? Ok() : Problem();
+        }
+        catch (Exception)
+        {
+            return BadRequest("Changing password failed");
+        }
+    }
 }

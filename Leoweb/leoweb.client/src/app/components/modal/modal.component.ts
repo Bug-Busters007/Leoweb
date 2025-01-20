@@ -23,4 +23,10 @@ export class ModalComponent {
   close(): void {
     this.dialogRef.close();
   }
+
+  submit(): void{
+    const email: string | null = localStorage.getItem('username');
+    this.data.onSubmit(email, (document.getElementById('currentPW') as HTMLInputElement).value, (document.getElementById('newPW') as HTMLInputElement).value, (document.getElementById('confirmPW') as HTMLInputElement).value);
+    this.close();
+  }
 }

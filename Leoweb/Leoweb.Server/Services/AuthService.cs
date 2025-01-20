@@ -50,6 +50,19 @@ public class AuthService
         return true;
     }
     
+    public async Task<bool> ChangePassword(string email, string oldPassword, string newPassword)
+    {
+        Student? student = await IsValidUser(email, oldPassword);
+        if (student != null)
+        {
+            student.PasswordHash = HashPassword(newPassword);
+            _context.Update(student);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        return false;
+    }
+    
     public string HashPassword(string password)
     {
         using (var sha256 = SHA256.Create())

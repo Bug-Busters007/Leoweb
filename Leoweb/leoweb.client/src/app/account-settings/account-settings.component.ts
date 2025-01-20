@@ -52,7 +52,8 @@ export class AccountSettingsComponent {
             <label for="confirmPW">Passwort bestätigen:</label>
             <input type="password" id="confirmPW" placeholder="Neues Passwort bestätigen" />
             </div>
-        `
+        `,
+        onSubmit: (email: string, oldPw: string, newPw: string, newPwCheck: string)=> this.changePassword(email, oldPw, newPw, newPwCheck)
       }
     })
   }
@@ -109,5 +110,22 @@ export class AccountSettingsComponent {
       throw new Error('Failed to fetch file names');
     }
     return[];
+  }
+
+  changePassword(email: string, oldPw: string, newPw: string, newPwCheck: string): void{
+    if(newPw !== newPwCheck || newPw !== newPwCheck){
+      return;
+    }
+    this.authService.changePassword(email, oldPw, newPw).subscribe({
+      next: (response) => {
+        console.log('Erfolgreich aktualisiert', JSON.stringify(response));
+      },
+      error: (error) => {
+        console.log('Error', 'Aktualisierung fehlgeschlagen');
+      }
+    });
+  }
+
+  changeEmail(newEmail: string, password: string): void{
   }
 }

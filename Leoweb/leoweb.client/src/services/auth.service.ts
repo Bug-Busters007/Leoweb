@@ -41,4 +41,7 @@ export class AuthService {
     return this.http.post<void>(`${this.apiUrl}/auth/logout`, {});
   }
 
+  changePassword(email: string, oldPassword: string, newPassword: string): Observable<string> {
+    return this.http.patch<string>(`${this.apiUrl}/auth/changePassword`, { email, oldPassword, newPassword});
+  }
 }
