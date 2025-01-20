@@ -54,6 +54,8 @@ export class FilterBarComponent {
     return this.subjectMap!.get(branch.toLowerCase());
   }
   get subjectMapKeys() {
-    return Array.from(this.subjectMap!.keys());
+    return Array.from(this.subjectMap!.keys()).map(k =>
+      k ? k[0].toUpperCase() + k.slice(1) : ''
+    );
   }
 }
