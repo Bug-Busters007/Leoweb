@@ -32,7 +32,7 @@ namespace Leoweb.Server.Controllers
 		}
 
 		[HttpGet("download/{id}")]
-		public IActionResult GetPdfToDonwload([FromRoute] int id)
+		public IActionResult GetPdfToDownload([FromRoute] int id)
 		{
 			var file = _dbContext.BinaryFile.Where(f => f.Id == id).First();
 			if (file == null)
@@ -96,6 +96,22 @@ namespace Leoweb.Server.Controllers
 					})
 				.ToList();
 
+			return Ok(dict);
+		}
+		
+		[HttpGet("allFilenamesFromStudent")]
+		public IActionResult GetAllFileNamesFromStudent()
+		{
+			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
+			var dict = _dbContext.File.Where(f => f.Student== studentID)
+				.Select(f => new 
+				{
+					f.Data.Id,
+					f.Data.Name,
+					f.Year,
+					Subject = f.Subject.ToString(),
+				})
+				.ToList();
 			return Ok(dict);
 		}
 

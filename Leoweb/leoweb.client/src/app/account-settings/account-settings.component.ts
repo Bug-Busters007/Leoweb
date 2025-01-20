@@ -3,16 +3,29 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../components/modal/modal.component';
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
+import {FileDisplayComponent} from "../components/file-display/file-display.component";
+import {NgForOf} from "@angular/common";
+import {HttpClient} from "@angular/common/http";
+import {ApiService} from "../../services/api.service";
 
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.component.html',
   standalone: true,
+  imports: [
+    FileDisplayComponent,
+    NgForOf
+  ],
   styleUrl: './account-settings.component.css'
 })
 export class AccountSettingsComponent {
-  constructor(public dialog: MatDialog, private router : Router, private authService: AuthService) {}
+  fileArray: { id: number; name: string; year: number, subject: string }[] = [];
+  constructor(public dialog: MatDialog, private router : Router, private authService: AuthService, private http: HttpClient, private apiService: ApiService) {}
 
+
+  async ngOnInit() {
+    this.fileArray = await this.getFileNamesFromStudent();
+  }
   openModal(title: string, content: string): void {
     this.dialog.open(ModalComponent, {
       width: '400px',
@@ -79,5 +92,22 @@ export class AccountSettingsComponent {
         this.openModal('Error', 'Could not get user data');
       }
     });
+  }
+
+  public async getFileNamesFromStudent(): Promise<{id: number, name: string, year: number, subject : string}[]> {
+    const url = this.apiService.getApiUrl('Notes/allFilenamesFromStudent');
+    console.log(url);
+    try {
+      const response: { id: number; name: string; year: number; subject: string }[] | undefined = await this.http
+        .get<{ id: number; name: string; year: number; subject: string}[]>(url)
+        .toPromise();
+      if (response) {
+        return response;
+      }
+    } catch (error) {
+      console.error('Error fetching file names:', error);
+      throw new Error('Failed to fetch file names');
+    }
+    return[];
   }
 }
