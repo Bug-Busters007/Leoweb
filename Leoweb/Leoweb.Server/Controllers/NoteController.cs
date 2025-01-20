@@ -1,10 +1,6 @@
-﻿using DotNetEnv;
-using Leoweb.Server.Database.Models;
-using Leoweb.Server.Services;
+﻿using Leoweb.Server.Database.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using File = Leoweb.Server.Database.Models.File;
 
 namespace Leoweb.Server.Controllers
@@ -22,12 +18,31 @@ namespace Leoweb.Server.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public IActionResult GetPdf([FromRoute] int id)
+		public IActionResult GetPdfToView([FromRoute] int id)
 		{
-			BinaryFile? file = _dbContext.BinaryFile.Where(f => f.Id == id).First();
+			var file = _dbContext.BinaryFile.Where(f => f.Id == id).First();
+			if (file == null)
+			{
+				return NotFound($"File with ID {id} not found.");
+			}
 
-			return File(file.Data, "application/pdf", file.Name, enableRangeProcessing: true);
+			Response.Headers.Append("Content-Disposition", $"inline; filename=\"{file.Name}\"; filename*=UTF-8''{Uri.EscapeDataString(file.Name)}");
+			Response.Headers.Append("Content-Type", "application/pdf");
+			return File(file.Data, "application/pdf");
 		}
+
+		[HttpGet("download/{id}")]
+		public IActionResult GetPdfToDonwload([FromRoute] int id)
+		{
+			var file = _dbContext.BinaryFile.Where(f => f.Id == id).First();
+			if (file == null)
+			{
+				return NotFound($"File with ID {id} not found.");
+			}
+
+			return File(file.Data, "application/pdf", file.Name);
+		}
+
 
 		[HttpPost("")]
 		public async Task<IActionResult> UploadPdf(IFormFile file, string subject, int year)
