@@ -3,7 +3,7 @@ import { NgIf, NgFor} from "@angular/common";
 import { getAllBranchesWithSubjects} from "../../leo-library/leo-library-helper";
 import { HttpClient} from "@angular/common/http";
 import { ApiService} from "../../../services/api.service";
-import { RefreshService } from "../../refresh.service";
+import { UpdateSearchService } from "../../update-search.service";
 
 @Component({
   selector: 'app-filter-bar',
@@ -18,7 +18,7 @@ import { RefreshService } from "../../refresh.service";
 export class FilterBarComponent {
   visibilityMap: Map<string, boolean> = new Map<string, boolean>();
   subjectMap: Map<string, string[]> | undefined = new Map<string, string[]>();
-  constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {}
+  constructor(private http: HttpClient, private apiService: ApiService, private dataService: UpdateSearchService) {}
   subjectsInformatik: string[] | undefined = [];
   subjectsMedientechnik: string[] | undefined = [];
   subjectsMedizintechnik: string[] | undefined = [];
@@ -47,13 +47,15 @@ export class FilterBarComponent {
     } else {
       this.filteredFiles = this.filteredFiles.filter(s => s !== subject);
     }
-    this.refreshService.triggerRefresh();
+    this.dataService.updateData(this.filteredFiles);
   }
 
   getSubjectsFromBranch(branch: string) {
     return this.subjectMap!.get(branch.toLowerCase());
   }
   get subjectMapKeys() {
-    return Array.from(this.subjectMap!.keys());
+    return Array.from(this.subjectMap!.keys()).map(k =>
+      k ? k[0].toUpperCase() + k.slice(1) : ''
+    );
   }
 }

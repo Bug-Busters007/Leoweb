@@ -5,6 +5,7 @@ import {Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../../services/api.service";
 import {RefreshService} from "../../refresh.service";
+import {UpdateSearchService} from "../../update-search.service";
 
 @Component({
   selector: 'app-file-search',
@@ -13,21 +14,30 @@ import {RefreshService} from "../../refresh.service";
     FileDisplayComponent,
     NgForOf
   ],
+  standalone: true,
   styleUrl: './file-search.component.css'
 })
 export class FileSearchComponent {
   fileArray: { id: number; name: string; year: number, subject: string }[] = [];
+  allFiles: { id: number; name: string; year: number, subject: string }[] = [];
+  filterSubjects:string[]= [];
   private refreshSubscription: Subscription|null = null;
   /*
     @ViewChild(FilterBarComponent) sidebar!: FilterBarComponent;
     filteredFilesSubject = this.sidebar.getArray();*/
-  constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {
+  constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService, private updateSearchService: UpdateSearchService) {
   }
   public async ngOnInit() {
-    this.fileArray = await this.getFileNames();
+    this.allFiles = await this.getFileNames();
+    this.fileArray = this.allFiles
+
     this.refreshSubscription = this.refreshService.refresh$.subscribe(async () => {
-      this.fileArray = await this.getFileNames();
+      this.fileArray = this.allFiles;
     });
+    this.updateSearchService.currentData.subscribe((data) =>{
+      this.filterSubjects = data;
+      this.fileArray = this.filterFilesSubject();
+    })
   }
 
   ngOnDestroy() {
@@ -35,27 +45,25 @@ export class FileSearchComponent {
       this.refreshSubscription.unsubscribe();
     }
   }
-  /*
+
     filterFilesSubject(){
-      if (this.filteredFilesSubject && this.filteredFilesSubject.length > 0) {
-        const newFiles = [];
-        for (const subject of this.filteredFilesSubject) {
-          for (const file of this.fileArray) {
-            if (file.subject.toUpperCase() === subject.toUpperCase()) {
-              newFiles.push(file);
+      if (this.filterSubjects.length !== 0){
+        const filterFiles:{ id: number; name: string; year: number, subject: string }[] = [];
+        for (const subject of this.filterSubjects) {
+          for (const file of this.allFiles) {
+            if (file.subject === subject && !filterFiles.includes(file)) {
+              filterFiles.push(file);
             }
           }
         }
-        return newFiles;
+        return  filterFiles;
       }
-      else {
-        return this.fileArray;
-      }
-    }*/
+      return  this.allFiles;
+    }
   filterFilesRegex(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.value === ""){
-      this.ngOnInit();
+      this.fileArray = this.allFiles;
       return;
     }
     const searchTerm = new RegExp(input.value, "i");

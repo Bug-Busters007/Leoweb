@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs';
 import {ApiService} from "../../services/api.service";
 import {CommonModule} from "@angular/common";
-import {FileDisplayComponent} from "../components/file-display/file-display.component";
 import {FileUploadComponent} from "../components/file-upload/file-upload.component";
 import {FilterBarComponent} from "../components/filter-bar/filter-bar.component";
 import {RefreshService} from "../refresh.service";
@@ -16,7 +15,6 @@ import {FileSearchComponent} from "../components/file-search/file-search.compone
   standalone: true,
   imports: [
     CommonModule,
-    FileDisplayComponent,
     FileUploadComponent,
     FilterBarComponent,
     FileSearchComponent

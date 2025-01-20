@@ -34,13 +34,14 @@ export class FileUploadComponent {
 
   async setBranch(event: Event) {
     this.branch = (event.target as HTMLSelectElement).value;
-    this.lessonsSelectOptions = this.subjectsMap!.get(this.branch);
+    this.lessonsSelectOptions = this.subjectsMap!.get(this.branch.toLowerCase());
   }
   constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {
   }
 
   public async ngOnInit() {
     this.subjectsMap = await getAllBranchesWithSubjects(this.http, this.apiService);
+    this.lessonsSelectOptions = this.subjectsMap!.get(this.branch.toLowerCase());
   }
 
   public onFileSelected(event: Event): void {
