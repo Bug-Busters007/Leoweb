@@ -3,23 +3,12 @@
     <app-filter-bar></app-filter-bar>
   </aside>
   <main class="main-content">
-    <div class="header">
-      <input
-        type="search"
-        class="search-bar"
-        (input)="filterFilesRegex($event)"
-        placeholder="Search for Files, Subjects, ..."
-      />
-      <button (click)="makeVisible()" class="upload-button">Upload File</button>
-    </div>
+    <button (click)="makeVisible()" class="upload-button">Upload File</button>
     <div *ngIf="isUploadDivVisible" class="uploadDiv">
       <app-file-upload></app-file-upload>
     </div>
+    <app-file-search></app-file-search>
 
-
-    <div id="filesListed" >
-      <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id" [year]="file.year" [subject]="file.subject"></app-file-display>
-    </div>
   </main>
 </div>
 

@@ -1,39 +1,27 @@
-import { Component, ViewChild } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Subscription} from 'rxjs';
-import {ApiService} from "../../services/api.service";
-import {CommonModule} from "@angular/common";
-import {FileDisplayComponent} from "../components/file-display/file-display.component";
-import {FileUploadComponent} from "../components/file-upload/file-upload.component";
-import {HeaderComponent} from "../components/header/header.component";
-import {FilterBarComponent} from "../components/filter-bar/filter-bar.component";
-import {RefreshService} from "../refresh.service";
-import {FileSearchComponent} from "../components/file-search/file-search.component";
+import { Component } from '@angular/core';
+import {FileDisplayComponent} from "../file-display/file-display.component";
+import {NgForOf} from "@angular/common";
+import {Subscription} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {ApiService} from "../../../services/api.service";
+import {RefreshService} from "../../refresh.service";
 
 @Component({
-  selector: 'app-leo-library',
-  templateUrl: './leo-library.component.html',
-  styleUrls: ['./leo-library.component.css'],
-  standalone: true,
+  selector: 'app-file-search',
+  templateUrl: './file-search.component.html',
   imports: [
-    CommonModule,
     FileDisplayComponent,
-    FileUploadComponent,
-    FilterBarComponent,
-    FileSearchComponent
-  ]
+    NgForOf
+  ],
+  styleUrl: './file-search.component.css'
 })
-export class LeoLibraryComponent{
+export class FileSearchComponent {
   fileArray: { id: number; name: string; year: number, subject: string }[] = [];
-  isUploadDivVisible = false;
   private refreshSubscription: Subscription|null = null;
-/*
-  @ViewChild(FilterBarComponent) sidebar!: FilterBarComponent;
-  filteredFilesSubject = this.sidebar.getArray();*/
+  /*
+    @ViewChild(FilterBarComponent) sidebar!: FilterBarComponent;
+    filteredFilesSubject = this.sidebar.getArray();*/
   constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {
-  }
-  makeVisible(){
-    this.isUploadDivVisible = !this.isUploadDivVisible;
   }
   public async ngOnInit() {
     this.fileArray = await this.getFileNames();
@@ -47,23 +35,23 @@ export class LeoLibraryComponent{
       this.refreshSubscription.unsubscribe();
     }
   }
-/*
-  filterFilesSubject(){
-    if (this.filteredFilesSubject && this.filteredFilesSubject.length > 0) {
-      const newFiles = [];
-      for (const subject of this.filteredFilesSubject) {
-        for (const file of this.fileArray) {
-          if (file.subject.toUpperCase() === subject.toUpperCase()) {
-            newFiles.push(file);
+  /*
+    filterFilesSubject(){
+      if (this.filteredFilesSubject && this.filteredFilesSubject.length > 0) {
+        const newFiles = [];
+        for (const subject of this.filteredFilesSubject) {
+          for (const file of this.fileArray) {
+            if (file.subject.toUpperCase() === subject.toUpperCase()) {
+              newFiles.push(file);
+            }
           }
         }
+        return newFiles;
       }
-      return newFiles;
-    }
-    else {
-      return this.fileArray;
-    }
-  }*/
+      else {
+        return this.fileArray;
+      }
+    }*/
   filterFilesRegex(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.value === ""){
