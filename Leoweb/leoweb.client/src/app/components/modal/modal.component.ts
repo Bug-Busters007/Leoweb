@@ -6,18 +6,7 @@ import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 @Component({
     selector: 'app-modal',
     imports: [CommonModule],
-    template: `
-      <div class="modal-overlay">
-        <div class="modal-container">
-          <h2 class="modal-title">{{ data.title }}</h2>
-          <form class="modal-content" [innerHTML]="sanitizedContent"></form>
-          <div class="modal-actions">
-            <button class="modal-button close-button" (click)="close()">Schließen</button>
-          </div>
-        </div>
-      </div>
-
-    `,
+    templateUrl: './modal.component.html',
     styleUrl: './modal.component.css'
 })
 export class ModalComponent {

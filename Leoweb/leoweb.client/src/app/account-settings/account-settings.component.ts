@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent } from '../components/modal/modal.component';
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 
