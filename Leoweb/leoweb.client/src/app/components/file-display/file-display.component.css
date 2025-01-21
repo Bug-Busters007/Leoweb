@@ -1,6 +1,6 @@
 #fileDiv{
   cursor: pointer;
-  font-size: 200%;
+  font-size: 150%;
   padding: 1%;
   background-color: white;
   color: orangered;
@@ -10,7 +10,7 @@
   margin: 1%;
   font-family: Consolas, sans-serif;
   display: inline-block;
-  width: 45%;
+  width: 70%;
 }
 
 #fileDiv:hover{
