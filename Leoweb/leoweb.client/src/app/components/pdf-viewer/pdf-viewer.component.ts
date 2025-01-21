@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Spinner} from "../spinner/spinner";
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -24,28 +25,9 @@ export class PdfViewerComponent {
     modalContainer.style.zIndex = '1000';
     document.body.appendChild(modalContainer);
 
-    // Loading Spinner
-    const spinner = document.createElement('div');
-    spinner.style.position = 'fixed';
-    spinner.style.top = '48%';
-    spinner.style.right = '48%';
-    spinner.style.border = '8px solid #f3f3f3';
-    spinner.style.borderTop = '8px solid #3498db';
-    spinner.style.borderRadius = '50%';
-    spinner.style.width = '50px';
-    spinner.style.height = '50px';
-    spinner.style.animation = 'spin 1s linear infinite';
-    modalContainer.appendChild(spinner);
+    const spinner: Spinner = new Spinner(modalContainer);
+    spinner.showSpinner();
 
-    // Add spinner animation
-    const style = document.createElement('style');
-    style.innerHTML = `
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-    `;
-    document.head.appendChild(style);
 
     // PDF Embed Element
     const embedElement = document.createElement('embed');
@@ -53,10 +35,10 @@ export class PdfViewerComponent {
     embedElement.style.height = '80%';
     embedElement.src = url;
     embedElement.onload = () => {
-      spinner.style.display = 'none';
+      spinner.removeSpinner();
     };
     embedElement.onerror = () => {
-      spinner.style.display = 'none';
+      spinner.removeSpinner();
       alert('Failed to load the PDF.');
     };
     modalContainer.appendChild(embedElement);

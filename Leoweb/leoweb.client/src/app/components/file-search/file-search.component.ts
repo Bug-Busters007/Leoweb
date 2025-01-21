@@ -6,6 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../../services/api.service";
 import {RefreshService} from "../../refresh.service";
 import {UpdateSearchService} from "../../update-search.service";
+import {Spinner} from "../spinner/spinner";
 
 @Component({
   selector: 'app-file-search',
@@ -15,7 +16,7 @@ import {UpdateSearchService} from "../../update-search.service";
     NgForOf
   ],
   standalone: true,
-  styleUrl: './file-search.component.css'
+  styleUrls: ['./file-search.component.css']
 })
 export class FileSearchComponent {
   fileArray: { id: number; name: string; year: number, subject: string }[] = [];
@@ -78,29 +79,9 @@ export class FileSearchComponent {
 
   public async getFileNames(): Promise<{id: number, name: string, year: number, subject: string}[]> {
 
-    //loading animation
-    const style = document.createElement('style');
-    style.innerHTML = `
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-    `;
-    document.head.appendChild(style);
-    const spinner = document.createElement('div');
-    spinner.style.position = 'fixed';
-    spinner.style.top = '48%';
-    spinner.style.right = '48%';
-    spinner.style.border = '8px solid #f3f3f3';
-    spinner.style.borderTop = '8px solid #3498db';
-    spinner.style.borderRadius = '50%';
-    spinner.style.width = '50px';
-    spinner.style.height = '50px';
-    spinner.style.animation = 'spin 1s linear infinite';
     const list = document.getElementById('filesListed');
-    if (list != null) {
-      list.appendChild(spinner);
-    }
+    const spinner = new Spinner(list);
+    spinner.showSpinner();
 
 
     const url = this.apiService.getApiUrl('Notes/allFileNames');
@@ -110,7 +91,7 @@ export class FileSearchComponent {
         .get<{ id: number; name: string; year: number; subject: string }[]>(url)
         .toPromise();
       if (response) {
-        list?.removeChild(spinner);
+        spinner.removeSpinner();
         return response;
       }
     } catch (error) {
