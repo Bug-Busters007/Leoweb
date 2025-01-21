@@ -14,6 +14,7 @@
   font-family: Consolas, sans-serif;
   width: 95%;
   height: 4rem;
+  min-width: 30rem;
 }
 
 .displayHead {
@@ -21,12 +22,14 @@
   flex-direction: row;
   justify-content: space-between;
   color: lightgrey;
+  min-width: fit-content;
 }
 
 .name {
   position: absolute;
   top: 45%;
   left: 20%;
+  min-width: fit-content;
 }
 
 .fileDiv:hover {
