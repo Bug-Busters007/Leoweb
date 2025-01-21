@@ -10,8 +10,6 @@ import {routes} from "../../app.routes";
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-
-  username = localStorage.getItem('username');
   constructor(private router: Router) {}
   navigateToLogin(): void {
     this.router.navigate(['/login']); // Navigiert zur Login-Seite

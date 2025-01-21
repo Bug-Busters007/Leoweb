@@ -20,6 +20,7 @@ import {ApiService} from "../../services/api.service";
 })
 export class AccountSettingsComponent {
   fileArray: { id: number; name: string; year: number, subject: string }[] = [];
+  username = localStorage.getItem('username');
   constructor(public dialog: MatDialog, private router : Router, private authService: AuthService, private http: HttpClient, private apiService: ApiService) {}
 
 
@@ -128,4 +129,6 @@ export class AccountSettingsComponent {
 
   changeEmail(newEmail: string, password: string): void{
   }
+
+  protected readonly localStorage = localStorage;
 }

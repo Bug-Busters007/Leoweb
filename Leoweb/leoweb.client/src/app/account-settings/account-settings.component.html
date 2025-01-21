@@ -1,11 +1,12 @@
 <div class="container">
   <div class="accountSettings-container">
-    <h2>Account Settings</h2>
+    <h2>{{username}}</h2>
     <button mat-button (click)="openEmailModal()">Change Email</button>
     <button mat-button (click)="openPasswordModal()">Change Password</button>
     <button (click)="logout()">Logout</button>
     <button (click)="getUserData()">Get User Data</button>
   </div>
+  <h2>Eigene Unterlagen</h2>
   <div id="filesListed" >
     <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id" [year]="file.year" [subject]="file.subject"></app-file-display>
   </div>
