@@ -1,6 +1,7 @@
 ﻿using Leoweb.Server.Database.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 using File = Leoweb.Server.Database.Models.File;
 
 namespace Leoweb.Server.Controllers
@@ -62,7 +63,7 @@ namespace Leoweb.Server.Controllers
 			await file.CopyToAsync(str);
 			var binFile = new BinaryFile()
 			{
-				Name = file.FileName,
+				Name = ReplaceGermanChars(file.FileName),
 				Data = str.ToArray()
 			};
 
@@ -138,5 +139,26 @@ namespace Leoweb.Server.Controllers
 			return Ok();
 		}
 		*/
+
+		private static string ReplaceGermanChars(string text)
+		{
+			string pattern = "[ÜüÖöÄäß]";
+
+			return Regex.Replace(text, pattern, match =>
+			{
+				return match.Value switch
+				{
+					"Ü" => "Ue",
+					"ü" => "ue",
+					"Ö" => "Oe",
+					"ö" => "oe",
+					"Ä" => "Ae",
+					"ä" => "ae",
+					"ß" => "ss",
+					_ => match.Value
+				};
+			});
+		}
+
 	}
 }
