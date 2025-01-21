@@ -7,6 +7,7 @@ import {FileDisplayComponent} from "../components/file-display/file-display.comp
 import {NgForOf} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../services/api.service";
+import {Spinner} from "../components/spinner/spinner";
 
 @Component({
   selector: 'app-account-settings',
@@ -25,12 +26,15 @@ export class AccountSettingsComponent {
 
 
   async ngOnInit() {
+    const spinner: Spinner = new Spinner(document.getElementById('filesListed'));
+    spinner.showSpinner();
     this.fileArray = await this.getFileNamesFromStudent();
+    spinner.removeSpinner();
   }
   openModal(title: string, content: string): void {
     this.dialog.open(ModalComponent, {
       width: '400px',
-      data: { title, content },
+      data: { title, content, showSubmitButton: false }
     });
   }
 
@@ -54,7 +58,8 @@ export class AccountSettingsComponent {
             <input type="password" id="confirmPW" placeholder="Neues Passwort bestätigen" />
             </div>
         `,
-        onSubmit: (email: string, oldPw: string, newPw: string, newPwCheck: string)=> this.changePassword(email, oldPw, newPw, newPwCheck)
+        onSubmit: (email: string, oldPw: string, newPw: string, newPwCheck: string)=> this.changePassword(email, oldPw, newPw, newPwCheck),
+        showSubmitButton: true
       }
     })
   }
@@ -71,9 +76,10 @@ export class AccountSettingsComponent {
             </div>
             <div>
             <label for="newPW">Passwort:</label>
-            <input type="password" id="PW" placeholder="Passwort eingeben" />
+            <input type="password" id="Password" placeholder="Passwort eingeben" />
             </div>
-        `
+        `,
+        showSubmitButton: true
       }
     })
   }

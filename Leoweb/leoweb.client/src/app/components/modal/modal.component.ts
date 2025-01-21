@@ -1,15 +1,16 @@
-import { Component, Inject } from '@angular/core';
+import {AfterViewInit, Component, Inject} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
+import {FormsModule} from "@angular/forms";
 
 @Component({
     selector: 'app-modal',
-    imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
     templateUrl: './modal.component.html',
     styleUrl: './modal.component.css'
 })
-export class ModalComponent {
+export class ModalComponent implements AfterViewInit {
   sanitizedContent: SafeHtml;
 
   constructor(
@@ -20,13 +21,28 @@ export class ModalComponent {
     this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(data.content);
   }
 
+  ngAfterViewInit(): void{
+    if(!this.data.showSubmitButton){
+      const btn = document.getElementById('submitBtn');
+      if(btn){
+        btn.hidden = true;
+        console.log('Kein button');
+      }
+    }
+  }
+
   close(): void {
     this.dialogRef.close();
   }
 
   submit(): void{
     const email: string | null = localStorage.getItem('username');
-    this.data.onSubmit(email, (document.getElementById('currentPW') as HTMLInputElement).value, (document.getElementById('newPW') as HTMLInputElement).value, (document.getElementById('confirmPW') as HTMLInputElement).value);
+    const title: string = document.getElementById('title')!.innerText;
+    if(title === 'Change Password'){
+      this.data.onSubmit(email, (document.getElementById('currentPW') as HTMLInputElement).value, (document.getElementById('newPW') as HTMLInputElement).value, (document.getElementById('confirmPW') as HTMLInputElement).value);
+    }else if(title === 'Change Email'){
+      console.log('Email');
+    }
     this.close();
   }
 }
