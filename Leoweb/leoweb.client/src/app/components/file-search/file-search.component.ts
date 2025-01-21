@@ -32,6 +32,7 @@ export class FileSearchComponent {
     this.fileArray = this.allFiles
 
     this.refreshSubscription = this.refreshService.refresh$.subscribe(async () => {
+      this.allFiles = await this.getFileNames();
       this.fileArray = this.allFiles;
     });
     this.updateSearchService.currentData.subscribe((data) =>{
