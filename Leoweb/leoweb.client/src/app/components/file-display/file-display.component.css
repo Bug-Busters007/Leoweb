@@ -17,3 +17,9 @@
   background-color: orangered;
   color: white;
 }
+
+.displayHead {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
