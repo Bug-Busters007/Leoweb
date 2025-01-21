@@ -26,7 +26,6 @@ export class ModalComponent implements AfterViewInit {
       const btn = document.getElementById('submitBtn');
       if(btn){
         btn.hidden = true;
-        console.log('Kein button');
       }
     }
   }
