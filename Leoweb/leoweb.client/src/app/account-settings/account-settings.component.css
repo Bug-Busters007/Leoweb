@@ -69,3 +69,7 @@ label{
   margin: 5px;
   font-size: x-large;
 }
+
+#filesListed {
+  width: 80%;
+}
