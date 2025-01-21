@@ -1,15 +1,23 @@
 ﻿export class Spinner {
   spinner: HTMLDivElement;
   htmlElement: HTMLElement;
+
   constructor(htmlElement: HTMLElement | null) {
     if (htmlElement == null) {
       throw new Error('htmlElement not found');
     }
     this.htmlElement = htmlElement;
-    this.spinner = document.createElement("div");
-    this.spinner.style.position = 'fixed';
-    this.spinner.style.top = '48%';
-    this.spinner.style.right = '48%';
+
+    const computedStyle = window.getComputedStyle(this.htmlElement);
+    if (computedStyle.position === 'static') {
+      this.htmlElement.style.position = 'relative';
+    }
+
+    this.spinner = document.createElement('div');
+    this.spinner.style.position = 'absolute';
+    this.spinner.style.top = '50%';
+    this.spinner.style.left = '50%';
+    this.spinner.style.transform = 'translate(-50%, -50%)';
     this.spinner.style.border = '8px solid #f3f3f3';
     this.spinner.style.borderTop = '8px solid #3498db';
     this.spinner.style.borderRadius = '50%';
