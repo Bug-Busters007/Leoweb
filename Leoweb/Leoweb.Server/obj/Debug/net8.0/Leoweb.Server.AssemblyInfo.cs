@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Leoweb.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98dcb45f36828fd231a276745fb6c56096bc64de")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+703532af00d3c0a6c6082e809899cf8812d3bf16")]
 [assembly: System.Reflection.AssemblyProductAttribute("Leoweb.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Leoweb.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

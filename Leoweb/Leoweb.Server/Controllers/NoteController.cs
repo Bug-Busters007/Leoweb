@@ -1,6 +1,8 @@
 ﻿using Leoweb.Server.Database.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
+using System.Text;
 using System.Text.RegularExpressions;
 using File = Leoweb.Server.Database.Models.File;
 
@@ -142,22 +144,22 @@ namespace Leoweb.Server.Controllers
 
 		private static string ReplaceGermanChars(string text)
 		{
-			string pattern = "[ÜüÖöÄäß]";
+			string normalized = text.Normalize(NormalizationForm.FormD);
 
-			return Regex.Replace(text, pattern, match =>
+			var builder = new StringBuilder();
+			foreach (char c in normalized)
 			{
-				return match.Value switch
+				if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
 				{
-					"Ü" => "Ue",
-					"ü" => "ue",
-					"Ö" => "Oe",
-					"ö" => "oe",
-					"Ä" => "Ae",
-					"ä" => "ae",
-					"ß" => "ss",
-					_ => match.Value
-				};
-			});
+					builder.Append(c);
+				}
+			}
+
+			string result = builder.ToString();
+
+			result = Regex.Replace(result, "ß", "ss", RegexOptions.IgnoreCase);
+
+			return result;
 		}
 
 	}
