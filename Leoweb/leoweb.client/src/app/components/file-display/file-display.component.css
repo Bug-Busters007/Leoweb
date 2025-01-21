@@ -1,4 +1,7 @@
-#fileDiv{
+.fileDiv{
+  position: relative;
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
   font-size: 150%;
   padding: 1%;
@@ -9,17 +12,39 @@
   transition: all 0.3s ease;
   margin: 1%;
   font-family: Consolas, sans-serif;
-  display: inline-block;
   width: 95%;
-}
-
-#fileDiv:hover{
-  background-color: orangered;
-  color: white;
+  height: 4rem;
 }
 
 .displayHead {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  color: lightgrey;
+}
+
+.name {
+  position: absolute;
+  top: 45%;
+  left: 20%;
+}
+
+.fileDiv:hover {
+  scale: 101%;
+}
+
+.fileDiv:hover .underline-effect::after {
+  width: 100%;
+}
+
+.underline-effect::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 3px;
+  border-radius: 2px;
+  background-color: orangered;
+  transition: width 0.3s ease-in-out;
 }
