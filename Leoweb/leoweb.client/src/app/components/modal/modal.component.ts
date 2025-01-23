@@ -40,7 +40,8 @@ export class ModalComponent implements AfterViewInit {
     if(title === 'Change Password'){
       this.data.onSubmit(email, (document.getElementById('currentPW') as HTMLInputElement).value, (document.getElementById('newPW') as HTMLInputElement).value, (document.getElementById('confirmPW') as HTMLInputElement).value);
     }else if(title === 'Change Email'){
-      console.log('Email');
+      this.data.onSubmit(email, (document.getElementById('newEmail') as HTMLInputElement).value, (document.getElementById('password') as HTMLInputElement).value);
+      localStorage.setItem('username', (document.getElementById('newEmail') as HTMLInputElement).value);
     }
     this.close();
   }

@@ -44,4 +44,8 @@ export class AuthService {
   changePassword(email: string, oldPassword: string, newPassword: string): Observable<string> {
     return this.http.patch<string>(`${this.apiUrl}/auth/changePassword`, { email, oldPassword, newPassword});
   }
+
+  changeEmail(oldEmail: string, newEmail: string, password: string): Observable<string> {
+    return this.http.patch<string>(`${this.apiUrl}/auth/changeEmail`, { oldEmail, newEmail, password });
+  }
 }

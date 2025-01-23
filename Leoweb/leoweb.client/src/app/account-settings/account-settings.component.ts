@@ -71,15 +71,16 @@ export class AccountSettingsComponent {
         title: 'Change Email',
         content: `
             <div>
-            <label for="currentPW">Neue Email:</label>
+            <label for="newEmail">Neue Email:</label>
             <input type="email" id="newEmail" placeholder="Neue Email eingeben" />
             </div>
             <div>
-            <label for="newPW">Passwort:</label>
-            <input type="password" id="Password" placeholder="Passwort eingeben" />
+            <label for="password">Passwort:</label>
+            <input type="password" id="password" placeholder="Passwort eingeben" />
             </div>
         `,
-        showSubmitButton: true
+        showSubmitButton: true,
+        onSubmit: (newEmail: string, oldEmail: string, password: string): void => this.changeEmail(newEmail, oldEmail, password)
       }
     })
   }
@@ -133,7 +134,15 @@ export class AccountSettingsComponent {
     });
   }
 
-  changeEmail(newEmail: string, password: string): void{
+  changeEmail(newEmail: string, oldEmail: string, password: string): void{
+    this.authService.changeEmail(newEmail, oldEmail, password).subscribe({
+      next: (response) => {
+        console.log('Erfolgreich aktualisiert', JSON.stringify(response));
+      },
+      error: (error) => {
+        console.log('Error', 'Aktualisierung fehlgeschlagen');
+      }
+    })
   }
 
   protected readonly localStorage = localStorage;

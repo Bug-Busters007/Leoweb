@@ -62,6 +62,19 @@ public class AuthService
         }
         return false;
     }
+
+    public async Task<bool> ChangeEmail(string oldemail, string newEmail, string password)
+    {
+        Student? student = await IsValidUser(oldemail, password);
+        if (student != null)
+        {
+            student.Email = newEmail;
+            _context.Update(student);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        return false;
+    }
     
     public string HashPassword(string password)
     {
