@@ -102,7 +102,7 @@ namespace Leoweb.Server.Controllers
 		
 		[HttpGet("allFilenamesFromStudent")]
 		public IActionResult GetAllFileNamesFromStudent()
-		{
+		{ 
 			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
 			var dict = _dbContext.File.Where(f => f.Student== studentID)
 				.Select(f => new 

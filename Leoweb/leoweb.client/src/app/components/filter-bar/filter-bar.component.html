@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngFor="let branch of subjectMapKeys">
+  <div *ngFor="let branch of subjectMapKeys" class="filter-zweig">
     <button (click)="toggleVisibility(branch)">{{ branch }}</button>
     <div *ngIf="visibilityMap.get(branch)" style="margin-top: 2%">
       <div *ngFor="let subject of getSubjectsFromBranch(branch)" class="option">
