@@ -17,12 +17,6 @@
   width: 90%;
 }
 
-.login-container:hover{
-  transition-duration: 0.5s;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
-
 h2{
   font-family: Consolas, sans-serif;
   color: orangered;
@@ -34,27 +28,26 @@ h2{
 p {
   color: #333333;
   font-size: 20px;
+  font-family: Consolas, sans-serif;
   line-height: 1.8;
   margin-bottom: 30px;
 }
 
 button {
   transition-duration: 0.5s;
-  background-color: orangered;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 18px;
-  border-radius: 5px;
+  background-color: white;
+  color: orangered;
+  border: 2px solid orangered;
+  padding: 10px 20px;
+  font-size: 150%;
+  border-radius: 10px;
   cursor: pointer;
-  margin-top: 25px;
+  margin-top: 2%;
 }
 
 button:hover {
-  transition-duration: 0.5s;
+  color: white;
   background-color: orangered;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 a{
@@ -80,6 +73,7 @@ input:focus {
 
 label{
   margin: 5px;
+  font-family: Consolas, sans-serif;
   font-size: x-large;
 }
 

@@ -41,8 +41,8 @@
 }
 
 .modal-button {
-  background: #007bff;
-  color: #fff;
+  background: white;
+  color: #6c757d;
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
@@ -51,16 +51,24 @@
   transition: background 0.3s ease;
 }
 
-.modal-button:hover {
-  background: #0056b3;
+.modal-button.submit-button{
+  background: white;
+  color: orangered;
+  border: 2px solid orangered;
+}
+
+.modal-button.submit-button:hover {
+  background: orangered;
+  color: white;
 }
 
 .modal-button.close-button {
-  background: #6c757d;
+  border: 2px solid #6c757d;
 }
 
 .modal-button.close-button:hover {
-  background: #5a6268;
+  background: #6c757d;
+  color: white;
 }
 
 @keyframes fadeIn {
