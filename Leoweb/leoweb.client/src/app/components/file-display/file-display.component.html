@@ -1,7 +1,12 @@
-<div (click)="navigateToFile()" class="fileDiv">
-  <span class="name underline-effect">{{name}}</span>
+<div class="fileDiv">
+  <div  (click)="navigateToFile()"  class="main">
+    <span class="name underline-effect">{{name}}</span>
+  </div>
   <div class="displayHead">
-    <span>Schulstufe {{year}} {{subject}}</span>
-    <span [routerLink]="'/UserOverview'">{{ student }}</span>
+    <div class="subjectInfo">
+      <span>{{year}}.Klasse</span>
+      <span>{{subject}}</span>
+    </div>
+    <span (click)="goToUserInfo()" class="userName">{{ student }}</span>
   </div>
 </div>

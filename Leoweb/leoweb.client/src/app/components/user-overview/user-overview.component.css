@@ -1,0 +1,25 @@
+h2{
+  font-family: Consolas, sans-serif;
+  color: orangered;
+  margin-bottom: 50px;
+  font-size: 3rem;
+  font-weight: normal;
+  justify-self: center;
+}
+
+button {
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  background-color: white;
+  color: orangered;
+  border: 2px solid orangered;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  margin: 5%;
+}
+
+button:hover {
+  background-color: orangered;
+  color: white;
+}

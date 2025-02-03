@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
   font-size: 150%;
   background-color: white;
   color: orangered;
@@ -29,7 +28,7 @@
 .displayHead {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 10px;
   padding: 8px 12px;
   background: #f5f5f5;
@@ -65,4 +64,20 @@
   border-radius: 2px;
   background-color: orangered;
   transition: width 0.3s ease-in-out;
+}
+
+.main {
+  cursor: pointer;
+  width: 100%;
+}
+
+.userName {
+  cursor: pointer;
+  color: cornflowerblue;
+}
+
+.subjectInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

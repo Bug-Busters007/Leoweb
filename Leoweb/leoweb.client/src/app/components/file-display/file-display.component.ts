@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {ApiService} from "../../../services/api.service";
 import {PdfViewerComponent} from "../pdf-viewer/pdf-viewer.component";
-import {UserOverviewComponent} from "../user-overview/user-overview.component";
-import {RouterLink} from "@angular/router";
+import {RouterLink, Router} from "@angular/router";
+import {SharedService} from "../../share-name.service";
 
 @Component({
   selector: 'app-file-display',
@@ -14,7 +14,7 @@ import {RouterLink} from "@angular/router";
   ]
 })
 export class FileDisplayComponent {
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private sharedService: SharedService, private router: Router) {
   }
   @Input() id: number = 0;
   @Input() name: string = "File";
@@ -29,6 +29,9 @@ export class FileDisplayComponent {
     PdfViewerComponent.showPdf(fileUrl);
   }
 
-  protected readonly UserOverviewComponent = UserOverviewComponent;
+  goToUserInfo() {
+    this.sharedService.setInputValue(this.student);
+    this.router.navigate(['/UserOverview']);
+  }
 }
 
