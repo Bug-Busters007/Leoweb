@@ -10,7 +10,8 @@
   border-radius: 10px;
   transition: all 0.3s ease;
   font-family: Consolas, sans-serif;
-  width: 70%;
+  width: 75%;
+  min-width: fit-content;
   min-height: fit-content;
   padding: 10px;
   position: relative;
@@ -18,10 +19,11 @@
 }
 
 .name {
-  flex-grow: 1;
+  display: inline-block;
   text-align: left;
   padding-left: 10px;
   min-width: fit-content;
+  position: relative;
 }
 
 .displayHead {
@@ -49,11 +51,11 @@
   scale: 101%;
 }
 
-.fileDiv:hover .underline-effect::after {
+.fileDiv:hover .name.underline-effect::after {
   width: 100%;
 }
 
-.underline-effect::after {
+.name.underline-effect::after {
   content: '';
   position: absolute;
   left: 0;
