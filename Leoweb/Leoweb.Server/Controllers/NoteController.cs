@@ -93,6 +93,7 @@ namespace Leoweb.Server.Controllers
 						f.Data.Id,
 						f.Data.Name,
 						f.Year,
+						student = _dbContext.Student.Where(s => s.Id == f.Student).First().Email,
 						subject = f.Subject.ToString(),
 					})
 				.ToList();

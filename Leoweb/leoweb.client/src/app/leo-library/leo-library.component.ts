@@ -21,7 +21,7 @@ import {FileSearchComponent} from "../components/file-search/file-search.compone
   ]
 })
 export class LeoLibraryComponent{
-  fileArray: { id: number; name: string; year: number, subject: string }[] = [];
+  fileArray: { id: number; name: string; year: number, student : string, subject: string }[] = [];
   isUploadDivVisible = false;
   private refreshSubscription: Subscription|null = null;
 /*
@@ -77,12 +77,12 @@ export class LeoLibraryComponent{
     this.fileArray = newFiles;
   }
 
-  public async getFileNames(): Promise<{id: number, name: string, year: number, subject: string}[]> {
+  public async getFileNames(): Promise<{id: number, name: string, year: number, student : string, subject: string}[]> {
     const url = this.apiService.getApiUrl('Notes/allFileNames');
     console.log(url);
     try {
-      const response: { id: number; name: string; year: number; subject: string }[] | undefined = await this.http
-        .get<{ id: number; name: string; year: number; subject: string }[]>(url)
+      const response: { id: number; name: string; year: number; student : string; subject: string }[] | undefined = await this.http
+        .get<{ id: number; name: string; year: number; student : string; subject: string }[]>(url)
         .toPromise();
       if (response) {
         return response;

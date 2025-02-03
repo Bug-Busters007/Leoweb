@@ -19,8 +19,8 @@ import {Spinner} from "../spinner/spinner";
   styleUrls: ['./file-search.component.css']
 })
 export class FileSearchComponent {
-  fileArray: { id: number; name: string; year: number, subject: string }[] = [];
-  allFiles: { id: number; name: string; year: number, subject: string }[] = [];
+  fileArray: { id: number; name: string; year: number,student: string, subject: string }[] = [];
+  allFiles: { id: number; name: string; year: number,student: string, subject: string }[] = [];
   filterSubjects:string[]= [];
   private refreshSubscription: Subscription|null = null;
   /*
@@ -50,7 +50,7 @@ export class FileSearchComponent {
 
     filterFilesSubject(){
       if (this.filterSubjects.length !== 0){
-        const filterFiles:{ id: number; name: string; year: number, subject: string }[] = [];
+        const filterFiles:{ id: number; name: string; year: number,student: string, subject: string }[] = [];
         for (const subject of this.filterSubjects) {
           for (const file of this.allFiles) {
             if (file.subject === subject && !filterFiles.includes(file)) {
@@ -78,7 +78,7 @@ export class FileSearchComponent {
     this.fileArray = newFiles;
   }
 
-  public async getFileNames(): Promise<{id: number, name: string, year: number, subject: string}[]> {
+  public async getFileNames(): Promise<{id: number, name: string, year: number,student: string, subject: string}[]> {
 
     const list = document.getElementById('filesListed');
     const spinner = new Spinner(list);
@@ -88,8 +88,8 @@ export class FileSearchComponent {
     const url = this.apiService.getApiUrl('Notes/allFileNames');
     console.log(url);
     try {
-      const response: { id: number; name: string; year: number; subject: string }[] | undefined = await this.http
-        .get<{ id: number; name: string; year: number; subject: string }[]>(url)
+      const response: { id: number; name: string; year: number; student: string; subject: string }[] | undefined = await this.http
+        .get<{ id: number; name: string; year: number;student: string; subject: string }[]>(url)
         .toPromise();
       if (response) {
         spinner.removeSpinner();
