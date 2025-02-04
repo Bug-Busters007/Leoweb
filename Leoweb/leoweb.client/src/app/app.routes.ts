@@ -25,6 +25,13 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'leochat',
+    loadComponent: () =>{
+      return import('./leo-chat/leo-chat.component').then(m => m.LeoChatComponent);
+    },
+    canActivate: [authGuard]
+  },
+  {
     path: 'login',
     loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent)
   },
