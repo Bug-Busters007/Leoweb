@@ -6,10 +6,9 @@ namespace Leoweb.Server.Database.Models
     public class Vote
     {
         [Key]
-        [Column(Order = 1)]
+		public int Id { get; set; }
         public required Student Student { get; set; }
-        [Key]
-        [Column(Order = 2)]
-        public required string Choice { get; set; } = string.Empty;
+        public Poll Poll { get; set; } = null!;
+		public required string Choice { get; set; } = string.Empty;
     }
 }
