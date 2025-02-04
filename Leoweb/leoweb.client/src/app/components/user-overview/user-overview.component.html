@@ -3,7 +3,7 @@
 
 
 <div id="filesListedOverview" >
-  <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id" [year]="file.year" [subject]="file.subject"></app-file-display>
+  <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id" [year]="file.year" [subject]="file.subject" [student]="file.student"></app-file-display>
 </div>
 
 <button (click)="goBack()" style=" display: flex; justify-self: right">Go Back</button>

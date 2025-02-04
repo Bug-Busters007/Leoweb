@@ -7,6 +7,7 @@ import {ApiService} from "../../../services/api.service";
 import {RefreshService} from "../../../services/refresh.service";
 import {UpdateSearchService} from "../../../services/update-search.service";
 import {Spinner} from "../spinner/spinner";
+import {SharedService} from "../../../services/share-name.service";
 
 @Component({
   selector: 'app-file-search',
@@ -23,11 +24,12 @@ export class FileSearchComponent {
   allFiles: { id: number; name: string; year: number,student: string, subject: string }[] = [];
   filterSubjects:string[]= [];
   private refreshSubscription: Subscription|null = null;
-  constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService, private updateSearchService: UpdateSearchService) {
+  constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService, private updateSearchService: UpdateSearchService, private shareService: SharedService) {
   }
   public async ngOnInit() {
     this.allFiles = await this.getFileNames();
     this.fileArray = this.allFiles
+    this.shareService.setFileArray(this.fileArray);
 
     this.refreshSubscription = this.refreshService.refresh$.subscribe(async () => {
       this.allFiles = await this.getFileNames();
@@ -97,5 +99,9 @@ export class FileSearchComponent {
       throw new Error('Failed to fetch file names');
     }
     return[];
+  }
+
+  getFileArray() {
+    return this.fileArray;
   }
 }
