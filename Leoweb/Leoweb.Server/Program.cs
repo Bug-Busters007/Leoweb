@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
 using Leoweb.Server;
+using Leoweb.Server.Database.Data;
 using Leoweb.Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -17,7 +18,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ChatDbContext>(options =>
+    options.UseSqlite("Data Source=chat.db"));
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddSignalR();
 
 builder.Services.AddCors(options =>
 {
@@ -65,6 +69,8 @@ app.UseCors("AllowAll");
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
 
