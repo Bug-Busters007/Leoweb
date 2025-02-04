@@ -4,7 +4,7 @@ import {ApiService} from "../../../services/api.service";
 import {Spinner} from "../spinner/spinner";
 import {FileDisplayComponent} from "../file-display/file-display.component";
 import {ActivatedRoute} from '@angular/router';
-import {SharedService} from "../../share-name.service";
+import {SharedService} from "../../../services/share-name.service";
 @Component({
   selector: 'app-user-overview',
   templateUrl: './user-overview.component.html',

@@ -3,7 +3,7 @@ import { NgIf, NgFor} from "@angular/common";
 import { getAllBranchesWithSubjects} from "../../leo-library/leo-library-helper";
 import { HttpClient} from "@angular/common/http";
 import { ApiService} from "../../../services/api.service";
-import { UpdateSearchService } from "../../update-search.service";
+import { UpdateSearchService } from "../../../services/update-search.service";
 
 @Component({
   selector: 'app-filter-bar',

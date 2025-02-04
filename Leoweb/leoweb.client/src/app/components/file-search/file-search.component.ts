@@ -4,8 +4,8 @@ import {NgForOf} from "@angular/common";
 import {Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../../services/api.service";
-import {RefreshService} from "../../refresh.service";
-import {UpdateSearchService} from "../../update-search.service";
+import {RefreshService} from "../../../services/refresh.service";
+import {UpdateSearchService} from "../../../services/update-search.service";
 import {Spinner} from "../spinner/spinner";
 
 @Component({
