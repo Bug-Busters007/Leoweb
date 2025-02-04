@@ -3,7 +3,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {getAllBranchesWithSubjects} from "../../leo-library/leo-library-helper";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../../services/api.service";
-import {RefreshService} from "../../refresh.service";
+import {RefreshService} from "../../../services/refresh.service";
 
 @Component({
   selector: 'app-file-upload',

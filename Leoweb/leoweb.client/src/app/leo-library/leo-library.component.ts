@@ -1,11 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs';
 import {ApiService} from "../../services/api.service";
 import {CommonModule} from "@angular/common";
 import {FileUploadComponent} from "../components/file-upload/file-upload.component";
 import {FilterBarComponent} from "../components/filter-bar/filter-bar.component";
-import {RefreshService} from "../refresh.service";
+import {RefreshService} from "../../services/refresh.service";
 import {FileSearchComponent} from "../components/file-search/file-search.component";
 
 @Component({
@@ -24,9 +24,7 @@ export class LeoLibraryComponent{
   fileArray: { id: number; name: string; year: number, student : string, subject: string }[] = [];
   isUploadDivVisible = false;
   private refreshSubscription: Subscription|null = null;
-/*
-  @ViewChild(FilterBarComponent) sidebar!: FilterBarComponent;
-  filteredFilesSubject = this.sidebar.getArray();*/
+
   constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {
   }
   makeVisible(){
