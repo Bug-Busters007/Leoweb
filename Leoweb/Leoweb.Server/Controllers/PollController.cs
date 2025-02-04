@@ -73,9 +73,43 @@ namespace Leoweb.Server.Controllers
 			_dbContext.SaveChanges();
 			return Ok(poll);
 		}
+		
+		[HttpGet("all")]
+		public async Task<IActionResult> GetAllPolls()
+		{
+			List<PollOverview> allPolls = new List<PollOverview>();
+			foreach (var poll in _dbContext.Poll)
+			{
+				var dict = await _dbContext.Vote
+					.Join(
+						_dbContext.Choice,
+						vote => vote.Poll,
+						choice => choice.Poll,
+						(vote, choice) => new { vote, choice }
+					)
+					.GroupBy(vc => vc.choice.Description)
+					.Select(grouped => new
+					{
+						Description = grouped.Key,
+						VoteCount = grouped.Count()
+					})
+					.ToDictionaryAsync(x => x.Description, x => x.VoteCount);
+				
+				allPolls.Add(new PollOverview()
+				{
+					Id = poll.Id,
+					Headline = poll.Headline,
+					Description = poll.Description,
+					Votes = dict,
+					Year = poll.Year,
+					Branch = poll.Branch,
+				});
+			}
+			return Ok(allPolls);
+		}
 
-		[HttpGet("overview/{pollId}")]
-		public IActionResult GetPollOverview([FromRoute] int pollId)
+		[HttpGet("{pollId}/overview")]
+		public async Task<IActionResult> GetPollOverview([FromRoute] int pollId)
 		{
 			Console.WriteLine(pollId);
 			var poll = _dbContext.Poll.Find(pollId);
@@ -83,7 +117,7 @@ namespace Leoweb.Server.Controllers
 			{
 				return BadRequest("Poll not found");
 			}
-			var dict = _dbContext.Vote
+			var dict = await _dbContext.Vote
 				.Join(
 					_dbContext.Choice,
 					vote => vote.Poll,
@@ -96,7 +130,7 @@ namespace Leoweb.Server.Controllers
 					Description = grouped.Key,
 					VoteCount = grouped.Count()
 				})
-				.ToDictionary(x => x.Description, x => x.VoteCount);
+				.ToDictionaryAsync(x => x.Description, x => x.VoteCount);
 
 			var info = new PollOverview()
 			{
@@ -110,5 +144,7 @@ namespace Leoweb.Server.Controllers
 
 			return Ok(info);
 		}
+
+		
 	}
 }
