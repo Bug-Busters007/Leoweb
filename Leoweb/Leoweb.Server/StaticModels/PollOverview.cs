@@ -6,5 +6,7 @@
 		public string Headline { get; set; }
 		public string Description { get; set; }
 		public Dictionary<string, int> Votes { get; set; }
+		public int[] Year { get; set; }
+		public string[] Branch { get; set; }
 	}
 }

@@ -25,9 +25,11 @@ namespace Leoweb.Server.Controllers
 			{
 				Headline = poll.Headline,
 				Description = poll.Description,
-				Created = DateTime.Now,
+				Created = DateTime.Now.ToUniversalTime(),
 				Close = poll.Close,
 				Release = poll.Release,
+				Year = poll.Year,
+				Branch = poll.Branch,
 			};
 
 			foreach (string s in poll.Choices)
@@ -59,7 +61,7 @@ namespace Leoweb.Server.Controllers
 			return Ok(newVote);
 		}
 
-		[HttpPost("close")]
+		[HttpPost("{pollId}/close")]
 		public IActionResult ClosePoll([FromRoute] int pollId, [FromBody] DateTime? date)
 		{
 			var poll = _dbContext.Poll.Find(pollId);
@@ -67,14 +69,15 @@ namespace Leoweb.Server.Controllers
 			{
 				return BadRequest("Poll not found");
 			}
-			poll.Close = date == null ? DateTime.Now : date;
+			poll.Close = date == null ? DateTime.Now.ToUniversalTime() : ((DateTime) date).ToUniversalTime();
 			_dbContext.SaveChanges();
 			return Ok(poll);
 		}
 
-		[HttpGet("overview")]
+		[HttpGet("overview/{pollId}")]
 		public IActionResult GetPollOverview([FromRoute] int pollId)
 		{
+			Console.WriteLine(pollId);
 			var poll = _dbContext.Poll.Find(pollId);
 			if ( poll == null )
 			{
@@ -100,8 +103,9 @@ namespace Leoweb.Server.Controllers
 				Id = poll.Id,
 				Headline = poll.Headline,
 				Description = poll.Description,
-				Votes = dict
-
+				Votes = dict,
+				Year = poll.Year,
+				Branch = poll.Branch,
 			};
 
 			return Ok(info);
