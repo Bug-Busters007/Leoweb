@@ -2,6 +2,7 @@
 using Leoweb.Server.StaticModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Leoweb.Server.Controllers
 {
@@ -79,16 +80,28 @@ namespace Leoweb.Server.Controllers
 			{
 				return BadRequest("Poll not found");
 			}
-			var dict = new Dictionary<string, int>();
-			foreach (var x in _dbContext.Choice.Where(c => c.Poll == poll))
-			{
-				_dbContext.Vote.Where(c => c.Poll == poll);
-			}
+			var dict = _dbContext.Vote
+				.Join(
+					_dbContext.Choice,
+					vote => vote.Poll,
+					choice => choice.Poll,
+					(vote, choice) => new { vote, choice }
+				)
+				.GroupBy(vc => vc.choice.Description)
+				.Select(grouped => new
+				{
+					Description = grouped.Key,
+					VoteCount = grouped.Count()
+				})
+				.ToDictionary(x => x.Description, x => x.VoteCount);
+
 			var info = new PollOverview()
 			{
 				Id = poll.Id,
 				Headline = poll.Headline,
-				Description = poll.Description
+				Description = poll.Description,
+				Votes = dict
+
 			};
 
 			return Ok(info);
