@@ -12,6 +12,5 @@ namespace Leoweb.Server.Database.Models
         public DateTime Created { get; set; }
         public DateTime Release { get; set; }
         public DateTime? Close { get; set; }
-        public Vote Votes { get; set; } = null!;
     }
 }

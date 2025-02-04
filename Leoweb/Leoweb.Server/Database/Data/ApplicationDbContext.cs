@@ -29,4 +29,5 @@ public class ApplicationDbContext : DbContext
 	public DbSet<BinaryFile> BinaryFile { get; set; } = null!;
 	public DbSet<Poll> Poll { get; set; } = null!;
 	public DbSet<Vote> Vote { get; set; } = null!;
+	public DbSet<Choice> Choice { get; set; }
 }

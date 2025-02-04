@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {ApiService} from "../../../services/api.service";
 import {Spinner} from "../spinner/spinner";
 import {FileDisplayComponent} from "../file-display/file-display.component";
-import {ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 import {SharedService} from "../../../services/share-name.service";
 @Component({
   selector: 'app-user-overview',
@@ -17,7 +17,7 @@ import {SharedService} from "../../../services/share-name.service";
 export class UserOverviewComponent {
   fileArray: { id: number; name: string; year: number, subject: string }[] = [];
   @Input() username: string = '';
-  constructor(private http: HttpClient, private apiService: ApiService, private sharedService: SharedService) {}
+  constructor(private http: HttpClient, private apiService: ApiService, private sharedService: SharedService, private router: Router) {}
 
   async ngOnInit() {
     this.username = this.sharedService.getInputValue();
@@ -44,6 +44,6 @@ export class UserOverviewComponent {
   }
 
   goBack(): void {
-    window.history.back();
+    this.router.navigate(['/UserOverview']);
   }
 }

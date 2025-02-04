@@ -23,9 +23,6 @@ export class FileSearchComponent {
   allFiles: { id: number; name: string; year: number,student: string, subject: string }[] = [];
   filterSubjects:string[]= [];
   private refreshSubscription: Subscription|null = null;
-  /*
-    @ViewChild(FilterBarComponent) sidebar!: FilterBarComponent;
-    filteredFilesSubject = this.sidebar.getArray();*/
   constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService, private updateSearchService: UpdateSearchService) {
   }
   public async ngOnInit() {
