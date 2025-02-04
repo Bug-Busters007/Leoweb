@@ -18,7 +18,7 @@ namespace Leoweb.Server.Controllers
 			_dbContext = new ApplicationDbContext(options);
 		}
 
-		[HttpPost("/")]
+		[HttpPost("")]
 		public async Task<IActionResult> CreateNewPoll([FromBody] PollJSON poll)
 		{
 			var newPoll = new Poll()
@@ -59,7 +59,7 @@ namespace Leoweb.Server.Controllers
 			return Ok(newVote);
 		}
 
-		[HttpPost("poll/close")]
+		[HttpPost("close")]
 		public IActionResult ClosePoll([FromRoute] int pollId, [FromBody] DateTime? date)
 		{
 			var poll = _dbContext.Poll.Find(pollId);
@@ -72,7 +72,7 @@ namespace Leoweb.Server.Controllers
 			return Ok(poll);
 		}
 
-		[HttpGet("poll/overview")]
+		[HttpGet("overview")]
 		public IActionResult GetPollOverview([FromRoute] int pollId)
 		{
 			var poll = _dbContext.Poll.Find(pollId);
