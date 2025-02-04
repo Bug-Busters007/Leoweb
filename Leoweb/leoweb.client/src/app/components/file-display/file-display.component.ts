@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {ApiService} from "../../../services/api.service";
 import {PdfViewerComponent} from "../pdf-viewer/pdf-viewer.component";
-import {RouterLink, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {SharedService} from "../../../services/share-name.service";
 
 @Component({
