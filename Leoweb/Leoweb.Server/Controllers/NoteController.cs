@@ -32,7 +32,7 @@ namespace Leoweb.Server.Controllers
 			return File(file.Data, "application/pdf");
 		}
 
-		[HttpGet("download/{id}")]
+		[HttpGet("{id}/download")]
 		public IActionResult GetPdfToDownload([FromRoute] int id)
 		{
 			var file = _dbContext.BinaryFile.Where(f => f.Id == id).First();

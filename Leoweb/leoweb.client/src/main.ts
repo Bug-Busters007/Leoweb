@@ -7,6 +7,7 @@ import { importProvidersFrom } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {authInterceptor} from "./app/auth-interceptor";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -14,7 +15,7 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(
       withInterceptors([authInterceptor])
     ),
-    importProvidersFrom(MatDialogModule, BrowserAnimationsModule)
+    importProvidersFrom(MatDialogModule, BrowserAnimationsModule), provideAnimationsAsync()
   ]
 }).catch((err) => console.error(err));
 

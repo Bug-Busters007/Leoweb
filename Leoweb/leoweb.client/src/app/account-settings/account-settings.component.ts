@@ -45,17 +45,17 @@ export class AccountSettingsComponent {
         title: 'Change Password',
         content: `
             <div>
-            <label for="currentPW">Aktuelles Passwort:</label>
-            <input type="password" id="currentPW" placeholder="Aktuelles Passwort eingeben" />
+            <label for="currentPW">Current password:</label>
+            <input type="password" id="currentPW" placeholder="Enter current password" />
             </div>
             <div>
-            <label for="newPW">Neues Passwort:</label>
-            <input type="password" id="newPW" placeholder="Neues Passwort eingeben" />
+            <label for="newPW">New password:</label>
+            <input type="password" id="newPW" placeholder="Enter new password" />
             </div>
 
             <div>
-            <label for="confirmPW">Passwort bestätigen:</label>
-            <input type="password" id="confirmPW" placeholder="Neues Passwort bestätigen" />
+            <label for="confirmPW">Confirm new password:</label>
+            <input type="password" id="confirmPW" placeholder="Enter new password" />
             </div>
         `,
         onSubmit: (email: string, oldPw: string, newPw: string, newPwCheck: string)=> this.changePassword(email, oldPw, newPw, newPwCheck),
@@ -71,12 +71,12 @@ export class AccountSettingsComponent {
         title: 'Change Email',
         content: `
             <div>
-            <label for="newEmail">Neue Email:</label>
-            <input type="email" id="newEmail" placeholder="Neue Email eingeben" />
+            <label for="newEmail">New email:</label>
+            <input type="email" id="newEmail" placeholder="Enter new email" />
             </div>
             <div>
-            <label for="password">Passwort:</label>
-            <input type="password" id="password" placeholder="Passwort eingeben" />
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter password" />
             </div>
         `,
         showSubmitButton: true,
