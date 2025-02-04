@@ -6,7 +6,7 @@
     <button (click)="logout()">Logout</button>
     <button (click)="getUserData()">Get User Data</button>
   </div>
-  <h2>Eigene Unterlagen</h2>
+  <h2>Your documents</h2>
   <div id="filesListed" >
     <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id" [year]="file.year" [subject]="file.subject"></app-file-display>
   </div>
