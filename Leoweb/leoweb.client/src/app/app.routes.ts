@@ -25,6 +25,11 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'leopolls',
+    loadComponent: () => import('./leo-poll/leo-poll.component').then(m => m.LeoPollComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: 'login',
     loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent)
   },
