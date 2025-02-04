@@ -71,6 +71,27 @@ namespace Leoweb.Server.Controllers
 			return Ok(poll);
 		}
 
+		[HttpGet("poll/overview")]
+		public IActionResult GetPollOverview([FromRoute] int pollId)
+		{
+			var poll = _dbContext.Poll.Find(pollId);
+			if ( poll == null )
+			{
+				return BadRequest("Poll not found");
+			}
+			var dict = new Dictionary<string, int>();
+			foreach (var x in _dbContext.Choice.Where(c => c.Poll == poll))
+			{
+				_dbContext.Vote.Where(c => c.Poll == poll);
+			}
+			var info = new PollOverview()
+			{
+				Id = poll.Id,
+				Headline = poll.Headline,
+				Description = poll.Description
+			};
 
+			return Ok(info);
+		}
 	}
 }
