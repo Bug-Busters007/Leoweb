@@ -75,36 +75,36 @@ namespace Leoweb.Server.Controllers
 		}
 		
 		[HttpGet("all")]
-		public async Task<IActionResult> GetAllPolls()
+		public IActionResult GetAllPolls()
 		{
-			List<PollOverview> allPolls = new List<PollOverview>();
-			foreach (var poll in _dbContext.Poll)
-			{
-				var dict = await _dbContext.Vote
-					.Join(
-						_dbContext.Choice,
-						vote => vote.Poll,
-						choice => choice.Poll,
-						(vote, choice) => new { vote, choice }
-					)
-					.GroupBy(vc => vc.choice.Description)
-					.Select(grouped => new
-					{
-						Description = grouped.Key,
-						VoteCount = grouped.Count()
-					})
-					.ToDictionaryAsync(x => x.Description, x => x.VoteCount);
-				
-				allPolls.Add(new PollOverview()
+			var dict = _dbContext.Vote
+				.Join(
+					_dbContext.Choice,
+					vote => vote.Poll,
+					choice => choice.Poll,
+					(vote, choice) => new { vote, choice }
+				)
+				.GroupBy(vc => vc.choice.Description)
+				.Select(grouped => new
 				{
-					Id = poll.Id,
-					Headline = poll.Headline,
-					Description = poll.Description,
+					Description = grouped.Key,
+					VoteCount = grouped.Count()
+				})
+				.ToDictionary(x => x.Description, x => x.VoteCount);
+
+			
+			var allPolls = _dbContext.Poll
+				.Select(p => new PollOverview()
+				{
+					Id = p.Id,
+					Headline = p.Headline,
+					Description = p.Description,
 					Votes = dict,
-					Year = poll.Year,
-					Branch = poll.Branch,
-				});
-			}
+					Year = p.Year,
+					Branch = p.Branch
+				})
+				.ToList();
+
 			return Ok(allPolls);
 		}
 

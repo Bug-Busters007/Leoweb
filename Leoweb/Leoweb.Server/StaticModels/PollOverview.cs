@@ -1,4 +1,6 @@
-﻿namespace Leoweb.Server.StaticModels
+﻿using System.Text.Json.Serialization;
+
+namespace Leoweb.Server.StaticModels
 {
 	public class PollOverview
 	{
