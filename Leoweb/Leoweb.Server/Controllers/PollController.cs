@@ -75,23 +75,26 @@ namespace Leoweb.Server.Controllers
 		}
 		
 		[HttpGet("all")]
-		public IActionResult GetAllPolls()
+		public async Task<IActionResult> GetAllPolls()
 		{
-			var dict = _dbContext.Vote
-				.Join(
-					_dbContext.Choice,
-					vote => vote.Poll,
-					choice => choice.Poll,
-					(vote, choice) => new { vote, choice }
-				)
-				.GroupBy(vc => vc.choice.Description)
-				.Select(grouped => new
-				{
-					Description = grouped.Key,
-					VoteCount = grouped.Count()
-				})
-				.ToDictionary(x => x.Description, x => x.VoteCount);
-
+			var dict = (await _dbContext.Vote
+					.Join(
+						_dbContext.Choice,
+						vote => vote.Poll,
+						choice => choice.Poll,
+						(vote, choice) => new { vote, choice }
+					)
+					.GroupBy(vc => vc.vote.Poll.Id) 
+					.ToListAsync())  
+				.ToDictionary(
+					grouped => grouped.Key, 
+					grouped => grouped
+						.GroupBy(vc => vc.choice.Description) 
+						.ToDictionary(
+							g => g.Key, 
+							g => g.Count() 
+						)
+				);
 			
 			var allPolls = _dbContext.Poll
 				.Select(p => new PollOverview()
@@ -99,13 +102,15 @@ namespace Leoweb.Server.Controllers
 					Id = p.Id,
 					Headline = p.Headline,
 					Description = p.Description,
-					Votes = dict,
+					Votes = dict.ContainsKey(p.Id) ? dict[p.Id] : new Dictionary<string, int>(), 
 					Year = p.Year,
 					Branch = p.Branch
 				})
 				.ToList();
 
 			return Ok(allPolls);
+
+
 		}
 
 		[HttpGet("{pollId}/overview")]
