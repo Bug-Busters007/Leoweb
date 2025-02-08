@@ -6,32 +6,41 @@ import {AuthService} from "../../services/auth.service";
 import {ApiService} from "../../services/api.service";
 import {Spinner} from "../components/spinner/spinner";
 import {FormsModule} from "@angular/forms";
+import {PollDisplayComponent} from "../components/poll-display/poll-display.component";
+import {FileDisplayComponent} from "../components/file-display/file-display.component";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-leo-poll',
   templateUrl: './leo-poll.component.html',
+  imports: [
+    PollDisplayComponent,
+    FileDisplayComponent,
+    NgForOf
+  ],
   styleUrl: './leo-poll.component.css'
 })
 export class LeoPollComponent {
+  pollArr: Array<any> = [];
 
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
   async ngOnInit() {
-    await this.getAllPolls();
-  }
-
-  async getAllPolls(): Promise<void>{
     const pdiv = document.getElementById('pollsDiv');
     const spinner = new Spinner(pdiv);
     spinner.showSpinner();
+    await this.getAllPolls();
+    spinner.removeSpinner();
+  }
+
+  async getAllPolls(): Promise<void>{
     const url = this.apiService.getApiUrl('Poll/all');
     try {
       const response = await this.http
         .get(url)
         .toPromise();
       if (response) {
-        spinner.removeSpinner();
-        pdiv!.innerText = JSON.stringify(response);
+        this.pollArr = Object.values(response);
       }
     } catch (error) {
       console.error('Error getting all polls', error);

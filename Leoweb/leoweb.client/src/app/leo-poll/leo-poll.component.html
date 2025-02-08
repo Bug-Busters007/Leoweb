@@ -1,3 +1,4 @@
 <div id="pollsDiv">
-
+    <app-poll-display *ngFor="let poll of pollArr" [headline]="poll.headline" [description]="poll.description"></app-poll-display>
 </div>
+
