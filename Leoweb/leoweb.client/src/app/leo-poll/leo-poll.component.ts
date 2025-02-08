@@ -1,13 +1,8 @@
-import { Component } from '@angular/core';
-import {Observable} from "rxjs";
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../../environments/environments";
-import {AuthService} from "../../services/auth.service";
 import {ApiService} from "../../services/api.service";
 import {Spinner} from "../components/spinner/spinner";
-import {FormsModule} from "@angular/forms";
 import {PollDisplayComponent} from "../components/poll-display/poll-display.component";
-import {FileDisplayComponent} from "../components/file-display/file-display.component";
 import {NgForOf} from "@angular/common";
 
 @Component({
@@ -15,12 +10,11 @@ import {NgForOf} from "@angular/common";
   templateUrl: './leo-poll.component.html',
   imports: [
     PollDisplayComponent,
-    FileDisplayComponent,
     NgForOf
   ],
   styleUrl: './leo-poll.component.css'
 })
-export class LeoPollComponent {
+export class LeoPollComponent implements OnInit {
   pollArr: Array<any> = [];
 
   constructor(private http: HttpClient, private apiService: ApiService) {}
