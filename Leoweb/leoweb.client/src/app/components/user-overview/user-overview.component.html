@@ -1,9 +1,12 @@
-
 <h2>Files uploaded by {{username}}:</h2>
 
-
-<div id="filesListedOverview" >
-  <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id" [year]="file.year" [subject]="file.subject" [student]="file.student"></app-file-display>
+<div class="user-info">
+  <p><strong>Email:</strong> <span class="email-placeholder">user&#64;example.com</span></p>
 </div>
 
-<button (click)="goBack()" style=" display: flex; justify-self: right">Go Back</button>
+<div class="main">
+  <div id="filesListed" >
+    <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id" [year]="file.year" [subject]="file.subject" [student]="file.student"></app-file-display>
+  </div>
+</div>
+<button (click)="goBack()">Go Back</button>

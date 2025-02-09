@@ -25,7 +25,7 @@ export class UserOverviewComponent {
 
   async ngOnInit() {
     this.username = this.sharedService.getInputValue();
-    const spinner: Spinner = new Spinner(document.getElementById('filesListedOverview'));
+    const spinner: Spinner = new Spinner(document.getElementById('filesListed'));
     spinner.showSpinner();
     this.fileArray = this.sharedService.getFileArray();
     this.fileArray = this.filterFiles();
