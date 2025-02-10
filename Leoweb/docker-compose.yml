@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./Leoweb.Server
+      dockerfile: Dockerfile
+    container_name: leoweb-backend
+    env_file:
+      - ./Leoweb.Server/.env
+    ports:
+      - "5000:5000"
+
+  client:
+    build:
+      context: ./leoweb.client
+      dockerfile: Dockerfile
+    container_name: leoweb-client
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
