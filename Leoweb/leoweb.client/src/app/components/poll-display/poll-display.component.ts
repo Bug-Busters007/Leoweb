@@ -1,9 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgForOf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {Component, Input, NgModule} from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { PollOverview } from '../../../models/pollOverviewModel';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-poll-display',
@@ -13,9 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './poll-display.component.css',
 
   imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
+    NgForOf
   ],
 })
 export class PollDisplayComponent {
