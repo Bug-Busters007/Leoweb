@@ -5,8 +5,21 @@
       <div *ngFor="let subject of getSubjectsFromBranch(branch)" class="option">
         <input type="checkbox"
                [id]="subject"
+               [checked]="activeFilters.includes(subject)"
                (change)="toggleValue(subject, $event)" />
         <label [for]="subject">{{ subject }}</label>
+      </div>
+    </div>
+  </div>
+  <div id="filter-display">
+    <div id="filter-heading">aktive Filter: </div>
+    <div id="aktive-filter">
+      <div *ngFor="let filter of activeFilters" class="option">
+        <input type="checkbox"
+               [id]="filter"
+               [checked]="activeFilters.includes(filter)"
+               (change)="toggleValue(filter, $event)" />
+        <label [for]="filter">{{ filter }}</label>
       </div>
     </div>
   </div>

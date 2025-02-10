@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Leoweb.Server.Database.Models
 {
-	public class Choice
+	public class PollBranch
 	{
 		[Key]
 		public int Id { get; set; }
 		[ForeignKey(nameof(Poll))]
 		public int PollId { get; set; }
-		public string Description { get; set; } = string.Empty;
+		public string Branch { get; set; }
 
 		public Poll Poll { get; set; }
 	}

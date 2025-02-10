@@ -4,6 +4,7 @@ import {PdfViewerComponent} from "../pdf-viewer/pdf-viewer.component";
 import {Router} from "@angular/router";
 import {SharedService} from "../../../services/share-name.service";
 
+
 @Component({
   selector: 'app-file-display',
   templateUrl: './file-display.component.html',

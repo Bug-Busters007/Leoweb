@@ -25,13 +25,16 @@
 }
 
 .filter-section {
-  flex: 0 0 20%;
+  position: fixed;
+  top: 8.24rem;
+  left: 0;
+  width: 20%;
+  height: 100vh;
   background-color: #f4f4f4;
   padding: 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
   border-right: 2px solid orangered;
   min-width: fit-content;
+  box-sizing: border-box;
 }
 
 .main-content {
@@ -40,5 +43,6 @@
   flex-direction: column;
   width: 100%;
   padding: 20px;
+  margin-left: 20%;
   box-sizing: border-box;
 }

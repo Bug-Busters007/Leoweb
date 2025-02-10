@@ -1,10 +1,21 @@
-h2{
+h2 {
   font-family: Consolas, sans-serif;
   color: orangered;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   font-size: 3rem;
   font-weight: normal;
-  justify-self: center;
+  text-align: center;
+}
+
+.user-info {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.email-placeholder {
+  color: gray;
+  font-style: italic;
 }
 
 button {
@@ -16,10 +27,29 @@ button {
   border: 2px solid orangered;
   border-radius: 10px;
   transition: all 0.3s ease;
-  margin: 5%;
+  display: block;
+  margin: 20px auto;
 }
 
 button:hover {
   background-color: orangered;
   color: white;
+}
+
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+app-file-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#filesListed {
+  width: 70%;
 }

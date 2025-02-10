@@ -16,14 +16,10 @@ import { UpdateSearchService } from "../../../services/update-search.service";
   ]
 })
 export class FilterBarComponent {
+  activeFilters: string[] = [];
   visibilityMap: Map<string, boolean> = new Map<string, boolean>();
   subjectMap: Map<string, string[]> | undefined = new Map<string, string[]>();
   constructor(private http: HttpClient, private apiService: ApiService, private dataService: UpdateSearchService) {}
-  subjectsInformatik: string[] | undefined = [];
-  subjectsMedientechnik: string[] | undefined = [];
-  subjectsMedizintechnik: string[] | undefined = [];
-  subjectsElektronik: string[] | undefined = [];
-  filteredFiles: string[] = [];
   async ngOnInit() {
     this.subjectMap = await getAllBranchesWithSubjects(this.http, this.apiService);
     this.visibilityMap = new Map<string, boolean>(
@@ -35,20 +31,18 @@ export class FilterBarComponent {
     this.visibilityMap.set(key, !this.visibilityMap.get(key));
   }
 
-  toggleValue(subject: string, $event: Event) {
-    if (event === undefined) {
-      return;
-    }
+  toggleValue(subject: string, event: Event) {
     const isChecked = (event.target as HTMLInputElement).checked;
 
-    if (isChecked) {
-      this.filteredFiles.push(subject);
-      console.log(this.filteredFiles);
+    if (isChecked && !this.activeFilters.includes(subject)) {
+      this.activeFilters.push(subject);
     } else {
-      this.filteredFiles = this.filteredFiles.filter(s => s !== subject);
+      this.activeFilters = this.activeFilters.filter(s => s !== subject);
     }
-    this.dataService.updateData(this.filteredFiles);
+
+    this.dataService.updateData(this.activeFilters);
   }
+
 
   getSubjectsFromBranch(branch: string) {
     return this.subjectMap!.get(branch.toLowerCase());
