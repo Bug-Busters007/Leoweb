@@ -1,0 +1,13 @@
+<div class="container">
+  <h2>{{headline}}</h2>
+  <h3>{{description}}</h3>
+  <form id="pollForm">
+    <div *ngFor="let choice of choices">
+      <label class="option">
+        <input type="radio" name="vote" value="{{choice}}"> {{choice}}
+      </label>
+    </div>
+    <button type="button">Abstimmen</button>
+  </form>
+  <p id="resultMessage"></p>
+</div>

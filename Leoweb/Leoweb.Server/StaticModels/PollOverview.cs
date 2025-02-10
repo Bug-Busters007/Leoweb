@@ -1,4 +1,6 @@
-﻿namespace Leoweb.Server.StaticModels
+﻿using System.Text.Json.Serialization;
+
+namespace Leoweb.Server.StaticModels
 {
 	public class PollOverview
 	{
@@ -6,5 +8,7 @@
 		public string Headline { get; set; }
 		public string Description { get; set; }
 		public Dictionary<string, int> Votes { get; set; }
+		public int[] Year { get; set; }
+		public string[] Branch { get; set; }
 	}
 }
