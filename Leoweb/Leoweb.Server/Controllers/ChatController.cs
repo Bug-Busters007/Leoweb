@@ -19,7 +19,6 @@ namespace Leoweb.Server.Controllers
             _context = context;
         }
 
-        // Alle Chat-Nachrichten abrufen
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ChatMessage>>> GetMessages()
         {

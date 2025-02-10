@@ -27,9 +27,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("http://127.0.0.1:4200")
             .AllowAnyHeader()
-            .AllowAnyMethod();
+            .AllowAnyMethod()
+            .AllowCredentials()
+            .SetIsOriginAllowed((host) => true);
     });
     
 });
@@ -73,9 +75,10 @@ app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
 
-app.MapHub<ChatHub>("/chatHub");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<ChatHub>("/chatHub");
+});
 
 
 app.Run();
-
-
