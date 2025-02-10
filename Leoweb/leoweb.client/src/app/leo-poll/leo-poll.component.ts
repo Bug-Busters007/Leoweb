@@ -4,6 +4,7 @@ import {ApiService} from "../../services/api.service";
 import {Spinner} from "../components/spinner/spinner";
 import {PollDisplayComponent} from "../components/poll-display/poll-display.component";
 import {NgForOf} from "@angular/common";
+import { PollOverview } from '../../models/pollOverviewModel';
 
 @Component({
   selector: 'app-leo-poll',
@@ -15,7 +16,7 @@ import {NgForOf} from "@angular/common";
   styleUrl: './leo-poll.component.css'
 })
 export class LeoPollComponent implements OnInit {
-  pollArr: Array<any> = [];
+  pollArr: Array<PollOverview> = [];
 
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
@@ -24,6 +25,7 @@ export class LeoPollComponent implements OnInit {
     const spinner = new Spinner(pdiv);
     spinner.showSpinner();
     await this.getAllPolls();
+    console.log(this.pollArr);
     spinner.removeSpinner();
   }
 
@@ -31,10 +33,10 @@ export class LeoPollComponent implements OnInit {
     const url = this.apiService.getApiUrl('Poll/all');
     try {
       const response = await this.http
-        .get(url)
+        .get<PollOverview[]>(url)
         .toPromise();
       if (response) {
-        this.pollArr = Object.values(response);
+        this.pollArr = response;
       }
     } catch (error) {
       console.error('Error getting all polls', error);
