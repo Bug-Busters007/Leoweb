@@ -27,19 +27,32 @@ namespace Leoweb.Server.Controllers
 				Description = poll.Description,
 				Created = DateTime.Now.ToUniversalTime(),
 				Close = poll.Close,
-				Release = poll.Release,
-				Year = poll.Year,
-				Branch = poll.Branch,
+				Release = poll.Release
 			};
 
 			foreach (string s in poll.Choices)
 			{
-				var choice = new Choice()
+				await _dbContext.AddAsync(new Choice()
 				{
 					Description = s,
 					Poll = newPoll
-				};
-				await _dbContext.AddAsync(choice);
+				});
+			}
+			foreach (var y in poll.Year)
+			{
+				await _dbContext.AddAsync(new PollYear()
+				{
+					Poll = newPoll,
+					Year = (Year)y
+				});
+			}
+			foreach (var b in poll.Branch)
+			{
+				await _dbContext.AddAsync(new PollBranch()
+				{
+					Poll = newPoll,
+					Branch = b
+				});
 			}
 			await _dbContext.AddAsync(newPoll);
 			_dbContext.SaveChanges();
@@ -53,7 +66,7 @@ namespace Leoweb.Server.Controllers
 			var newVote = new Vote()
 			{
 				Student = _dbContext.Student.Find(studentID)!,
-				Choice = vote.Choice,
+				Choice = _dbContext.Choice.Find(vote.Choice)!,
 				Poll = _dbContext.Poll.Find(vote.PollId)!
 			};
 			await _dbContext.AddAsync(newVote);
@@ -77,40 +90,51 @@ namespace Leoweb.Server.Controllers
 		[HttpGet("all")]
 		public async Task<IActionResult> GetAllPolls()
 		{
-			var dict = (await _dbContext.Vote
-					.Join(
-						_dbContext.Choice,
-						vote => vote.Poll,
-						choice => choice.Poll,
-						(vote, choice) => new { vote, choice }
-					)
-					.GroupBy(vc => vc.vote.Poll.Id) 
-					.ToListAsync())  
-				.ToDictionary(
-					grouped => grouped.Key, 
-					grouped => grouped
-						.GroupBy(vc => vc.choice.Description) 
-						.ToDictionary(
-							g => g.Key, 
-							g => g.Count() 
-						)
-				);
-			
-			var allPolls = _dbContext.Poll
-				.Select(p => new PollOverview()
-				{
-					Id = p.Id,
-					Headline = p.Headline,
-					Description = p.Description,
-					Votes = dict.ContainsKey(p.Id) ? dict[p.Id] : new Dictionary<string, int>(), 
-					Year = p.Year,
-					Branch = p.Branch
-				})
-				.ToList();
+			var polls = await _dbContext.Poll
+				.GroupJoin(
+					_dbContext.Choice,
+					poll => poll.Id,
+					choice => choice.Poll.Id,
+					(poll, choices) => new { poll, choices }
+				)
+				.SelectMany(
+					pc => pc.choices.DefaultIfEmpty(),
+					(pc, choice) => new { pc.poll, choice }
+				)
+				.GroupJoin(
+					_dbContext.Vote,
+					pc => pc.poll.Id,
+					vote => vote.Poll.Id,
+					(pc, votes) => new { pc.poll, pc.choice, votes }
+				)
+				.SelectMany(
+					pvc => pvc.votes.DefaultIfEmpty(),
+					(pvc, vote) => new
+					{
+						pvc.poll,
+						pvc.choice,
+						VoteDescription = pvc.choice!.Description,
+						VoteCount = vote != null ? 1 : 0
+					}
+				)
+				.GroupBy(x => new { x.poll.Id, x.poll.Headline, x.poll.Description })
+				.ToListAsync();
 
-			return Ok(allPolls);
+			var result = polls.Select(grouped => new PollOverview
+			{
+				Id = grouped.Key.Id,
+				Headline = grouped.Key.Headline,
+				Description = grouped.Key.Description,
+				Votes = grouped
+					.Where(x => x.VoteDescription != null)
+					.GroupBy(x => x.VoteDescription)
+					.ToDictionary(g => g.Key, g => g.Sum(v => v.VoteCount)),
+				Year = _dbContext.PollYear.Where(y => y.PollId == grouped.Key.Id).Select(y => (int)y.Year).ToArray(),
+				Branch = _dbContext.PollBranch.Where(b => b.PollId == grouped.Key.Id).Select(b => b.Branch).ToArray(),
+			})
+			.ToList();
 
-
+			return Ok(result);
 		}
 
 		[HttpGet("{pollId}/overview")]
@@ -122,6 +146,7 @@ namespace Leoweb.Server.Controllers
 			{
 				return BadRequest("Poll not found");
 			}
+
 			var dict = await _dbContext.Vote
 				.Join(
 					_dbContext.Choice,
@@ -137,19 +162,18 @@ namespace Leoweb.Server.Controllers
 				})
 				.ToDictionaryAsync(x => x.Description, x => x.VoteCount);
 
+			var years = _dbContext.PollYear.Where(y => y.PollId == pollId).ToArray();
 			var info = new PollOverview()
 			{
 				Id = poll.Id,
 				Headline = poll.Headline,
 				Description = poll.Description,
 				Votes = dict,
-				Year = poll.Year,
-				Branch = poll.Branch,
+				Year = _dbContext.PollYear.Where(y => y.PollId == pollId).Select(y => (int)y.Year).ToArray(),
+				Branch = _dbContext.PollBranch.Where(b => b.PollId == pollId).Select(b => b.Branch).ToArray(),
 			};
 
 			return Ok(info);
 		}
-
-		
 	}
 }

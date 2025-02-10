@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Leoweb.Server.Database.Models
 {
@@ -12,7 +11,5 @@ namespace Leoweb.Server.Database.Models
         public DateTime Created { get; set; }
         public DateTime Release { get; set; }
         public DateTime? Close { get; set; }
-		public int[] Year { get; set; }
-		public string[] Branch { get; set; }
 	}
 }

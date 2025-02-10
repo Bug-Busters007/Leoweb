@@ -30,4 +30,6 @@ public class ApplicationDbContext : DbContext
 	public DbSet<Poll> Poll { get; set; } = null!;
 	public DbSet<Vote> Vote { get; set; } = null!;
 	public DbSet<Choice> Choice { get; set; }
+	public DbSet<PollYear> PollYear { get; set; }
+	public DbSet<PollBranch> PollBranch { get; set; }
 }

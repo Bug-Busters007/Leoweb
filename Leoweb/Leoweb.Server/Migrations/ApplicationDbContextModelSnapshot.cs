@@ -78,7 +78,7 @@ namespace Leoweb.Server.Migrations
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
 
-                    b.Property<string>("Student")
+                    b.Property<string>("StudentId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -92,6 +92,8 @@ namespace Leoweb.Server.Migrations
 
                     b.HasIndex("DataId");
 
+                    b.HasIndex("StudentId");
+
                     b.ToTable("File");
                 });
 
@@ -102,10 +104,6 @@ namespace Leoweb.Server.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.PrimitiveCollection<string[]>("Branch")
-                        .IsRequired()
-                        .HasColumnType("text[]");
 
                     b.Property<DateTime?>("Close")
                         .HasColumnType("timestamp with time zone");
@@ -124,13 +122,52 @@ namespace Leoweb.Server.Migrations
                     b.Property<DateTime>("Release")
                         .HasColumnType("timestamp with time zone");
 
-                    b.PrimitiveCollection<int[]>("Year")
-                        .IsRequired()
-                        .HasColumnType("integer[]");
-
                     b.HasKey("Id");
 
                     b.ToTable("Poll");
+                });
+
+            modelBuilder.Entity("Leoweb.Server.Database.Models.PollBranch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Branch")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("PollId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PollId");
+
+                    b.ToTable("PollBranch");
+                });
+
+            modelBuilder.Entity("Leoweb.Server.Database.Models.PollYear", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PollId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PollId");
+
+                    b.ToTable("PollYear");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Student", b =>
@@ -166,9 +203,8 @@ namespace Leoweb.Server.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Choice")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("ChoiceId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("PollId")
                         .HasColumnType("integer");
@@ -178,6 +214,8 @@ namespace Leoweb.Server.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ChoiceId");
 
                     b.HasIndex("PollId");
 
@@ -205,11 +243,47 @@ namespace Leoweb.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Leoweb.Server.Database.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Data");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("Leoweb.Server.Database.Models.PollBranch", b =>
+                {
+                    b.HasOne("Leoweb.Server.Database.Models.Poll", "Poll")
+                        .WithMany()
+                        .HasForeignKey("PollId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Poll");
+                });
+
+            modelBuilder.Entity("Leoweb.Server.Database.Models.PollYear", b =>
+                {
+                    b.HasOne("Leoweb.Server.Database.Models.Poll", "Poll")
+                        .WithMany()
+                        .HasForeignKey("PollId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Poll");
                 });
 
             modelBuilder.Entity("Leoweb.Server.Database.Models.Vote", b =>
                 {
+                    b.HasOne("Leoweb.Server.Database.Models.Choice", "Choice")
+                        .WithMany()
+                        .HasForeignKey("ChoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Leoweb.Server.Database.Models.Poll", "Poll")
                         .WithMany()
                         .HasForeignKey("PollId")
@@ -221,6 +295,8 @@ namespace Leoweb.Server.Migrations
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Choice");
 
                     b.Navigation("Poll");
 

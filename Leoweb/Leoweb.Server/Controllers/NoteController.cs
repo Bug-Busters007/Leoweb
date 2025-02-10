@@ -75,7 +75,7 @@ namespace Leoweb.Server.Controllers
 				Subject = s,
 				Data = binFile,
 				Date = DateOnly.FromDateTime(DateTime.Now),
-				Student = studentID
+				StudentId = studentID
 			};
 			_dbContext.File.Add(newFile);
 
@@ -93,7 +93,7 @@ namespace Leoweb.Server.Controllers
 						f.Data.Id,
 						f.Data.Name,
 						f.Year,
-						student = _dbContext.Student.Where(s => s.Id == f.Student).First().Email,
+						student = _dbContext.Student.Where(s => s.Id == f.Student.Id).First().Email,
 						subject = f.Subject.ToString(),
 					})
 				.ToList();
@@ -105,7 +105,7 @@ namespace Leoweb.Server.Controllers
 		public IActionResult GetAllFileNamesFromStudent()
 		{ 
 			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
-			var dict = _dbContext.File.Where(f => f.Student== studentID)
+			var dict = _dbContext.File.Where(f => f.Student.Id == studentID)
 				.Select(f => new 
 				{
 					f.Data.Id,
@@ -160,6 +160,5 @@ namespace Leoweb.Server.Controllers
 				};
 			});
 		}
-
 	}
 }
