@@ -1,7 +1,8 @@
-<div class="chat-box">
-  <div *ngFor="let msg of messages">
-    <strong>{{ msg.sender }}:</strong> {{ msg.message }}
-  </div>
-  <input [(ngModel)]="newMessage" placeholder="Nachricht eingeben..." />
-  <button (click)="sendMessage()">Senden</button>
+<div>
+    <h3>Chat</h3>
+    <div *ngFor="let msg of messages">
+        <strong>{{ msg.user }}:</strong> {{ msg.message }}
+    </div>
+    <input [(ngModel)]="message" placeholder="Nachricht eingeben..." />
+    <button (click)="sendMessage()">Senden</button>
 </div>

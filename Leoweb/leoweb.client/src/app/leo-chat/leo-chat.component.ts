@@ -1,40 +1,35 @@
-import { Component, OnInit } from "@angular/core";
-import { ChatService } from "../../services/chat.service";
-import {FormsModule} from "@angular/forms";
-import {NgForOf} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { SignalRService } from '../../services/chat.service';
+import { FormsModule } from '@angular/forms';
+import { NgForOf } from '@angular/common';
+
 @Component({
-  selector: "app-chat",
-  templateUrl: "./leo-chat.component.html",
-  standalone: true,
-  styleUrls: ["./leo-chat.component.css"],
-  imports: [
-    NgForOf,
-    FormsModule,
-  ]
+    selector: 'app-chat',
+    templateUrl: './leo-chat.component.html',
+    styleUrls: ['./leo-chat.component.css'],
+    standalone: true,
+    imports:[
+        NgForOf,
+        FormsModule,
+    ]
 })
 export class LeoChatComponent implements OnInit {
-  messages: { sender: string; message: string }[] = [];
-  newMessage = "";
-  userName = "User"
+    user = 'User' + Math.floor(Math.random() * 1000);
+    message = '';
+    messages: { user: string; message: string }[] = [];
 
-  constructor(private chatService: ChatService) {}
+    constructor(private signalRService: SignalRService) {}
 
-  ngOnInit() {
-    this.chatService.startConnection();
-
-    this.chatService.messages$.subscribe(messages => {
-      this.messages = messages;
-    });
-
-    this.chatService.getChatHistory().subscribe(history => {
-      this.messages = [...history, ...this.messages];
-    });
-  }
-
-  sendMessage() {
-    if (this.newMessage.trim()) {
-      this.chatService.sendMessage(this.userName, this.newMessage);
-      this.newMessage = "";
+    ngOnInit(): void {
+        this.signalRService.getMessages().subscribe((msg) => {
+            this.messages.push(msg);
+        });
     }
-  }
+
+    sendMessage() {
+        if (this.message.trim()) {
+            this.signalRService.sendMessage(this.user, this.message);
+            this.message = '';
+        }
+    }
 }
