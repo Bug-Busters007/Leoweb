@@ -31,6 +31,7 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
+    
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -47,6 +48,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
         };
     });
+builder.Services.AddControllers();
+builder.Services.AddSignalR();
 
 
 var app = builder.Build();
@@ -71,6 +74,7 @@ app.MapControllers();
 app.MapFallbackToFile("/index.html");
 
 app.MapHub<ChatHub>("/chatHub");
+
 
 app.Run();
 
