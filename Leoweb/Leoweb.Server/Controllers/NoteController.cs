@@ -116,8 +116,6 @@ namespace Leoweb.Server.Controllers
 				.ToList();
 			return Ok(dict);
 		}
-		
-		//[HttpGet("allFilesUploadedByStudent")]
 
 		[HttpGet("allBranches")]
 		public IActionResult GetAllBranches()

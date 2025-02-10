@@ -25,8 +25,15 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+<<<<<<< HEAD
     path: 'leopolls',
     loadComponent: () => import('./leo-poll/leo-poll.component').then(m => m.LeoPollComponent),
+=======
+    path: 'leochat',
+    loadComponent: () =>{
+      return import('./leo-chat/leo-chat.component').then(m => m.LeoChatComponent);
+    },
+>>>>>>> origin/main
     canActivate: [authGuard]
   },
   {

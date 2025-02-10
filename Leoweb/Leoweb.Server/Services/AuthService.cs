@@ -43,9 +43,15 @@ public class AuthService
             Id = Guid.NewGuid().ToString(),
             Email = email,
             PasswordHash = HashPassword(password),
+<<<<<<< HEAD
             Year = 0,
             Branch = "informatik"
         };
+=======
+			Year = 0,
+            Branch = "informatik"
+		};
+>>>>>>> origin/main
 
         _context.Student.Add(student);
         await _context.SaveChangesAsync();
