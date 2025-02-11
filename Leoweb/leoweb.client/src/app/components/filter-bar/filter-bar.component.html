@@ -3,11 +3,12 @@
     <button (click)="toggleVisibility(branch)">{{ branch }}</button>
     <div *ngIf="visibilityMap.get(branch)" style="margin-top: 2%">
       <div *ngFor="let subject of getSubjectsFromBranch(branch)" class="option">
-        <input type="checkbox"
-               [id]="subject"
-               [checked]="activeFilters.includes(subject)"
-               (change)="toggleValue(subject, $event)" />
-        <label [for]="subject">{{ subject }}</label>
+        <mat-slide-toggle
+          [id]="subject"
+          [checked]="activeFilters.includes(subject)"
+          (change)="toggleValue(subject, $event.checked)">
+          {{ subject }}
+        </mat-slide-toggle>
       </div>
     </div>
   </div>
@@ -15,11 +16,12 @@
     <div id="filter-heading">aktive Filter: </div>
     <div id="aktive-filter">
       <div *ngFor="let filter of activeFilters" class="option">
-        <input type="checkbox"
-               [id]="filter"
-               [checked]="activeFilters.includes(filter)"
-               (change)="toggleValue(filter, $event)" />
-        <label [for]="filter">{{ filter }}</label>
+        <mat-slide-toggle
+          [id]="filter"
+          [checked]="activeFilters.includes(filter)"
+          (change)="toggleValue(filter, $event.checked)">
+          {{ filter }}
+        </mat-slide-toggle>
       </div>
     </div>
   </div>

@@ -26,15 +26,16 @@
 
 .filter-section {
   position: fixed;
-  top: 8.24rem;
+  top: 0;
   left: 0;
-  width: 20%;
+  width: 15rem;
   height: 100vh;
   background-color: #f4f4f4;
-  padding: 20px;
+  padding: 9.24rem 1rem 1rem;
   border-right: 2px solid orangered;
   min-width: fit-content;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .main-content {

@@ -18,6 +18,3 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(MatDialogModule, BrowserAnimationsModule), provideAnimationsAsync()
   ]
 }).catch((err) => console.error(err));
-
-
-
