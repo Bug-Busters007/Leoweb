@@ -9,11 +9,9 @@
 button{
   padding: 5px 20px;
   font-family: Consolas, sans-serif;
-  font-size: 150%;
+  font-size: 130%;
   cursor: pointer;
   border-radius: 10px;
-  background-color: transparent;
-  color: orangered;
   width: 100%;
 }
 
@@ -27,4 +25,8 @@ button{
 mat-slide-toggle {
   font-size: 100%;
   margin-top: 0.5rem;
+}
+
+#filter-display {
+  min-height: 15rem;
 }

@@ -7,6 +7,7 @@ import {RefreshService} from "../../../services/refresh.service";
 import {MatSelectChange, MatSelectModule} from '@angular/material/select';
 import {MatButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
+import {MatCard} from "@angular/material/card";
 
 
 @Component({
@@ -18,6 +19,7 @@ import {MatInput} from "@angular/material/input";
     MatSelectModule,
     NgForOf,
     MatButton,
+    MatCard,
   ]
 })
 export class FileUploadComponent {

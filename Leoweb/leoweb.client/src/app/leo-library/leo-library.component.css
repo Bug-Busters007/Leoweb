@@ -1,8 +1,7 @@
-.upload-button {
+#upload-button {
   align-self: flex-end;
-  padding: 5px 20px;
   font-family: Consolas, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   cursor: pointer;
   border-radius: 10px;
 }
@@ -19,7 +18,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 15rem;
+  width: 18rem;
   height: 100vh;
   background-color: #f4f4f4;
   padding: 9.24rem 1rem 1rem;
@@ -35,6 +34,6 @@
   flex-direction: column;
   width: 100%;
   padding: 20px;
-  margin-left: 15rem;
+  margin-left: 18rem;
   box-sizing: border-box;
 }

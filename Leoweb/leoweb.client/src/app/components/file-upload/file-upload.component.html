@@ -1,25 +1,20 @@
-<div class="uploadDiv">
-  <div class="select-container">
-
-    <div class="select-wrapper">
+<mat-card class="upload-card">
+  <div class="options">
+    <div class="selects">
       <mat-form-field>
         <mat-label>Year</mat-label>
         <mat-select id="year" (selectionChange)="setYear($event)">
           <mat-option *ngFor="let year of [1,2,3,4,5]" [value]="year">{{ year }}</mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
 
-    <div class="select-wrapper">
       <mat-form-field>
         <mat-label>Branch</mat-label>
         <mat-select id="branch" (selectionChange)="setBranch($event)">
           <mat-option *ngFor="let option of branchSelectOptions" [value]="option">{{ option }}</mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
 
-    <div class="select-wrapper">
       <mat-form-field>
         <mat-label>Subject:</mat-label>
         <mat-select id="subject" multiple (selectionChange)="setSubject($event)">
@@ -28,14 +23,13 @@
       </mat-form-field>
     </div>
 
-    <div class="custom-file-container">
-      <input class="ng-hide" id="input-file-id" multiple type="file" />
-      <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
+    <div class="file-select-button-container">
+      <button mat-stroked-button color="accent" (click)="fileInput.click()">Choose File</button>
+      <input #fileInput type="file" multiple hidden (change)="onFileSelected($event)">
     </div>
-
   </div>
 
   <form (submit)="onSubmit($event)" enctype="multipart/form-data">
-    <button mat-stroked-button type="submit" style="cursor: pointer; font-family: Consolas, sans-serif">Upload</button>
+    <button mat-raised-button color="accent" type="submit">Upload</button>
   </form>
-</div>
+</mat-card>
