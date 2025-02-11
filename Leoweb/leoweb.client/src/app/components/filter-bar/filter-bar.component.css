@@ -24,3 +24,8 @@ button{
   font-size: 1.2rem;
   font-family: Consolas, sans-serif;
 }
+
+mat-slide-toggle {
+  font-size: 100%;
+  margin-top: 0.5rem;
+}
