@@ -1,7 +1,7 @@
 <div class="uploadDiv">
   <div class="select-container">
     <div class="select-wrapper">
-      <label for="year">Jahrgang: </label>
+      <label for="year">Year: </label>
       <select id="year" (change)="setYear($event)">
         <option>1</option>
         <option>2</option>
@@ -12,14 +12,14 @@
     </div>
 
     <div class="select-wrapper">
-      <label for="branch">Zweig:</label>
+      <label for="branch">Branch:</label>
       <select id="branch" (change)="setBranch($event)">
         <option *ngFor="let option of branchSelectOptions" [value]="option">{{ option }}</option>
       </select>
     </div>
 
     <div class="select-wrapper">
-      <label for="subject">Unterrichtsgegenstand:</label>
+      <label for="subject">Subject:</label>
       <select id="subject" (change)="setSubject($event)">
         <option *ngFor="let option of lessonsSelectOptions" [value]="option">{{ option }}</option>
       </select>
@@ -27,7 +27,7 @@
 
     <div class="custom-file-container">
       <input type="file" id="fileInput" (change)="onFileSelected($event)" />
-      <label for="fileInput">Wähle Datei</label>
+      <label for="fileInput">Select file</label>
       <span *ngIf="selectedFileName" class="file-name">{{ selectedFileName }}</span>
     </div>
   </div>

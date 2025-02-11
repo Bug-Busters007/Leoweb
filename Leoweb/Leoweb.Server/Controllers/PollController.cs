@@ -74,7 +74,7 @@ namespace Leoweb.Server.Controllers
 			return Ok(newVote);
 		}
 
-		[HttpPost("{pollId}/close")]
+		[HttpPatch("{pollId}/close")]
 		public IActionResult ClosePoll([FromRoute] int pollId, [FromBody] DateTime? date)
 		{
 			var poll = _dbContext.Poll.Find(pollId);
