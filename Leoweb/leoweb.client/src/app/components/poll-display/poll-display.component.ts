@@ -4,6 +4,9 @@ import {Component, Input, NgModule} from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { PollOverview } from '../../../models/pollOverviewModel';
 import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-poll-display',
@@ -14,7 +17,11 @@ import { FormsModule } from '@angular/forms';
 
   imports: [
     NgForOf,
-    FormsModule
+    FormsModule,
+    MatCardModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatRadioModule
   ],
 })
 export class PollDisplayComponent {
