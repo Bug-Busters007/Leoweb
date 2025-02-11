@@ -2,7 +2,6 @@
   <h2>{{headline}}</h2>
   <h3>{{description}}</h3>
   <form id="pollForm">
-<<<<<<< HEAD
     <mat-radio-group [(ngModel)]="selectedChoice" name="vote">
       <div *ngFor="let choice of choices">
         <mat-radio-button class="example-margin" [value]="choice">
@@ -11,14 +10,6 @@
       </div>
     </mat-radio-group>
     <button type="button" (click)="vote()">Abstimmen</button>
-=======
-    <div *ngFor="let choice of choices">
-      <label class="option">
-        <input type="radio" name="vote" value="{{choice}}" [(ngModel)]="selectedChoice"> {{choice}}
-      </label>
-    </div>
-    <button type="button" (click)="vote()">Vote</button>
->>>>>>> abb8d440f16e3d668e34365640dc53fdcfc3b9c2
   </form>
   <p id="resultMessage"></p>
 </div>
