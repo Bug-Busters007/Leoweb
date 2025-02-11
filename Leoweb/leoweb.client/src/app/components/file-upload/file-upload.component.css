@@ -15,11 +15,6 @@
   margin-bottom: 0.5%;
 }
 
-.uploadDiv button:hover {
-  background-color: orangered;
-  color: white;
-}
-
 .custom-file-container {
   display: flex;
   flex-direction: column;

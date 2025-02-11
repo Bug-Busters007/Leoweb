@@ -1,10 +1,12 @@
 <div class="header">
-  <input
-    type="search"
-    class="search-bar"
-    (input)="filterFilesRegex($event)"
-    placeholder="Search for Files, Subjects, ..."
-  />
+  <mat-form-field>
+    <input matNativeControl
+      type="search"
+      class="search-bar"
+      (input)="filterFilesRegex($event)"
+      placeholder="Search for Files, Subjects, ..."
+    />
+  </mat-form-field>
 </div>
 
 <div id="filesListed" >

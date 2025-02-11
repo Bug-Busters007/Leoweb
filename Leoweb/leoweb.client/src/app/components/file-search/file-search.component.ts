@@ -8,13 +8,17 @@ import {RefreshService} from "../../../services/refresh.service";
 import {UpdateSearchService} from "../../../services/update-search.service";
 import {Spinner} from "../spinner/spinner";
 import {SharedService} from "../../../services/share-name.service";
+import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
 
 @Component({
   selector: 'app-file-search',
   templateUrl: './file-search.component.html',
   imports: [
+    MatFormFieldModule,
     FileDisplayComponent,
-    NgForOf
+    NgForOf,
+    MatInput
   ],
   standalone: true,
   styleUrls: ['./file-search.component.css']

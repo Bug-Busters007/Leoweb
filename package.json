@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "mat-file-upload": "^18.0.0"
+  }
+}

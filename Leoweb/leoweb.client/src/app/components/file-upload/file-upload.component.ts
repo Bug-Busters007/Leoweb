@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf} from "@angular/common";
 import {getAllBranchesWithSubjects} from "../../leo-library/leo-library-helper";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../../services/api.service";
 import {RefreshService} from "../../../services/refresh.service";
+import {MatSelectChange, MatSelectModule} from '@angular/material/select';
+import {MatButton} from "@angular/material/button";
+import {MatInput} from "@angular/material/input";
+
 
 @Component({
   selector: 'app-file-upload',
@@ -11,8 +15,9 @@ import {RefreshService} from "../../../services/refresh.service";
   styleUrl: './file-upload.component.css',
   standalone: true,
   imports: [
+    MatSelectModule,
     NgForOf,
-    NgIf
+    MatButton,
   ]
 })
 export class FileUploadComponent {
@@ -23,17 +28,17 @@ export class FileUploadComponent {
   branch: string = "Informatik";
   year: string = "1";
   lessonsSelectOptions: string[]|undefined = undefined;
-  setYear(event: Event): void {
-    this.year = (event.target as HTMLInputElement).value;
+  setYear(event: MatSelectChange): void {
+    this.year = event.value;
   }
 
-  setSubject(event: Event): void {
-    this.subject = (event.target as HTMLInputElement).value;
+  setSubject(event: MatSelectChange): void {
+    this.subject = event.value;
   }
   branchSelectOptions = ['Informatik', 'Medientechnik', 'Medizintechnik','Elektronik'];
 
-  async setBranch(event: Event) {
-    this.branch = (event.target as HTMLSelectElement).value;
+  async setBranch(event: MatSelectChange) {
+    this.branch = event.value;
     this.lessonsSelectOptions = this.subjectsMap!.get(this.branch.toLowerCase());
   }
   constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService) {

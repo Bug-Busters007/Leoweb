@@ -7,6 +7,7 @@ import {FileUploadComponent} from "../components/file-upload/file-upload.compone
 import {FilterBarComponent} from "../components/filter-bar/filter-bar.component";
 import {RefreshService} from "../../services/refresh.service";
 import {FileSearchComponent} from "../components/file-search/file-search.component";
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-leo-library',
@@ -14,6 +15,7 @@ import {FileSearchComponent} from "../components/file-search/file-search.compone
   styleUrls: ['./leo-library.component.css'],
   standalone: true,
   imports: [
+    MatButtonModule,
     CommonModule,
     FileUploadComponent,
     FilterBarComponent,
