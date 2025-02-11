@@ -4,10 +4,10 @@
   <form id="pollForm">
     <div *ngFor="let choice of choices">
       <label class="option">
-        <input type="radio" name="vote" value="{{choice}}"> {{choice}}
+        <input type="radio" name="vote" value="{{choice}}" [(ngModel)]="selectedChoice"> {{choice}}
       </label>
     </div>
-    <button type="button">Abstimmen</button>
+    <button type="button" (click)="vote()">Abstimmen</button>
   </form>
   <p id="resultMessage"></p>
 </div>

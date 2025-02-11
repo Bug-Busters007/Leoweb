@@ -65,8 +65,8 @@ namespace Leoweb.Server.Controllers
 			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
 			var newVote = new Vote()
 			{
-				Student = _dbContext.Student.Find(studentID)!,
-				Choice = _dbContext.Choice.Find(vote.Choice)!,
+				StudentId = studentID,
+				Choice = _dbContext.Choice.First(c => c.PollId == vote.PollId && c.Description == vote.Choice),
 				Poll = _dbContext.Poll.Find(vote.PollId)!
 			};
 			await _dbContext.AddAsync(newVote);

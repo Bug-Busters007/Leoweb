@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {Component, Input, NgModule} from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { PollOverview } from '../../../models/pollOverviewModel';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-poll-display',
@@ -12,7 +13,8 @@ import { PollOverview } from '../../../models/pollOverviewModel';
   styleUrl: './poll-display.component.css',
 
   imports: [
-    NgForOf
+    NgForOf,
+    FormsModule
   ],
 })
 export class PollDisplayComponent {
@@ -20,6 +22,7 @@ export class PollDisplayComponent {
   headline: string = "";
   description: string = "";
   choices: string[] = [];
+  selectedChoice: string | null = null;
 
   constructor(private http: HttpClient, private apiService: ApiService) { }
 
@@ -29,6 +32,21 @@ export class PollDisplayComponent {
       this.headline = this.poll.headline;
       this.description = this.poll.description;
       this.choices = Array.from(Object.keys(this.poll.votes));
+    }
+  }
+
+  async vote(): Promise<void> {
+    console.log(this.selectedChoice);
+    const url = this.apiService.getApiUrl('Poll/vote');
+    try {
+      const response = await this.http
+        .post(url, {
+          pollId: this.poll.id,
+          choice: this.selectedChoice
+        })
+        .toPromise();
+    } catch (error) {
+      throw new Error("cannot vote");
     }
   }
 }
