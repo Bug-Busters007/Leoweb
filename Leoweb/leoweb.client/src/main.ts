@@ -15,7 +15,7 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(
       withInterceptors([authInterceptor])
     ),
-    importProvidersFrom(MatDialogModule, BrowserAnimationsModule), provideAnimationsAsync()
+    importProvidersFrom(MatDialogModule, BrowserAnimationsModule), provideAnimationsAsync(), provideAnimationsAsync()
   ]
 }).catch((err) => console.error(err));
 
