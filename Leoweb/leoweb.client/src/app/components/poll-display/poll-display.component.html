@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
   <h2>{{headline}}</h2>
   <h3>{{description}}</h3>
   <form id="pollForm">
@@ -12,4 +12,25 @@
     <button type="button" (click)="vote()">Abstimmen</button>
   </form>
   <p id="resultMessage"></p>
-</div>
+</div>-->
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2>{{headline}}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <h3>{{description}}</h3>
+    <form id="pollForm">
+      <mat-radio-group [(ngModel)]="selectedChoice" name="vote">
+        <div *ngFor="let choice of choices">
+          <mat-radio-button class="example-margin" [value]="choice">
+            {{ choice }}
+          </mat-radio-button>
+        </div>
+      </mat-radio-group>
+      <button type="button" (click)="vote()">Vote</button>
+    </form>
+    <p id="resultMessage"></p>
+  </mat-card-content>
+
+</mat-card>
