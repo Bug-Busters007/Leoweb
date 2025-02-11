@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { ApiService } from "../../../services/api.service";
 import { UpdateSearchService } from "../../../services/update-search.service";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-filter-bar',
@@ -12,6 +13,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   styleUrl: './filter-bar.component.css',
   standalone: true,
   imports: [
+    MatButtonModule,
     MatSlideToggleModule,
     NgIf,
     NgFor,
