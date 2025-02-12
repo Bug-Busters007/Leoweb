@@ -20,7 +20,8 @@ import {MatButtonModule} from '@angular/material/button';
   ]
 })
 export class FilterBarComponent {
-  activeFilters: string[] = [];
+  instance = new UpdateSearchService;
+  activeFilters: string[] = this.instance.getFilters(); // da is des nu leer also geht a mid []
   visibilityMap: Map<string, boolean> = new Map<string, boolean>();
   subjectMap: Map<string, string[]> | undefined = new Map<string, string[]>();
 
@@ -36,7 +37,7 @@ export class FilterBarComponent {
     } else {
       this.activeFilters = this.activeFilters.filter(s => s !== subject);
     }
-
+    this.instance.setFilters(this.activeFilters);
     this.updateSearchService.updateData(this.activeFilters);
   }
 
@@ -60,5 +61,23 @@ export class FilterBarComponent {
     return Array.from(this.subjectMap!.keys()).map(k =>
       k ? k[0].toUpperCase() + k.slice(1) : ''
     );
+  }
+
+  static addFilterInDoc(filter: string): void {
+    const list = document.getElementById("aktive-filter");
+    if (list) {
+      list.innerHTML += `
+        <div class="option">
+          <mat-slide-toggle
+            id="${filter}"
+            checked
+            onchange="toggleValue('${filter}', this.checked)">
+            ${filter}
+          </mat-slide-toggle>
+        </div>`;
+    }
+    else {
+      console.error("No active filter found.");
+    }
   }
 }

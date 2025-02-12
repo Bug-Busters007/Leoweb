@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import {FilterBarComponent} from "../app/components/filter-bar/filter-bar.component";
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,20 @@ export class UpdateSearchService {
 
   updateData(data: string[]) {
     this.data = [...data];
-    console.log(data);
+    console.log(this.data);
     this.dataSource.next(this.data);
   }
 
   addFilter(filter: string): void {
     this.updateData([...this.data, filter]);
+    FilterBarComponent.addFilterInDoc(filter);
+  }
+
+  getFilters(): string[] {
+    return this.data;
+  }
+
+  setFilters(filters: string[]) {
+    this.data = filters;
   }
 }

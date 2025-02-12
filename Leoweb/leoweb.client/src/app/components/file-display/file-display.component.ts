@@ -46,6 +46,6 @@ export class FileDisplayComponent {
   }
 
   addSubjectFilter() {
-    this.updateSearchService.addFilter(this.subject.toString());
+    this.updateSearchService.addFilter(this.subject.toString());  
   }
 }
