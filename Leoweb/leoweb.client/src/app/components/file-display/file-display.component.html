@@ -1,12 +1,12 @@
-<div class="fileDiv">
-  <div  (click)="navigateToFile()"  class="main">
-    <span class="name underline-effect">{{name}}</span>
+<mat-card class="fileDiv" appearance="outlined">
+  <div class="title" (click)="navigateToFile()">
+    <mat-card-title class="name underline-effect">{{ name }}</mat-card-title>
   </div>
-  <div class="displayHead">
-    <div class="subjectInfo">
-      <span>{{year}}.Klasse</span>
-      <span>{{subject}}</span>
-    </div>
-    <span (click)="goToUserInfo()" class="userName">{{ student }}</span>
+  <div class="chips">
+    <mat-chip-set aria-label="Chihuahua traits">
+      <mat-chip>{{year}}.Klasse</mat-chip>
+      <mat-chip>{{subject}}</mat-chip>
+      <mat-chip class="userName" (click)="goToUserInfo()">{{ student }}</mat-chip>
+    </mat-chip-set>
   </div>
-</div>
+</mat-card>

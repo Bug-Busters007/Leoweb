@@ -1,53 +1,22 @@
 .fileDiv {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-size: 150%;
-  background-color: white;
-  color: orangered;
-  border: 2px solid orangered;
-  border-radius: 10px;
   transition: all 0.3s ease;
-  font-family: Consolas, sans-serif;
   width: 75%;
   min-width: fit-content;
-  min-height: fit-content;
   padding: 10px;
-  position: relative;
-  margin-bottom: 1.2rem;
 }
 
 .name {
-  display: inline-block;
-  text-align: left;
-  padding-left: 10px;
-  min-width: fit-content;
   position: relative;
-}
-
-.displayHead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 8px 12px;
-  background: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 18px;
-  color: #666;
-  font-weight: bold;
-  width: 250px;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.displayHead:hover {
-  background-color: #ddd;
+  cursor: pointer;
 }
 
 .fileDiv:hover {
   scale: 101%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .fileDiv:hover .name.underline-effect::after {
@@ -62,22 +31,6 @@
   width: 0;
   height: 3px;
   border-radius: 2px;
-  background-color: orangered;
+  background-color: cornflowerblue;
   transition: width 0.3s ease-in-out;
-}
-
-.main {
-  cursor: pointer;
-  width: 100%;
-}
-
-.userName {
-  cursor: pointer;
-  color: cornflowerblue;
-}
-
-.subjectInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 }

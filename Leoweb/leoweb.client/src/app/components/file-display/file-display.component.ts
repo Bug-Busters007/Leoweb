@@ -3,6 +3,8 @@ import {ApiService} from "../../../services/api.service";
 import {PdfViewerComponent} from "../pdf-viewer/pdf-viewer.component";
 import {Router} from "@angular/router";
 import {SharedService} from "../../../services/share-name.service";
+import {MatCard, MatCardTitle} from "@angular/material/card";
+import {MatChip, MatChipSet} from "@angular/material/chips";
 
 
 @Component({
@@ -10,6 +12,12 @@ import {SharedService} from "../../../services/share-name.service";
   templateUrl: './file-display.component.html',
   styleUrl: './file-display.component.css',
   standalone: true,
+  imports: [
+    MatCard,
+    MatChipSet,
+    MatCardTitle,
+    MatChip
+  ]
 })
 export class FileDisplayComponent {
   constructor(private apiService: ApiService, private sharedService: SharedService, private router: Router) {
@@ -32,4 +40,3 @@ export class FileDisplayComponent {
     this.router.navigate(['/UserOverview']);
   }
 }
-
