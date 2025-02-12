@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {SharedService} from "../../../services/share-name.service";
 import {MatCard, MatCardTitle} from "@angular/material/card";
 import {MatChip, MatChipSet} from "@angular/material/chips";
+import {UpdateSearchService} from "../../../services/update-search.service";
 
 
 @Component({
@@ -20,7 +21,7 @@ import {MatChip, MatChipSet} from "@angular/material/chips";
   ]
 })
 export class FileDisplayComponent {
-  constructor(private apiService: ApiService, private sharedService: SharedService, private router: Router) {
+  constructor(private apiService: ApiService, private sharedService: SharedService, private router: Router, private updateSearchService: UpdateSearchService) {
   }
   @Input() id: number = 0;
   @Input() name: string = "File";
@@ -38,5 +39,13 @@ export class FileDisplayComponent {
   goToUserInfo() {
     this.sharedService.setInputValue(this.student);
     this.router.navigate(['/UserOverview']);
+  }
+
+  addYearFilter() {
+    this.updateSearchService.addFilter(this.year.toString());
+  }
+
+  addSubjectFilter() {
+    this.updateSearchService.addFilter(this.subject.toString());
   }
 }

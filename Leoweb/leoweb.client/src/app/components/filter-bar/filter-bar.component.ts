@@ -24,7 +24,22 @@ export class FilterBarComponent {
   visibilityMap: Map<string, boolean> = new Map<string, boolean>();
   subjectMap: Map<string, string[]> | undefined = new Map<string, string[]>();
 
-  constructor(private http: HttpClient, private apiService: ApiService, private dataService: UpdateSearchService) {}
+  constructor(
+    private http: HttpClient,
+    private apiService: ApiService,
+    private updateSearchService: UpdateSearchService
+  ) { }
+
+  toggleValue(subject: string, isChecked: boolean) {
+    if (isChecked && !this.activeFilters.includes(subject)) {
+      this.activeFilters.push(subject);
+    } else {
+      this.activeFilters = this.activeFilters.filter(s => s !== subject);
+    }
+
+    this.updateSearchService.updateData(this.activeFilters);
+  }
+
 
   async ngOnInit() {
     this.subjectMap = await getAllBranchesWithSubjects(this.http, this.apiService);
@@ -35,16 +50,6 @@ export class FilterBarComponent {
 
   toggleVisibility(key: string) {
     this.visibilityMap.set(key, !this.visibilityMap.get(key));
-  }
-
-  toggleValue(subject: string, isChecked: boolean) {
-    if (isChecked && !this.activeFilters.includes(subject)) {
-      this.activeFilters.push(subject);
-    } else {
-      this.activeFilters = this.activeFilters.filter(s => s !== subject);
-    }
-
-    this.dataService.updateData(this.activeFilters);
   }
 
   getSubjectsFromBranch(branch: string) {

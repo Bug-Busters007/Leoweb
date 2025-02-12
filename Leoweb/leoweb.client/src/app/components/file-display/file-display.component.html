@@ -4,8 +4,8 @@
   </div>
   <div class="chips">
     <mat-chip-set aria-label="Chihuahua traits">
-      <mat-chip>{{year}}.Klasse</mat-chip>
-      <mat-chip>{{subject}}</mat-chip>
+      <mat-chip (click)="addYearFilter()">{{year}}.Klasse</mat-chip>
+      <mat-chip (click)="addSubjectFilter()">{{subject}}</mat-chip>
       <mat-chip class="userName" (click)="goToUserInfo()">{{ student }}</mat-chip>
     </mat-chip-set>
   </div>
