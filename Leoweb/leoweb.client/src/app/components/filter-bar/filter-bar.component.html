@@ -12,8 +12,8 @@
       </div>
     </div>
   </div>
-  <div id="filter-display">
-    <div id="filter-heading">aktive Filter: </div>
+  <div *ngIf="activeFilters.length > 0" id="filter-display">
+    <div id="filter-heading">aktive Filter:</div>
     <div id="aktive-filter">
       <div *ngFor="let filter of activeFilters" class="option">
         <mat-slide-toggle

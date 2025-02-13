@@ -29,4 +29,16 @@ mat-slide-toggle {
 
 #filter-display {
   min-height: 15rem;
+  border-top: 2px solid black;
+}
+
+#filter-heading {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-family: Consolas, sans-serif;
+  font-size: 130%;
+}
+
+#aktive-filter {
+  margin-top: 1rem;
 }

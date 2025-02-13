@@ -3,7 +3,7 @@
     <app-filter-bar></app-filter-bar>
   </aside>
   <main class="main-content">
-    <button mat-stroked-button (click)="makeVisible()" id="upload-button">Upload File</button>
+    <button mat-raised-button (click)="makeVisible()" id="upload-button">Upload File</button>
     <div *ngIf="isUploadDivVisible" class="uploadDiv">
       <app-file-upload></app-file-upload>
     </div>
