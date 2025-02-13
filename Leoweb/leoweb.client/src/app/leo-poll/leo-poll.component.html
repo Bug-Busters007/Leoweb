@@ -1,3 +1,9 @@
+<div *ngIf="isCreaterVisible" id="createPollDiv">
+  <app-poll-creater></app-poll-creater>
+</div>
+
+<button mat-raised-button (click)="showPollCreater()">Create Poll</button>
+
 <div id="pollsDiv">
   <app-poll-display *ngFor="let poll of pollArr" [poll]="poll"></app-poll-display>
 </div>

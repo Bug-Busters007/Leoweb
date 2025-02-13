@@ -3,29 +3,35 @@ import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../services/api.service";
 import {Spinner} from "../components/spinner/spinner";
 import {PollDisplayComponent} from "../components/poll-display/poll-display.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import { PollOverview } from '../../models/pollOverviewModel';
+import {MatButton} from "@angular/material/button";
+import {Router} from "@angular/router";
+import {PollCreaterComponent} from "../components/poll-creater/poll-creater.component";
 
 @Component({
   selector: 'app-leo-poll',
   templateUrl: './leo-poll.component.html',
   imports: [
     PollDisplayComponent,
-    NgForOf
+    NgForOf,
+    MatButton,
+    NgIf,
+    PollCreaterComponent
   ],
   styleUrl: './leo-poll.component.css'
 })
 export class LeoPollComponent implements OnInit {
   pollArr: Array<PollOverview> = [];
+  isCreaterVisible = false;
 
-  constructor(private http: HttpClient, private apiService: ApiService) {}
+  constructor(private http: HttpClient, private apiService: ApiService, private router: Router) {}
 
   async ngOnInit() {
     const pdiv = document.getElementById('pollsDiv');
     const spinner = new Spinner(pdiv);
     spinner.showSpinner();
     await this.getAllPolls();
-    console.log(this.pollArr);
     spinner.removeSpinner();
   }
 
@@ -42,5 +48,9 @@ export class LeoPollComponent implements OnInit {
       console.error('Error getting all polls', error);
       throw new Error('Failed to get all polls');
     }
+  }
+
+  showPollCreater(): void{
+    this.isCreaterVisible = !this.isCreaterVisible;
   }
 }

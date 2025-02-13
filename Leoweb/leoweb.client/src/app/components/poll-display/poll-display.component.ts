@@ -1,12 +1,13 @@
 import { CommonModule, NgForOf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import {Component, Input, NgModule} from '@angular/core';
+import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { ApiService } from '../../../services/api.service';
 import { PollOverview } from '../../../models/pollOverviewModel';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-poll-display',
@@ -21,10 +22,11 @@ import { MatRadioModule } from '@angular/material/radio';
     MatCardModule,
     MatCheckboxModule,
     FormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatButton
   ],
 })
-export class PollDisplayComponent {
+export class PollDisplayComponent implements OnInit {
   @Input() poll!: PollOverview;
   headline: string = "";
   description: string = "";
@@ -43,13 +45,14 @@ export class PollDisplayComponent {
   }
 
   async vote(): Promise<void> {
-    console.log(this.selectedChoice);
+    const selection = this.selectedChoice;
+    this.selectedChoice = null;
     const url = this.apiService.getApiUrl('Poll/vote');
     try {
       const response = await this.http
         .post(url, {
           pollId: this.poll.id,
-          choice: this.selectedChoice
+          choice: selection
         })
         .toPromise();
     } catch (error) {
