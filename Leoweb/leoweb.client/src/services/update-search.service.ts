@@ -13,12 +13,13 @@ export class UpdateSearchService {
 
   updateData(data: string[]) {
     this.data = [...data];
-    console.log(this.data);
     this.dataSource.next(this.data);
   }
 
   addOneFilter(filter: string): void {
-    this.data.push(filter);
+    if (this.data.indexOf(filter) === -1) {
+      this.data.push(filter);
+    }
   }
 
   getFilters(): string[] {
