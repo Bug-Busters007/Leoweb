@@ -16,8 +16,8 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Subject:</mat-label>
-        <mat-select id="subject" multiple (selectionChange)="setSubject($event)">
+        <mat-label>Subject</mat-label>
+        <mat-select id="subject" (selectionChange)="setSubject($event)">
           <mat-option *ngFor="let option of lessonsSelectOptions" [value]="option">{{ option }}</mat-option>
         </mat-select>
       </mat-form-field>

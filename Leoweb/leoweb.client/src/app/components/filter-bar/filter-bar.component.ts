@@ -6,6 +6,8 @@ import { ApiService } from "../../../services/api.service";
 import { UpdateSearchService } from "../../../services/update-search.service";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatButtonModule} from '@angular/material/button';
+import {RefreshService} from "../../../services/refresh.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-filter-bar',
@@ -20,15 +22,16 @@ import {MatButtonModule} from '@angular/material/button';
   ]
 })
 export class FilterBarComponent {
-  instance = new UpdateSearchService;
-  activeFilters: string[] = this.instance.getFilters(); // da is des nu leer also geht a mid []
+  activeFilters: string[] = this.updateSearchService.getFilters();
   visibilityMap: Map<string, boolean> = new Map<string, boolean>();
   subjectMap: Map<string, string[]> | undefined = new Map<string, string[]>();
+  private refreshSubscription: Subscription| null = null;
 
   constructor(
     private http: HttpClient,
     private apiService: ApiService,
-    private updateSearchService: UpdateSearchService
+    private updateSearchService: UpdateSearchService,
+    private refreshService: RefreshService
   ) { }
 
   toggleValue(subject: string, isChecked: boolean) {
@@ -37,7 +40,7 @@ export class FilterBarComponent {
     } else {
       this.activeFilters = this.activeFilters.filter(s => s !== subject);
     }
-    this.instance.setFilters(this.activeFilters);
+    this.updateSearchService.setFilters(this.activeFilters);
     this.updateSearchService.updateData(this.activeFilters);
   }
 
@@ -47,6 +50,9 @@ export class FilterBarComponent {
     this.visibilityMap = new Map<string, boolean>(
       Array.from(this.subjectMap!.keys()).map(key => [key, false])
     );
+    this.refreshSubscription = this.refreshService.refresh$.subscribe(async () => {
+      this.activeFilters = this.updateSearchService.getFilters();
+    });
   }
 
   toggleVisibility(key: string) {

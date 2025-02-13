@@ -17,9 +17,8 @@ export class UpdateSearchService {
     this.dataSource.next(this.data);
   }
 
-  addFilter(filter: string): void {
-    this.updateData([...this.data, filter]);
-    FilterBarComponent.addFilterInDoc(filter);
+  addOneFilter(filter: string): void {
+    this.data.push(filter);
   }
 
   getFilters(): string[] {
