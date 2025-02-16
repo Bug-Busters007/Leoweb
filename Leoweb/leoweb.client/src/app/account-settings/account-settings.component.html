@@ -1,14 +1,41 @@
 <div class="container">
-  <div class="accountSettings-container">
-    <h2>{{username}}</h2>
-    <button mat-button (click)="openEmailModal()">Change Email</button>
-    <button mat-button (click)="openPasswordModal()">Change Password</button>
-    <button (click)="logout()">Logout</button>
-    <button (click)="getUserData()">Get User Data</button>
-  </div>
-  <h2>Your documents</h2>
-  <div id="filesListed" >
-    <app-file-display *ngFor="let file of fileArray" [name]="file.name" [id]="file.id" [year]="file.year" [subject]="file.subject"></app-file-display>
-  </div>
-</div>
+  <mat-card class="accountSettings-container">
+    <mat-card-header>
+      <div mat-card-avatar class="header-avatar"></div>
+      <mat-card-title>{{username}}</mat-card-title>
+      <mat-card-subtitle>Student</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="openEmailModal()">
+          <mat-icon>email</mat-icon>
+          Change Email
+        </button>
+        <button mat-raised-button color="primary" (click)="openPasswordModal()">
+          <mat-icon>lock</mat-icon>
+          Change Password
+        </button>
+        <button mat-raised-button color="warn" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
+  <h2 class="documents-title">Your documents</h2>
+  <mat-accordion id="filesListed">
+    <mat-expansion-panel *ngFor="let file of fileArray">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{file.name}}
+          <mat-icon class="file-icon">description</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{file.subject}} - {{file.year}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-file-display [name]="file.name" [id]="file.id" [year]="file.year" [subject]="file.subject"></app-file-display>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
