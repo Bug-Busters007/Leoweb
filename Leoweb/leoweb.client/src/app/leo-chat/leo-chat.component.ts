@@ -14,7 +14,7 @@ import { NgForOf } from '@angular/common';
     ]
 })
 export class LeoChatComponent implements OnInit {
-    user = 'User' + Math.floor(Math.random() * 1000);
+    user = localStorage.getItem('username');
     message = '';
     messages: { user: string; message: string }[] = [];
 
@@ -27,7 +27,7 @@ export class LeoChatComponent implements OnInit {
     }
 
     sendMessage() {
-        if (this.message.trim()) {
+        if (this.message.trim() && this.user) {
             this.signalRService.sendMessage(this.user, this.message);
             this.message = '';
         }

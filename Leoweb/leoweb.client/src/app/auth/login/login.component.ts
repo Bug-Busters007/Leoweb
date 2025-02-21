@@ -24,7 +24,7 @@ export class LoginComponent {
         localStorage.setItem('jwtToken', response.token);
         localStorage.setItem('username', response.username);
         localStorage.setItem('expiresAt', response.expiresAt);
-        this.router.navigate(['/main']);
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         console.error('Login fehlgeschlagen:', err);
