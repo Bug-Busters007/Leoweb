@@ -68,22 +68,4 @@ export class FilterBarComponent {
       k ? k[0].toUpperCase() + k.slice(1) : ''
     );
   }
-
-  static addFilterInDoc(filter: string): void {
-    const list = document.getElementById("aktive-filter");
-    if (list) {
-      list.innerHTML += `
-        <div class="option">
-          <mat-slide-toggle
-            id="${filter}"
-            checked
-            onchange="toggleValue('${filter}', this.checked)">
-            ${filter}
-          </mat-slide-toggle>
-        </div>`;
-    }
-    else {
-      console.error("No active filter found.");
-    }
-  }
 }

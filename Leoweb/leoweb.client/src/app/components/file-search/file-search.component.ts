@@ -82,7 +82,6 @@ export class FileSearchComponent {
   }
 
   public async getFileNames(): Promise<{id: number, name: string, year: number,student: string, subject: string}[]> {
-
     const list = document.getElementById('filesListed');
     const spinner = new Spinner(list);
     spinner.showSpinner();
@@ -103,9 +102,5 @@ export class FileSearchComponent {
       throw new Error('Failed to fetch file names');
     }
     return[];
-  }
-
-  getFileArray() {
-    return this.fileArray;
   }
 }
