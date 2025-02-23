@@ -4,13 +4,15 @@ import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
 import {Component, OnInit} from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Importiere FormsModule
+import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import {Q} from "@angular/cdk/keycodes";
+import {Router} from "@angular/router";
+import {SharedService} from "../../services/share-name.service";
 
 
 @Component({
@@ -41,7 +43,7 @@ export class LeoChatComponent implements OnInit {
     message = '';
     messages: { user: string; message: string }[] = [];
 
-    constructor(private signalRService: SignalRService) {}
+    constructor(private signalRService: SignalRService, private router: Router, private sharedService: SharedService) {}
 
    async ngOnInit() {
        this.signalRService.getInitialMessages().then((messages) => {
@@ -68,4 +70,14 @@ export class LeoChatComponent implements OnInit {
             this.message = '';
         }
     }
+
+  navigateUser(user: string) {
+    if (user === this.user) {
+      this.router.navigate(['/accountSettings']);
+    }
+    else{
+      this.sharedService.setInputValue(user)
+      this.router.navigate(['/UserOverview']);
+    }
+  }
 }
