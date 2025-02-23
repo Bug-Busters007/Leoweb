@@ -1,8 +1,18 @@
-<div>
-    <h3>Chat</h3>
-    <div *ngFor="let msg of messages">
-        <strong>{{ msg.user }}:</strong> {{ msg.message }}
+<div class="chat-container">
+  <div class="chat-messages">
+    <div *ngFor="let msg of messages" [ngClass]="{'mine': msg.user === user, 'theirs': msg.user !== user}">
+      <mat-card>
+        <mat-card-content>
+          <strong>{{ msg.user }}:</strong> {{ msg.message }}
+        </mat-card-content>
+      </mat-card>
     </div>
-    <input [(ngModel)]="message" placeholder="Nachricht eingeben..." />
-    <button (click)="sendMessage()">Senden</button>
+  </div>
+
+  <div class="chat-input">
+    <mat-form-field class="input-field" appearance="fill">
+      <input matInput [(ngModel)]="message" placeholder="Nachricht eingeben..." (keyup.enter)="sendMessage()" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="sendMessage()">Senden</button>
+  </div>
 </div>
