@@ -7,6 +7,7 @@ import {ModuleComponent} from "./components/module/module.component";
 import {HeaderComponent} from "./components/header/header.component";
 import {FileUploadComponent} from "./components/file-upload/file-upload.component";
 import {authGuard} from "./auth.guard";
+import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 
 export const routes: Routes = [
   {
@@ -70,5 +71,5 @@ export const routes: Routes = [
 ];
 
 bootstrapApplication(AppComponent, {
-  providers: [provideRouter(routes)]
+  providers: [provideRouter(routes), provideAnimationsAsync()]
 });

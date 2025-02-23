@@ -19,7 +19,7 @@ namespace Leoweb.Server.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("messages")]
         public async Task<ActionResult<IEnumerable<ChatMessage>>> GetMessages()
         {
             var messages = await _context.ChatMessages
