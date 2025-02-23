@@ -1,5 +1,5 @@
 <div class="chat-container">
-  <div class="chat-messages">
+  <div class="chat-messages" #chatMessages>
     <div *ngFor="let msg of messages" [ngClass]="{'mine': msg.user === user, 'theirs': msg.user !== user}">
       <mat-card>
         <mat-card-content>
