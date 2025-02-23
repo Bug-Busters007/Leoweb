@@ -12,7 +12,7 @@ import {routes} from "../../app.routes";
 export class HeaderComponent {
   constructor(private router: Router) {}
   navigateToLogin(): void {
-    this.router.navigate(['/login']); // Navigiert zur Login-Seite
+    this.router.navigate(['/login']);
   }
 
   navigateToAccountSettings(): void{

@@ -3,7 +3,8 @@
     <div *ngFor="let msg of messages" [ngClass]="{'mine': msg.user === user, 'theirs': msg.user !== user}">
       <mat-card>
         <mat-card-content>
-          <strong>{{ msg.user }}:</strong> {{ msg.message }}
+          <div class="username" (click)="navigateUser(msg.user)" style="cursor: pointer">{{ msg.user }}</div>
+          <div class="message">{{ msg.message }}</div>
         </mat-card-content>
       </mat-card>
     </div>

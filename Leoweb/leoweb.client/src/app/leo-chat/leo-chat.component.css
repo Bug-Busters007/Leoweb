@@ -32,6 +32,16 @@ mat-card {
   padding: 10px;
 }
 
+.username {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+.message {
+  font-size: 1em;
+}
+
 .chat-input {
   position: fixed;
   bottom: 20px;

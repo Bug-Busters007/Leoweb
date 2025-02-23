@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import {SharedService} from "../../services/share-name.service";
 
 
 @Component({
@@ -40,7 +42,7 @@ export class LeoChatComponent {
     message = '';
     messages: { user: string; message: string }[] = [];
 
-    constructor(private signalRService: SignalRService) {}
+    constructor(private signalRService: SignalRService, private router: Router, private sharedService: SharedService) {}
 
     ngOnInit(): void {
         this.signalRService.getMessages().subscribe((msg) => {
@@ -54,4 +56,14 @@ export class LeoChatComponent {
             this.message = '';
         }
     }
+
+  navigateUser(user: string) {
+    if (user === this.user) {
+      this.router.navigate(['/accountSettings']);
+    }
+    else{
+      this.sharedService.setInputValue(user)
+      this.router.navigate(['/UserOverview']);
+    }
+  }
 }
