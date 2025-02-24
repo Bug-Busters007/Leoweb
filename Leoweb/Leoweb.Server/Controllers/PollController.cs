@@ -27,7 +27,7 @@ namespace Leoweb.Server.Controllers
 				Description = poll.Description,
 				Created = DateTime.Now.ToUniversalTime(),
 				Close = poll.Close,
-				Release = poll.Release
+				Release = poll.Release ?? DateTime.Now
 			};
 
 			foreach (string s in poll.Choices)
@@ -57,6 +57,47 @@ namespace Leoweb.Server.Controllers
 			await _dbContext.AddAsync(newPoll);
 			_dbContext.SaveChanges();
 			return Ok(newPoll);
+		}
+
+		[HttpPatch("{pollId}/update")]
+		public async Task<IActionResult> PatchPoll([FromRoute] int pollId, [FromBody] PollJSON poll)
+		{
+			var existingPoll = await _dbContext.Poll.FindAsync(pollId);
+			if (existingPoll == null)
+			{
+				return BadRequest("Poll not found");
+			}
+
+			existingPoll.Headline = poll.Headline ?? existingPoll.Headline;
+			existingPoll.Description = poll.Description ?? existingPoll.Description;
+			existingPoll.Release = poll.Release ?? existingPoll.Release;
+			existingPoll.Close = poll.Close ?? existingPoll.Close;
+
+			var existingYears = _dbContext.PollYear.Select(y => y.Year).ToHashSet();
+			var newYears = poll.Year.Where(y => !existingYears.Contains((Year)y))
+						.Select(y => new PollYear { Year = (Year)y })
+						.ToList();
+			if (newYears.Any())
+			{
+				_dbContext.PollYear.AddRange(newYears);
+				_dbContext.SaveChanges();
+			}
+
+			var existingBranches = _dbContext.PollBranch.Select(y => y.Branch).ToHashSet();
+			var newBranches = poll.Branch.Where(y => !existingBranches.Contains(y))
+						.Select(y => new PollBranch { Branch = y })
+						.ToList();
+			if (newBranches.Any())
+			{
+				_dbContext.PollBranch.AddRange(newBranches);
+				_dbContext.SaveChanges();
+			}
+
+
+			_dbContext.Poll.Update(existingPoll);
+			await _dbContext.SaveChangesAsync();
+
+			return Ok(existingPoll);
 		}
 
 		[HttpPost("vote")]
