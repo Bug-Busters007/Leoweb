@@ -37,7 +37,6 @@ export class PollDisplayComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.poll) {
-      console.log(this.poll);
       this.headline = this.poll.headline;
       this.description = this.poll.description;
       this.choices = Array.from(Object.keys(this.poll.votes));

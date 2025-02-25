@@ -1,23 +1,22 @@
 <mat-card appearance="outlined" class="container">
   <mat-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Create a title for your poll</ng-template>
+    <mat-step [stepControl]="titleFormGroup">
+      <form [formGroup]="titleFormGroup">
+        <ng-template matStepLabel>Create a title</ng-template>
         <mat-form-field>
           <mat-label>Title</mat-label>
-          <input matInput formControlName="firstCtrl" required>
+          <input matInput formControlName="title" required>
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Write a description for you poll">
-      <form [formGroup]="secondFormGroup">
+    <mat-step [stepControl]="descriptionFormGroup" label="Write a description">
+      <form [formGroup]="descriptionFormGroup">
         <mat-form-field>
           <mat-label>Description</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
+          <input matInput formControlName="description" required>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -25,17 +24,54 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="thirdFormGroup" label="Add some Choices">
-      <form [formGroup]="thirdFormGroup">
-        <mat-form-field>
-          <mat-label>Choice 1</mat-label>
-          <input matInput formControlName="thirdCtrl" required>
+    <mat-step [stepControl]="dateFormGroup" label="Choose the daterange">
+      <form [formGroup]="dateFormGroup">
+        <mat-form-field class="example-form-field">
+          <mat-label>Enter a date range</mat-label>
+          <mat-date-range-input [rangePicker]="rangePicker">
+            <input matStartDate formControlName="startdate" placeholder="Start date" />
+            <input matEndDate formControlName="enddate" placeholder="End date" />
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="rangePicker"></mat-datepicker-toggle>
+          <mat-date-range-picker #rangePicker>
+            <mat-date-range-picker-actions>
+              <button mat-button matDateRangePickerCancel>Cancel</button>
+              <button mat-raised-button matDateRangePickerApply>Apply</button>
+            </mat-date-range-picker-actions>
+          </mat-date-range-picker>
         </mat-form-field>
-        <button mat-fab color="primary"><mat-icon>add</mat-icon></button>
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
-          <button mat-button >Create</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="choicesFormGroup" label="Add some Choices">
+      <form [formGroup]="choicesFormGroup">
+        <mat-form-field class="example-form-field">
+          <mat-label>Choices</mat-label>
+          <mat-chip-grid #chipGrid aria-label="Enter choices" [formControl]="formControl">
+            @for (keyword of keywords(); track keyword) {
+              <mat-chip-row (removed)="removeKeyword(keyword)">
+                {{keyword}}
+                <button matChipRemove aria-label="'remove ' + keyword">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            }
+          </mat-chip-grid>
+          <input
+            placeholder="New choice..."
+            [matChipInputFor]="chipGrid"
+            (matChipInputTokenEnd)="add($event)"
+            formControlName="choices"
+          />
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="reset(stepper)">Reset</button>
+          <button mat-button (click)="createPoll()">Create</button>
         </div>
       </form>
     </mat-step>

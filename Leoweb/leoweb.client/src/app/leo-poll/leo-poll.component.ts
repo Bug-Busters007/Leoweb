@@ -8,6 +8,7 @@ import { PollOverview } from '../../models/pollOverviewModel';
 import {MatButton} from "@angular/material/button";
 import {Router} from "@angular/router";
 import {PollCreaterComponent} from "../components/poll-creater/poll-creater.component";
+import {provideNativeDateAdapter} from "@angular/material/core";
 
 @Component({
   selector: 'app-leo-poll',
@@ -19,6 +20,7 @@ import {PollCreaterComponent} from "../components/poll-creater/poll-creater.comp
     NgIf,
     PollCreaterComponent
   ],
+  providers: provideNativeDateAdapter(),
   styleUrl: './leo-poll.component.css'
 })
 export class LeoPollComponent implements OnInit {
