@@ -13,7 +13,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Leoweb.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8ed25f84eeb2070037e76b802516f0a62e3e795e")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d6b9719db82857c6d59a8f0a9b37de86e2c6cf0f")]
+>>>>>>> 38849f7c24446fa5309f3b907bc431594866f6c0
 [assembly: System.Reflection.AssemblyProductAttribute("Leoweb.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Leoweb.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
