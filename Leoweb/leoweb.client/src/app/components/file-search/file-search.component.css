@@ -33,3 +33,12 @@ app-file-display {
 mat-form-field {
   width: 50%;
 }
+
+#filesListed {
+  width: 75%;
+}
+
+.listContainer {
+  display: flex;
+  justify-content: center;
+}
