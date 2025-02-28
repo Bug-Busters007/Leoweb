@@ -36,7 +36,6 @@ import {MatChipGrid, MatChipInput, MatChipInputEvent, MatChipRemove, MatChipRow}
     MatCard,
     MatButton,
     MatIcon,
-    MatFabButton,
     MatStep,
     ReactiveFormsModule,
     MatStepperPrevious,

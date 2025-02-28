@@ -3,7 +3,6 @@ import {HomeComponent} from "./home/home.component";
 import {bootstrapApplication} from "@angular/platform-browser";
 import {AppComponent} from "./app.component";
 import {LeoLibraryComponent} from "./leo-library/leo-library.component";
-import {ModuleComponent} from "./components/module/module.component";
 import {HeaderComponent} from "./components/header/header.component";
 import {FileUploadComponent} from "./components/file-upload/file-upload.component";
 import {authGuard} from "./auth.guard";
@@ -16,13 +15,13 @@ export const routes: Routes = [
     loadComponent: () => {
       return import('./auth/login/login.component').then(m => m.LoginComponent);
     },
-    canActivate: [authGuard]
   },
   {
     path: 'home',
     loadComponent: () =>{
       return import('./home/home.component').then(m => m.HomeComponent);
-    }
+    },
+    canActivate: [authGuard]
   },
   {
     path: 'leolibrary',
@@ -65,8 +64,7 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
-    canActivate: [authGuard]
+    loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent)
   }
 ];
 

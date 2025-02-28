@@ -1,19 +1,18 @@
-<section class="module-container container" style="margin-top: 3%">
-  <app-module
-    [title]="'LeoLibrary'"
-    [description]="'Knowledge database'"
-    [link]="'/leolibrary'">
-  </app-module>
-
-  <app-module
-    [title]="'LeoChat'"
-    [description]="'Chat with other victims'"
-    [link]="'/leochat'">
-  </app-module>
-
-  <app-module
-    [title]="'LeoPoll'"
-    [description]="'Student voting'"
-    [link]="'/leopoll'">
-  </app-module>
-</section>
+<div class="main">
+  <section class="modules-showcase">
+    <div class="module-item" *ngFor="let module of modules" [routerLink]="module.link">
+      <div class="module-content">
+        <div class="module-icon" [ngClass]="module.iconClass">
+          <mat-icon>{{module.icon}}</mat-icon>
+        </div>
+        <h2 class="module-title">{{module.title}}</h2>
+        <p class="module-description">{{module.description}}</p>
+        <div class="module-action">
+          <span>Erkunden</span>
+          <mat-icon>arrow_forward</mat-icon>
+        </div>
+      </div>
+      <div class="module-background"></div>
+    </div>
+  </section>
+</div>

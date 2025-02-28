@@ -1,23 +1,21 @@
 import { Component } from '@angular/core';
-import {Router, RouterLink, RouterModule, RouterOutlet} from "@angular/router";
-import {routes} from "../../app.routes";
+import {Router, RouterLink} from '@angular/router';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
-  templateUrl: './header.component.html',
   standalone: true,
-  styleUrl: './header.component.css'
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatSlideToggleModule, RouterLink],
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
   constructor(private router: Router) {}
-  navigateToLogin(): void {
-    this.router.navigate(['/login']);
-  }
 
-  navigateToAccountSettings(): void{
+  navigateToAccountSettings(): void {
     this.router.navigate(['/accountSettings']);
   }
-
-  protected readonly localStorage = localStorage;
 }

@@ -1,13 +1,18 @@
 <header id="header">
-  <div class="logo-container">
-    <img src="assets/pics/Logo.png" alt="logo">
-    <h1 routerLink="/home" style="cursor: pointer">Leoweb</h1>
-    <div class="switch-container">
-      <label class="switch">
-        <input type="checkbox" id="darkmode-switch">
-        <span class="slider"></span>
-      </label>
+  <mat-toolbar color="primary">
+    <div class="logo-container">
+      <img src="assets/pics/Logo.png" alt="logo" class="logo">
+      <span class="title" routerLink="/home">Leoweb</span>
     </div>
-    <a id="Account" class="animated-link" (click)="navigateToAccountSettings()"><img src="assets/pics/account_white.png" alt="AccountButton" style="width: 7%; height: auto" id="accountimage">  <span id="color" style="cursor: pointer; margin-left: 1%">Account</span></a>
-  </div>
+
+    <div class="user-settings">
+      <mat-slide-toggle color="accent" id="darkmode-switch">
+        Dark Mode
+      </mat-slide-toggle>
+
+      <button mat-icon-button (click)="navigateToAccountSettings()" aria-label="Account" class="account-button">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
 </header>
