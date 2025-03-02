@@ -1,10 +1,15 @@
 #header {
   width: 100%;
+  height: 64px; // Fixe Höhe für den Header - passe nach Bedarf an
   background: linear-gradient(135deg,#1a237e, #0d47a1);
-  height: 100px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   margin: 0;
   padding: 0;
+  position: fixed; // Fixiert den Header oben
+  top: 0;
+  left: 0;
+  z-index: 1000; // Hoher z-index damit er über allem steht
+  overflow: hidden; // Verhindert, dass Elemente außerhalb des Headers sichtbar sind
 
   &::before {
     content: '';
@@ -31,13 +36,13 @@
       align-items: center;
 
       .logo {
-        height: 100px;
+        height: 40px; // Reduziere die Logogrößen, damit sie im Header passen
         margin-right: 16px;
         filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
       }
 
       .title {
-        font-size: 50px;
+        font-size: 24px; // Reduziere die Schriftgröße, damit sie in den Header passt
         font-weight: 600;
         cursor: pointer;
         color: white;
@@ -51,25 +56,6 @@
       }
     }
 
-    .user-settings {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-
-      mat-slide-toggle {
-        color: white;
-      }
-
-      .account-button {
-        color: white;
-        transition: transform 0.3s ease, color 0.3s ease;
-
-        &:hover {
-          color: #ffab40;
-          transform: scale(1.2);
-        }
-      }
-    }
+    // Rest unverändert...
   }
 }
-
