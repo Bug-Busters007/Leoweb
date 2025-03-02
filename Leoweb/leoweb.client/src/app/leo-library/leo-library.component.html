@@ -1,8 +1,8 @@
 <div class="container">
-  <aside class="filter-section">
-    <app-filter-bar></app-filter-bar>
-  </aside>
   <main class="main-content">
+    <aside class="filter-section">
+      <app-filter-bar></app-filter-bar>
+    </aside>
     <button mat-raised-button (click)="makeVisible()" id="upload-button">Upload File</button>
     <div *ngIf="isUploadDivVisible" class="uploadDiv">
       <app-file-upload></app-file-upload>

@@ -4,7 +4,7 @@ import {HeaderComponent} from "../components/header/header.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatAnchor, MatButtonModule} from "@angular/material/button";
 import {NgClass, NgForOf} from "@angular/common";
-import {MatIconModule} from "@angular/material/icon";
+import {MatIcon, MatIconModule} from "@angular/material/icon";
 
 
 interface Module {
@@ -25,6 +25,7 @@ interface Module {
     MatButtonModule,
     NgForOf,
     MatIconModule,
+    MatIcon,
     NgClass
   ]
 })
