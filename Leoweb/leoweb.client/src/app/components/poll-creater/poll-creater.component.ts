@@ -23,6 +23,7 @@ import {
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {MatChipGrid, MatChipInput, MatChipInputEvent, MatChipRemove, MatChipRow} from "@angular/material/chips";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-poll-creater',
@@ -62,11 +63,11 @@ import {MatChipGrid, MatChipInput, MatChipInputEvent, MatChipRemove, MatChipRow}
   styleUrl: './poll-creater.component.css'
 })
 export class PollCreaterComponent{
-  keywords:WritableSignal<string[]> = signal([]);
+  choices: string[] = [];
   readonly formControl = new FormControl(['angular']);
 
   announcer = inject(LiveAnnouncer);
-  constructor(private apiService: ApiService, private _formBuilder: FormBuilder) {}
+  constructor(private apiService: ApiService, private _formBuilder: FormBuilder, private http: HttpClient) {}
 
   titleFormGroup = this._formBuilder.group({
     title: ['', Validators.required],
@@ -83,35 +84,52 @@ export class PollCreaterComponent{
   });
   isLinear = false;
 
-  removeKeyword(keyword: string) {
-    this.keywords.update(keywords => {
-      const index = keywords.indexOf(keyword);
-      if (index < 0) {
-        return keywords;
-      }
-
-      keywords.splice(index, 1);
-      this.announcer.announce(`removed ${keyword}`);
-      return [...keywords];
-    });
-  }
-
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
     if (value) {
-      this.keywords.update(keywords => [...keywords, value]);
+      this.choices.push(value);
     }
     event.chipInput!.clear();
   }
 
+  removeKeyword(choice: string): void {
+    const index = this.choices.indexOf(choice);
+    if (index >= 0) {
+      this.choices.splice(index, 1);
+    }
+  }
+
   createPoll(): void{
     const url = this.apiService.getApiUrl('Poll');
+    if(this.dateFormGroup.value.startdate && this.dateFormGroup.value.enddate) {
+      const pollData = {
+        headline: this.titleFormGroup.value.title,
+        description: this.descriptionFormGroup.value.description,
+        release: new Date(this.dateFormGroup.value.startdate).toISOString(),
+        close: new Date(this.dateFormGroup.value.enddate).toISOString(),
+        choices: this.choices,
+        year: [
+          0
+        ],
+        branch: [
+          "ok"
+        ]
+      }
 
+      this.http.post(url, pollData).subscribe({
+        next: (response) => {
+          console.log('Creation successful!', response);
+          alert("Creation successful!");
+        },
+        error: (err) => {
+          console.error("Error creating your poll", err);
+        },
+      });
+    }
   }
 
   reset(stepper: MatStepper):void{
     stepper.reset();
-    this.keywords = signal([]);
+    this.choices = [];
   }
-
 }
