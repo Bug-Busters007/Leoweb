@@ -39,6 +39,8 @@ namespace Leoweb.Server.Services
 				Id = poll.Id,
 				Headline = poll.Headline,
 				Description = poll.Description,
+				Release = poll.Release.ToLongDateString(),
+				Close = poll.Close.HasValue ? poll.Close.Value.ToLongDateString() : string.Empty,
 				Votes = dict,
 				Year = _dbContext.PollYear.Where(y => y.PollId == pollId).Select(y => (int)y.Year).ToArray(),
 				Branch = _dbContext.PollBranch.Where(b => b.PollId == pollId).Select(b => b.Branch).ToArray(),
