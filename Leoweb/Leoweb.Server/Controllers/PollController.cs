@@ -28,7 +28,8 @@ namespace Leoweb.Server.Controllers
 				Description = poll.Description,
 				Created = DateTime.Now.ToUniversalTime(),
 				Close = poll.Close,
-				Release = poll.Release ?? DateTime.Now
+				Release = poll.Release ?? DateTime.Now,
+				StudentId = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value
 			};
 
 			foreach (string s in poll.Choices)
@@ -160,6 +161,17 @@ namespace Leoweb.Server.Controllers
 			var info = await new PollService(_dbContext).GetPollOverview(pollId, poll);
 
 			return Ok(info);
+		}
+
+		[HttpGet("user/pollNames")]
+		public async Task<IActionResult> GetPollNames()
+		{
+			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
+			var polls = await _dbContext.Poll
+				.Where(v => v.StudentId == studentID)
+				.Select(p => new { p.Id, p.Headline })
+				.ToDictionaryAsync(x => x.Id, x => x.Headline);
+			return Ok(polls);
 		}
 	}
 }
