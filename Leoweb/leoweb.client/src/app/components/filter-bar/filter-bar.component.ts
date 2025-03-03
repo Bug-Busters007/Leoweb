@@ -37,7 +37,6 @@ export class FilterBarComponent {
   toggleValue(subject: string, isChecked: boolean) {
     if (isChecked && !this.activeFilters.includes(subject)) {
       this.activeFilters.push(subject);
-      console.log('added filter');
     } else {
       this.activeFilters = this.activeFilters.filter(s => s !== subject);
     }
