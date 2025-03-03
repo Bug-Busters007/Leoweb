@@ -12,16 +12,9 @@ export class PollService {
   constructor(private apiService: ApiService, private http: HttpClient) { }
 
   async getPollNames(): Promise<PollName[]> {
-    let resp;
-    const url = this.apiService.getApiUrl('Poll/user/pollNames');
-    await this.http.get<PollName[]>(url).subscribe({
-      next: (response) => {
-        resp = response;
-      },
-      error: (err) => {
-        console.error("Error getting poll names", err);
-      },
-    });
-    return resp ?? [];
+    const url = this.apiService.getApiUrl(`Poll/user/pollNames`);
+    const value: PollName[] = await firstValueFrom<PollName[]>(this.http.get<PollName[]>(url));
+    console.log(value);
+    return value;
   }
 }

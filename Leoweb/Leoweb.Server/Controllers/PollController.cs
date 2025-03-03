@@ -167,10 +167,11 @@ namespace Leoweb.Server.Controllers
 		public async Task<IActionResult> GetPollNames()
 		{
 			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
+			Console.WriteLine(studentID);
 			var polls = await _dbContext.Poll
 				.Where(v => v.StudentId == studentID)
-				.Select(p => new { p.Id, p.Headline })
-				.ToDictionaryAsync(x => x.Id, x => x.Headline);
+				.Select(p => new { p.Id, name = p.Headline })
+				.ToArrayAsync();
 			return Ok(polls);
 		}
 	}

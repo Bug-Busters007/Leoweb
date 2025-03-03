@@ -9,7 +9,6 @@ import {MatButton} from "@angular/material/button";
 import {Router} from "@angular/router";
 import {PollCreaterComponent} from "../components/poll-creater/poll-creater.component";
 import {provideNativeDateAdapter} from "@angular/material/core";
-import { PollEditorComponent } from '../components/poll-editor/poll-editor.component';
 
 @Component({
   selector: 'app-leo-poll',
@@ -20,7 +19,6 @@ import { PollEditorComponent } from '../components/poll-editor/poll-editor.compo
     MatButton,
     NgIf,
     PollCreaterComponent,
-    PollEditorComponent
   ],
   providers: provideNativeDateAdapter(),
   styleUrl: './leo-poll.component.css'
@@ -28,7 +26,6 @@ import { PollEditorComponent } from '../components/poll-editor/poll-editor.compo
 export class LeoPollComponent implements OnInit {
   pollArr: Array<PollOverview> = [];
   isCreaterVisible = false;
-  isEditorVisible = false;
 
   constructor(private http: HttpClient, private apiService: ApiService, private router: Router) {}
 
@@ -57,9 +54,5 @@ export class LeoPollComponent implements OnInit {
 
   showPollCreater(): void{
     this.isCreaterVisible = !this.isCreaterVisible;
-  }
-
-  showPollEditor(): void {
-    this.isEditorVisible = !this.isEditorVisible;
   }
 }
