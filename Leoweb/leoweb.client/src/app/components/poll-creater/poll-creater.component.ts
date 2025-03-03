@@ -30,6 +30,7 @@ import { PollName } from '../../../models/pollNameModel';
 import { PollService } from '../../../services/poll.service';
 import { PollOverview } from '../../../models/pollOverviewModel';
 import { CommonModule } from '@angular/common';
+import { first, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-poll-creater',
@@ -91,7 +92,7 @@ export class PollCreaterComponent implements OnInit {
   }
 
   pollSelectorGroup = this._formBuilder.group({
-    title: ['', Validators.required], 
+    title: [this.pollNames, Validators.required], 
   });
   titleFormGroup = this._formBuilder.group({
     title: ['', Validators.required],
@@ -104,11 +105,11 @@ export class PollCreaterComponent implements OnInit {
     enddate: ['', Validators.required],
   })
   choicesFormGroup = this._formBuilder.group({
-    choices: ['', Validators.required],
+    choices: [this.choices, Validators.required],
   });
   branchFormGroup = this._formBuilder.group({
-    yearsCtrl: [0, Validators.required],
-    branchesCtrl: ['', Validators.required],
+    yearsCtrl: [this.years, Validators.required],
+    branchesCtrl: [this.branches, Validators.required],
   })
   isLinear = false;
 
@@ -158,17 +159,18 @@ export class PollCreaterComponent implements OnInit {
     this.choices = [];
   }
 
-  loadPoll(id: number): void {
+  async loadPoll(id: number): Promise<void> {
     console.log("Loading poll");
     const url = this.apiService.getApiUrl(`Poll/${id}/overview`);
-    this.http.get<PollOverview>(url).subscribe({
-      next: (response) => {
-        this.poll = response;
-      },
-      error: (err) => {
-        console.error("Error loading poll", err);
-      },
-    });
+    this.poll = await firstValueFrom(this.http.get<PollOverview>(url));
+
+    console.log(this.poll);
+
+    this.titleFormGroup.setValue({ title: this.poll?.headline ?? null });
+    this.descriptionFormGroup.setValue({ description: this.poll?.description ?? null });
+    this.dateFormGroup.setValue({ startdate: this.poll?.release ?? null, enddate: this.poll?.close ?? null });
+    //this.choicesFormGroup.setValue({ choices: Array.from(this.poll?.votes.keys()) ?? [] });
+    this.branchFormGroup.setValue({ branchesCtrl: this.poll?.branch ?? [], yearsCtrl: this.poll?.year ?? [] });
   }
 }
 
