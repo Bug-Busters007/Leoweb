@@ -6,27 +6,28 @@ import {FilterBarComponent} from "../app/components/filter-bar/filter-bar.compon
   providedIn: 'root'
 })
 export class UpdateSearchService {
+
+  //the data array holds all active filters
   private dataSource = new BehaviorSubject<string[]>([]);
-  private data: string[] = [];
+  private filters: string[] = [];
 
   currentData = this.dataSource.asObservable();
 
-  updateData(data: string[]) {
-    this.data = [...data];
-    this.dataSource.next(this.data);
+  updateData() {
+    this.dataSource.next(this.filters);
   }
 
   addOneFilter(filter: string): void {
-    if (this.data.indexOf(filter) === -1) {
-      this.data.push(filter);
+    if (this.filters.indexOf(filter) === -1) {
+      this.filters.push(filter);
     }
   }
 
   getFilters(): string[] {
-    return this.data;
+    return this.filters;
   }
 
   setFilters(filters: string[]) {
-    this.data = filters;
+    this.filters = filters;
   }
 }

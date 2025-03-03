@@ -26,7 +26,7 @@ import {MatInput} from "@angular/material/input";
 export class FileSearchComponent {
   fileArray: { id: number; name: string; year: number,student: string, subject: string }[] = [];
   allFiles: { id: number; name: string; year: number,student: string, subject: string }[] = [];
-  filterSubjects:string[]= [];
+  filters: string[]= [];
   private refreshSubscription: Subscription|null = null;
   constructor(private http: HttpClient, private apiService: ApiService, private refreshService: RefreshService, private updateSearchService: UpdateSearchService, private shareService: SharedService) {
   }
@@ -36,12 +36,11 @@ export class FileSearchComponent {
     this.shareService.setFileArray(this.fileArray);
 
     this.refreshSubscription = this.refreshService.refresh$.subscribe(async () => {
-      this.allFiles = await this.getFileNames();
-      this.fileArray = this.allFiles;
+      this.updateSearchService.updateData();
     });
     this.updateSearchService.currentData.subscribe((data) =>{
-      this.filterSubjects = data;
-      this.fileArray = this.filterFilesSubject();
+      this.filters = data;
+      this.fileArray = this.filterFilesSubjectAndYear();
     })
   }
 
@@ -51,12 +50,12 @@ export class FileSearchComponent {
     }
   }
 
-    filterFilesSubject(){
-      if (this.filterSubjects.length !== 0){
+    filterFilesSubjectAndYear(){
+      if (this.filters.length !== 0){
         const filterFiles:{ id: number; name: string; year: number,student: string, subject: string }[] = [];
-        for (const subject of this.filterSubjects) {
+        for (const filter of this.filters) {
           for (const file of this.allFiles) {
-            if (file.subject === subject && !filterFiles.includes(file)) {
+            if ((file.subject === filter || file.year === Number(filter.charAt(0))) && !filterFiles.includes(file)) {
               filterFiles.push(file);
             }
           }

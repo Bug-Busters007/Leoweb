@@ -43,7 +43,7 @@ export class FileDisplayComponent {
   }
 
   addYearFilter() {
-    this.updateSearchService.addOneFilter(this.year.toString());
+    this.updateSearchService.addOneFilter(this.year.toString() + '.Klasse');
     this.refreshService.triggerRefresh();
   }
 
