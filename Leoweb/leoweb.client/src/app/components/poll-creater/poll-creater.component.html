@@ -47,7 +47,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="choicesFormGroup" label="Add some Choices">
+    <mat-step [stepControl]="choicesFormGroup" label="Add Choices">
       <form [formGroup]="choicesFormGroup">
         <mat-form-field class="example-form-field">
           <mat-label>Choices</mat-label>
@@ -74,7 +74,7 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="branchFormGroup" label="abcdefg">
+    <mat-step [stepControl]="branchFormGroup" label="Mir fällt nix gscheids ein">
       <form [formGroup]="branchFormGroup">
         <mat-form-field>
           <mat-label>Year</mat-label>
@@ -95,7 +95,7 @@
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button (click)="reset(stepper)">Reset</button>
-          <button mat-button (click)="createPoll()">Create</button>
+          <button mat-button (click)="createPoll(); reset(stepper)">Create</button>
         </div>
       </form>
     </mat-step>

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
-=======
-import {Component, inject} from '@angular/core';
->>>>>>> 2d2cca7bab4607c4d18090cd33f353f035cea47a
 import {MatInput} from "@angular/material/input";
 import {MatCard} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
@@ -30,6 +26,7 @@ import {MatChipGrid, MatChipInput, MatChipInputEvent, MatChipRemove, MatChipRow}
 import {HttpClient} from "@angular/common/http";
 import {MatSelect} from "@angular/material/select";
 import {getAllBranches} from "../../leo-library/leo-library-helper";
+import {RefreshService} from "../../../services/refresh.service";
 
 @Component({
   selector: 'app-poll-creater',
@@ -77,7 +74,7 @@ export class PollCreaterComponent implements OnInit {
   branches: string[] = [];
 
   announcer = inject(LiveAnnouncer);
-  constructor(private apiService: ApiService, private _formBuilder: FormBuilder, private http: HttpClient) {}
+  constructor(private apiService: ApiService, private _formBuilder: FormBuilder, private http: HttpClient, private refreshService: RefreshService) {}
 
   async ngOnInit() {
     this.branches = capitalizeFirstLetter(await getAllBranches(this.http, this.apiService));
@@ -133,6 +130,7 @@ export class PollCreaterComponent implements OnInit {
       this.http.post(url, pollData).subscribe({
         next: (response) => {
           console.log('Creation successful!', response);
+          this.refreshService.triggerRefresh();
           alert("Creation successful!");
         },
         error: (err) => {
@@ -145,8 +143,6 @@ export class PollCreaterComponent implements OnInit {
   reset(stepper: MatStepper):void{
     stepper.reset();
     this.choices = [];
-    //this.yearsCtrl = new FormControl(0);
-    //this.branchesCtrl = new FormControl("");
   }
 }
 

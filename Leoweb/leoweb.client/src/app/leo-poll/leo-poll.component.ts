@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import {PollCreaterComponent} from "../components/poll-creater/poll-creater.component";
 import {provideNativeDateAdapter} from "@angular/material/core";
 import { PollEditorComponent } from '../components/poll-editor/poll-editor.component';
+import {RefreshService} from "../../services/refresh.service";
 
 @Component({
   selector: 'app-leo-poll',

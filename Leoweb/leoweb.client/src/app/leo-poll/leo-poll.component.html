@@ -1,3 +1,5 @@
+<button id="pollCreaterButton" mat-raised-button (click)="showPollCreater()">Create Poll</button>
+
 <div *ngIf="isCreaterVisible" id="createPollDiv">
   <app-poll-creater></app-poll-creater>
 </div>
@@ -6,7 +8,6 @@
   <app-poll-editor></app-poll-editor>
 </div>
 
-<button mat-raised-button (click)="showPollCreater()">Create Poll</button>
 <button mat-raised-button (click)="showPollEditor()">Create Poll</button>
 
 <div id="pollsDiv">
