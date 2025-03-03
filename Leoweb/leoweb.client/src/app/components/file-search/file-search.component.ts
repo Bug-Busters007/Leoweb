@@ -36,8 +36,8 @@ export class FileSearchComponent {
     this.shareService.setFileArray(this.fileArray);
 
     this.refreshSubscription = this.refreshService.refresh$.subscribe(async () => {
-      this.allFiles = await this.getFileNames();
-      this.fileArray = this.allFiles;
+      console.log('update');
+      this.updateSearchService.updateData();
     });
     this.updateSearchService.currentData.subscribe((data) =>{
       this.filterSubjects = data;
