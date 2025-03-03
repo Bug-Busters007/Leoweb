@@ -143,6 +143,7 @@ export class PollCreaterComponent implements OnInit {
       this.http.post(url, pollData).subscribe({
         next: (response) => {
           console.log('Creation successful!', response);
+          this.reset(document.getElementById('stepper') as unknown as MatStepper);
           alert("Creation successful!");
         },
         error: (err) => {
@@ -155,8 +156,6 @@ export class PollCreaterComponent implements OnInit {
   reset(stepper: MatStepper):void{
     stepper.reset();
     this.choices = [];
-    //this.yearsCtrl = new FormControl(0);
-    //this.branchesCtrl = new FormControl("");
   }
 
   loadPoll(id: number): void {
