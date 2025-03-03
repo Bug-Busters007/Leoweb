@@ -1,11 +1,11 @@
-import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {MatInput} from "@angular/material/input";
 import {MatCard} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MatFormField, MatHint, MatLabel, MatSuffix} from "@angular/material/form-field";
 import {
-  FormBuilder, FormControl, FormGroup,
+  FormBuilder, FormControl,
   FormsModule,
   ReactiveFormsModule,
   Validators
@@ -24,9 +24,12 @@ import {MatOption, provideNativeDateAdapter} from "@angular/material/core";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {MatChipGrid, MatChipInput, MatChipInputEvent, MatChipRemove, MatChipRow} from "@angular/material/chips";
 import {HttpClient} from "@angular/common/http";
-import {MatSelect} from "@angular/material/select";
+import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {getAllBranches} from "../../leo-library/leo-library-helper";
-import {RefreshService} from "../../../services/refresh.service";
+import { PollName } from '../../../models/pollNameModel';
+import { PollService } from '../../../services/poll.service';
+import { PollOverview } from '../../../models/pollOverviewModel';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-poll-creater',
@@ -62,7 +65,11 @@ import {RefreshService} from "../../../services/refresh.service";
     MatChipRow,
     MatChipGrid,
     MatOption,
-    MatSelect
+    MatSelect,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule, CommonModule
   ],
   providers: provideNativeDateAdapter(),
   styleUrl: './poll-creater.component.css'
@@ -72,14 +79,20 @@ export class PollCreaterComponent implements OnInit {
   readonly formControl = new FormControl(['angular']);
   years: number[] = [1,2,3,4,5];
   branches: string[] = [];
+  pollNames: PollName[] = [];
+  poll: PollOverview | null = null;
 
   announcer = inject(LiveAnnouncer);
-  constructor(private apiService: ApiService, private _formBuilder: FormBuilder, private http: HttpClient, private refreshService: RefreshService) {}
+  constructor(private pollService: PollService, private apiService: ApiService, private _formBuilder: FormBuilder, private http: HttpClient) {}
 
   async ngOnInit() {
     this.branches = capitalizeFirstLetter(await getAllBranches(this.http, this.apiService));
+    this.pollNames = await this.pollService.getPollNames();
   }
 
+  pollSelectorGroup = this._formBuilder.group({
+    title: ['', Validators.required], 
+  });
   titleFormGroup = this._formBuilder.group({
     title: ['', Validators.required],
   });
@@ -130,7 +143,7 @@ export class PollCreaterComponent implements OnInit {
       this.http.post(url, pollData).subscribe({
         next: (response) => {
           console.log('Creation successful!', response);
-          this.refreshService.triggerRefresh();
+          this.reset(document.getElementById('stepper') as unknown as MatStepper);
           alert("Creation successful!");
         },
         error: (err) => {
@@ -143,6 +156,19 @@ export class PollCreaterComponent implements OnInit {
   reset(stepper: MatStepper):void{
     stepper.reset();
     this.choices = [];
+  }
+
+  loadPoll(id: number): void {
+    console.log("Loading poll");
+    const url = this.apiService.getApiUrl(`Poll/${id}/overview`);
+    this.http.get<PollOverview>(url).subscribe({
+      next: (response) => {
+        this.poll = response;
+      },
+      error: (err) => {
+        console.error("Error loading poll", err);
+      },
+    });
   }
 }
 

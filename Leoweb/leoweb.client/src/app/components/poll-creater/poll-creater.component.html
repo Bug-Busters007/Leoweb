@@ -1,5 +1,17 @@
 <mat-card appearance="outlined" class="container">
   <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="pollSelectorGroup">
+      <ng-template matStepLabel>Select Poll</ng-template>
+      <mat-form-field>
+        <mat-label>Poll</mat-label>
+        <mat-select (selectionChange)="loadPoll($event.value)">
+          @for (name of pollNames; track name.id) {
+          <mat-option [value]="name.id">{{ name.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+    </mat-step>
     <mat-step [stepControl]="titleFormGroup">
       <form [formGroup]="titleFormGroup">
         <ng-template matStepLabel>Create a title</ng-template>
