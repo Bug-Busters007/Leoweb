@@ -1,4 +1,4 @@
-import {Component, inject, signal, WritableSignal} from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {MatInput} from "@angular/material/input";
 import {MatCard} from "@angular/material/card";
 import {MatButton, MatFabButton} from "@angular/material/button";
@@ -20,10 +20,12 @@ import {
   MatDateRangeInput,
   MatDateRangePicker, MatEndDate, MatStartDate
 } from "@angular/material/datepicker";
-import {provideNativeDateAdapter} from "@angular/material/core";
+import {MatOption, provideNativeDateAdapter} from "@angular/material/core";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {MatChipGrid, MatChipInput, MatChipInputEvent, MatChipRemove, MatChipRow} from "@angular/material/chips";
 import {HttpClient} from "@angular/common/http";
+import {MatSelect} from "@angular/material/select";
+import {getAllBranches} from "../../leo-library/leo-library-helper";
 
 @Component({
   selector: 'app-poll-creater',
@@ -57,17 +59,25 @@ import {HttpClient} from "@angular/common/http";
     MatChipInput,
     MatChipRemove,
     MatChipRow,
-    MatChipGrid
+    MatChipGrid,
+    MatOption,
+    MatSelect
   ],
   providers: provideNativeDateAdapter(),
   styleUrl: './poll-creater.component.css'
 })
-export class PollCreaterComponent{
+export class PollCreaterComponent implements OnInit {
   choices: string[] = [];
   readonly formControl = new FormControl(['angular']);
+  years: number[] = [1,2,3,4,5];
+  branches: string[] = [];
 
   announcer = inject(LiveAnnouncer);
   constructor(private apiService: ApiService, private _formBuilder: FormBuilder, private http: HttpClient) {}
+
+  async ngOnInit() {
+    this.branches = capitalizeFirstLetter(await getAllBranches(this.http, this.apiService));
+  }
 
   titleFormGroup = this._formBuilder.group({
     title: ['', Validators.required],
@@ -82,6 +92,10 @@ export class PollCreaterComponent{
   choicesFormGroup = this._formBuilder.group({
     choices: ['', Validators.required],
   });
+  branchFormGroup = this._formBuilder.group({
+    yearsCtrl: [0, Validators.required],
+    branchesCtrl: ['', Validators.required],
+  })
   isLinear = false;
 
   add(event: MatChipInputEvent): void {
@@ -108,12 +122,8 @@ export class PollCreaterComponent{
         release: new Date(this.dateFormGroup.value.startdate).toISOString(),
         close: new Date(this.dateFormGroup.value.enddate).toISOString(),
         choices: this.choices,
-        year: [
-          0
-        ],
-        branch: [
-          "ok"
-        ]
+        year: this.branchFormGroup.value.yearsCtrl,
+        branch: this.branchFormGroup.value.branchesCtrl,
       }
 
       this.http.post(url, pollData).subscribe({
@@ -131,5 +141,11 @@ export class PollCreaterComponent{
   reset(stepper: MatStepper):void{
     stepper.reset();
     this.choices = [];
+    //this.yearsCtrl = new FormControl(0);
+    //this.branchesCtrl = new FormControl("");
   }
+}
+
+function capitalizeFirstLetter(arr: string[]): string[] {
+  return arr.map(str => str.charAt(0).toUpperCase() + str.slice(1));
 }

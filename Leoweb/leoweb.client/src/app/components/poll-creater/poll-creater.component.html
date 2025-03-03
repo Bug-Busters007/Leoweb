@@ -70,6 +70,30 @@
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="branchFormGroup" label="abcdefg">
+      <form [formGroup]="branchFormGroup">
+        <mat-form-field>
+          <mat-label>Year</mat-label>
+          <mat-select formControlName="yearsCtrl" multiple>
+            @for (year of years; track year) {
+              <mat-option [value]="year">{{year}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Branch</mat-label>
+          <mat-select formControlName="branchesCtrl" multiple>
+            @for (branch of branches; track branch) {
+              <mat-option [value]="branch">{{branch}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
           <button mat-button (click)="reset(stepper)">Reset</button>
           <button mat-button (click)="createPoll()">Create</button>
         </div>

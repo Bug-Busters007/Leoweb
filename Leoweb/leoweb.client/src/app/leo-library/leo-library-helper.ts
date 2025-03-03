@@ -9,7 +9,7 @@ export async function getAllBranchesWithSubjects(http: HttpClient, apiService: A
   return new Map<string, string[]>(Object.entries(response));
 }
 
-export async function getAllBranches(http: HttpClient, apiService: ApiService): Promise<string[]|undefined> {
+export async function getAllBranches(http: HttpClient, apiService: ApiService): Promise<string[]> {
   const url = apiService.getApiUrl(`Notes/allBranches`);
   return await firstValueFrom(http.get<string[]>(url));
 }
