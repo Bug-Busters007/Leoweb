@@ -16,7 +16,7 @@ namespace Leoweb.Server.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("ProductVersion", "9.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -122,7 +122,13 @@ namespace Leoweb.Server.Migrations
                     b.Property<DateTime>("Release")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Poll");
                 });
@@ -250,6 +256,17 @@ namespace Leoweb.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Data");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("Leoweb.Server.Database.Models.Poll", b =>
+                {
+                    b.HasOne("Leoweb.Server.Database.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Student");
                 });

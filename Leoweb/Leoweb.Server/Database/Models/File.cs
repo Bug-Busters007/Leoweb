@@ -13,7 +13,7 @@ namespace Leoweb.Server.Database.Models
         [ForeignKey(nameof(Data))]
         public int DataId { get; set; }
         public DateOnly Date { get; set; }
-        [ForeignKey(nameof(Subject))]
+        [ForeignKey(nameof(Student))]
         public required string StudentId { get; set; }
 
 		public Student Student { get; set; }
