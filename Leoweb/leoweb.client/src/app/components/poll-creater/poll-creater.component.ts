@@ -31,6 +31,7 @@ import { PollService } from '../../../services/poll.service';
 import { PollOverview } from '../../../models/pollOverviewModel';
 import { CommonModule } from '@angular/common';
 import { first, firstValueFrom } from 'rxjs';
+import {RefreshService} from "../../../services/refresh.service";
 
 @Component({
   selector: 'app-poll-creater',
@@ -84,7 +85,7 @@ export class PollCreaterComponent implements OnInit {
   poll: PollOverview | null = null;
 
   announcer = inject(LiveAnnouncer);
-  constructor(private pollService: PollService, private apiService: ApiService, private _formBuilder: FormBuilder, private http: HttpClient) {}
+  constructor(private pollService: PollService, private apiService: ApiService, private _formBuilder: FormBuilder, private http: HttpClient, private refreshService: RefreshService) {}
 
   async ngOnInit() {
     this.branches = capitalizeFirstLetter(await getAllBranches(this.http, this.apiService));
@@ -92,7 +93,7 @@ export class PollCreaterComponent implements OnInit {
   }
 
   pollSelectorGroup = this._formBuilder.group({
-    title: [this.pollNames, Validators.required], 
+    title: [this.pollNames, Validators.required],
   });
   titleFormGroup = this._formBuilder.group({
     title: ['', Validators.required],
@@ -144,7 +145,7 @@ export class PollCreaterComponent implements OnInit {
       this.http.post(url, pollData).subscribe({
         next: (response) => {
           console.log('Creation successful!', response);
-          this.reset(document.getElementById('stepper') as unknown as MatStepper);
+          this.refreshService.triggerRefresh();
           alert("Creation successful!");
         },
         error: (err) => {
