@@ -41,7 +41,6 @@ export class FilterBarComponent {
       this.activeFilters = this.activeFilters.filter(s => s !== subject);
     }
     this.updateSearchService.setFilters(this.activeFilters);
-    this.updateSearchService.updateData();
   }
 
 
