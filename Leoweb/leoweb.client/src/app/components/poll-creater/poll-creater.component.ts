@@ -90,6 +90,7 @@ export class PollCreaterComponent implements OnInit {
   async ngOnInit() {
     this.branches = capitalizeFirstLetter(await getAllBranches(this.http, this.apiService));
     this.pollNames = await this.pollService.getPollNames();
+    this.pollNames.unshift({ id: -1, name: "New Poll"});
   }
 
   pollSelectorGroup = this._formBuilder.group({
@@ -130,7 +131,6 @@ export class PollCreaterComponent implements OnInit {
   }
 
   createPoll(): void{
-    const url = this.apiService.getApiUrl('Poll');
     if(this.dateFormGroup.value.startdate && this.dateFormGroup.value.enddate) {
       const pollData = {
         headline: this.titleFormGroup.value.title,
@@ -142,16 +142,32 @@ export class PollCreaterComponent implements OnInit {
         branch: this.branchFormGroup.value.branchesCtrl,
       }
 
-      this.http.post(url, pollData).subscribe({
-        next: (response) => {
-          console.log('Creation successful!', response);
-          this.refreshService.triggerRefresh();
-          alert("Creation successful!");
-        },
-        error: (err) => {
-          console.error("Error creating your poll", err);
-        },
-      });
+      if (!this.poll || this.poll.id === -1) {
+        const url = this.apiService.getApiUrl('Poll');
+        this.http.post(url, pollData).subscribe({
+          next: (response) => {
+            console.log('Creation successful!', response);
+            this.reset(document.getElementById('stepper') as unknown as MatStepper);
+            alert("Creation successful!");
+          },
+          error: (err) => {
+            console.error("Error creating your poll", err);
+          },
+        });
+      }
+      else {
+        const url = this.apiService.getApiUrl(`Poll/${this.poll!.id}/update`);
+        this.http.patch(url, pollData).subscribe({
+          next: (response) => {
+            console.log('Creation successful!', response);
+            this.reset(document.getElementById('stepper') as unknown as MatStepper);
+            alert("Creation successful!");
+          },
+          error: (err) => {
+            console.error("Error creating your poll", err);
+          },
+        });
+      }
     }
   }
 
@@ -161,16 +177,32 @@ export class PollCreaterComponent implements OnInit {
   }
 
   async loadPoll(id: number): Promise<void> {
-    console.log("Loading poll");
-    const url = this.apiService.getApiUrl(`Poll/${id}/overview`);
-    this.poll = await firstValueFrom(this.http.get<PollOverview>(url));
+    if (id === -1) {
+      this.poll = {
+        id: -1,
+        headline: "",
+        description: "",
+        release: "",
+        close: "",
+        votes: new Map<string, number>(),
+        year: [],
+        branch: []
+      };
+    }
+    else {
+      const url = this.apiService.getApiUrl(`Poll/${id}/overview`);
+      this.poll = await firstValueFrom(this.http.get<PollOverview>(url));
+    }
 
     console.log(this.poll);
 
     this.titleFormGroup.setValue({ title: this.poll?.headline ?? null });
     this.descriptionFormGroup.setValue({ description: this.poll?.description ?? null });
     this.dateFormGroup.setValue({ startdate: this.poll?.release ?? null, enddate: this.poll?.close ?? null });
-    //this.choicesFormGroup.setValue({ choices: Array.from(this.poll?.votes.keys()) ?? [] });
+    this.choices = [];
+    console.log(this.choices);
+    this.choices = Object.keys(this.poll?.votes) ?? [];
+    console.log(this.choices);
     this.branchFormGroup.setValue({ branchesCtrl: this.poll?.branch ?? [], yearsCtrl: this.poll?.year ?? [] });
   }
 }
