@@ -130,7 +130,6 @@ export class PollCreaterComponent implements OnInit {
   }
 
   createPoll(): void{
-    const url = this.apiService.getApiUrl('Poll');
     if(this.dateFormGroup.value.startdate && this.dateFormGroup.value.enddate) {
       const pollData = {
         headline: this.titleFormGroup.value.title,
@@ -141,17 +140,33 @@ export class PollCreaterComponent implements OnInit {
         year: this.branchFormGroup.value.yearsCtrl,
         branch: this.branchFormGroup.value.branchesCtrl,
       }
-      
-      this.http.post(url, pollData).subscribe({
-        next: (response) => {
-          console.log('Creation successful!', response);
-          this.reset(document.getElementById('stepper') as unknown as MatStepper);
-          alert("Creation successful!");
-        },
-        error: (err) => {
-          console.error("Error creating your poll", err);
-        },
-      });
+
+      if (!this.poll || this.poll.id === -1) {
+        const url = this.apiService.getApiUrl('Poll');
+        this.http.post(url, pollData).subscribe({
+          next: (response) => {
+            console.log('Creation successful!', response);
+            this.reset(document.getElementById('stepper') as unknown as MatStepper);
+            alert("Creation successful!");
+          },
+          error: (err) => {
+            console.error("Error creating your poll", err);
+          },
+        });
+      }
+      else {
+        const url = this.apiService.getApiUrl(`Poll/${this.poll!.id}/update`);
+        this.http.patch(url, pollData).subscribe({
+          next: (response) => {
+            console.log('Creation successful!', response);
+            this.reset(document.getElementById('stepper') as unknown as MatStepper);
+            alert("Creation successful!");
+          },
+          error: (err) => {
+            console.error("Error creating your poll", err);
+          },
+        });
+      }
     }
   }
 
@@ -162,20 +177,30 @@ export class PollCreaterComponent implements OnInit {
 
   async loadPoll(id: number): Promise<void> {
     if (id === -1) {
-      return;
+      this.poll = {
+        id: -1,
+        headline: "",
+        description: "",
+        release: "",
+        close: "",
+        votes: new Map<string, number>(),
+        year: [],
+        branch: []
+      };
+    }
+    else {
+      const url = this.apiService.getApiUrl(`Poll/${id}/overview`);
+      this.poll = await firstValueFrom(this.http.get<PollOverview>(url));
     }
 
-    const url = this.apiService.getApiUrl(`Poll/${id}/overview`);
-    this.poll = await firstValueFrom(this.http.get<PollOverview>(url));
-
-    this.poll.release = this.poll.release.replace(".", "/");
-    this.poll.close = this.poll.close.replace(".", "/");
     console.log(this.poll);
 
     this.titleFormGroup.setValue({ title: this.poll?.headline ?? null });
     this.descriptionFormGroup.setValue({ description: this.poll?.description ?? null });
     this.dateFormGroup.setValue({ startdate: this.poll?.release ?? null, enddate: this.poll?.close ?? null });
-    this.choices.push(...Object.keys(this.poll?.votes) ?? []);
+    this.choices = [];
+    console.log(this.choices);
+    this.choices = Object.keys(this.poll?.votes) ?? [];
     console.log(this.choices);
     this.branchFormGroup.setValue({ branchesCtrl: this.poll?.branch ?? [], yearsCtrl: this.poll?.year ?? [] });
   }
