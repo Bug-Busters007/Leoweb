@@ -17,14 +17,18 @@ namespace Leoweb.Server.Services
 
 		public async Task<PollOverview> GetPollOverview(int pollId, Poll poll)
 		{
-			var dict = await _dbContext.Vote
-				.Join(
-					_dbContext.Choice,
-					vote => vote.PollId,
+			var dict = await _dbContext.Choice
+				.Where(c => c.PollId == pollId)
+				.GroupJoin(
+					_dbContext.Vote,
 					choice => choice.PollId,
-					(vote, choice) => new { vote, choice }
+					vote => vote.PollId,
+					(choice, vote) => new { choice, vote }
 				)
-				.Where(vc => vc.vote.Poll.Id == pollId)
+				.SelectMany(
+					x => x.vote.DefaultIfEmpty(),
+					(choiceGroup, vote) => new { choiceGroup.choice, vote }
+				)
 				.GroupBy(vc => vc.choice.Description)
 				.Select(grouped => new
 				{
@@ -33,14 +37,13 @@ namespace Leoweb.Server.Services
 				})
 			.ToDictionaryAsync(x => x.Description, x => x.VoteCount);
 
-			var years = _dbContext.PollYear.Where(y => y.PollId == pollId).ToArray();
 			return new PollOverview()
 			{
 				Id = poll.Id,
 				Headline = poll.Headline,
 				Description = poll.Description,
-				Release = poll.Release.ToLongDateString(),
-				Close = poll.Close.HasValue ? poll.Close.Value.ToLongDateString() : string.Empty,
+				Release = poll.Release.ToString("M/d/yyyy"),
+				Close = poll.Close.HasValue ? poll.Close.Value.ToString("M/d/yyyy") : string.Empty,
 				Votes = dict,
 				Year = _dbContext.PollYear.Where(y => y.PollId == pollId).Select(y => (int)y.Year).ToArray(),
 				Branch = _dbContext.PollBranch.Where(b => b.PollId == pollId).Select(b => b.Branch).ToArray(),
@@ -64,7 +67,7 @@ namespace Leoweb.Server.Services
 					_dbContext.Poll,
 					x => x.choice.PollId,
 					poll => poll.Id,
-					(x, poll) => new { poll.Id, poll.Headline, poll.Description, ChoiceDescription = x.choice.Description, x.vote }
+					(x, poll) => new { poll.Id, poll.Headline, poll.Description, ChoiceDescription = x.choice.Description, poll.Release, poll.Close, x.vote }
 				)
 				.ToListAsync();
 
@@ -93,16 +96,22 @@ namespace Leoweb.Server.Services
 				.ToDictionary(g => g.Key, g => g.Select(b => b.Branch).ToArray());
 
 			return pollGrouped
-				.Select(p => new PollOverview
+				.Select(p =>
 				{
-					Id = p.PollId,
-					Headline = p.Headline,
-					Description = p.PollDescription,
-					Votes = p.Votes,
-					Year = pollYears.ContainsKey(p.PollId) ? pollYears[p.PollId] : Array.Empty<int>(),
-					Branch = pollBranches.ContainsKey(p.PollId) ? pollBranches[p.PollId] : Array.Empty<string>(),
+					var poll = _dbContext.Poll.Find(p.PollId);
+					return new PollOverview
+					{
+						Id = p.PollId,
+						Headline = p.Headline,
+						Description = p.PollDescription,
+						Release = poll?.Release.ToString("M/d/yyyy") ?? string.Empty,
+						Close = poll?.Close.HasValue == true ? poll.Close.Value.ToString("M/d/yyyy") : string.Empty,
+						Votes = p.Votes,
+						Year = pollYears.TryGetValue(p.PollId, out var years) ? years : Array.Empty<int>(),
+						Branch = pollBranches.TryGetValue(p.PollId, out var branches) ? branches : Array.Empty<string>(),
+					};
 				})
 				.ToArray();
-		}
+	}
 	}
 }

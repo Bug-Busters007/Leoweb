@@ -89,6 +89,7 @@ export class PollCreaterComponent implements OnInit {
   async ngOnInit() {
     this.branches = capitalizeFirstLetter(await getAllBranches(this.http, this.apiService));
     this.pollNames = await this.pollService.getPollNames();
+    this.pollNames.unshift({ id: -1, name: "New Poll"});
   }
 
   pollSelectorGroup = this._formBuilder.group({
@@ -140,7 +141,7 @@ export class PollCreaterComponent implements OnInit {
         year: this.branchFormGroup.value.yearsCtrl,
         branch: this.branchFormGroup.value.branchesCtrl,
       }
-
+      
       this.http.post(url, pollData).subscribe({
         next: (response) => {
           console.log('Creation successful!', response);
@@ -160,16 +161,22 @@ export class PollCreaterComponent implements OnInit {
   }
 
   async loadPoll(id: number): Promise<void> {
-    console.log("Loading poll");
+    if (id === -1) {
+      return;
+    }
+
     const url = this.apiService.getApiUrl(`Poll/${id}/overview`);
     this.poll = await firstValueFrom(this.http.get<PollOverview>(url));
 
+    this.poll.release = this.poll.release.replace(".", "/");
+    this.poll.close = this.poll.close.replace(".", "/");
     console.log(this.poll);
 
     this.titleFormGroup.setValue({ title: this.poll?.headline ?? null });
     this.descriptionFormGroup.setValue({ description: this.poll?.description ?? null });
     this.dateFormGroup.setValue({ startdate: this.poll?.release ?? null, enddate: this.poll?.close ?? null });
-    //this.choicesFormGroup.setValue({ choices: Array.from(this.poll?.votes.keys()) ?? [] });
+    this.choices.push(...Object.keys(this.poll?.votes) ?? []);
+    console.log(this.choices);
     this.branchFormGroup.setValue({ branchesCtrl: this.poll?.branch ?? [], yearsCtrl: this.poll?.year ?? [] });
   }
 }
