@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../services/api.service";
 import {Spinner} from "../components/spinner/spinner";
@@ -9,6 +9,8 @@ import {MatButton} from "@angular/material/button";
 import {Router} from "@angular/router";
 import {PollCreaterComponent} from "../components/poll-creater/poll-creater.component";
 import {provideNativeDateAdapter} from "@angular/material/core";
+import {Subscription} from "rxjs";
+import {RefreshService} from "../../services/refresh.service";
 
 @Component({
   selector: 'app-leo-poll',
@@ -23,11 +25,12 @@ import {provideNativeDateAdapter} from "@angular/material/core";
   providers: provideNativeDateAdapter(),
   styleUrl: './leo-poll.component.css'
 })
-export class LeoPollComponent implements OnInit {
+export class LeoPollComponent implements OnInit, OnDestroy {
   pollArr: Array<PollOverview> = [];
   isCreaterVisible = false;
+  private refreshSub!: Subscription;
 
-  constructor(private http: HttpClient, private apiService: ApiService, private router: Router) {}
+  constructor(private http: HttpClient, private apiService: ApiService, private router: Router, private refreshService: RefreshService) {}
 
   async ngOnInit() {
     const pdiv = document.getElementById('pollsDiv');
@@ -35,6 +38,11 @@ export class LeoPollComponent implements OnInit {
     spinner.showSpinner();
     await this.getAllPolls();
     spinner.removeSpinner();
+    this.refreshSub = this.refreshService.refresh$.subscribe();
+  }
+
+  ngOnDestroy() {
+    this.refreshSub.unsubscribe();
   }
 
   async getAllPolls(): Promise<void>{

@@ -21,6 +21,7 @@ export class UpdateSearchService {
     if (this.filters.indexOf(filter) === -1) {
       this.filters.push(filter);
     }
+    this.updateData();
   }
 
   getFilters(): string[] {
@@ -29,5 +30,6 @@ export class UpdateSearchService {
 
   setFilters(filters: string[]) {
     this.filters = filters;
+    this.updateData();
   }
 }

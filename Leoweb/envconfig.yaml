@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: leoweb-config
+data:
+  # Connection-String zur Docker-PostgreSQL auf dem Host-System
+  DB_CONNECTION_STRING: "Host=host.minikube.internal;Port=5432;Database=dev_db;Username=dev;Password=dev_password"
