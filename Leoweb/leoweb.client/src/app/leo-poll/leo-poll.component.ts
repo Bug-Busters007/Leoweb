@@ -38,7 +38,9 @@ export class LeoPollComponent implements OnInit, OnDestroy {
     spinner.showSpinner();
     await this.getAllPolls();
     spinner.removeSpinner();
-    this.refreshSub = this.refreshService.refresh$.subscribe();
+    this.refreshSub = this.refreshService.refresh$.subscribe(async() =>{
+      await this.getAllPolls();
+    });
   }
 
   ngOnDestroy() {
