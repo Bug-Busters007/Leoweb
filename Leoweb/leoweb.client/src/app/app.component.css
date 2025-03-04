@@ -11,3 +11,6 @@ main {
   overflow-y: auto;
 }
 
+app-header {
+  z-index: 1000;
+}
