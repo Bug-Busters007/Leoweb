@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, numberAttribute, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ApiService} from "../../../services/api.service";
 import {PdfViewerComponent} from "../pdf-viewer/pdf-viewer.component";
 import {Router} from "@angular/router";
@@ -7,6 +7,8 @@ import {MatCard, MatCardTitle} from "@angular/material/card";
 import {MatChip, MatChipSet} from "@angular/material/chips";
 import {UpdateSearchService} from "../../../services/update-search.service";
 import {RefreshService} from "../../../services/refresh.service";
+import {LikesServiceService} from "../../../services/likes-service.service";
+import {NgIf} from "@angular/common";
 
 
 @Component({
@@ -18,18 +20,30 @@ import {RefreshService} from "../../../services/refresh.service";
     MatCard,
     MatChipSet,
     MatCardTitle,
-    MatChip
+    MatChip,
+    NgIf
   ]
 })
-export class FileDisplayComponent {
-  constructor(private apiService: ApiService, private sharedService: SharedService, private router: Router, private updateSearchService: UpdateSearchService, private refreshService: RefreshService) {
+export class FileDisplayComponent implements OnInit {
+  constructor(private apiService: ApiService, private sharedService: SharedService,
+              private router: Router, private updateSearchService: UpdateSearchService,
+              private refreshService: RefreshService,
+              private likeService: LikesServiceService) {
   }
   @Input() id: number = 0;
   @Input() name: string = "File";
   @Input() year:number = 1;
   @Input() subject: string = "AM"
   @Input() student: string = "Student"
+  @Input() likesCount!: number;
+  @Input() liked!: boolean;
   url = this.apiService.getApiUrl('Notes');
+
+  async ngOnInit() {
+    console.log(this.likesCount);
+    console.log(this.liked);
+  }
+
 
 
   navigateToFile(): void {
@@ -50,5 +64,16 @@ export class FileDisplayComponent {
   addSubjectFilter() {
     this.updateSearchService.addOneFilter(this.subject.toString());
     this.refreshService.triggerRefresh();
+  }
+
+  async onLikeChanged() {
+    this.liked = !this.liked;
+    this.likesCount = this.liked ? this.likesCount + 1 : this.likesCount - 1;
+    if(this.liked) {
+      await this.likeService.likeFile(this.id);
+    }else{
+      await this.likeService.unlikeFile(this.id);
+    }
+    console.log(this.likeService.getLikedFileIds());
   }
 }

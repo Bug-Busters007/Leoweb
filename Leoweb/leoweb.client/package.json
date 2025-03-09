@@ -25,6 +25,7 @@
     "@angular/router": "^19.1.1",
     "@microsoft/signalr": "^8.0.7",
     "cliui": "^8.0.1",
+    "component": "^1.1.0",
     "jest-editor-support": "*",
     "run-script-os": "*",
     "rxjs": "~7.8.1",

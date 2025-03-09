@@ -17,6 +17,66 @@ namespace Leoweb.Server.Controllers
 			var options = new DbContextOptionsBuilder<ApplicationDbContext>().Options;
 			_dbContext = new ApplicationDbContext(options);
 		}
+		
+		[HttpGet("fileIdsWithLikesFromUser")]
+		public IActionResult GetFileIdsWithLikesFromUser()
+		{
+			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
+			var fileIds = _dbContext.UserFileLike.Where(like => like.UserId == studentID).Select(like => like.FileId).ToList();
+			return Ok(fileIds);
+		}
+		
+		[HttpPost("like/{id}")]
+		public IActionResult LikeFile([FromRoute] int id)
+		{
+			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
+			var file = _dbContext.File.Where(f => f.Data.Id == id).First();
+			if (file == null)
+			{
+				return NotFound($"File with ID {id} not found.");
+			}
+			
+			var fileHasBeenLikedByUser = _dbContext.UserFileLike.Where(like => like.FileId == id && like.UserId == studentID).Any();
+			if (fileHasBeenLikedByUser)
+			{
+				return BadRequest("File has already been liked by user.");
+			}
+			var like = new UserFileLike()
+			{
+				UserId = studentID,
+				FileId = id
+			};
+			_dbContext.UserFileLike.Add(like);
+			_dbContext.SaveChanges();
+			return Ok();
+		}
+		
+		[HttpDelete("unlike/{id}")]
+		public IActionResult UnlikeFile([FromRoute] int id)
+		{
+			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
+			var file = _dbContext.File.Where(f => f.Data.Id == id).First();
+			if (file == null)
+			{
+				return NotFound($"File with ID {id} not found.");
+			}
+			
+			var like = _dbContext.UserFileLike.Where(like => like.FileId == id && like.UserId == studentID).First();
+			if (like == null)
+			{
+				return BadRequest("File has not been liked by user.");
+			}
+			_dbContext.UserFileLike.Remove(like);
+			_dbContext.SaveChanges();
+			return Ok();
+		}
+		
+		[HttpGet("numOfLikes/{id}")]
+		public IActionResult GetNumOfLikes([FromRoute] int id)
+		{
+			var likes = _dbContext.UserFileLike.Where(like => like.FileId == id).Count();
+			return Ok(likes);
+		}
 
 		[HttpGet("{id}")]
 		public IActionResult GetPdfToView([FromRoute] int id)

@@ -35,3 +35,44 @@
   background-color: cornflowerblue;
   transition: width 0.3s ease-in-out;
 }
+
+.like-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 20px;
+}
+
+.like-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.like-button svg {
+  transition: all 0.3s ease;
+  stroke: #666;
+  fill: transparent;
+}
+
+.liked svg {
+  stroke: #ff3366;
+  fill: #ff3366;
+  animation: heartBeat 0.3s ease-in-out;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
