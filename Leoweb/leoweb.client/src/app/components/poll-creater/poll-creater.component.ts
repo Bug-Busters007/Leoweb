@@ -160,6 +160,7 @@ export class PollCreaterComponent implements OnInit {
         this.http.patch(url, pollData).subscribe({
           next: (response) => {
             console.log('Creation successful!', response);
+            this.refreshService.triggerRefresh();
             alert("Creation successful!");
           },
           error: (err) => {
