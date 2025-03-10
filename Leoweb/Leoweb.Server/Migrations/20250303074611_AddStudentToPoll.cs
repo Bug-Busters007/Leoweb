@@ -10,6 +10,7 @@ namespace Leoweb.Server.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.AddColumn<string>(
                 name: "StudentId",
                 table: "Poll",
@@ -29,11 +30,14 @@ namespace Leoweb.Server.Migrations
                 principalTable: "Student",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
+                
+                */
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            /*
             migrationBuilder.DropForeignKey(
                 name: "FK_Poll_Student_StudentId",
                 table: "Poll");
@@ -45,6 +49,7 @@ namespace Leoweb.Server.Migrations
             migrationBuilder.DropColumn(
                 name: "StudentId",
                 table: "Poll");
+                */
         }
     }
 }

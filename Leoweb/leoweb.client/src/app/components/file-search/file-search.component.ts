@@ -24,6 +24,7 @@ import {LikesServiceService} from "../../../services/likes-service.service";
   standalone: true,
   styleUrls: ['./file-search.component.css']
 })
+
 export class FileSearchComponent implements OnInit {
   fileArray: { id: number; name: string; year: number,student: string, subject: string, likesCount : number, liked : boolean }[] = [];
   allFiles: { id: number; name: string; year: number,student: string, subject: string, likesCount : number, liked : boolean }[] = [];
