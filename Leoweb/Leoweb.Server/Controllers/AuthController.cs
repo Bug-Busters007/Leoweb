@@ -33,12 +33,12 @@ public class AuthController : Controller
     {
         try
         {
-            bool success = await _authService.RegisterStudentAsync(model.Email, model.Password);
+            bool success = await _authService.RegisterStudentAsync(model.Email, model.Password, model.Role);
             return success ? Ok() : Problem();
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            return BadRequest("Registration failed");
+            return BadRequest($"Registration failed {e.Message}");
         }
     }
     

@@ -6,6 +6,7 @@ import {FileDisplayComponent} from "../file-display/file-display.component";
 import {Router} from '@angular/router';
 import {SharedService} from "../../../services/share-name.service";
 import {NgForOf} from "@angular/common";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-user-overview',
@@ -19,9 +20,8 @@ import {NgForOf} from "@angular/common";
 })
 export class UserOverviewComponent {
   fileArray: { id: number; name: string; year: number, subject: string, student: string}[] = [];
-  fileArrayByUser: { id: number; name: string; year: number, subject: string, student: string}[] = [];
   @Input() username: string = '';
-  constructor(private http: HttpClient, private apiService: ApiService, private sharedService: SharedService, private router: Router) {}
+  constructor(private authService: AuthService, private http: HttpClient, private apiService: ApiService, private sharedService: SharedService, private router: Router) {}
 
   async ngOnInit() {
     this.username = this.sharedService.getInputValue();

@@ -32,7 +32,7 @@ public class AuthService
         return student == null || student.PasswordHash == HashPassword(password) ? student : null;
     }
     
-    public async Task<bool> RegisterStudentAsync(string email, string password)
+    public async Task<bool> RegisterStudentAsync(string email, string password, string role)
     {
         if(await StudentExists(email))
         {
@@ -42,6 +42,7 @@ public class AuthService
         {
             Id = Guid.NewGuid().ToString(),
             Email = email,
+            Role = role,
             PasswordHash = HashPassword(password),
             Year = 0,
             Branch = "informatik"
