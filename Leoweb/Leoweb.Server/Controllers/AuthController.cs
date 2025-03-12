@@ -56,10 +56,9 @@ public class AuthController : Controller
             new Claim(JwtRegisteredClaimNames.Sub, loginDto.Email),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new Claim(ClaimTypes.Name, loginDto.Email),
-            new Claim("Role", "User"),
+            new Claim("Role", user.Role.ToString()),
             new Claim("UserId", user.Id.ToString())
         };
-        
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
         
@@ -97,8 +96,8 @@ public class AuthController : Controller
         return Ok(new
         {
             Email = email,
-            UserId = userId,
-            Role = role
+            Role = role,
+            UserId = userId
         });
     }
     
