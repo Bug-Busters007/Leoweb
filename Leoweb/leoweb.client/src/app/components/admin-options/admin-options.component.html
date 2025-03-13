@@ -1,7 +1,13 @@
-<div class="admin-options-container">
-  <button class="admin-button" (click)="toggleMenu()">❌</button>
-  <div class="admin-menu" *ngIf="menuOpen">
-    <button (click)="deleteItem()">Löschen</button>
-    <button *ngIf="isUser" (click)="banUser()">User bannen</button>
-  </div>
-</div>
+<button mat-icon-button [matMenuTriggerFor]="adminMenu" aria-label="Admin options">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #adminMenu="matMenu">
+  <button mat-menu-item (click)="deleteItem()">
+    <mat-icon>delete</mat-icon>
+    <span>Löschen</span>
+  </button>
+  <button mat-menu-item *ngIf="isUser" (click)="banUser()">
+    <mat-icon>block</mat-icon>
+    <span>User bannen</span>
+  </button>
+</mat-menu>

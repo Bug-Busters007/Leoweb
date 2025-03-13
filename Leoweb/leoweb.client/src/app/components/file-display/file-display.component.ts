@@ -9,6 +9,7 @@ import {UpdateSearchService} from "../../../services/update-search.service";
 import {RefreshService} from "../../../services/refresh.service";
 import {LikesServiceService} from "../../../services/likes-service.service";
 import {NgIf} from "@angular/common";
+import {AdminOptionsComponent} from "../admin-options/admin-options.component";
 
 
 @Component({
@@ -21,7 +22,8 @@ import {NgIf} from "@angular/common";
     MatChipSet,
     MatCardTitle,
     MatChip,
-    NgIf
+    NgIf,
+    AdminOptionsComponent
   ]
 })
 export class FileDisplayComponent implements OnInit {
@@ -44,13 +46,13 @@ export class FileDisplayComponent implements OnInit {
   @Input() student: string = "Student"
   @Input() likesCount!: number;
   @Input() liked!: boolean;
+  @Input() isAdmin!: boolean;
   url = this.apiService.getApiUrl('Notes');
 
   private previousCount = 0;
 
   async ngOnInit() {
-    console.log(this.likesCount);
-    console.log(this.liked);
+    console.log(this.isAdmin);
     this.previousCount = this.likesCount;
   }
 

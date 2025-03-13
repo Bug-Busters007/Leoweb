@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FileDisplayComponent} from "../file-display/file-display.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {ApiService} from "../../../services/api.service";
@@ -11,6 +11,8 @@ import {SharedService} from "../../../services/share-name.service";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {LikesServiceService} from "../../../services/likes-service.service";
+import {AdminOptionsComponent} from "../admin-options/admin-options.component";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-file-search',
@@ -29,8 +31,11 @@ export class FileSearchComponent implements OnInit {
   fileArray: { id: number; name: string; year: number,student: string, subject: string, likesCount : number, liked : boolean }[] = [];
   allFiles: { id: number; name: string; year: number,student: string, subject: string, likesCount : number, liked : boolean }[] = [];
   filters: string[]= [];
+  isAdmin: boolean = false;
+  role: string = "";
   private refreshSubscription: Subscription|null = null;
   constructor(private http: HttpClient,
+              private authService: AuthService,
               private apiService: ApiService,
               private refreshService: RefreshService,
               private updateSearchService: UpdateSearchService,
@@ -42,14 +47,18 @@ export class FileSearchComponent implements OnInit {
     this.allFiles = await this.getFileNames();
     this.fileArray = this.allFiles
     this.shareService.setFileArray(this.fileArray);
-
     this.refreshSubscription = this.refreshService.refresh$.subscribe(async () => {
       this.updateSearchService.updateData();
     });
     this.updateSearchService.currentData.subscribe((data) =>{
       this.filters = data;
       this.fileArray = this.filterFilesSubjectAndYear();
-    })
+    });
+    this.authService.getUserData().subscribe((data) => {
+      this.role = data.role;
+      this.isAdmin = this.role === "admin";
+      console.log(`User is admin: ${this.isAdmin}`);
+    });
   }
 
   ngOnDestroy() {

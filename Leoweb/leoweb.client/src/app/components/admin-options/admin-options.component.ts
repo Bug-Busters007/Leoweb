@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import {NgFor, NgIf} from "@angular/common";
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-admin-options',
@@ -8,17 +11,13 @@ import {NgFor, NgIf} from "@angular/common";
   standalone: true,
   imports: [
     NgIf,
-
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule
     ]
 })
 export class AdminOptionsComponent {
   @Input() isUser = false;
-  menuOpen = false;
-
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
-  }
-
   deleteItem() {
     alert('Element gelöscht!');
   }
