@@ -3,6 +3,8 @@ import {NgFor, NgIf} from "@angular/common";
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import {HttpClient} from "@angular/common/http";
+import {SharedService} from "../../../services/share-name.service";
 
 @Component({
   selector: 'app-admin-options',
@@ -18,8 +20,21 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AdminOptionsComponent {
   @Input() isUser = false;
+  @Input() id: number = 0;
+
+  constructor(private sharedService: SharedService) {
+  }
   deleteItem() {
-    alert('Element gelöscht!');
+    console.log(`id: ${this.id}`);
+    this.sharedService.deleteFile(this.id).subscribe({
+      next: () => {
+        alert(`Successfully deleted file ${this.id}`);
+      },
+      error: (error) => {
+        console.log(`Fehler beim löschen der Datei: ${error.message}`);
+        console.log(error);
+      }
+    });
   }
 
   banUser() {
