@@ -1,0 +1,7 @@
+<div class="admin-options-container">
+  <button class="admin-button" (click)="toggleMenu()">❌</button>
+  <div class="admin-menu" *ngIf="menuOpen">
+    <button (click)="deleteItem()">Löschen</button>
+    <button *ngIf="isUser" (click)="banUser()">User bannen</button>
+  </div>
+</div>
