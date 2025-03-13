@@ -24,4 +24,9 @@ export class SharedService {
   getFileArray() {
     return this.fileArray;
   }
+
+  deleteFile(id: number) : void {
+    console.log('deleting file');
+  }
+
 }

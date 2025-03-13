@@ -200,6 +200,40 @@ namespace Leoweb.Server.Controllers
 			return Ok();
 		}
 		*/
+		
+		[HttpDelete("{id}")]
+		public IActionResult DeleteFile(int id)
+		{
+			bool success = false;
+			try
+			{
+				var file = _dbContext.BinaryFile.Find(id);
+          
+				if (file == null)
+				{
+					throw new Exception($"File with ID {id} not found.");
+				}
+          
+				_dbContext.BinaryFile.Remove(file);
+          
+				int affectedRows = _dbContext.SaveChanges();
+          
+				success = affectedRows > 0;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error deleting file with ID {id}: {ex.Message}");
+			}
+  
+			if (success)
+			{
+				return NoContent();
+			}
+			else
+			{
+				return NotFound($"File with ID {id} not found");
+			}
+		}
 
 		private static string ReplaceGermanChars(string text)
 		{
