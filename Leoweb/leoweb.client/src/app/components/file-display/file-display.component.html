@@ -32,7 +32,7 @@
         </div>
         <div class="particles" *ngIf="liked"></div>
       </button>
-      <app-admin-options *ngIf="isAdmin" [id]="this.id"></app-admin-options>
+      <app-admin-options *ngIf="isAdmin" [id]="this.id" [itemType]="'file'"></app-admin-options>
     </mat-chip-set>
   </div>
 </mat-card>

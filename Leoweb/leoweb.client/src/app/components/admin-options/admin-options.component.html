@@ -1,13 +1,15 @@
+
 <button mat-icon-button [matMenuTriggerFor]="adminMenu" aria-label="Admin options">
   <mat-icon>more_vert</mat-icon>
 </button>
-<mat-menu #adminMenu="matMenu">
-  <button mat-menu-item (click)="deleteItem()">
+<mat-menu #adminMenu="matMenu" id="adminMenu">
+  <button mat-menu-item id="deleteButton" (click)="deleteItem()">
     <mat-icon>delete</mat-icon>
     <span>Löschen</span>
   </button>
-  <button mat-menu-item *ngIf="isUser" (click)="banUser()">
+  <button mat-menu-item id="blockButton" (click)="banUser()">
     <mat-icon>block</mat-icon>
     <span>User bannen</span>
   </button>
 </mat-menu>
+
