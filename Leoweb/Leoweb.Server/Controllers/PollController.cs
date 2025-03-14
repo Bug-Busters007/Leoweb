@@ -180,10 +180,38 @@ namespace Leoweb.Server.Controllers
 			return Ok(polls);
 		}
 
-		[HttpDelete("{pollId}")]
-		public async Task<IActionResult> DeletePoll([FromRoute] int pollId)
+		[HttpDelete("{id}")]
+		public IActionResult DeletePoll([FromRoute] int id)
 		{
-			return null;
+			bool success = false;
+			try
+			{
+				var poll = _dbContext.Poll.Find(id);
+          
+				if (poll == null)
+				{
+					throw new Exception($"Poll with ID {id} not found.");
+				}
+          
+				_dbContext.Poll.Remove(poll);
+          
+				int affectedRows = _dbContext.SaveChanges();
+          
+				success = affectedRows > 0;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error deleting poll with ID {id}: {ex.Message}");
+			}
+  
+			if (success)
+			{
+				return NoContent();
+			}
+			else
+			{
+				return NotFound($"Poll with ID {id} not found");
+			}
 		}
 }
 }

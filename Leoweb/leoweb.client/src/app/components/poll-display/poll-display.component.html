@@ -13,6 +13,7 @@
         </div>
       </mat-radio-group>
       <button mat-raised-button (click)="vote()">Vote</button>
+      <app-admin-options *ngIf="isAdmin" [id]="this.id" [itemType]="'poll'"></app-admin-options>
     </form>
     <p id="resultMessage"></p>
   </mat-card-content>

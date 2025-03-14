@@ -1,4 +1,4 @@
-import { CommonModule, NgForOf } from '@angular/common';
+import {CommonModule, NgForOf, NgIf} from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { ApiService } from '../../../services/api.service';
@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatButton} from "@angular/material/button";
+import {AdminOptionsComponent} from "../admin-options/admin-options.component";
 
 @Component({
   selector: 'app-poll-display',
@@ -23,11 +24,15 @@ import {MatButton} from "@angular/material/button";
     MatCheckboxModule,
     FormsModule,
     MatRadioModule,
-    MatButton
+    MatButton,
+    AdminOptionsComponent,
+    NgIf
   ],
 })
 export class PollDisplayComponent implements OnInit {
+  @Input() id!: number;
   @Input() poll!: PollOverview;
+  @Input() isAdmin!: boolean;
   headline: string = "";
   description: string = "";
   choices: string[] = [];
