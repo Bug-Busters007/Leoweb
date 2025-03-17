@@ -33,4 +33,5 @@ public class ApplicationDbContext : DbContext
 	public DbSet<PollYear> PollYear { get; set; }
 	public DbSet<PollBranch> PollBranch { get; set; }
 	public DbSet<UserFileLike> UserFileLike { get; set; }
+	public DbSet<StudentBan> StudentBan { get; set; }
 }
