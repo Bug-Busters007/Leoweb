@@ -42,6 +42,7 @@ namespace Leoweb.Server.Services
 				Id = poll.Id,
 				Headline = poll.Headline,
 				Description = poll.Description,
+				Creator = poll.StudentId,
 				Release = poll.Release.ToString("M/d/yyyy"),
 				Close = poll.Close.HasValue ? poll.Close.Value.ToString("M/d/yyyy") : string.Empty,
 				Votes = dict,
@@ -67,17 +68,18 @@ namespace Leoweb.Server.Services
 					_dbContext.Poll,
 					x => x.choice.PollId,
 					poll => poll.Id,
-					(x, poll) => new { poll.Id, poll.Headline, poll.Description, ChoiceDescription = x.choice.Description, poll.Release, poll.Close, x.vote }
+					(x, poll) => new { poll.Id, poll.Headline, poll.Description, poll.StudentId, ChoiceDescription = x.choice.Description, poll.Release, poll.Close, x.vote }
 				)
 				.ToListAsync();
 
 			var pollGrouped = pollChoices
-				.GroupBy(x => new { x.Id, x.Headline, x.Description })
+				.GroupBy(x => new { x.Id, x.Headline, x.Description, x.StudentId })
 				.Select(grouped => new
 				{
 					PollId = grouped.Key.Id,
 					Headline = grouped.Key.Headline,
 					PollDescription = grouped.Key.Description,
+					Creator = grouped.Key.StudentId,
 					Votes = grouped
 						.GroupBy(c => c.ChoiceDescription)
 						.ToDictionary(
@@ -104,6 +106,7 @@ namespace Leoweb.Server.Services
 						Id = p.PollId,
 						Headline = p.Headline,
 						Description = p.PollDescription,
+						Creator = p.Creator,
 						Release = poll?.Release.ToString("M/d/yyyy") ?? string.Empty,
 						Close = poll?.Close.HasValue == true ? poll.Close.Value.ToString("M/d/yyyy") : string.Empty,
 						Votes = p.Votes,

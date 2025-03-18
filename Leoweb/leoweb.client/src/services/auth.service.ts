@@ -7,6 +7,7 @@ interface LoginResponse {
   token: string;
   expiresAt: string;
   username: string;
+  userId: string;
 }
 
 interface RegisterRequest {

@@ -74,7 +74,8 @@ public class AuthController : Controller
         {
             token = new JwtSecurityTokenHandler().WriteToken(token),
             expiration = token.ValidTo,
-            username = loginDto.Email
+            username = loginDto.Email,
+            userId = user.Id.ToString()
         });
     }
     
