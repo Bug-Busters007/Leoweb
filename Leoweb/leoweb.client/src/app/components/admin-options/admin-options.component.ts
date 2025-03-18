@@ -20,7 +20,6 @@ import {PollService} from "../../../services/poll.service";
     ]
 })
 export class AdminOptionsComponent {
-  @Input() isUser = false;
   @Input() id: number = 0;
   @Input() itemType: string = "";
 

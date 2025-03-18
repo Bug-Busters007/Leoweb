@@ -3,7 +3,7 @@ import { NgForOf, NgClass } from '@angular/common';
 import { MatListModule } from "@angular/material/list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatExpansionModule } from "@angular/material/expansion";
-import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, AfterViewChecked, Input} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -16,6 +16,8 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 import { trigger, transition, style, animate } from '@angular/animations';
+import {AdminOptionsComponent} from "../components/admin-options/admin-options.component";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-chat',
@@ -30,7 +32,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
       ])
     ])
   ],
-  imports:[
+  imports: [
     NgForOf,
     FormsModule,
     NgClass,
@@ -45,7 +47,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
     MatInputModule,
     MatRippleModule,
     MatBadgeModule,
-    MatDividerModule
+    MatDividerModule,
+    AdminOptionsComponent
   ]
 })
 export class LeoChatComponent implements OnInit, AfterViewChecked {
@@ -53,10 +56,12 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
 
   user = localStorage.getItem('username');
   message = '';
-  messages: { user: string; message: string; timestamp?: Date }[] = [];
+  messages: { user: string; message: string; timestamp?: Date, id: number }[] = [];
   isTyping = false;
+  isAdmin!: boolean;
+  role!: string;
 
-  constructor(private signalRService: SignalRService, private router: Router, private sharedService: SharedService) {}
+  constructor(private signalRService: SignalRService, private router: Router, private sharedService: SharedService, private authService: AuthService) {}
 
   async ngOnInit() {
     this.signalRService.getInitialMessages().then((messages) => {
@@ -65,7 +70,8 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
           this.messages.push({
             user: messages[i].studentName,
             message: messages[i].message,
-            timestamp: new Date(messages[i].timestamp || Date.now())
+            timestamp: new Date(messages[i].timestamp || Date.now()),
+            id: messages[i].id
           });
         }
         // Sort messages by timestamp if available
@@ -73,6 +79,11 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
           return (a.timestamp?.getTime() || 0) - (b.timestamp?.getTime() || 0);
         });
         setTimeout(() => this.scrollToBottom(), 100);
+        this.authService.getUserData().subscribe((data) => {
+          this.role = data.role;
+          this.isAdmin = this.role === "admin";
+          console.log(`User is admin: ${this.isAdmin}`);
+        });
       }else{
         console.log('No messages');
       }

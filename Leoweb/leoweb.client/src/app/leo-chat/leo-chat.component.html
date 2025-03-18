@@ -22,11 +22,14 @@
             <span class="timestamp">{{ getTimeString(msg.timestamp) }}</span>
           </div>
 
-          <mat-card class="message-card" [ngClass]="{'consecutive': isConsecutiveMessage(i)}">
-            <mat-card-content>
-              <div class="message">{{ msg.message }}</div>
-            </mat-card-content>
-          </mat-card>
+          <div class="message-content">
+            <mat-card class="message-card" [ngClass]="{'consecutive': isConsecutiveMessage(i)}">
+              <mat-card-content>
+                <div class="message">{{ msg.message }}</div>
+              </mat-card-content>
+            </mat-card>
+            <app-admin-options *ngIf="this.isAdmin" [id]="msg.id" [itemType]="'message'"></app-admin-options>
+          </div>
         </div>
       </div>
     </mat-card-content>
