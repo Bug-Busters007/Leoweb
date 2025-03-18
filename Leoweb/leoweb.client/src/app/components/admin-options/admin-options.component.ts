@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {SharedService} from "../../../services/share-name.service";
 import {Spinner} from "../spinner/spinner";
 import {PollService} from "../../../services/poll.service";
+import {RefreshService} from "../../../services/refresh.service";
 
 @Component({
   selector: 'app-admin-options',
@@ -24,7 +25,7 @@ export class AdminOptionsComponent {
   @Input() id: number = 0;
   @Input() itemType: string = "";
 
-  constructor(private sharedService: SharedService, private pollService: PollService) {
+  constructor(private sharedService: SharedService, private pollService: PollService, private refreshService: RefreshService) {
   }
   deleteItem() {
     if (this.itemType == "file") {
@@ -47,6 +48,7 @@ export class AdminOptionsComponent {
     this.sharedService.deleteFile(this.id).subscribe({
       next: () => {
         alert(`Successfully deleted file ${this.id}`);
+        this.refreshService.triggerRefresh();
       },
       error: (error) => {
         console.log(`Error while deleting file: ${error.message}`);
@@ -64,6 +66,7 @@ export class AdminOptionsComponent {
     this.pollService.deletePoll(this.id).subscribe({
       next: () => {
         alert(`Successfully deleted poll ${this.id}`);
+        this.refreshService.triggerRefresh();
       },
       error: (error) => {
         console.log(`Error while deleting poll: ${error.message}`);

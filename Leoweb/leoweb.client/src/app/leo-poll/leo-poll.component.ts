@@ -31,7 +31,7 @@ export class LeoPollComponent implements OnInit, OnDestroy {
   isCreaterVisible = false;
   isAdmin: boolean = false;
   role: string = "";
-  private refreshSub!: Subscription;
+  private refreshSub: Subscription|null = null;
 
   constructor(private authService: AuthService, private http: HttpClient, private apiService: ApiService, private router: Router, private refreshService: RefreshService) {}
 
@@ -52,7 +52,7 @@ export class LeoPollComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.refreshSub.unsubscribe();
+    this.refreshSub?.unsubscribe();
   }
 
   async getAllPolls(): Promise<void>{
