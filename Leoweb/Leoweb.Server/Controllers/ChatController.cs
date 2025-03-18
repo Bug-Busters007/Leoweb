@@ -27,5 +27,38 @@ namespace Leoweb.Server.Controllers
                 .ToListAsync();
             return Ok(messages);
         }
+
+        [HttpDelete("messages/{id}")]
+        public async Task<ActionResult<ChatMessage>> DeleteMessages(int id)
+        {
+            bool success = false;
+            try
+            {
+                var file = _context.ChatMessages.Find(id);
+          
+                if (file == null)
+                {
+                    throw new Exception($"File with ID {id} not found.");
+                }
+          
+                _context.ChatMessages.Remove(file);
+          
+                int affectedRows = _context.SaveChanges();
+          
+                success = affectedRows > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting message with ID {id}: {ex.Message}");
+            }
+            if (success)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return NotFound($"Message with ID {id} not found");
+            }
+        }
     }
 }

@@ -51,4 +51,10 @@ export class SignalRService {
       return undefined;
   }
 
+  deleteMessage(id: number) : Observable<void> {
+    const url = this.apiService.getApiUrl('chat/messages');
+    console.log('sending request');
+    return this.http.delete<void>(`${url}/${id}`);
+  }
+
 }
