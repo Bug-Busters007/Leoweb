@@ -63,6 +63,11 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'chart',
+    loadComponent: () => import('./components/pie-chart/pie-chart.component').then(m => m.PieChartComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: '**',
     loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent)
   }
