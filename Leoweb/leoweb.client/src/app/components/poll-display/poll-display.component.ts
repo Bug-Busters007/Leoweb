@@ -8,6 +8,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatButton} from "@angular/material/button";
+import {
+  MatExpansionPanel,
+  MatExpansionPanelDescription,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle
+} from "@angular/material/expansion";
 
 @Component({
   selector: 'app-poll-display',
@@ -23,7 +29,11 @@ import {MatButton} from "@angular/material/button";
     MatCheckboxModule,
     FormsModule,
     MatRadioModule,
-    MatButton
+    MatButton,
+    MatExpansionPanelDescription,
+    MatExpansionPanelTitle,
+    MatExpansionPanelHeader,
+    MatExpansionPanel
   ],
 })
 export class PollDisplayComponent implements OnInit {
@@ -58,4 +68,10 @@ export class PollDisplayComponent implements OnInit {
       throw new Error("cannot vote");
     }
   }
+
+  async evaluatePoll(): Promise<void>{
+    const userId = localStorage.getItem('userId');
+
+  }
 }
+

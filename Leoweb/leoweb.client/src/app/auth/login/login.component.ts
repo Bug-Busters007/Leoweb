@@ -24,6 +24,7 @@ export class LoginComponent {
         localStorage.setItem('jwtToken', response.token);
         localStorage.setItem('username', response.username);
         localStorage.setItem('expiresAt', response.expiresAt);
+        localStorage.setItem('userId', response.userId);
         this.router.navigate(['/home']);
       },
       error: (err) => {

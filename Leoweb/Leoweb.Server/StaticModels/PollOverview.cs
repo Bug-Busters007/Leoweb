@@ -7,6 +7,7 @@ namespace Leoweb.Server.StaticModels
 		public int Id { get; set; }
 		public string Headline { get; set; }
 		public string Description { get; set; }
+		public string Creator { get; set; }
 		public string Release { get; set; }
 		public string Close { get; set; }
 		public Dictionary<string, int> Votes { get; set; }
