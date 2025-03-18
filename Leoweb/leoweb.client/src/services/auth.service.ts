@@ -13,6 +13,7 @@ interface LoginResponse {
 interface RegisterRequest {
   email: string;
   password: string;
+  role: string;
 }
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,8 @@ export class AuthService {
     });
   }
 
-  register(email: string, password: string): Observable<string> {
-    const registerRequest: RegisterRequest = { email, password };
+  register(email: string, password: string, role: string): Observable<string> {
+    const registerRequest: RegisterRequest = { email, password, role };
     return this.http.post<string>(`${this.apiUrl}/auth/register`, registerRequest);
   }
 

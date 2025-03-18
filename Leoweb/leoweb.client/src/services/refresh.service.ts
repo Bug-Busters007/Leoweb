@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class RefreshService {
-  private refreshTrigger = new Subject<void>();
+  private refreshTrigger = new BehaviorSubject<void>(undefined);
 
   refresh$ = this.refreshTrigger.asObservable();
 
   triggerRefresh() {
+    console.log("triggered");
     this.refreshTrigger.next();
   }
 }

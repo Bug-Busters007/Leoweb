@@ -9,7 +9,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class SignalRService {
   private hubConnection: signalR.HubConnection;
-  private messageSubject = new Subject<{ user: string; message: string }>();
+  private messageSubject = new Subject<{ user: string; message: string, id: number }>();
 
   constructor(private apiService: ApiService, private http: HttpClient) {
     this.hubConnection = new signalR.HubConnectionBuilder()
@@ -22,8 +22,8 @@ export class SignalRService {
 
     this.hubConnection.start().catch(err => console.error('SignalR Error:', err));
 
-    this.hubConnection.on('ReceiveMessage', (user: string, message: string) => {
-      this.messageSubject.next({ user, message });
+    this.hubConnection.on('ReceiveMessage', (user: string, message: string, id: number) => {
+      this.messageSubject.next({ user, message, id });
     });
     this.getInitialMessages();
   }
@@ -32,7 +32,7 @@ export class SignalRService {
     this.hubConnection.invoke('SendMessage', user, message).catch(err => console.error(err));
   }
 
-  getMessages(): Observable<{ user: string; message: string }> {
+  getMessages(): Observable<{ user: string; message: string, id: number}> {
     return this.messageSubject.asObservable();
   }
 

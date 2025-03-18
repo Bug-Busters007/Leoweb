@@ -19,6 +19,8 @@ export class RegisterComponent {
   password: string = '';
   confirmPassword: string = '';
   errorMessage: string = '';
+  isAdmin: boolean = true;
+  role: string = "";
 
   constructor(private authService: AuthService, private router: Router) {}
   register(): void {
@@ -27,7 +29,16 @@ export class RegisterComponent {
       return;
     }
 
-    this.authService.register(this.email, this.password).subscribe({
+    if (this.isAdmin) {
+      this.role = 'admin';
+      console.log('registered as admin');
+    }
+    else {
+      this.role = 'user';
+      console.log('registered as user');
+    }
+
+    this.authService.register(this.email, this.password, this.role).subscribe({
       next: (response) => {
         this.router.navigate(['/login']);
       },
@@ -35,5 +46,10 @@ export class RegisterComponent {
         this.errorMessage = 'Registration failed. Please try again.';
       },
     });
+  }
+
+  checkedAdmin() {
+    this.isAdmin = !this.isAdmin;
+    console.log(`is admin: ${this.isAdmin}`);
   }
 }

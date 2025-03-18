@@ -8,6 +8,7 @@ namespace Leoweb.Server.Database.Models
         [Key]
         public string Id { get; set; }
         public string Email { get; set; }
+        public string Role { get; set; }
         public string PasswordHash { get; set; }
 		public int Year { get; set; }
 		public string Branch { get; set; }

@@ -17,6 +17,11 @@
       <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required />
     </div>
 
+    <div>
+      <input type="checkbox" id="admin" name="admin" [(ngModel)]="isAdmin" (change)="checkedAdmin()">
+      <label for="admin">admin</label>
+    </div>
+
     <button type="submit">Register</button>
   </form>
 

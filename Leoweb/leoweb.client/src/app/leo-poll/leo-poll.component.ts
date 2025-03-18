@@ -11,6 +11,7 @@ import {PollCreaterComponent} from "../components/poll-creater/poll-creater.comp
 import {provideNativeDateAdapter} from "@angular/material/core";
 import {Subscription} from "rxjs";
 import {RefreshService} from "../../services/refresh.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-leo-poll',
@@ -28,9 +29,11 @@ import {RefreshService} from "../../services/refresh.service";
 export class LeoPollComponent implements OnInit, OnDestroy {
   pollArr: Array<PollOverview> = [];
   isCreaterVisible = false;
-  private refreshSub!: Subscription;
+  isAdmin: boolean = false;
+  role: string = "";
+  private refreshSub: Subscription|null = null;
 
-  constructor(private http: HttpClient, private apiService: ApiService, private router: Router, private refreshService: RefreshService) {}
+  constructor(private authService: AuthService, private http: HttpClient, private apiService: ApiService, private router: Router, private refreshService: RefreshService) {}
 
   async ngOnInit() {
     const pdiv = document.getElementById('pollsDiv');
@@ -41,10 +44,15 @@ export class LeoPollComponent implements OnInit, OnDestroy {
     this.refreshSub = this.refreshService.refresh$.subscribe(async() =>{
       await this.getAllPolls();
     });
+    this.authService.getUserData().subscribe((data) => {
+      this.role = data.role;
+      this.isAdmin = this.role === "admin";
+      console.log(`User is admin: ${this.isAdmin}`);
+    });
   }
 
   ngOnDestroy() {
-    this.refreshSub.unsubscribe();
+    this.refreshSub?.unsubscribe();
   }
 
   async getAllPolls(): Promise<void>{

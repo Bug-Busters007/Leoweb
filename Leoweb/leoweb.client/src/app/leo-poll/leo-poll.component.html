@@ -5,6 +5,6 @@
 </div>
 
 <div id="pollsDiv">
-  <app-poll-display *ngFor="let poll of pollArr" [poll]="poll"></app-poll-display>
+  <app-poll-display *ngFor="let poll of pollArr" [id]="poll.id" [poll]="poll" [isAdmin]="isAdmin"></app-poll-display>
 </div>
 

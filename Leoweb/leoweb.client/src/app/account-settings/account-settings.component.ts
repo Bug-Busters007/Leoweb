@@ -32,6 +32,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
 export class AccountSettingsComponent {
   fileArray: { id: number; name: string; year: number, subject: string }[] = [];
   username = localStorage.getItem('username');
+  role: string = "";
+
 
   constructor(public dialog: MatDialog, private router: Router, private authService: AuthService, private http: HttpClient, private apiService: ApiService) {}
 
@@ -40,6 +42,9 @@ export class AccountSettingsComponent {
     spinner.showSpinner();
     this.fileArray = await this.getFileNamesFromStudent();
     spinner.removeSpinner();
+    this.authService.getUserData().subscribe((data) => {
+      this.role = data.role;
+    });
   }
 
   openModal(title: string, content: string): void {

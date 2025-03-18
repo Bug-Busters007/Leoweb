@@ -4,6 +4,7 @@ using Leoweb.Server.StaticModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Net;
 
 namespace Leoweb.Server.Controllers
 {
@@ -40,6 +41,7 @@ namespace Leoweb.Server.Controllers
 					Poll = newPoll
 				});
 			}
+
 			foreach (var y in poll.Year)
 			{
 				await _dbContext.AddAsync(new PollYear()
@@ -48,6 +50,7 @@ namespace Leoweb.Server.Controllers
 					Year = (Year)y
 				});
 			}
+
 			foreach (var b in poll.Branch)
 			{
 				await _dbContext.AddAsync(new PollBranch()
@@ -56,6 +59,7 @@ namespace Leoweb.Server.Controllers
 					Branch = b
 				});
 			}
+
 			await _dbContext.AddAsync(newPoll);
 			_dbContext.SaveChanges();
 			return Ok(newPoll);
@@ -77,7 +81,7 @@ namespace Leoweb.Server.Controllers
 
 			var pollYears = _dbContext.PollYear.Where(py => py.PollId == existingPoll.Id).ToList();
 			_dbContext.PollYear.RemoveRange(pollYears);
-			foreach(var y in poll.Year)
+			foreach (var y in poll.Year)
 			{
 				await _dbContext.AddAsync(new PollYear()
 				{
@@ -88,7 +92,7 @@ namespace Leoweb.Server.Controllers
 
 			var pollBranches = _dbContext.PollBranch.Where(pb => pb.PollId == existingPoll.Id).ToList();
 			_dbContext.PollBranch.RemoveRange(pollBranches);
-			foreach(var b in poll.Branch)
+			foreach (var b in poll.Branch)
 			{
 				await _dbContext.AddAsync(new PollBranch()
 				{
@@ -136,11 +140,12 @@ namespace Leoweb.Server.Controllers
 			{
 				return BadRequest("Poll not found");
 			}
-			poll.Close = date == null ? DateTime.Now.ToUniversalTime() : ((DateTime) date).ToUniversalTime();
+
+			poll.Close = date == null ? DateTime.Now.ToUniversalTime() : ((DateTime)date).ToUniversalTime();
 			_dbContext.SaveChanges();
 			return Ok(poll);
 		}
-		
+
 		[HttpGet("all")]
 		public async Task<IActionResult> GetAllPolls()
 		{
@@ -153,7 +158,7 @@ namespace Leoweb.Server.Controllers
 		public async Task<IActionResult> GetPollOverview([FromRoute] int pollId)
 		{
 			var poll = _dbContext.Poll.Find(pollId);
-			if ( poll == null )
+			if (poll == null)
 			{
 				return BadRequest("Poll not found");
 			}
@@ -174,5 +179,39 @@ namespace Leoweb.Server.Controllers
 				.ToArrayAsync();
 			return Ok(polls);
 		}
-	}
+
+		[HttpDelete("{id}")]
+		public IActionResult DeletePoll([FromRoute] int id)
+		{
+			bool success = false;
+			try
+			{
+				var poll = _dbContext.Poll.Find(id);
+          
+				if (poll == null)
+				{
+					throw new Exception($"Poll with ID {id} not found.");
+				}
+          
+				_dbContext.Poll.Remove(poll);
+          
+				int affectedRows = _dbContext.SaveChanges();
+          
+				success = affectedRows > 0;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error deleting poll with ID {id}: {ex.Message}");
+			}
+  
+			if (success)
+			{
+				return NoContent();
+			}
+			else
+			{
+				return NotFound($"Poll with ID {id} not found");
+			}
+		}
+}
 }
