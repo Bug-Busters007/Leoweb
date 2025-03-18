@@ -118,7 +118,6 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
     if (this.message.trim() && this.user) {
       this.signalRService.sendMessage(this.user, this.message);
       this.message = '';
-      // Focus back on input after sending
       const inputElement = document.querySelector('input[matInput]') as HTMLElement;
       if (inputElement) {
         (inputElement as HTMLElement).focus();

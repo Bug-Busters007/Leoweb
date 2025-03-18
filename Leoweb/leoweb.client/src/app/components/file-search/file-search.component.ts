@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {FileDisplayComponent} from "../file-display/file-display.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {Subscription} from "rxjs";
@@ -43,11 +43,12 @@ export class FileSearchComponent implements OnInit {
               private likeService: LikesServiceService) {
   }
   async ngOnInit() {
-    console.log('SEAS');
     this.allFiles = await this.getFileNames();
     this.fileArray = this.allFiles
     this.shareService.setFileArray(this.fileArray);
     this.refreshSubscription = this.refreshService.refresh$.subscribe(async () => {
+      this.allFiles = await this.getFileNames();
+      this.fileArray = this.allFiles;
       this.updateSearchService.updateData();
     });
     this.updateSearchService.currentData.subscribe((data) =>{
@@ -62,9 +63,7 @@ export class FileSearchComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    if (this.refreshSubscription) {
-      this.refreshSubscription.unsubscribe();
-    }
+    this.refreshSubscription?.unsubscribe();
   }
 
     filterFilesSubjectAndYear(){
