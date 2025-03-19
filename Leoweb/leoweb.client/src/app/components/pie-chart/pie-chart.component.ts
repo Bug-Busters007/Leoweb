@@ -16,9 +16,21 @@ export class PieChartComponent {
 
   colorScheme = 'vivid';
 
-  single = [
-    { "name": "Germany", "value": 894e4 },
-    { "name": "USA", "value": 5e6 },
-    { "name": "France", "value": 3e6 }
+  dataAr = [
+    { "name": "Germany", "value": 20 },
+    { "name": "USA", "value": 20 },
+    { "name": "France", "value": 60 }
   ];
+
+  data = this.dataAr.map(item => ({
+    name: item.name,
+    value: item.value 
+  }));
+
+  single = this.data.map(v => ({ name: v.name, value: v.value }));
+
+  formatLabel(value: string): string {
+    console.log(value);
+    return value;
+  }
 }

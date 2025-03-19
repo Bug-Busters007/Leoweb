@@ -1,8 +1,9 @@
 <p>bar chart works!</p>
-<ngx-charts-bar-vertical [view]="[700, 400]"
-                         [scheme]="colorScheme"
-                         [results]="single"
-                         [gradient]="false"
-                         [xAxis]="true"
-                         [yAxis]="true">
-</ngx-charts-bar-vertical>
+<ngx-charts-pie-chart [view]="[700, 400]"
+                      [scheme]="colorScheme"
+                      [results]="single"
+                      [legend]="true"
+                      [labels]="true"
+                      [labelFormatting]="formatLabel">
+</ngx-charts-pie-chart>
+
