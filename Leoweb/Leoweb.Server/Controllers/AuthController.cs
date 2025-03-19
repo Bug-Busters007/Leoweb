@@ -69,6 +69,10 @@ public class AuthController : Controller
             expires: DateTime.Now.AddHours(1),
             signingCredentials: creds
         );
+        foreach (var claim in User.Claims)
+        {
+            Console.WriteLine(claim);
+        }
         
         return Ok(new
         {
@@ -79,6 +83,7 @@ public class AuthController : Controller
         });
     }
     
+    [Authorize]
     [HttpGet("getUserData")]
     public IActionResult GetUserData()
     {

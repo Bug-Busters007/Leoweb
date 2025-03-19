@@ -29,7 +29,14 @@ public class AuthService
     public async Task<Student?> IsValidUser(string email, string password)
     {
         var student = await _context.Student.FirstOrDefaultAsync(s => s.Email == email);
-        return student == null || student.PasswordHash == HashPassword(password) ? student : null;
+    
+        if (student == null)
+            return null;
+        
+        if (student.PasswordHash == HashPassword(password))
+            return student;
+        
+        return null;
     }
     
     public async Task<bool> RegisterStudentAsync(string email, string password, string role)

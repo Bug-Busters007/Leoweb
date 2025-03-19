@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authorization;
 using File = Leoweb.Server.Database.Models.File;
 
 namespace Leoweb.Server.Controllers
@@ -21,29 +22,35 @@ namespace Leoweb.Server.Controllers
 		[HttpGet("fileIdsWithLikesFromUser")]
 		public IActionResult GetFileIdsWithLikesFromUser()
 		{
+
 			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
 			var fileIds = _dbContext.UserFileLike.Where(like => like.UserId == studentID).Select(like => like.FileId).ToList();
 			return Ok(fileIds);
 		}
 		
+		[Authorize]
 		[HttpPost("like/{id}")]
 		public IActionResult LikeFile([FromRoute] int id)
 		{
-			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
-			var file = _dbContext.File.Where(f => f.Data.Id == id).First();
+			foreach (var claim in User.Claims)
+			{
+				Console.WriteLine("Claim: " + claim.Type + ":" + claim.Value);
+			}
+			var studentId = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
+			var file = _dbContext.File.First(f => f.Data.Id == id);
 			if (file == null)
 			{
 				return NotFound($"File with ID {id} not found.");
 			}
 			
-			var fileHasBeenLikedByUser = _dbContext.UserFileLike.Where(like => like.FileId == id && like.UserId == studentID).Any();
+			var fileHasBeenLikedByUser = _dbContext.UserFileLike.Where(like => like.FileId == id && like.UserId == studentId).Any();
 			if (fileHasBeenLikedByUser)
 			{
 				return BadRequest("File has already been liked by user.");
 			}
 			var like = new UserFileLike()
 			{
-				UserId = studentID,
+				UserId = studentId,
 				FileId = id
 			};
 			_dbContext.UserFileLike.Add(like);
