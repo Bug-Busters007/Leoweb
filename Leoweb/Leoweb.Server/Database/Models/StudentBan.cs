@@ -7,6 +7,7 @@ namespace Leoweb.Server.Database.Models
     public class StudentBan
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         public string Reason { get; set; }
         public string BannedIn { get; set; }

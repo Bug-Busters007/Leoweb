@@ -28,32 +28,26 @@ namespace Leoweb.Server.Controllers
             return Ok(messages);
         }
 
-        [HttpPost("")]
-        public async Task<ActionResult<StudentBan>> AddBan([FromBody]StudentBan studentBan)
+        
+        public class AddBanClass
         {
-            if (studentBan == null)
-            {
-                return BadRequest("Student ban information cannot be null.");
-            }
-            
-            
+            public string bannedIn { get; set; }
+            public string reason { get; set; }
+        }
+        [HttpPost("{studentId}")]
+        public async Task<ActionResult<StudentBan>> AddBan([FromBody] AddBanClass addBan, string studentId)
+        {
             string[] validBannedInValues = { "chat", "library", "poll" };
-            if (!validBannedInValues.Contains(studentBan.BannedIn?.ToLower()))
+            if (!validBannedInValues.Contains(addBan.bannedIn.ToLower()))
             {
                 return BadRequest("BannedIn must be one of the following values: chat, library, poll.");
             }
 
-            var authService = new AuthService(_context);
-            if (await authService.StudentExists(studentBan.StudentId))
-            {
-                return NotFound($"Student with ID {studentBan.StudentId} not found.");
-            }
-
             var ban = new StudentBan()
             {
-                BannedIn = studentBan.BannedIn,
-                StudentId = studentBan.StudentId,
-                Reason = studentBan.Reason,
+                BannedIn = addBan.bannedIn,
+                StudentId = studentId,
+                Reason = addBan.reason,
             };
     
             _context.StudentBan.Add(ban);
