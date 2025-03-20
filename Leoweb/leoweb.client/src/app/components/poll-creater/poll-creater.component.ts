@@ -135,6 +135,7 @@ export class PollCreaterComponent implements OnInit {
       const pollData = {
         headline: this.titleFormGroup.value.title,
         description: this.descriptionFormGroup.value.description,
+        creator: localStorage.getItem('userId'),
         release: new Date(this.dateFormGroup.value.startdate).toISOString(),
         close: new Date(this.dateFormGroup.value.enddate).toISOString(),
         choices: this.choices,
@@ -182,6 +183,7 @@ export class PollCreaterComponent implements OnInit {
         id: -1,
         headline: "",
         description: "",
+        creator: "",
         release: "",
         close: "",
         votes: new Map<string, number>(),

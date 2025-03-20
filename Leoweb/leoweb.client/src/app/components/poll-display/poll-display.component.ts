@@ -16,7 +16,6 @@ import {
 } from "@angular/material/expansion";
 import {AdminOptionsComponent} from "../admin-options/admin-options.component";
 
-
 @Component({
   selector: 'app-poll-display',
   standalone: true,
@@ -48,14 +47,19 @@ export class PollDisplayComponent implements OnInit {
   description: string = "";
   choices: string[] = [];
   selectedChoice: string | null = null;
+  isPollOwner: boolean = false;
 
   constructor(private http: HttpClient, private apiService: ApiService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     if (this.poll) {
       this.headline = this.poll.headline;
       this.description = this.poll.description;
       this.choices = Array.from(Object.keys(this.poll.votes));
+      if(localStorage.getItem('userId') === this.poll.creator) {
+        this.isPollOwner = true;
+        await this.evaluatePoll();
+      }
     }
   }
 
@@ -76,7 +80,6 @@ export class PollDisplayComponent implements OnInit {
   }
 
   async evaluatePoll(): Promise<void>{
-    const userId = localStorage.getItem('userId');
 
   }
 }
