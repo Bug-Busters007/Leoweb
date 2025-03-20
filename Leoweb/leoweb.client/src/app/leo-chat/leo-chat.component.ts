@@ -74,7 +74,6 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
             id: messages[i].id
           });
         }
-        // Sort messages by timestamp if available
         this.messages.sort((a, b) => {
           return (a.timestamp?.getTime() || 0) - (b.timestamp?.getTime() || 0);
         });
@@ -89,19 +88,16 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
       }
     });
     this.signalRService.getMessages().subscribe((msg) => {
-      // Add timestamp to new messages
       const msgWithTimestamp = {
         ...msg,
         timestamp: new Date()
       };
       this.messages.push(msgWithTimestamp);
-      // Auto-scroll on new message
       setTimeout(() => this.scrollToBottom(), 100);
     });
   }
 
   ngAfterViewChecked() {
-    // This ensures we scroll to bottom after view updates
     this.scrollToBottom();
   }
 

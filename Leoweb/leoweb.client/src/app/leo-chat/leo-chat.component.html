@@ -1,10 +1,5 @@
 <div class="chat-container">
-  <mat-card class="chat-card">
-    <mat-card-header>
-      <mat-card-title>Chat</mat-card-title>
-      <mat-card-subtitle>{{messages.length}} messages</mat-card-subtitle>
-    </mat-card-header>
-
+  <div class="chat-card">
     <mat-card-content>
       <div class="chat-messages" #chatMessages>
         <div *ngFor="let msg of messages; let i = index"
@@ -58,5 +53,5 @@
         </button>
       </div>
     </mat-card-actions>
-  </mat-card>
+  </div>
 </div>
