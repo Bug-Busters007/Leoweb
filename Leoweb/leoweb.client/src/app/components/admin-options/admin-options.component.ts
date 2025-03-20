@@ -9,6 +9,8 @@ import {Spinner} from "../spinner/spinner";
 import {PollService} from "../../../services/poll.service";
 import {RefreshService} from "../../../services/refresh.service";
 import {SignalRService} from "../../../services/chat.service";
+import {BanService} from "../../../services/ban.service";
+import {IStudentBan} from "../../../models/studentBanModel";
 
 @Component({
   selector: 'app-admin-options',
@@ -24,8 +26,10 @@ import {SignalRService} from "../../../services/chat.service";
 export class AdminOptionsComponent {
   @Input() id: number = 0;
   @Input() itemType: string = "";
+  @Input() component?: string;
+  @Input() responsibleStudentId?: string;
 
-  constructor(private sharedService: SharedService, private pollService: PollService, private refreshService: RefreshService, private chatService: SignalRService) {
+  constructor(private sharedService: SharedService, private pollService: PollService, private refreshService: RefreshService, private chatService: SignalRService, private banService: BanService) {
   }
   deleteItem() {
     if (this.itemType == "file") {
@@ -39,8 +43,9 @@ export class AdminOptionsComponent {
     }
   }
 
-  banUser() {
-    alert('User gebannt!');
+  async banUser() {
+    const ban: IStudentBan = {reason: 'not implemented', userId: this.responsibleStudentId!, bannedIn: this.component!};
+    this.banService.banStudent(ban)
   }
 
   deleteFile() {
