@@ -5,6 +5,8 @@ import {MatCardModule} from "@angular/material/card";
 import {MatAnchor, MatButtonModule} from "@angular/material/button";
 import {NgClass, NgForOf} from "@angular/common";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
+import {AuthService} from "../../services/auth.service";
+import { CommonModule } from '@angular/common';
 
 
 interface Module {
@@ -26,10 +28,13 @@ interface Module {
     NgForOf,
     MatIconModule,
     MatIcon,
-    NgClass
+    NgClass,
+    CommonModule,
   ]
 })
 export class HomeComponent implements OnInit{
+  isAdmin?: boolean;
+  role?: string;
   modules: Module[] = [
     {
       title: 'LeoLibrary',
@@ -53,8 +58,24 @@ export class HomeComponent implements OnInit{
       iconClass: 'poll-icon'
     }
   ];
+  adminModule: Module = {
+    title: 'AdminOptions',
+    description: 'Management Seite für Admins',
+    link: '/adminOverview',
+    icon: 'settings',
+    iconClass: 'settings'
+  }
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.authService.getUserData().subscribe((data) => {
+      this.role = data.role;
+      this.isAdmin = this.role === "admin";
+      console.log(`User is admin: ${this.isAdmin}`);
+    });
+  }
+  ngOnDestroy(): void {
+    this.authService.logout();
+  }
 }

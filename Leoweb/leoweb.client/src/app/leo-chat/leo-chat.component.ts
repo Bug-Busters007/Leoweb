@@ -16,7 +16,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
 import { trigger, transition, style, animate } from '@angular/animations';
-import {AdminOptionsComponent} from "../components/admin-options/admin-options.component";
+import {AdminOptionsComponent} from "../components/admin/admin-options/admin-options.component";
 import {AuthService} from "../../services/auth.service";
 
 @Component({

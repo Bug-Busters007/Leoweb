@@ -8,13 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatButton} from "@angular/material/button";
-import {
-  MatExpansionPanel,
-  MatExpansionPanelDescription,
-  MatExpansionPanelHeader,
-  MatExpansionPanelTitle
-} from "@angular/material/expansion";
-import {AdminOptionsComponent} from "../admin-options/admin-options.component";
+import {AdminOptionsComponent} from "../admin/admin-options/admin-options.component";
 import {PollAnalyseComponent} from "../poll-analyse/poll-analyse.component";
 import { firstValueFrom } from 'rxjs';
 
@@ -33,10 +27,6 @@ import { firstValueFrom } from 'rxjs';
     FormsModule,
     MatRadioModule,
     MatButton,
-    MatExpansionPanelDescription,
-    MatExpansionPanelTitle,
-    MatExpansionPanelHeader,
-    MatExpansionPanel,
     AdminOptionsComponent,
     NgIf,
     PollAnalyseComponent

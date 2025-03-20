@@ -14,5 +14,19 @@
       </div>
       <div class="module-background"></div>
     </div>
+    <div class="module-item" *ngIf="isAdmin" [routerLink]="adminModule.link">
+      <div class="module-content">
+        <div class="module-icon" [ngClass]="adminModule.iconClass">
+          <mat-icon>{{adminModule.icon}}</mat-icon>
+        </div>
+        <h2 class="module-title">{{adminModule.title}}</h2>
+        <p class="module-description">{{adminModule.description}}</p>
+        <div class="module-action">
+          <span>Erkunden</span>
+          <mat-icon>arrow_forward</mat-icon>
+        </div>
+      </div>
+      <div class="module-background"></div>
+    </div>
   </section>
 </div>

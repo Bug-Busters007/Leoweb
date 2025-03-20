@@ -11,7 +11,7 @@ import {SharedService} from "../../../services/share-name.service";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {LikesServiceService} from "../../../services/likes-service.service";
-import {AdminOptionsComponent} from "../admin-options/admin-options.component";
+import {AdminOptionsComponent} from "../admin/admin-options/admin-options.component";
 import {AuthService} from "../../../services/auth.service";
 
 @Component({

@@ -9,7 +9,7 @@ import {UpdateSearchService} from "../../../services/update-search.service";
 import {RefreshService} from "../../../services/refresh.service";
 import {LikesServiceService} from "../../../services/likes-service.service";
 import {NgIf} from "@angular/common";
-import {AdminOptionsComponent} from "../admin-options/admin-options.component";
+import {AdminOptionsComponent} from "../admin/admin-options/admin-options.component";
 
 
 @Component({

@@ -21,4 +21,9 @@ export class BanService {
     const url = this.apiService.getApiUrl(`ban/${ban.userId}`);
     return this.http.post<IStudentBan>(url, {BannedIn: ban.bannedIn, Reason: ban.reason});
   }
+
+  delteBan(banId: string): Observable<void>{
+    const url = this.apiService.getApiUrl(`ban/${banId}`);
+    return this.http.delete<void>(url);
+  }
 }

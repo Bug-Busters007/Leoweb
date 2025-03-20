@@ -4,13 +4,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import {HttpClient} from "@angular/common/http";
-import {SharedService} from "../../../services/share-name.service";
-import {Spinner} from "../spinner/spinner";
-import {PollService} from "../../../services/poll.service";
-import {RefreshService} from "../../../services/refresh.service";
-import {SignalRService} from "../../../services/chat.service";
-import {BanService} from "../../../services/ban.service";
-import {IStudentBan} from "../../../models/studentBanModel";
+import {SharedService} from "../../../../services/share-name.service";
+import {Spinner} from "../../spinner/spinner";
+import {PollService} from "../../../../services/poll.service";
+import {RefreshService} from "../../../../services/refresh.service";
+import {SignalRService} from "../../../../services/chat.service";
+import {BanService} from "../../../../services/ban.service";
+import {IStudentBan} from "../../../../models/studentBanModel";
 
 @Component({
   selector: 'app-admin-options',
