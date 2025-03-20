@@ -11,16 +11,22 @@ import { IPieChartData } from '../../../models/chartModel'
   imports: [NgxChartsModule]
 })
 export class PieChartComponent {
-  @Input() input: Map<string, number> = new Map<string, number>;
+  @Input() input: Map<string, number> = new Map<string, number>([
+    ['GER', 40],
+    ['USA', 40],
+    ['FRA', 120]
+  ]);
 
-  data: IPieChartData[] = [
-    { data: { name: 'GER', value: 40, label: '' } },
-    { data: { name: 'USA', value: 40, label: '' } },
-    { data: { name: 'FRA', value: 120, label: '' }}
-  ];
+  ngOnInit() {
+    this.data = Array.from(this.input.entries()).map(([name, value]) => ({
+      data: { name, value }
+    }));
+    this.single = this.data.map(d => ({ name: d.data.name, value: d.data.value }));
+  }
 
+  data: IPieChartData[] = [];
 
-  single = this.data.map(d => d.data);
+  single: {name: string, value: number}[] = [];
 
   colorScheme = 'vivid';
 
@@ -34,4 +40,3 @@ export class PieChartComponent {
     return `${d?.data.name} (${this.getPercentage(d?.data.value ?? 0)}%)`;
   }
 }
-
