@@ -3,6 +3,7 @@ using Leoweb.Server.Services;
 using Leoweb.Server.StaticModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Expressions;
 using System.Linq;
 using System.Net;
 
@@ -117,18 +118,27 @@ namespace Leoweb.Server.Controllers
 			return Ok(existingPoll);
 		}
 
-		[HttpPost("vote")]
-		public async Task<IActionResult> CreateNewVote([FromBody] VoteJSON vote)
+		[HttpPut("vote")]
+		public async Task<IActionResult> CreateNewVote([FromBody] VoteJSON voteJSON)
 		{
 			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
+			var vote = _dbContext.Vote
+				.Where(v => v.StudentId == studentID && v.PollId == voteJSON.PollId)
+				.FirstOrDefault();
+			if (vote != null)
+			{
+				vote.Choice = _dbContext.Choice.First(c => c.PollId == voteJSON.PollId && c.Description == voteJSON.Choice);
+				await _dbContext.SaveChangesAsync();
+				return Ok(vote);
+			}
 			var newVote = new Vote()
 			{
 				StudentId = studentID,
-				Choice = _dbContext.Choice.First(c => c.PollId == vote.PollId && c.Description == vote.Choice),
-				Poll = _dbContext.Poll.Find(vote.PollId)!
+				Choice = _dbContext.Choice.First(c => c.PollId == voteJSON.PollId && c.Description == voteJSON.Choice),
+				Poll = _dbContext.Poll.Find(voteJSON.PollId)!
 			};
-			await _dbContext.AddAsync(newVote);
-			_dbContext.SaveChanges();
+			_dbContext.Add(newVote);
+			await _dbContext.SaveChangesAsync();
 			return Ok(newVote);
 		}
 
@@ -213,5 +223,18 @@ namespace Leoweb.Server.Controllers
 				return NotFound($"Poll with ID {id} not found");
 			}
 		}
-}
+
+		[HttpGet("{pollId}/vote")]
+		public async Task<IActionResult> GetStudentVotes([FromRoute] int pollId)
+		{
+			var studentID = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
+			var vote = _dbContext.Vote
+				.Where(v => v.StudentId == studentID && v.Poll.Id == pollId)
+				.Select(v => new { choice = v.Choice.Description })
+				.ToArray()
+				.FirstOrDefault();
+
+			return Ok(vote);
+		}
+	}
 }

@@ -5,7 +5,7 @@
   <mat-card-content>
     <h3>{{description}}</h3>
     <form id="pollForm">
-      <mat-radio-group [(ngModel)]="selectedChoice" name="vote">
+      <mat-radio-group [(ngModel)]="selectedChoice" [name]="'poll_' + this.poll.id">
         <div *ngFor="let choice of choices">
           <mat-radio-button class="example-margin" [value]="choice">
             {{ choice }}
@@ -13,7 +13,7 @@
         </div>
       </mat-radio-group>
       <button mat-raised-button (click)="vote()">Vote</button>
-      <app-admin-options *ngIf="isAdmin" [id]="this.id" [itemType]="'poll'" [component]="'poll'" [responsibleStudentId]="this.poll.creator"></app-admin-options>
+      <app-admin-options *ngIf="isAdmin" [id]="this.poll.id" [itemType]="'poll'" [component]="'poll'" [responsibleStudentId]="this.poll.creator"></app-admin-options>
     </form>
     <p id="resultMessage"></p>
   </mat-card-content>

@@ -11,10 +11,9 @@ import { IPieChartData } from '../../../models/chartModel'
   imports: [NgxChartsModule]
 })
 export class PieChartComponent  implements OnInit{
-  @Input() input: Object = {Ger: 10, Fra: 40, USA: 50};
+  @Input() input: Object = {GER: 10, FRA: 40, USA: 50};
 
   ngOnInit() {
-    console.log(this.input);
     const map = new Map<string, number>(Object.entries(this.input));
     this.data = Array.from(map.entries()).map(([name, value]) => ({
       data: { name, value }
@@ -33,8 +32,7 @@ export class PieChartComponent  implements OnInit{
     return (value / sum * 100).toFixed(0);
   }
 
-  formatLabel = (value: string): string => {
-    const d = this.data.find(d => d.data.name === value);
-    return `${d?.data.name} (${this.getPercentage(d?.data.value ?? 0)}%)`;
+  formatTooltip = (d: IPieChartData): string => {
+    return `${d?.data.name} (${this.getPercentage(d?.data.value ?? 0)}%) <br> ${d?.data.value}`;
   }
 }

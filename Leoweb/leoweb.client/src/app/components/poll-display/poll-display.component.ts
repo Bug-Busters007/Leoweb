@@ -16,6 +16,7 @@ import {
 } from "@angular/material/expansion";
 import {AdminOptionsComponent} from "../admin-options/admin-options.component";
 import {PollAnalyseComponent} from "../poll-analyse/poll-analyse.component";
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-poll-display',
@@ -42,7 +43,6 @@ import {PollAnalyseComponent} from "../poll-analyse/poll-analyse.component";
   ],
 })
 export class PollDisplayComponent implements OnInit {
-  @Input() id!: number;
   @Input() poll!: PollOverview;
   @Input() isAdmin!: boolean;
   headline: string = "";
@@ -62,22 +62,26 @@ export class PollDisplayComponent implements OnInit {
         this.isPollOwner = true;
       }
     }
+    const url = this.apiService.getApiUrl(`Poll/${this.poll.id}/vote`);
+    try {
+      const response = await firstValueFrom(this.http.get<{choice: string} | null>(url));
+      this.selectedChoice = response?.choice ?? null;
+    } catch (error) {
+      console.error('Fehler beim Abrufen der Auswahl:', error);
+      this.selectedChoice = null;
+    }
   }
 
   async vote(): Promise<void> {
-    const selection = this.selectedChoice;
-    this.selectedChoice = null;
     const url = this.apiService.getApiUrl('Poll/vote');
     try {
-      const response = await this.http
-        .post(url, {
+      const response = await firstValueFrom(this.http
+        .put(url, {
           pollId: this.poll.id,
-          choice: selection
-        })
-        .toPromise();
+          choice: this.selectedChoice
+        }));
     } catch (error) {
       throw new Error("cannot vote");
     }
   }
 }
-
