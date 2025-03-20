@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Leoweb.Server.Services;
+using Leoweb.Server.StaticModels;
 
 namespace Leoweb.Server.Controllers
 {
@@ -27,27 +28,21 @@ namespace Leoweb.Server.Controllers
                 .ToListAsync();
             return Ok(messages);
         }
-
         
-        public class AddBanClass
-        {
-            public string bannedIn { get; set; }
-            public string reason { get; set; }
-        }
         [HttpPost("{studentId}")]
-        public async Task<ActionResult<StudentBan>> AddBan([FromBody] AddBanClass addBan, string studentId)
+        public async Task<ActionResult<StudentBan>> AddBan([FromBody] AddBan addBan, string studentId)
         {
             string[] validBannedInValues = { "chat", "library", "poll" };
-            if (!validBannedInValues.Contains(addBan.bannedIn.ToLower()))
+            if (!validBannedInValues.Contains(addBan.BannedIn.ToLower()))
             {
                 return BadRequest("BannedIn must be one of the following values: chat, library, poll.");
             }
 
             var ban = new StudentBan()
             {
-                BannedIn = addBan.bannedIn,
+                BannedIn = addBan.BannedIn,
                 StudentId = studentId,
-                Reason = addBan.reason,
+                Reason = addBan.Reason,
             };
     
             _context.StudentBan.Add(ban);
