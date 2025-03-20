@@ -15,6 +15,7 @@ import {
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import {AdminOptionsComponent} from "../admin-options/admin-options.component";
+import {PollAnalyseComponent} from "../poll-analyse/poll-analyse.component";
 
 @Component({
   selector: 'app-poll-display',
@@ -36,7 +37,8 @@ import {AdminOptionsComponent} from "../admin-options/admin-options.component";
     MatExpansionPanelHeader,
     MatExpansionPanel,
     AdminOptionsComponent,
-    NgIf
+    NgIf,
+    PollAnalyseComponent
   ],
 })
 export class PollDisplayComponent implements OnInit {
@@ -58,7 +60,6 @@ export class PollDisplayComponent implements OnInit {
       this.choices = Array.from(Object.keys(this.poll.votes));
       if(localStorage.getItem('userId') === this.poll.creator) {
         this.isPollOwner = true;
-        await this.evaluatePoll();
       }
     }
   }
@@ -77,10 +78,6 @@ export class PollDisplayComponent implements OnInit {
     } catch (error) {
       throw new Error("cannot vote");
     }
-  }
-
-  async evaluatePoll(): Promise<void>{
-
   }
 }
 
