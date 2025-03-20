@@ -21,7 +21,7 @@ import {AuthService} from "../../../services/auth.service";
 export class UserOverviewComponent {
   fileArray: { id: number; name: string; year: number, subject: string, student: string}[] = [];
   @Input() username: string = '';
-  fromWhere: string = this.sharedService.fromWhere;
+  fromWhere: string = this.sharedService.getfromWhere();
   constructor(private authService: AuthService, private http: HttpClient, private apiService: ApiService, private sharedService: SharedService, private router: Router) {}
 
   async ngOnInit() {
@@ -44,6 +44,8 @@ export class UserOverviewComponent {
   }
 
   goBack(): void {
+    this.fromWhere = this.sharedService.getfromWhere();
+    console.log(this.fromWhere);
     this.router.navigate([this.fromWhere]);
   }
 }

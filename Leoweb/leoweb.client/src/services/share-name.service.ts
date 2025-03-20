@@ -8,11 +8,12 @@ import {id} from "@swimlane/ngx-charts";
 
 @Injectable({ providedIn: 'root' })
 export class SharedService {
-  get fromWhere(): string {
+  getfromWhere(): string {
     return this._fromWhere;
   }
 
-  set fromWhere(value: string) {
+  setfromWhere(value: string) {
+    console.log("set fromWhere:", value);
     this._fromWhere = value;
   }
   private inputValue: string = '';

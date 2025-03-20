@@ -62,7 +62,7 @@ export class FileDisplayComponent implements OnInit {
   }
 
   goToUserInfo() {
-    this.sharedService.fromWhere='/leolibrary'
+    this.sharedService.setfromWhere('/leolibrary');
     this.sharedService.setInputValue(this.student);
     this.router.navigate(['/UserOverview']);
   }
