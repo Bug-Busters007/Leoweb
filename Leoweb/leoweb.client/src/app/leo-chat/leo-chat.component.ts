@@ -54,7 +54,7 @@ import {AuthService} from "../../services/auth.service";
 export class LeoChatComponent implements OnInit, AfterViewChecked {
   @ViewChild('chatMessages') private chatMessagesContainer: ElementRef | undefined;
 
-  user = localStorage.getItem('username');
+  user = localStorage.getItem('userId');
   message = '';
   messages: { user: string; message: string; timestamp?: Date, id: number }[] = [];
   isTyping = false;
