@@ -12,6 +12,7 @@ import {AdminOptionsComponent} from "../admin/admin-options/admin-options.compon
 import {PollAnalyseComponent} from "../poll-analyse/poll-analyse.component";
 import { firstValueFrom } from 'rxjs';
 import {RefreshService} from "../../../services/refresh.service";
+import {PollResultComponent} from "../poll-result/poll-result.component";
 
 @Component({
   selector: 'app-poll-display',
@@ -30,7 +31,8 @@ import {RefreshService} from "../../../services/refresh.service";
     MatButton,
     AdminOptionsComponent,
     NgIf,
-    PollAnalyseComponent
+    PollAnalyseComponent,
+    PollResultComponent
   ],
 })
 export class PollDisplayComponent implements OnInit {
@@ -41,11 +43,14 @@ export class PollDisplayComponent implements OnInit {
   choices: string[] = [];
   selectedChoice: string | null = null;
   isPollOwner: boolean = false;
+  isPollClosed: [boolean, boolean] = [false, false];
 
   constructor(private http: HttpClient, private apiService: ApiService) { }
 
   async ngOnInit(): Promise<void> {
     if (this.poll) {
+      this.isPollClosed = this.isClosed();
+      console.log(this.isPollClosed);
       this.headline = this.poll.headline;
       this.description = this.poll.description;
       this.choices = Array.from(Object.keys(this.poll.votes));
@@ -75,4 +80,22 @@ export class PollDisplayComponent implements OnInit {
       throw new Error("cannot vote");
     }
   }
+
+  // returns [isClosed, showResults]
+  isClosed(): [boolean, boolean]{
+    const currentDate: Date = new Date();
+    const closeDate: Date = this.parseDate(this.poll.close);
+    const releaseDate: Date = this.parseDate(this.poll.release);
+    if(currentDate < closeDate && currentDate > releaseDate) {
+      return [false, false];
+    }else if(currentDate > closeDate){
+      return [true, true];
+    }
+    return [true, false];
+  }
+
+  parseDate(dateStr: string): Date{
+    const [month, day, year] = dateStr.split(".").map(Number);
+    return new Date(year, month - 1, day);
+  };
 }

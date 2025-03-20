@@ -1,4 +1,4 @@
-<mat-card appearance="outlined">
+<mat-card appearance="outlined" *ngIf="!isPollClosed[0] && !isPollClosed[1]">
   <mat-card-header>
     <h2>{{headline}}</h2>
   </mat-card-header>
@@ -21,3 +21,6 @@
     <app-poll-analyse [pollOverview]="poll"></app-poll-analyse>
   </div>
 </mat-card>
+<div *ngIf="isPollClosed[0] && isPollClosed[1]">
+  <app-poll-result [pollResult]="poll"></app-poll-result>
+</div>

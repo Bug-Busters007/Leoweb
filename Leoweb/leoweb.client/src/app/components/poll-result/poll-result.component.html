@@ -1,0 +1,8 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <h2>Result for poll: {{this.pollResult.headline}}</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <app-pie-chart [input]="pollResult.votes" [size]="[400,300]"></app-pie-chart>
+  </mat-card-content>
+</mat-card>

@@ -3,10 +3,8 @@
     <mat-panel-title> Poll overview </mat-panel-title>
     <mat-panel-description> This is your poll overview</mat-panel-description>
   </mat-expansion-panel-header>
-  <div *ngIf="voteCount == 0">
-    <p>No votes yet</p>
-  </div>
-  <div *ngIf="voteCount > 0">
+  <p *ngIf="voteCount === 0; else pieChart">No votes yet</p>
+  <ng-template #pieChart>
     <app-pie-chart [input]="pollOverview.votes" [size]="[400,300]"></app-pie-chart>
-  </div>
+  </ng-template>
 </mat-expansion-panel>
