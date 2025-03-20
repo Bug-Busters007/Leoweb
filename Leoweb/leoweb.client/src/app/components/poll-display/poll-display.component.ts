@@ -11,6 +11,7 @@ import {MatButton} from "@angular/material/button";
 import {AdminOptionsComponent} from "../admin/admin-options/admin-options.component";
 import {PollAnalyseComponent} from "../poll-analyse/poll-analyse.component";
 import { firstValueFrom } from 'rxjs';
+import {RefreshService} from "../../../services/refresh.service";
 
 @Component({
   selector: 'app-poll-display',

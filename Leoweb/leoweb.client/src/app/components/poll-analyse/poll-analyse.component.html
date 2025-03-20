@@ -1,7 +1,12 @@
 <mat-expansion-panel hideToggle>
   <mat-expansion-panel-header>
-    <mat-panel-title> Polloverview </mat-panel-title>
-    <mat-panel-description> This is your poll overview </mat-panel-description>
+    <mat-panel-title> Poll overview </mat-panel-title>
+    <mat-panel-description> This is your poll overview</mat-panel-description>
   </mat-expansion-panel-header>
-  <app-pie-chart [input]="pollOverview.votes"></app-pie-chart>
+  <div *ngIf="voteCount == 0">
+    <p>No votes yet</p>
+  </div>
+  <div *ngIf="voteCount > 0">
+    <app-pie-chart [input]="pollOverview.votes" [size]="[400,300]"></app-pie-chart>
+  </div>
 </mat-expansion-panel>

@@ -12,6 +12,7 @@ import { IPieChartData } from '../../../models/chartModel'
 })
 export class PieChartComponent  implements OnInit{
   @Input() input: Object = {GER: 10, FRA: 40, USA: 50};
+  @Input() size: [number, number] = [700, 400];
 
   ngOnInit() {
     const map = new Map<string, number>(Object.entries(this.input));

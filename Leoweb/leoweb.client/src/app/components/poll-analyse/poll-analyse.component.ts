@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {
   MatExpansionPanel,
   MatExpansionPanelDescription,
@@ -7,6 +7,7 @@ import {
 } from "@angular/material/expansion";
 import {PollOverview} from "../../../models/pollOverviewModel";
 import {PieChartComponent} from "../pie-chart/pie-chart.component";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-poll-analyse',
@@ -18,11 +19,15 @@ import {PieChartComponent} from "../pie-chart/pie-chart.component";
     MatExpansionPanelDescription,
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
-    PieChartComponent
+    PieChartComponent,
+    NgIf
   ],
   styleUrl: './poll-analyse.component.css'
 })
-export class PollAnalyseComponent {
+export class PollAnalyseComponent implements OnInit{
   @Input() pollOverview!: PollOverview;
-
+  voteCount: number = 0;
+  ngOnInit() {
+    new Map<string, number>(Object.entries(this.pollOverview.votes)).forEach((count: number, _: string) => this.voteCount = this.voteCount + count);
+  }
 }
