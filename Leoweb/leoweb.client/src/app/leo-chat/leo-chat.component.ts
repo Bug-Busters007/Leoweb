@@ -18,6 +18,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { trigger, transition, style, animate } from '@angular/animations';
 import {AdminOptionsComponent} from "../components/admin/admin-options/admin-options.component";
 import {AuthService} from "../../services/auth.service";
+import {ApiService} from "../../services/api.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-chat',
@@ -61,8 +63,35 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
   isAdmin!: boolean;
   role!: string;
 
-  constructor(private signalRService: SignalRService, private router: Router, private sharedService: SharedService, private authService: AuthService) {}
+  constructor(private signalRService: SignalRService, private router: Router, private sharedService: SharedService, private authService: AuthService, private http: HttpClient, private apiService: ApiService) {}
 
+  private async getStudentsNames(): Promise<{ user: string; message: string; timestamp?: Date, id: number }[]> {
+    const newMessages: { user: string; message: string; timestamp?: Date, id: number }[]= [];
+
+    for (const message of this.messages) {
+      const userId: string = message.user;
+      const studentName = await this.getStudentName(this.http, this.apiService, userId)
+      console.log(studentName);
+      if (studentName) {
+        const params={
+          user: studentName,
+          message: message.message,
+          timestamp: message.timestamp,
+          id: message.id,
+        }
+        newMessages.push(params);
+      }
+    }
+
+    return newMessages;
+  }
+
+  async getStudentName(http: HttpClient, apiService: ApiService, userId: string) :Promise<string | undefined> {
+    const url = apiService.getApiUrl(`Notes/studentName/${userId}`);
+    const response = await http.get<string>(url);
+    console.log(response);
+    return response.toString();
+  }
   async ngOnInit() {
     this.signalRService.getInitialMessages().then((messages) => {
       if(messages && messages.length > 0){
@@ -95,6 +124,8 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
       this.messages.push(msgWithTimestamp);
       setTimeout(() => this.scrollToBottom(), 100);
     });
+
+    this.messages = await this.getStudentsNames();
   }
 
   ngAfterViewChecked() {

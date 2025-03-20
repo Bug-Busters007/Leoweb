@@ -9,7 +9,6 @@ export class RefreshService {
   refresh$ = this.refreshTrigger.asObservable();
 
   triggerRefresh() {
-    console.log("triggered");
     this.refreshTrigger.next();
   }
 }

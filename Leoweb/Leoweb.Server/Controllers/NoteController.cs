@@ -167,6 +167,16 @@ namespace Leoweb.Server.Controllers
 
 			return Ok(dict);
 		}
+
+		[HttpGet("studentName/{id}")]
+		public IActionResult GetStudentName([FromRoute] string id)
+		{
+			var studentName = _dbContext.Student.Select(s => new
+			{
+				name = _dbContext.Student.Where(st => st.Id == s.Id).First().Email,
+			}).ToString();
+			return Ok(studentName);
+		}
 		
 		[HttpGet("allFilenamesFromStudent")]
 		public IActionResult GetAllFileNamesFromStudent()
