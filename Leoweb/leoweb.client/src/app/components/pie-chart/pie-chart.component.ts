@@ -1,36 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { IPieChartData } from '../../../models/chartModel'
 
 @Component({
   selector: 'app-pie-chart',
   standalone: true,
-  
+
   templateUrl: './pie-chart.component.html',
   styleUrl: './pie-chart.component.css',
   imports: [NgxChartsModule]
 })
 export class PieChartComponent {
-  //colorScheme = {
-  //  domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  //};
+  @Input() input: Map<string, number> = new Map<string, number>;
+
+  data: IPieChartData[] = [
+    { data: { name: 'GER', value: 40, label: '' } },
+    { data: { name: 'USA', value: 40, label: '' } },
+    { data: { name: 'FRA', value: 120, label: '' }}
+  ];
+
+
+  single = this.data.map(d => d.data);
 
   colorScheme = 'vivid';
 
-  dataAr = [
-    { "name": "Germany", "value": 20 },
-    { "name": "USA", "value": 20 },
-    { "name": "France", "value": 60 }
-  ];
+  getPercentage(value: number): string {
+    const sum = this.data.reduce((acc, val) => acc + val.data.value, 0);
+    return (value / sum * 100).toFixed(0);
+  }
 
-  data = this.dataAr.map(item => ({
-    name: item.name,
-    value: item.value 
-  }));
-
-  single = this.data.map(v => ({ name: v.name, value: v.value }));
-
-  formatLabel(value: string): string {
-    console.log(value);
-    return value;
+  formatLabel = (value: string): string => {
+    const d = this.data.find(d => d.data.name === value);
+    return `${d?.data.name} (${this.getPercentage(d?.data.value ?? 0)}%)`;
   }
 }
+
