@@ -44,8 +44,17 @@ export class AdminOptionsComponent {
   }
 
   async banUser() {
+    console.log(`banning user: ${this.responsibleStudentId}`);
     const ban: IStudentBan = {reason: 'not implemented', userId: this.responsibleStudentId!, bannedIn: this.component!};
-    this.banService.banStudent(ban)
+    this.banService.banStudent(ban).subscribe({
+      next: () => {
+        alert(`Successfully banned user ${this.responsibleStudentId}`);
+      },
+      error: (error) => {
+        console.log(`Error while banning user`);
+        console.log(error);
+      }
+    })
   }
 
   deleteFile() {

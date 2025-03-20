@@ -23,7 +23,7 @@
                 <div class="message">{{ msg.message }}</div>
               </mat-card-content>
             </mat-card>
-            <app-admin-options *ngIf="this.isAdmin" [id]="msg.id" [itemType]="'message'" [component]="'chat'"></app-admin-options>
+            <app-admin-options *ngIf="this.isAdmin" [id]="msg.id" [itemType]="'message'" [component]="'chat'" [responsibleStudentId]="msg.user"></app-admin-options>
           </div>
         </div>
       </div>
