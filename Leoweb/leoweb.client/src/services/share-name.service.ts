@@ -13,7 +13,6 @@ export class SharedService {
   }
 
   setfromWhere(value: string) {
-    console.log("set fromWhere:", value);
     this._fromWhere = value;
   }
   private inputValue: string = '';

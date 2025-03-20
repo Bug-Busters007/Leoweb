@@ -45,7 +45,6 @@ export class UserOverviewComponent {
 
   goBack(): void {
     this.fromWhere = this.sharedService.getfromWhere();
-    console.log(this.fromWhere);
     this.router.navigate([this.fromWhere]);
   }
 }
