@@ -195,5 +195,5 @@ mat-card-content {
 
 
 .message-container:last-child {
-  margin-bottom: 1.5rem; /* Zusätzlicher Abstand für die letzte Nachricht */
+  margin-bottom: 1.5rem;
 }

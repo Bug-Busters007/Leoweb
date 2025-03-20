@@ -4,11 +4,19 @@ import {FileSearchComponent} from "../app/components/file-search/file-search.com
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environments";
+import {id} from "@swimlane/ngx-charts";
 
 @Injectable({ providedIn: 'root' })
 export class SharedService {
-  // this component has all files saved which any component can use and filter
+  get fromWhere(): string {
+    return this._fromWhere;
+  }
+
+  set fromWhere(value: string) {
+    this._fromWhere = value;
+  }
   private inputValue: string = '';
+  private _fromWhere: string = '';
   private fileArray: { id: number; name: string; year: number; student: string; subject: string }[] = [];
   apiUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}

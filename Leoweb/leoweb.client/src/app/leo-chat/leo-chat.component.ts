@@ -127,6 +127,7 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
 
   navigateUser(user: string) {
     if (user === this.user) {
+      this.sharedService.fromWhere='/leochat';
       this.router.navigate(['/accountSettings']);
     } else {
       this.sharedService.setInputValue(user);
