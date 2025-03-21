@@ -50,7 +50,6 @@ export class PollDisplayComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     if (this.poll) {
       this.isPollClosed = this.isClosed();
-      console.log(this.isPollClosed);
       this.headline = this.poll.headline;
       this.description = this.poll.description;
       this.choices = Array.from(Object.keys(this.poll.votes));

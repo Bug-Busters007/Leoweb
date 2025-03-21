@@ -38,7 +38,7 @@
     </mat-step>
     <mat-step [stepControl]="dateFormGroup" label="Choose the daterange">
       <form [formGroup]="dateFormGroup">
-        <mat-form-field class="example-form-field">
+        <mat-form-field class="form-field">
           <mat-label>Enter a date range</mat-label>
           <mat-date-range-input [rangePicker]="rangePicker">
             <input matStartDate formControlName="startdate" placeholder="Start date" />
@@ -53,6 +53,12 @@
             </mat-date-range-picker-actions>
           </mat-date-range-picker>
         </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Pick a time*</mat-label>
+          <input matInput formControlName="endtime" [matTimepicker]="picker">
+          <mat-timepicker-toggle matIconSuffix [for]="picker"></mat-timepicker-toggle>
+          <mat-timepicker #picker></mat-timepicker>
+        </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
@@ -61,7 +67,7 @@
     </mat-step>
     <mat-step [stepControl]="choicesFormGroup" label="Add Choices">
       <form [formGroup]="choicesFormGroup">
-        <mat-form-field class="example-form-field">
+        <mat-form-field class="choices-form-field">
           <mat-label>Choices</mat-label>
           <mat-chip-grid #chipGrid aria-label="Enter choices" [formControl]="formControl">
             @for (choice of choices; track choice) {

@@ -32,6 +32,7 @@ import { PollOverview } from '../../../models/pollOverviewModel';
 import { CommonModule } from '@angular/common';
 import { first, firstValueFrom } from 'rxjs';
 import {RefreshService} from "../../../services/refresh.service";
+import {MatTimepickerModule} from '@angular/material/timepicker';
 
 @Component({
   selector: 'app-poll-creater',
@@ -71,7 +72,9 @@ import {RefreshService} from "../../../services/refresh.service";
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule, CommonModule
+    MatSelectModule,
+    CommonModule,
+    MatTimepickerModule
   ],
   providers: provideNativeDateAdapter(),
   styleUrl: './poll-creater.component.css'
@@ -105,6 +108,7 @@ export class PollCreaterComponent implements OnInit {
   dateFormGroup = this._formBuilder.group({
     startdate: ['', Validators.required],
     enddate: ['', Validators.required],
+    endtime: ['', Validators.required],
   })
   choicesFormGroup = this._formBuilder.group({
     choices: [this.choices, Validators.required],
@@ -132,12 +136,16 @@ export class PollCreaterComponent implements OnInit {
 
   createPoll(): void{
     if(this.dateFormGroup.value.startdate && this.dateFormGroup.value.enddate) {
+      const closeDate = new Date(this.dateFormGroup.value.enddate);
+      const closeTime = new Date(Number(this.dateFormGroup.value.endtime));
+      closeDate.setHours(closeTime.getHours(), closeTime.getMinutes());
+      closeDate.setHours(Number(this.dateFormGroup.value.endtime));
       const pollData = {
         headline: this.titleFormGroup.value.title,
         description: this.descriptionFormGroup.value.description,
         creator: localStorage.getItem('userId'),
         release: new Date(this.dateFormGroup.value.startdate).toISOString(),
-        close: new Date(this.dateFormGroup.value.enddate).toISOString(),
+        close: closeDate.toISOString(),
         choices: this.choices,
         year: this.branchFormGroup.value.yearsCtrl,
         branch: this.branchFormGroup.value.branchesCtrl,
@@ -200,7 +208,7 @@ export class PollCreaterComponent implements OnInit {
 
     this.titleFormGroup.setValue({ title: this.poll?.headline ?? null });
     this.descriptionFormGroup.setValue({ description: this.poll?.description ?? null });
-    this.dateFormGroup.setValue({ startdate: this.poll?.release ?? null, enddate: this.poll?.close ?? null });
+    this.dateFormGroup.setValue({ startdate: this.poll?.release ?? null, enddate: this.poll?.close ?? null , endtime: "11:00"});
     this.choices = [];
     console.log(this.choices);
     this.choices = Object.keys(this.poll?.votes) ?? [];
