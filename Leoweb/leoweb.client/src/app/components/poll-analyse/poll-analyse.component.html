@@ -5,6 +5,13 @@
   </mat-expansion-panel-header>
   <p *ngIf="voteCount === 0; else pieChart">No votes yet</p>
   <ng-template #pieChart>
-    <app-pie-chart [input]="pollOverview.votes" [size]="[400,300]"></app-pie-chart>
+    <mat-tab-group>
+      <mat-tab label="Pie Chart">
+        <app-pie-chart [input]="pollOverview.votes" [size]="[400,300]"></app-pie-chart>
+      </mat-tab>
+      <mat-tab label="Bar Chart">
+        <app-bar-chart [input]="pollOverview.votes"></app-bar-chart>
+      </mat-tab>
+    </mat-tab-group>
   </ng-template>
 </mat-expansion-panel>

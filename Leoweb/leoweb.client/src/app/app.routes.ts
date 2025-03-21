@@ -70,6 +70,10 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'bar-chart',
+    loadComponent: () => import('./components/bar-chart/bar-chart.component').then(m => m.BarChartComponent)
+  },
+  {
     path: '**',
     loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent)
   }

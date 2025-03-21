@@ -137,14 +137,15 @@ export class PollCreaterComponent implements OnInit {
   createPoll(): void{
     if (this.dateFormGroup.value.startdate && this.dateFormGroup.value.enddate) {
       const closeDate = new Date(this.dateFormGroup.value.enddate);
+      const releaseDate = new Date(this.dateFormGroup.value.startdate);
       const closeTime = new Date(Date.parse(this.dateFormGroup.value.endtime ?? ''));
-      closeDate.setHours(closeTime.getHours());
-      closeDate.setMinutes(closeTime.getMinutes());
+      releaseDate.setDate(releaseDate.getDate() + 1);
+      closeDate.setHours(closeTime.getHours() + 1, closeTime.getMinutes());
       const pollData = {
         headline: this.titleFormGroup.value.title,
         description: this.descriptionFormGroup.value.description,
         creator: localStorage.getItem('userId'),
-        release: new Date(this.dateFormGroup.value.startdate).toISOString(),
+        release: releaseDate.toISOString(),
         close: closeDate.toISOString(),
         choices: this.choices,
         year: this.branchFormGroup.value.yearsCtrl,

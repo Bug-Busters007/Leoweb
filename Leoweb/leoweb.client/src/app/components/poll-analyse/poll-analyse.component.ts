@@ -8,6 +8,8 @@ import {
 import {PollOverview} from "../../../models/pollOverviewModel";
 import {PieChartComponent} from "../pie-chart/pie-chart.component";
 import {NgIf} from "@angular/common";
+import {BarChartComponent} from "../bar-chart/bar-chart.component";
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
 
 @Component({
   selector: 'app-poll-analyse',
@@ -20,7 +22,10 @@ import {NgIf} from "@angular/common";
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     PieChartComponent,
-    NgIf
+    NgIf,
+    BarChartComponent,
+    MatTab,
+    MatTabGroup
   ],
   styleUrl: './poll-analyse.component.css'
 })
