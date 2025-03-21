@@ -135,11 +135,11 @@ export class PollCreaterComponent implements OnInit {
   }
 
   createPoll(): void{
-    if(this.dateFormGroup.value.startdate && this.dateFormGroup.value.enddate) {
+    if (this.dateFormGroup.value.startdate && this.dateFormGroup.value.enddate) {
       const closeDate = new Date(this.dateFormGroup.value.enddate);
-      const closeTime = new Date(Number(this.dateFormGroup.value.endtime));
-      closeDate.setHours(closeTime.getHours(), closeTime.getMinutes());
-      closeDate.setHours(Number(this.dateFormGroup.value.endtime));
+      const closeTime = new Date(Date.parse(this.dateFormGroup.value.endtime ?? ''));
+      closeDate.setHours(closeTime.getHours());
+      closeDate.setMinutes(closeTime.getMinutes());
       const pollData = {
         headline: this.titleFormGroup.value.title,
         description: this.descriptionFormGroup.value.description,
@@ -204,15 +204,11 @@ export class PollCreaterComponent implements OnInit {
       this.poll = await firstValueFrom(this.http.get<PollOverview>(url));
     }
 
-    console.log(this.poll);
-
     this.titleFormGroup.setValue({ title: this.poll?.headline ?? null });
     this.descriptionFormGroup.setValue({ description: this.poll?.description ?? null });
     this.dateFormGroup.setValue({ startdate: this.poll?.release ?? null, enddate: this.poll?.close ?? null , endtime: "11:00"});
     this.choices = [];
-    console.log(this.choices);
     this.choices = Object.keys(this.poll?.votes) ?? [];
-    console.log(this.choices);
     this.branchFormGroup.setValue({ branchesCtrl: this.poll?.branch ?? [], yearsCtrl: this.poll?.year ?? [] });
   }
 }

@@ -16,7 +16,6 @@ export class PollService {
   async getPollNames(): Promise<PollName[]> {
     const url = this.apiService.getApiUrl(`Poll/user/pollNames`);
     const value: PollName[] = await firstValueFrom<PollName[]>(this.http.get<PollName[]>(url));
-    console.log(value);
     return value;
   }
 
