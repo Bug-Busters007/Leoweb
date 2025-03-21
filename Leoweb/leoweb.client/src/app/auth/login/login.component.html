@@ -1,18 +1,17 @@
 <div class="login-container">
   <h2>Login</h2>
   <form (ngSubmit)="login()">
-    <div>
+    <mat-form-field class="email-form-field">
       <label for="email">Email</label>
-      <input id="email" type="email" [(ngModel)]="email" name="email" required/>
-    </div>
-    <div>
+      <input matInput id="email" type="email" [(ngModel)]="email" name="email" required>
+    </mat-form-field>
+    <mat-form-field>
       <label for="password">Password</label>
-      <input id="password" type="password" [(ngModel)]="password" name="password" required/>
-    </div>
-    <button type="submit">Login</button>
+      <input matInput id="password" type="password" [(ngModel)]="password" name="password" required>
+    </mat-form-field>
+    <button mat-raised-button type="submit">Login</button>
   </form>
   <p>
     Noch kein Konto? <a routerLink="/register">Registrieren</a>
   </p>
 </div>
-
