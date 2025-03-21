@@ -1,22 +1,25 @@
-﻿using Leoweb.Server.Database.Data;
+﻿using System.ComponentModel.DataAnnotations;
+using Leoweb.Server.Database.Data;
 using Leoweb.Server.Database.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Leoweb.Server.Controllers
 {
+    
+    
     [Route("api/chat")]
     [ApiController]
     public class ChatController : ControllerBase
     {
         private readonly ChatDbContext _context;
+        private readonly ApplicationDbContext _dbContext;
 
         public ChatController(ChatDbContext context)
         {
             _context = context;
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>().Options;
+            _dbContext = new ApplicationDbContext(options);
         }
 
         [HttpGet("messages")]
@@ -28,6 +31,19 @@ namespace Leoweb.Server.Controllers
             return Ok(messages);
         }
 
+        [HttpGet("{id}/email")]
+        public IActionResult GetStudentName([FromRoute] string id)
+        {
+            var student = _dbContext.Student.Find(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(new { email = student.Email });
+        }
+        
+        
         [HttpDelete("messages/{id}")]
         public async Task<ActionResult<ChatMessage>> DeleteMessages(int id)
         {

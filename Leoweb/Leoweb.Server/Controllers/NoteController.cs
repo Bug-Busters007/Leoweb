@@ -155,29 +155,19 @@ namespace Leoweb.Server.Controllers
 		public IActionResult GetAllFileNames()
 		{
 			var dict = _dbContext.File
-				.Select(f => new 
-					{
-						f.Data.Id,
-						f.Data.Name,
-						f.Year,
-						student = _dbContext.Student.Where(s => s.Id == f.Student.Id).First().Email,
-						subject = f.Subject.ToString(),
-					})
+				.Select(f => new
+				{
+					f.Data.Id,
+					f.Data.Name,
+					f.Year,
+					student = _dbContext.Student.Where(s => s.Id == f.Student.Id).First().Email,
+					subject = f.Subject.ToString(),
+				})
 				.ToList();
 
 			return Ok(dict);
 		}
 
-		[HttpGet("studentName/{id}")]
-		public IActionResult GetStudentName([FromRoute] string id)
-		{
-			var studentName = _dbContext.Student.Select(s => new
-			{
-				name = _dbContext.Student.Where(st => st.Id == s.Id).First().Email,
-			}).ToString();
-			return Ok(studentName);
-		}
-		
 		[HttpGet("allFilenamesFromStudent")]
 		public IActionResult GetAllFileNamesFromStudent()
 		{ 
