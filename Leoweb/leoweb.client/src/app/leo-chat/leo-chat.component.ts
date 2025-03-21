@@ -87,11 +87,11 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
     return newMessages;
   }
 
-  async getStudentName(http: HttpClient, apiService: ApiService, userId: string) :Promise<Observable<string> | undefined> {
+  async getStudentName(http: HttpClient, apiService: ApiService, userId: string) :Promise<string | undefined> {
     const url = apiService.getApiUrl(`chat/${userId}/email`);
     const response = await http.get<string>(url);
     console.log(response);
-    return response;
+    return response.toString();
   }
   async ngOnInit() {
     this.signalRService.getInitialMessages().then((messages) => {
