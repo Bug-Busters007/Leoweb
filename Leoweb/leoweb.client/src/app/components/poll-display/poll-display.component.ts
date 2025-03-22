@@ -94,9 +94,4 @@ export class PollDisplayComponent implements OnInit {
     }
     return [true, false];
   }
-
-  parseDate(dateStr: string): Date{
-    const [month, day, year] = dateStr.split(".").map(Number);
-    return new Date(year, month - 1, day);
-  };
 }
