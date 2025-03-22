@@ -21,6 +21,6 @@
     <app-poll-analyse [pollOverview]="poll"></app-poll-analyse>
   </div>
 </mat-card>
-<div *ngIf="isPollClosed[0] && isPollClosed[1]">
+<div *ngIf="isPollClosed[0] && isPollClosed[1] && voteCount !== 0">
   <app-poll-result [pollResult]="poll"></app-poll-result>
 </div>

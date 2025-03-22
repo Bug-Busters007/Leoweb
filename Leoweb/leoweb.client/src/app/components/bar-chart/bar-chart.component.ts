@@ -7,11 +7,13 @@ Chart.register(BarController, BarElement, CategoryScale, LinearScale);
   standalone: true,
 
   templateUrl: './bar-chart.component.html',
+  imports: [],
   styleUrl: './bar-chart.component.css'
 })
 export class BarChartComponent implements AfterViewInit {
 
   @Input() input: Object = {GER: 10, FRA: 40, USA: 50};
+  @Input() size: [number, number] = [1000, 500];
   @ViewChild('barCanvas') barCanvas!: ElementRef;
 
   chart!: Chart;

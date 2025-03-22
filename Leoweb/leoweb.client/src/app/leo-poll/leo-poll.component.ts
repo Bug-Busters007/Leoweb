@@ -12,6 +12,7 @@ import {provideNativeDateAdapter} from "@angular/material/core";
 import {Subscription} from "rxjs";
 import {RefreshService} from "../../services/refresh.service";
 import {AuthService} from "../../services/auth.service";
+import {PollService} from "../../services/poll.service";
 
 @Component({
   selector: 'app-leo-poll',
@@ -27,22 +28,22 @@ import {AuthService} from "../../services/auth.service";
   styleUrl: './leo-poll.component.css'
 })
 export class LeoPollComponent implements OnInit, OnDestroy {
-  pollArr: Array<PollOverview> = [];
+  pollArr: Array<PollOverview> | null = [];
   isCreaterVisible = false;
   isAdmin: boolean = false;
   role: string = "";
   private refreshSub: Subscription|null = null;
 
-  constructor(private authService: AuthService, private http: HttpClient, private apiService: ApiService, private router: Router, private refreshService: RefreshService) {}
+  constructor(private authService: AuthService, private http: HttpClient, private apiService: ApiService, private router: Router, private refreshService: RefreshService, private pollService: PollService) {}
 
   async ngOnInit() {
     const pdiv = document.getElementById('pollsDiv');
     const spinner = new Spinner(pdiv);
     spinner.showSpinner();
-    await this.getAllPolls();
+    this.pollArr = await this.pollService.getAllPolls();
     spinner.removeSpinner();
     this.refreshSub = this.refreshService.refresh$.subscribe(async() =>{
-      await this.getAllPolls();
+      this.pollArr = await this.pollService.getAllPolls();
     });
     this.authService.getUserData().subscribe((data) => {
       this.role = data.role;
@@ -53,21 +54,6 @@ export class LeoPollComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.refreshSub?.unsubscribe();
-  }
-
-  async getAllPolls(): Promise<void>{
-    const url = this.apiService.getApiUrl('Poll/all');
-    try {
-      const response = await this.http
-        .get<PollOverview[]>(url)
-        .toPromise();
-      if (response) {
-        this.pollArr = response;
-      }
-    } catch (error) {
-      console.error('Error getting all polls', error);
-      throw new Error('Failed to get all polls');
-    }
   }
 
   showPollCreater(): void{

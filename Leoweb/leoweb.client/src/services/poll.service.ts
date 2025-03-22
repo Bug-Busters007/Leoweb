@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { PollName } from '../models/pollNameModel';
 import {firstValueFrom, Observable} from 'rxjs';
 import {environment} from "../environments/environments";
+import {PollOverview} from "../models/pollOverviewModel";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,21 @@ export class PollService {
     return value;
   }
 
+  async getAllPolls(): Promise<PollOverview[] | null>{
+    const url = this.apiService.getApiUrl('Poll/all');
+    try {
+      const response = await this.http
+        .get<PollOverview[]>(url)
+        .toPromise();
+      if (response) {
+        return response;
+      }
+    } catch (error) {
+      console.error('Error getting all polls', error);
+      throw new Error('Failed to get all polls');
+    }
+    return null;
+  }
 
   deletePoll(id: number) : Observable<void> {
     console.log('sending request');

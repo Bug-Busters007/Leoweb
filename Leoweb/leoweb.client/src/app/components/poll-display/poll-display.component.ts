@@ -44,6 +44,7 @@ export class PollDisplayComponent implements OnInit {
   selectedChoice: string | null = null;
   isPollOwner: boolean = false;
   isPollClosed: [boolean, boolean] = [false, false];
+  voteCount: number = 0;
 
   constructor(private http: HttpClient, private apiService: ApiService) { }
 
@@ -56,6 +57,7 @@ export class PollDisplayComponent implements OnInit {
       if(localStorage.getItem('userId') === this.poll.creator) {
         this.isPollOwner = true;
       }
+      new Map<string, number>(Object.entries(this.poll.votes)).forEach((count: number, _: string) => this.voteCount = this.voteCount + count);
     }
     const url = this.apiService.getApiUrl(`Poll/${this.poll.id}/vote`);
     try {
@@ -83,8 +85,8 @@ export class PollDisplayComponent implements OnInit {
   // returns [isClosed, showResults]
   isClosed(): [boolean, boolean]{
     const currentDate: Date = new Date();
-    const closeDate: Date = this.parseDate(this.poll.close);
-    const releaseDate: Date = this.parseDate(this.poll.release);
+    const closeDate: Date = new Date(this.poll.close);
+    const releaseDate: Date = new Date(this.poll.release);
     if(currentDate < closeDate && currentDate > releaseDate) {
       return [false, false];
     }else if(currentDate > closeDate){
