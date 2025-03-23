@@ -85,7 +85,8 @@ namespace Leoweb.Server.Controllers
 		[HttpGet("{id}")]
 		public IActionResult GetPdfToView([FromRoute] int id)
 		{
-			var file = _dbContext.BinaryFile.Where(f => f.Id == id).First();
+			var binaryId = _dbContext.File.Where(f => f.Id == id).First().DataId;
+			var file = _dbContext.BinaryFile.Where(f => f.Id == binaryId).First();
 			if (file == null)
 			{
 				return NotFound($"File with ID {id} not found.");
