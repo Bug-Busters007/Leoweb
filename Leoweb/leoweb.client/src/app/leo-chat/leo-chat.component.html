@@ -3,11 +3,10 @@
     <mat-card-content>
       <div class="chat-messages" #chatMessages>
         <div *ngFor="let msg of messages; let i = index"
-             [ngClass]="{'mine': msg.user === user, 'theirs': msg.user !== user}"
+             [ngClass]="{'mine': msg.user === username, 'theirs': msg.user !== username}"
              [@messageAnimation]
              class="message-container">
 
-          <!-- Only show username for first message in a sequence -->
           <div *ngIf="!isConsecutiveMessage(i) || msg.user !== messages[i-1]?.user"
                class="username"
                (click)="navigateUser(msg.user)"

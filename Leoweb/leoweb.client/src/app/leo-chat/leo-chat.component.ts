@@ -58,6 +58,7 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
   @ViewChild('chatMessages') private chatMessagesContainer: ElementRef | undefined;
 
   user = localStorage.getItem('userId');
+  username = localStorage.getItem('username');
   message = '';
   messages: { user: string; message: string; timestamp?: Date, id: number }[] = [];
   isTyping = false;
@@ -66,16 +67,14 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
 
   constructor(private signalRService: SignalRService, private router: Router, private sharedService: SharedService, private authService: AuthService, private http: HttpClient, private apiService: ApiService) {}
 
-  private async getStudentsNames(): Promise<{ user: string; message: string; timestamp?: Date, id: number }[]> {
+  private async getStudentsNames(messsages: { user: string; message: string; timestamp?: Date, id: number }[]): Promise<{ user: string; message: string; timestamp?: Date, id: number }[]> {
     const newMessages: { user: string; message: string; timestamp?: Date, id: number }[]= [];
-
-    for (const message of this.messages) {
+    for (const message of messsages) {
       const userId: string = message.user;
       const studentName = await this.getStudentName(this.http, this.apiService, userId)
-      console.log(studentName);
       if (studentName) {
         const params={
-          user: studentName,
+          user: studentName.email,
           message: message.message,
           timestamp: message.timestamp,
           id: message.id,
@@ -87,36 +86,41 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
     return newMessages;
   }
 
-  async getStudentName(http: HttpClient, apiService: ApiService, userId: string) :Promise<string | undefined> {
-    const url = apiService.getApiUrl(`chat/${userId}/email`);
-    const response = await http.get<string>(url);
-    console.log(response);
-    return response.toString();
+  private async getStudentName(http: HttpClient, apiService: ApiService, userId: string): Promise<{ email: string } | undefined> {
+    try {
+      const url = apiService.getApiUrl(`chat/${userId}/email`);
+      const response = await http.get<{ email: string }>(url).toPromise();
+      return response;
+    } catch (error) {
+      return undefined;
+    }
   }
   async ngOnInit() {
-    this.signalRService.getInitialMessages().then((messages) => {
-      if(messages && messages.length > 0){
-        for(let i = 0; i < messages.length; i++){
-          this.messages.push({
+    const rawMessages: { user: string; message: string; timestamp?: Date, id: number }[] = [];
+    this.signalRService.getInitialMessages().then(async (messages) => {
+      if (messages && messages.length > 0) {
+        for (let i = 0; i < messages.length; i++) {
+          rawMessages.push({
             user: messages[i].studentName,
             message: messages[i].message,
             timestamp: new Date(messages[i].timestamp || Date.now()),
             id: messages[i].id
           });
         }
-        this.messages.sort((a, b) => {
-          return (a.timestamp?.getTime() || 0) - (b.timestamp?.getTime() || 0);
-        });
+        this.messages = await this.getStudentsNames(rawMessages);
+
         setTimeout(() => this.scrollToBottom(), 100);
+
         this.authService.getUserData().subscribe((data) => {
           this.role = data.role;
           this.isAdmin = this.role === "admin";
           console.log(`User is admin: ${this.isAdmin}`);
         });
-      }else{
+      } else {
         console.log('No messages');
       }
     });
+
     this.signalRService.getMessages().subscribe((msg) => {
       const msgWithTimestamp = {
         ...msg,
@@ -125,9 +129,8 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
       this.messages.push(msgWithTimestamp);
       setTimeout(() => this.scrollToBottom(), 100);
     });
-
-    this.messages = await this.getStudentsNames();
   }
+
 
   ngAfterViewChecked() {
     this.scrollToBottom();
