@@ -32,22 +32,19 @@ namespace Leoweb.Server.Controllers
 		[HttpPost("like/{id}")]
 		public IActionResult LikeFile([FromRoute] int id)
 		{
-			foreach (var claim in User.Claims)
-			{
-				Console.WriteLine("Claim: " + claim.Type + ":" + claim.Value);
-			}
 			var studentId = User.Claims.FirstOrDefault(u => u.Type == "UserId")!.Value;
-			var file = _dbContext.File.First(f => f.Data.Id == id);
+			var file = _dbContext.File.First(f => f.Id == id);
 			if (file == null)
 			{
 				return NotFound($"File with ID {id} not found.");
 			}
-			
+			Console.WriteLine(file.Id);
 			var fileHasBeenLikedByUser = _dbContext.UserFileLike.Where(like => like.FileId == id && like.UserId == studentId).Any();
 			if (fileHasBeenLikedByUser)
 			{
 				return BadRequest("File has already been liked by user.");
 			}
+			
 			var like = new UserFileLike()
 			{
 				UserId = studentId,
@@ -157,7 +154,7 @@ namespace Leoweb.Server.Controllers
 			var dict = _dbContext.File
 				.Select(f => new
 				{
-					f.Data.Id,
+					f.Id,
 					f.Data.Name,
 					f.Year,
 					student = _dbContext.Student.Where(s => s.Id == f.Student.Id).First().Email,
@@ -175,7 +172,7 @@ namespace Leoweb.Server.Controllers
 			var dict = _dbContext.File.Where(f => f.Student.Id == studentID)
 				.Select(f => new 
 				{
-					f.Data.Id,
+					f.Id,
 					f.Data.Name,
 					f.Year,
 					Subject = f.Subject.ToString(),

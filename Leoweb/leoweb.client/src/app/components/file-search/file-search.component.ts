@@ -44,6 +44,7 @@ export class FileSearchComponent implements OnInit {
   }
   async ngOnInit() {
     this.allFiles = await this.getFileNames();
+    console.log(this.allFiles);
     this.fileArray = this.allFiles
     this.shareService.setFileArray(this.fileArray);
     this.refreshSubscription = this.refreshService.refresh$.subscribe(async () => {
