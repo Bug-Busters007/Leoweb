@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
-import {FormsModule} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MatButtonModule } from '@angular/material/button';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
 
 @Component({
     selector: 'app-login',
@@ -16,16 +17,21 @@ import { MatInputModule } from '@angular/material/input';
       MatButtonModule,
       MatFormField,
       MatInputModule,
+      MatCard,
+      MatCardTitle,
+      MatCardContent,
+      ReactiveFormsModule,
     ]
 })
 export class LoginComponent {
-
-  email: string = '';
-  password: string = '';
+  form: FormGroup = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl(''),
+  });
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    this.authService.login(this.email, this.password).subscribe({
+    this.authService.login(this.form.value.email, this.form.value.password).subscribe({
       next: (response) => {
         localStorage.setItem('jwtToken', response.token);
         localStorage.setItem('username', response.username);
