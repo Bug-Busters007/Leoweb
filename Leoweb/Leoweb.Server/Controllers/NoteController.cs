@@ -212,14 +212,16 @@ namespace Leoweb.Server.Controllers
 			bool success = false;
 			try
 			{
-				var file = _dbContext.BinaryFile.Find(id);
+				var file = _dbContext.File.Find(id);
+				var binaryFile = _dbContext.BinaryFile.Find(id + 1);
           
-				if (file == null)
+				if (file == null || binaryFile == null)
 				{
 					throw new Exception($"File with ID {id} not found.");
 				}
           
-				_dbContext.BinaryFile.Remove(file);
+				_dbContext.File.Remove(file);
+				_dbContext.BinaryFile.Remove(binaryFile);
           
 				int affectedRows = _dbContext.SaveChanges();
           

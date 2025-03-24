@@ -128,6 +128,7 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
     });
 
     this.signalRService.getMessages().subscribe((msg) => {
+      console.log(msg);
       const msgWithTimestamp = {
         ...msg,
         user: this.allUsers?.[msg.user] || msg.user,
