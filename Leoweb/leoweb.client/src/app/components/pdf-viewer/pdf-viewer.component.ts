@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
 import {Spinner} from "../spinner/spinner";
+import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -53,21 +56,21 @@ export class PdfViewerComponent {
     closeModalButton.style.fontFamily = 'Consolas, sans-serif';
     closeModalButton.style.fontSize = '1.5rem';
     closeModalButton.style.cursor = 'pointer';
-    closeModalButton.style.border = '2px solid orangered';
+    closeModalButton.style.border = '2px solid blue';
     closeModalButton.style.borderRadius = '10px';
     closeModalButton.style.backgroundColor = 'white';
-    closeModalButton.style.color = 'orangered';
+    closeModalButton.style.color = 'blue';
     closeModalButton.style.transition = 'background-color 0.3s, color 0.3s';
 
     // Hover effect for close button
     closeModalButton.onmouseover = () => {
-      closeModalButton.style.backgroundColor = 'orangered';
+      closeModalButton.style.backgroundColor = 'blue';
       closeModalButton.style.color = 'white';
     };
 
     closeModalButton.onmouseout = () => {
       closeModalButton.style.backgroundColor = 'white';
-      closeModalButton.style.color = 'orangered';
+      closeModalButton.style.color = 'blue';
     };
 
     closeModalButton.onclick = () => {
