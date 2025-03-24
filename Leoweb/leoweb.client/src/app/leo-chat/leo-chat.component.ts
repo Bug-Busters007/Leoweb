@@ -77,18 +77,14 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
   private async getStudentsNames(
     messages: { user: string; message: string; timestamp?: Date; id: number }[]
   ): Promise<{ user: string; message: string; timestamp?: Date; id: number }[]> {
-
     const userEmailMap = this.allUsers;
-
     if (!userEmailMap) {
       return messages;
     }
-
     const newMessages = messages.map(message => ({
       ...message,
       user: userEmailMap[message.user] || message.user
     }));
-
     return newMessages;
   }
 
@@ -134,6 +130,7 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
     this.signalRService.getMessages().subscribe((msg) => {
       const msgWithTimestamp = {
         ...msg,
+        user: this.allUsers?.[msg.user] || msg.user,
         timestamp: new Date()
       };
       this.messages.push(msgWithTimestamp);

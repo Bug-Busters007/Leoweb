@@ -32,7 +32,7 @@ namespace Leoweb.Server.Controllers
         }
 
         [HttpGet("allEmails")]
-        public IActionResult GetStudentName([FromRoute] string id)
+        public IActionResult GetStudentName()
         {
             var users = _dbContext.Student
                 .Select(s => new { s.Id, s.Email }) 
