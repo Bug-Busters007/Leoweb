@@ -31,16 +31,14 @@ namespace Leoweb.Server.Controllers
             return Ok(messages);
         }
 
-        [HttpGet("{id}/email")]
+        [HttpGet("allEmails")]
         public IActionResult GetStudentName([FromRoute] string id)
         {
-            var student = _dbContext.Student.Find(id);
-            if (student == null)
-            {
-                return NotFound();
-            }
-            
-            return Ok(new { email = student.Email });
+            var users = _dbContext.Student
+                .Select(s => new { s.Id, s.Email }) 
+                .ToDictionary(s => s.Id, s => s.Email);
+
+            return Ok(users);
         }
         
         

@@ -3,6 +3,7 @@ import * as signalR from '@microsoft/signalr';
 import { Observable, Subject } from 'rxjs';
 import {ApiService} from "./api.service";
 import {HttpClient} from "@angular/common/http";
+import {RefreshService} from "./refresh.service";
 
 @Injectable({
   providedIn: 'root',

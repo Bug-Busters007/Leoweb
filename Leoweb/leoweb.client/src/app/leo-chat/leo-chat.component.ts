@@ -20,7 +20,8 @@ import {AdminOptionsComponent} from "../components/admin/admin-options/admin-opt
 import {AuthService} from "../../services/auth.service";
 import {ApiService} from "../../services/api.service";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
+import {RefreshService} from "../../services/refresh.service";
 
 @Component({
   selector: 'app-chat',
@@ -64,38 +65,47 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
   isTyping = false;
   isAdmin!: boolean;
   role!: string;
+  allUsers:{ [userId: string]: string } | undefined= undefined;
 
-  constructor(private signalRService: SignalRService, private router: Router, private sharedService: SharedService, private authService: AuthService, private http: HttpClient, private apiService: ApiService) {}
+  constructor(private signalRService: SignalRService,
+              private router: Router,
+              private sharedService: SharedService,
+              private authService: AuthService,
+              private http: HttpClient,
+              private apiService: ApiService) {}
 
-  private async getStudentsNames(messsages: { user: string; message: string; timestamp?: Date, id: number }[]): Promise<{ user: string; message: string; timestamp?: Date, id: number }[]> {
-    const newMessages: { user: string; message: string; timestamp?: Date, id: number }[]= [];
-    for (const message of messsages) {
-      const userId: string = message.user;
-      const studentName = await this.getStudentName(this.http, this.apiService, userId)
-      if (studentName) {
-        const params={
-          user: studentName.email,
-          message: message.message,
-          timestamp: message.timestamp,
-          id: message.id,
-        }
-        newMessages.push(params);
-      }
+  private async getStudentsNames(
+    messages: { user: string; message: string; timestamp?: Date; id: number }[]
+  ): Promise<{ user: string; message: string; timestamp?: Date; id: number }[]> {
+
+    const userEmailMap = this.allUsers;
+
+    if (!userEmailMap) {
+      return messages;
     }
+
+    const newMessages = messages.map(message => ({
+      ...message,
+      user: userEmailMap[message.user] || message.user
+    }));
 
     return newMessages;
   }
 
-  private async getStudentName(http: HttpClient, apiService: ApiService, userId: string): Promise<{ email: string } | undefined> {
+
+  private async getAllUserEmails(http: HttpClient, apiService: ApiService): Promise<{ [userId: string]: string } | undefined> {
     try {
-      const url = apiService.getApiUrl(`chat/${userId}/email`);
-      const response = await http.get<{ email: string }>(url).toPromise();
+      const url = apiService.getApiUrl(`chat/allEmails`);
+      const response = await http.get<{ [userId: string]: string }>(url).toPromise();
       return response;
     } catch (error) {
+      console.error("Fehler beim Abrufen der User-Emails:", error);
       return undefined;
     }
   }
+
   async ngOnInit() {
+    this.allUsers = await this.getAllUserEmails(this.http, this.apiService);
     const rawMessages: { user: string; message: string; timestamp?: Date, id: number }[] = [];
     this.signalRService.getInitialMessages().then(async (messages) => {
       if (messages && messages.length > 0) {
