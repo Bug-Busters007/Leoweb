@@ -157,12 +157,9 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
     if (this.message.trim() && this.user) {
       this.signalRService.sendMessage(this.user, this.message);
       this.message = '';
-      const inputElement = document.querySelector('input[matInput]') as HTMLElement;
-      if (inputElement) {
-        (inputElement as HTMLElement).focus();
-      }
     }
   }
+
 
   onTyping() {
     this.isTyping = this.message.trim().length > 0;
@@ -187,4 +184,6 @@ export class LeoChatComponent implements OnInit, AfterViewChecked {
     if (index === 0) return false;
     return this.messages[index].user === this.messages[index-1].user;
   }
+
+
 }

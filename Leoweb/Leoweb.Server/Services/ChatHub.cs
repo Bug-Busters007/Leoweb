@@ -17,7 +17,7 @@ namespace Leoweb.Server.Services
             _context = context;
         }
 
-        public async Task SendMessage(string student, string message)
+        public async Task<int> SendMessage(string student, string message)
         {
             var chatMessage = new ChatMessage 
             { 
@@ -28,8 +28,11 @@ namespace Leoweb.Server.Services
             _context.ChatMessages.Add(chatMessage);
             await _context.SaveChangesAsync();
 
-            await Clients.All.SendAsync("ReceiveMessage", student, message);
+            await Clients.All.SendAsync("ReceiveMessage", student, message, chatMessage.Id);
+            return chatMessage.Id;
         }
+        
+        
 
         public async Task<List<ChatMessage>> GetChatHistory()
         {
