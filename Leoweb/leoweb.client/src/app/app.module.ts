@@ -6,6 +6,7 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { AdminOverviewComponent } from './admin-overview/admin-overview.component';
 import { BanListComponent } from './ban-list/ban-list.component';
 import { BanComponent } from './components/ban/ban.component';
+import { ScraperTestComponent } from './components/scraper-test/scraper-test.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { BanComponent } from './components/ban/ban.component';
     PieChartComponent,
     AdminOverviewComponent,
     BanListComponent,
-    BanComponent
+    BanComponent,
+    ScraperTestComponent
   ],
   imports: [
     BrowserModule,

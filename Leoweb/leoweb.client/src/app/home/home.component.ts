@@ -56,6 +56,13 @@ export class HomeComponent implements OnInit{
       link: '/leopoll',
       icon: 'how_to_vote',
       iconClass: 'poll-icon'
+    },
+    {
+      title: 'LeoEvents',
+      description: 'Aktuelle Events',
+      link: '/leoEvents',
+      icon: 'event',
+      iconClass: 'event-icon'
     }
   ];
   adminModule: Module = {

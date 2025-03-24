@@ -70,6 +70,11 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'leoEvents',
+    loadComponent: () => import('./components/scraper-test/scraper-test.component').then(m => m.ScraperTestComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: '**',
     loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent)
   }

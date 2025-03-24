@@ -57,6 +57,4 @@ export class SignalRService {
     const url = this.apiService.getApiUrl('chat/messages');
     return this.http.delete<void>(`${url}/${id}`);
   }
-
-
 }

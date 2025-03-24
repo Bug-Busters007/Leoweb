@@ -1,0 +1,16 @@
+<h2>HTL-Leonding Termine</h2>
+<table>
+  <tr>
+    <th>Datum</th>
+    <th>Zeit</th>
+    <th>Event</th>
+    <th>Ort</th>
+  </tr>
+  <tr *ngFor="let event of events">
+    <td>{{ event.date }}</td>
+    <td>{{ event.time }}</td>
+    <td>{{ event.event }}</td>
+    <td>{{ event.location }}</td>
+  </tr>
+</table>
+

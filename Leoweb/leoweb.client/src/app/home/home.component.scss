@@ -132,6 +132,10 @@
 }
 
 .module-item:nth-child(4) .module-background {
+  background: linear-gradient(135deg, yellow 0%, magenta 100%);
+}
+
+.module-item:nth-child(5) .module-background {
   background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
 }
 
