@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit{
     description: 'Management Seite für Admins',
     link: '/adminOverview',
     icon: 'settings',
-    iconClass: 'settings'
+    iconClass: 'admin-icon'
   }
 
   constructor(private authService: AuthService) { }
