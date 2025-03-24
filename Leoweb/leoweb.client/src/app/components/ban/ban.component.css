@@ -1,0 +1,43 @@
+.ban-card {
+  width: 300px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+.ban-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ban-card.expanded {
+  width: 350px;
+  min-height: 200px;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.user-info p {
+  margin: 4px 0;
+  color: #666;
+}
+
+.ban-details {
+  margin-top: 10px;
+}
+
+.reason {
+  font-style: italic;
+  color: #d32f2f;
+  margin-bottom: 12px;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+}

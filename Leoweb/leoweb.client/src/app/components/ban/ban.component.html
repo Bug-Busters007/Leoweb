@@ -1,1 +1,12 @@
-<p>ban works!</p>
+<mat-card class="ban-card" [class.expanded]="isExpanded" (click)="toggleExpand()">
+  <mat-card-content>
+    <div class="user-info">
+      <h3>{{ user }}</h3>
+      <p>Banned in: <strong>{{ bannedIn }}</strong></p>
+    </div>
+    <div class="ban-details" *ngIf="isExpanded">
+      <p class="reason">{{ reason }}</p>
+      <button mat-button color="warn" (click)="deleteBan($event)">Delete Ban</button>
+    </div>
+  </mat-card-content>
+</mat-card>
