@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
