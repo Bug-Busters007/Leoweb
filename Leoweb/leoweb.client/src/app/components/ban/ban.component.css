@@ -1,43 +1,86 @@
 .ban-card {
-  width: 300px;
+  width: 600px;
+  max-width: 95vw;
   cursor: pointer;
   transition: all 0.3s ease;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background: #fff;
+  padding: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(100, 170, 240, 0.1) 0%, rgba(130, 190, 255, 0.2) 100%);
+  color: #2c3e50;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  border: 1px solid rgba(100, 170, 240, 0.2);
 }
 
-.ban-card:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 }
 
-.ban-card.expanded {
-  width: 350px;
-  min-height: 200px;
+.ban-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.user-info h3 {
-  margin: 0;
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  font-weight: bold;
   font-size: 20px;
 }
 
-.user-info p {
-  margin: 4px 0;
-  color: #666;
+.user-details h3 {
+  margin: 0 0 5px 0;
+  font-size: 22px;
+}
+
+.user-details p {
+  margin: 0;
+  opacity: 0.8;
 }
 
 .ban-details {
-  margin-top: 10px;
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.reason-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.warning-icon {
+  margin-right: 10px;
+  color: #fff3f3;
 }
 
 .reason {
   font-style: italic;
-  color: #d32f2f;
-  margin-bottom: 12px;
+  margin: 0;
 }
 
-button {
-  display: block;
-  margin: 0 auto;
+.delete-btn {
+  width: 100%;
+  background-color: rgba(255,255,255,0.2);
+  color: white;
+  margin-top: 10px;
+}
+
+.delete-btn:hover {
+  background-color: rgba(255,255,255,0.3);
+}
+
+.ban-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.25);
 }

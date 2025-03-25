@@ -18,7 +18,7 @@ export class BanService {
   }
 
   banStudent(ban: IStudentBan): Observable<IStudentBan> {
-    const url = this.apiService.getApiUrl(`ban/${ban.userId}`);
+    const url = this.apiService.getApiUrl(`ban/${ban.studentId}`);
     return this.http.post<IStudentBan>(url, {BannedIn: ban.bannedIn, Reason: ban.reason});
   }
 

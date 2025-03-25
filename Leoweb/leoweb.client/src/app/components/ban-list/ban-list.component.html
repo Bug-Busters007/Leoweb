@@ -1,6 +1,6 @@
 <div class="ban-list-container">
   <h2>Ban List</h2>
   <div class="ban-list">
-    <app-ban [user]="'test'" [bannedIn]="'test library'" [reason]="'test reason ödlfkjaölsdjfösalekjföldskfjklsdjfk'"></app-ban>
+    <app-ban *ngFor="let ban of banList" [studentId]="ban.studentId" [bannedIn]="ban.bannedIn" [reason]="ban.reason"></app-ban>
   </div>
 </div>

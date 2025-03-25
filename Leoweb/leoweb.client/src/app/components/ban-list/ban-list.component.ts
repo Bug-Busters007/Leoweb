@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BanComponent} from "../ban/ban.component";
+import {BanService} from "../../../services/ban.service";
+import {NgFor} from "@angular/common";
+import {IStudentBan} from "../../../models/studentBanModel";
 
 @Component({
   selector: 'app-ban-list',
@@ -8,9 +11,17 @@ import {BanComponent} from "../ban/ban.component";
   templateUrl: './ban-list.component.html',
   styleUrl: './ban-list.component.css',
   imports: [
-    BanComponent
+    BanComponent, NgFor
   ]
 })
-export class BanListComponent {
+export class BanListComponent implements OnInit {
+  banList?: IStudentBan[];
+  constructor(private banService: BanService) {
+  }
+
+  async ngOnInit(): Promise<void> {
+        this.banList = await this.banService.getAll();
+        console.log(this.banList);
+    }
 
 }
