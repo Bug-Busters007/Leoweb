@@ -63,10 +63,13 @@
       <div class="button">
         <button type="submit" mat-button>Register</button>
       </div>
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
     </form>
   </mat-card-content>
   <p class="create-account">
-    Schon ein Konto? <a routerLink="/login">Login</a>
+    Schon ein Konto? <a routerLink="/">Login</a>
   </p>
 </mat-card>
 

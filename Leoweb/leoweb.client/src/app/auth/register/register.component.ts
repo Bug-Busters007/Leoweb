@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
 import {CommonModule} from "@angular/common";
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
@@ -26,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
       MatCheckbox,
       MatButtonModule,
       MatInputModule,
+      RouterLink,
     ],
 })
 export class RegisterComponent {
