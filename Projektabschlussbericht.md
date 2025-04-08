@@ -1,7 +1,7 @@
 # LeoWeb – Projektabschlussbericht
 
 **Projektzeitraum:** September 2024 – April 2025 
-**Projektname:** LeoWeb – Digitale Wissensplattform für Schüler  
+**Projektname:** LeoWeb 
 **Team:** 5 Mitglieder  
 **Abschlussdatum:** 8. April 2025
 
@@ -17,9 +17,9 @@ LeoWeb ist eine modulare Webplattform für Schüler, die verschiedene Tools wie 
 
 ### Teammitglied 1: Michael
 
-- BP1
-- BP2
-- BP3
+- Angular
+- WebSockets(SignalR)
+- C# Controller & Hubs
 
 ---
 
@@ -59,7 +59,7 @@ LeoWeb ist eine modulare Webplattform für Schüler, die verschiedene Tools wie 
 
 ## Herausforderungen
 
-- Michael:  
+- Michael: Die Kommunikation unter den einzelnen Teammitgliedern, Struktur des Projektes
 - Manuel: das Einhalten einer strukturierten und sauberen Programmiertechnik, die das Entwickeln
           von Modulen vereinfacht
 - Julian: ...
@@ -77,4 +77,3 @@ LeoWeb hat uns nicht nur technisch weitergebracht, sondern auch im Bereich Proje
 ## Abschließender Kommentar
 
 Vielen Dank an alle Mitwirkenden und an den Herrn Prof. Klewein für die Projektbetreuung – das LeoWeb-Projekt war ein großer Schritt in unserer Entwicklung als Softwareentwickler.
-
