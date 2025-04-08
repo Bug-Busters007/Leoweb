@@ -25,9 +25,11 @@ LeoWeb ist eine modulare Webplattform für Schüler, die verschiedene Tools wie 
 
 ### Teammitglied 2: Manuel
 
-- BP1
-- BP2
-- BP3
+- Verwendung von Angular
+- Benutzerverwaltung mit JWT 
+- Verwendung von Docker
+- Verwendung von Kubernetes
+- Einhaltung einer sauberern Projektstruktur
 
 ---
 
@@ -57,8 +59,9 @@ LeoWeb ist eine modulare Webplattform für Schüler, die verschiedene Tools wie 
 
 ## Herausforderungen
 
-- Michael: ...
-- Manuel: ...
+- Michael:  
+- Manuel: das Einhalten einer strukturierten und sauberen Programmiertechnik, die das Entwickeln
+          von Modulen vereinfacht
 - Julian: ...
 - David: ...
 - Lukas: ...
