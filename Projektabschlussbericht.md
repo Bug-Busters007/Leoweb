@@ -43,17 +43,17 @@ LeoWeb ist eine modulare Webplattform für Schüler, die verschiedene Tools wie 
 
 ### Teammitglied 4: Lukas
 
-- BP1
-- BP2
-- BP3
+- Angular
+- ASP.NET
+- REST-API
 
 ---
 
 ### Teammitglied 5: David
 
-- BP1
-- BP2
-- BP3
+- Angular
+- ASP.NET
+- REST-API
 
 ---
 
@@ -63,8 +63,8 @@ LeoWeb ist eine modulare Webplattform für Schüler, die verschiedene Tools wie 
 - Manuel: das Einhalten einer strukturierten und sauberen Programmiertechnik, die das Entwickeln
           von Modulen vereinfacht
 - Julian: richtiges Verwenden von EF, REST-Endpoints mit ASP.NET, 
-- David: ...
-- Lukas: ...
+- David: Kommunikation mit Teammitglieder, mit Angular zurecht kommen
+- Lukas: Kommunikation im Team, Angular verstehen
 
 ---
 
