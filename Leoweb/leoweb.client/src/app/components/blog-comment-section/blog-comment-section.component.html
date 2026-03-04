@@ -1,0 +1,54 @@
+<div class="comments-section">
+  <h3>
+    <mat-icon>forum</mat-icon>
+    Kommentare ({{ comments.length }})
+  </h3>
+
+  <!-- Comment List -->
+  <div class="comments-list">
+    <div *ngFor="let comment of comments" class="comment-item">
+      <div class="comment-header">
+        <span class="comment-author">
+          <mat-icon>account_circle</mat-icon>
+          {{ comment.username }}
+        </span>
+        <span class="comment-date">{{ comment.createdAt | date:'dd.MM.yyyy HH:mm' }}</span>
+      </div>
+      <p class="comment-text">{{ comment.text }}</p>
+      <button *ngIf="isOwnComment(comment)"
+              mat-icon-button
+              class="comment-delete"
+              (click)="deleteComment(comment.id)">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+    </div>
+
+    <p *ngIf="comments.length === 0 && !isLoading" class="no-comments">
+      Noch keine Kommentare vorhanden.
+    </p>
+  </div>
+
+  <!-- Add Comment Form -->
+  <div *ngIf="commentsAllowed" class="add-comment">
+    <mat-form-field class="comment-input" appearance="outline">
+      <mat-label>Kommentar schreiben...</mat-label>
+      <textarea matInput
+                [(ngModel)]="newCommentText"
+                rows="3"
+                maxlength="1000">
+      </textarea>
+    </mat-form-field>
+    <button mat-raised-button
+            [disabled]="!newCommentText.trim()"
+            (click)="submitComment()">
+      <mat-icon>send</mat-icon>
+      Kommentieren
+    </button>
+  </div>
+
+  <p *ngIf="!commentsAllowed" class="comments-disabled">
+    <mat-icon>comments_disabled</mat-icon>
+    Kommentare sind für diesen Eintrag deaktiviert.
+  </p>
+</div>
+

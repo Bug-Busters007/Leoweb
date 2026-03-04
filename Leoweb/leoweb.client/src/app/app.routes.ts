@@ -45,6 +45,13 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'leoblog',
+    loadComponent: () => {
+      return import('./leo-blog/leo-blog.component').then(m => m.LeoBlogComponent);
+    },
+    canActivate: [authGuard]
+  },
+  {
     path: 'adminOverview',
     loadComponent: () => {
       return import('./components/admin/admin-overview/admin-overview.component').then(m => m.AdminOverviewComponent);

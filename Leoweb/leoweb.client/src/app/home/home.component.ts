@@ -63,6 +63,13 @@ export class HomeComponent implements OnInit{
       link: '/leoEvents',
       icon: 'event',
       iconClass: 'event-icon'
+    },
+    {
+      title: 'LeoBlog',
+      description: 'Erstelle und teile Blog-Einträge mit der Community',
+      link: '/leoblog',
+      icon: 'article',
+      iconClass: 'blog-icon'
     }
   ];
   adminModule: Module = {

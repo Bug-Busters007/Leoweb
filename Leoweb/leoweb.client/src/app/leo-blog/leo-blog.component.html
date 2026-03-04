@@ -1,0 +1,27 @@
+<div class="blog-header">
+  <button id="blogCreatorButton" mat-raised-button (click)="showEntryCreator()">
+    {{ isCreatorVisible ? 'Schließen' : 'Neuer Eintrag' }}
+  </button>
+</div>
+
+<div *ngIf="isCreatorVisible" id="createEntryDiv">
+  <app-blog-entry-creator></app-blog-entry-creator>
+</div>
+
+<div class="blog-content">
+  <div class="blog-sidebar">
+    <app-blog-category-filter (categorySelected)="onCategorySelected($event)"></app-blog-category-filter>
+  </div>
+
+  <div id="blogEntriesDiv" class="blog-entries">
+    <div *ngIf="filteredEntries && filteredEntries.length === 0" class="no-entries">
+      <p>Keine Blog-Einträge vorhanden.</p>
+    </div>
+    <app-blog-entry-display
+      *ngFor="let entry of filteredEntries"
+      [entry]="entry"
+      [isAdmin]="isAdmin">
+    </app-blog-entry-display>
+  </div>
+</div>
+

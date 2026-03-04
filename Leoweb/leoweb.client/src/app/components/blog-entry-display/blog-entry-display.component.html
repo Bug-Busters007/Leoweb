@@ -1,0 +1,84 @@
+<mat-card appearance="outlined" class="blog-card">
+  <mat-card-header (click)="toggleExpand()" class="clickable">
+    <div class="entry-header">
+      <div class="entry-meta">
+        <mat-chip-set>
+          <mat-chip class="category-chip">{{ entry.category }}</mat-chip>
+        </mat-chip-set>
+        <span class="entry-date">{{ entry.creationDate | date:'dd.MM.yyyy HH:mm' }}</span>
+      </div>
+      <h2 class="entry-title">{{ entry.title }}</h2>
+      <p class="entry-author">
+        <mat-icon>person</mat-icon>
+        {{ getAuthorName() }}
+      </p>
+      <p class="entry-description">{{ entry.description }}</p>
+      <div class="entry-stats">
+        <span class="stat">
+          <mat-icon>visibility</mat-icon>
+          {{ entry.impressionCount }}
+        </span>
+        <span class="stat" *ngIf="entry.commentsAllowed">
+          <mat-icon>comment</mat-icon>
+          Kommentare erlaubt
+        </span>
+        <span class="stat" *ngIf="!entry.commentsAllowed">
+          <mat-icon>comments_disabled</mat-icon>
+          Keine Kommentare
+        </span>
+        <span class="stat" *ngIf="getLastEditDate()">
+          <mat-icon>edit</mat-icon>
+          Bearbeitet: {{ getLastEditDate() | date:'dd.MM.yyyy' }}
+        </span>
+      </div>
+    </div>
+    <mat-icon class="expand-icon">{{ isExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+  </mat-card-header>
+
+  <mat-card-content *ngIf="isExpanded" class="entry-content">
+    <!-- Text Content -->
+    <div *ngIf="entry.content?.text" class="content-section">
+      <h3>Inhalt</h3>
+      <p class="content-text">{{ entry.content.text }}</p>
+    </div>
+
+    <!-- Images (base64) -->
+    <div *ngIf="entry.content?.images?.length" class="content-section">
+      <h3>Bilder</h3>
+      <div class="image-gallery">
+        <img *ngFor="let img of entry.content.images"
+             [src]="'data:image/png;base64,' + img"
+             alt="Blog Bild"
+             class="blog-image" />
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div *ngIf="entry.content?.links?.length" class="content-section">
+      <h3>Links</h3>
+      <ul class="link-list">
+        <li *ngFor="let link of entry.content.links">
+          <a [href]="link" target="_blank" rel="noopener noreferrer">
+            <mat-icon>link</mat-icon>
+            {{ link }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Actions -->
+    <div class="entry-actions" *ngIf="isOwner || isAdmin">
+      <button mat-raised-button color="warn" (click)="deleteEntry()">
+        <mat-icon>delete</mat-icon>
+        Löschen
+      </button>
+    </div>
+
+    <!-- Comments Section -->
+    <app-blog-comment-section
+      [entryId]="entry.id"
+      [commentsAllowed]="entry.commentsAllowed">
+    </app-blog-comment-section>
+  </mat-card-content>
+</mat-card>
+

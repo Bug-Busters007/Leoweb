@@ -90,6 +90,10 @@
   background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 }
 
+.blog-icon {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
 
 .module-title {
   font-size: 24px;
@@ -137,6 +141,10 @@
 
 .module-item:nth-child(5) .module-background {
   background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);
+}
+
+.module-item:nth-child(6) .module-background {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
 @media (max-width: 600px) {

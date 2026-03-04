@@ -1,0 +1,116 @@
+<mat-card appearance="outlined" class="container">
+  <mat-stepper [linear]="isLinear" #stepper>
+    <!-- Step 1: Title -->
+    <mat-step [stepControl]="titleFormGroup">
+      <form [formGroup]="titleFormGroup">
+        <ng-template matStepLabel>Titel</ng-template>
+        <mat-form-field class="full-width">
+          <mat-label>Titel des Blog-Eintrags</mat-label>
+          <input matInput formControlName="title" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Weiter</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 2: Description -->
+    <mat-step [stepControl]="descriptionFormGroup">
+      <form [formGroup]="descriptionFormGroup">
+        <ng-template matStepLabel>Beschreibung</ng-template>
+        <mat-form-field class="full-width">
+          <mat-label>Kurzbeschreibung</mat-label>
+          <textarea matInput formControlName="description" rows="3" required></textarea>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Zurück</button>
+          <button mat-button matStepperNext>Weiter</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 3: Category -->
+    <mat-step [stepControl]="categoryFormGroup">
+      <form [formGroup]="categoryFormGroup">
+        <ng-template matStepLabel>Kategorie</ng-template>
+        <mat-form-field class="full-width">
+          <mat-label>Kategorie</mat-label>
+          <mat-select formControlName="category" required>
+            @for (cat of categories; track cat.id) {
+              <mat-option [value]="cat.name">{{ cat.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Zurück</button>
+          <button mat-button matStepperNext>Weiter</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 4: Content -->
+    <mat-step [stepControl]="contentFormGroup">
+      <form [formGroup]="contentFormGroup">
+        <ng-template matStepLabel>Inhalt</ng-template>
+
+        <!-- Text Content -->
+        <mat-form-field class="full-width">
+          <mat-label>Text</mat-label>
+          <textarea matInput formControlName="text" rows="8" placeholder="Dein Blog-Text..."></textarea>
+        </mat-form-field>
+
+        <!-- Links -->
+        <h4>Links</h4>
+        <mat-form-field class="full-width">
+          <mat-label>Links hinzufügen</mat-label>
+          <mat-chip-grid #linkChipGrid>
+            @for (link of links; track link) {
+              <mat-chip-row (removed)="removeLink(link)">
+                {{ link }}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            }
+          </mat-chip-grid>
+          <input placeholder="https://..."
+                 [matChipInputFor]="linkChipGrid"
+                 (matChipInputTokenEnd)="addLink($event)" />
+        </mat-form-field>
+
+        <!-- Images -->
+        <h4>Bilder (Base64)</h4>
+        <input type="file" accept="image/*" multiple (change)="onImageSelected($event)" />
+        <div class="image-preview-grid" *ngIf="base64Images.length > 0">
+          <div *ngFor="let img of base64Images; let i = index" class="image-preview">
+            <img [src]="'data:image/png;base64,' + img" alt="Vorschau" />
+            <button mat-icon-button class="remove-image-btn" (click)="removeImage(i)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <button mat-button matStepperPrevious>Zurück</button>
+          <button mat-button matStepperNext>Weiter</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 5: Settings -->
+    <mat-step>
+      <ng-template matStepLabel>Einstellungen</ng-template>
+      <form [formGroup]="settingsFormGroup">
+        <mat-slide-toggle formControlName="commentsAllowed">
+          Kommentare erlauben
+        </mat-slide-toggle>
+      </form>
+      <div class="final-actions">
+        <button mat-button matStepperPrevious>Zurück</button>
+        <button mat-button (click)="reset(stepper)">Zurücksetzen</button>
+        <button mat-raised-button (click)="createEntry(stepper)">Erstellen</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</mat-card>
+

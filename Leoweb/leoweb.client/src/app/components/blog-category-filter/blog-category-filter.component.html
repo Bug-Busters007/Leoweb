@@ -1,0 +1,24 @@
+<div class="category-filter">
+  <h3>
+    <mat-icon>category</mat-icon>
+    Kategorien
+  </h3>
+
+  <button mat-button
+          class="category-btn"
+          [class.active]="selectedCategory === ''"
+          (click)="clearFilter()">
+    <mat-icon>list</mat-icon>
+    Alle
+  </button>
+
+  <button *ngFor="let cat of categories"
+          mat-button
+          class="category-btn"
+          [class.active]="selectedCategory === cat.name"
+          (click)="selectCategory(cat.name)">
+    <mat-icon>label</mat-icon>
+    {{ cat.name }}
+  </button>
+</div>
+

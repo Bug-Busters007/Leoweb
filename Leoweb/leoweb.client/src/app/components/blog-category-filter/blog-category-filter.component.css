@@ -1,0 +1,36 @@
+.category-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 12px;
+}
+
+.category-filter h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.category-btn {
+  justify-content: flex-start;
+  text-align: left;
+  border-radius: 8px;
+}
+
+.category-btn.active {
+  background: #e3f2fd;
+  font-weight: 600;
+}
+
+.category-btn mat-icon {
+  margin-right: 8px;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
