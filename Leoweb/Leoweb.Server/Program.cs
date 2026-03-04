@@ -1,27 +1,35 @@
 using System.Text;
 using Microsoft.EntityFrameworkCore;
-using DotNetEnv;
-using Leoweb.Server;
 using Leoweb.Server.Database.Data;
 using Leoweb.Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using MongoDB.Driver;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlite("Data Source=app.db"));
 builder.Services.AddDbContext<ChatDbContext>(options =>
     options.UseSqlite("Data Source=chat.db"));
+
+// ════════════════════════════════════════
+// MongoDB-Konfiguration für das Blog-System
+// ════════════════════════════════════════
+var mongoConnectionString = builder.Configuration.GetValue<string>("MongoDB:ConnectionString") ?? "mongodb://localhost:27017";
+var mongoDatabaseName = builder.Configuration.GetValue<string>("MongoDB:DatabaseName") ?? "leoblog";
+var mongoClient = new MongoClient(mongoConnectionString);
+var mongoDatabase = mongoClient.GetDatabase(mongoDatabaseName);
+builder.Services.AddSingleton<IMongoDatabase>(mongoDatabase);
+builder.Services.AddScoped<IBlogService, BlogService>();
+
 builder.Services.AddScoped<AuthService>();
-builder.Services.AddSignalR();
 
 builder.Services.AddCors(options =>
 {
@@ -52,7 +60,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 builder.Services.AddHttpClient<ScraperService>();
 builder.Services.AddScoped<ScraperService>();
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+    });
 builder.Services.AddSignalR();
 
 
@@ -83,5 +95,9 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHub<ChatHub>("/chatHub");
 });
 
+// ════════════════════════════════════════
+// Blog-Daten seeden (nur wenn Collections leer sind)
+// ════════════════════════════════════════
+await BlogSeeder.SeedAsync(mongoDatabase);
 
 app.Run();
