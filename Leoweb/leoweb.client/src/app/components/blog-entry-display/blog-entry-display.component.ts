@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule, NgForOf, NgIf, DatePipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,6 +31,7 @@ import { RefreshService } from '../../../services/refresh.service';
 export class BlogEntryDisplayComponent implements OnInit {
   @Input() entry!: BlogEntry;
   @Input() isAdmin = false;
+  @Output() editRequested = new EventEmitter<BlogEntry>();
 
   isExpanded = false;
   isOwner = false;
@@ -66,6 +67,10 @@ export class BlogEntryDisplayComponent implements OnInit {
         },
       });
     }
+  }
+
+  requestEdit(): void {
+    this.editRequested.emit(this.entry);
   }
 
   getAuthorName(): string {

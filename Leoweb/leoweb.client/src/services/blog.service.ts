@@ -77,7 +77,7 @@ export class BlogService {
     return this.http.post<BlogEntry>(url, entry);
   }
 
-  updateEntry(id: string, entry: CreateBlogEntryRequest): Observable<BlogEntry> {
+  updateEntry(id: string, entry: BlogEntry): Observable<BlogEntry> {
     const url = this.apiService.getApiUrl(`Blog/${id}`);
     return this.http.put<BlogEntry>(url, entry);
   }
@@ -112,4 +112,3 @@ export class BlogService {
     return this.http.post<void>(url, {});
   }
 }
-

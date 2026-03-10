@@ -108,7 +108,7 @@
       <div class="final-actions">
         <button mat-button matStepperPrevious>Zurück</button>
         <button mat-button (click)="reset(stepper)">Zurücksetzen</button>
-        <button mat-raised-button (click)="createEntry(stepper)">Erstellen</button>
+        <button mat-raised-button (click)="createEntry(stepper)">{{ editEntry ? 'Speichern' : 'Erstellen' }}</button>
       </div>
     </mat-step>
   </mat-stepper>

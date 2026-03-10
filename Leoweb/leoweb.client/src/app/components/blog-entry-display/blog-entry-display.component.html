@@ -68,6 +68,10 @@
 
     <!-- Actions -->
     <div class="entry-actions" *ngIf="isOwner || isAdmin">
+      <button mat-raised-button color="primary" (click)="requestEdit()">
+        <mat-icon>edit</mat-icon>
+        Bearbeiten
+      </button>
       <button mat-raised-button color="warn" (click)="deleteEntry()">
         <mat-icon>delete</mat-icon>
         Löschen

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -13,6 +13,7 @@ import { MatChipsModule, MatChipInputEvent } from '@angular/material/chips';
 import { BlogService } from '../../../services/blog.service';
 import { RefreshService } from '../../../services/refresh.service';
 import { BlogCategory } from '../../../models/blogCategoryModel';
+import { BlogEntry } from '../../../models/blogEntryModel';
 
 @Component({
   selector: 'app-blog-entry-creator',
@@ -35,6 +36,9 @@ import { BlogCategory } from '../../../models/blogCategoryModel';
   ],
 })
 export class BlogEntryCreatorComponent implements OnInit {
+  @Input() editEntry: BlogEntry | null = null;
+  @Output() saved = new EventEmitter<void>();
+
   categories: BlogCategory[] = [];
   links: string[] = [];
   base64Images: string[] = [];
@@ -49,6 +53,10 @@ export class BlogEntryCreatorComponent implements OnInit {
   async ngOnInit() {
     const result = await this.blogService.getCategories();
     this.categories = result ?? [];
+
+    if (this.editEntry) {
+      this.patchFormFromEntry(this.editEntry);
+    }
   }
 
   titleFormGroup = this._formBuilder.group({
@@ -118,29 +126,55 @@ export class BlogEntryCreatorComponent implements OnInit {
       commentsAllowed: this.settingsFormGroup.value.commentsAllowed ?? true,
     };
 
-    // Sicherstellen, dass der User als Blog-User registriert ist
     await this.blogService.ensureBlogUser();
 
-    this.blogService.createEntry(entryData).subscribe({
+    const updatePayload = this.editEntry
+      ? {
+          ...this.editEntry,
+          ...entryData,
+          content: { ...entryData.content },
+        }
+      : null;
+
+    const request$ = this.editEntry
+      ? this.blogService.updateEntry(this.editEntry.id, updatePayload!)
+      : this.blogService.createEntry(entryData);
+
+    request$.subscribe({
       next: (response) => {
-        console.log('Blog entry created!', response);
+        console.log(this.editEntry ? 'Blog entry updated!' : 'Blog entry created!', response);
         this.refreshService.triggerRefresh();
-        alert('Blog-Eintrag erfolgreich erstellt!');
+        this.saved.emit();
+        alert(this.editEntry ? 'Blog-Eintrag erfolgreich bearbeitet!' : 'Blog-Eintrag erfolgreich erstellt!');
         this.reset(stepper);
       },
       error: (err) => {
-        console.error('Error creating blog entry:', err);
+        console.error(this.editEntry ? 'Error updating blog entry:' : 'Error creating blog entry:', err);
         const message = err.error?.message || err.error || err.statusText || 'Unbekannter Fehler';
-        alert(`Fehler beim Erstellen des Blog-Eintrags (${err.status}): ${message}`);
+        alert(`Fehler beim ${this.editEntry ? 'Bearbeiten' : 'Erstellen'} des Blog-Eintrags (${err.status}): ${message}`);
       },
     });
   }
 
   reset(stepper: any): void {
     stepper.reset();
+    this.titleFormGroup.reset({ title: '' });
+    this.descriptionFormGroup.reset({ description: '' });
+    this.categoryFormGroup.reset({ category: '' });
+    this.contentFormGroup.reset({ text: '' });
+    this.settingsFormGroup.reset({ commentsAllowed: true });
     this.links = [];
     this.base64Images = [];
   }
-}
 
+  private patchFormFromEntry(entry: BlogEntry): void {
+    this.titleFormGroup.patchValue({ title: entry.title });
+    this.descriptionFormGroup.patchValue({ description: entry.description });
+    this.categoryFormGroup.patchValue({ category: entry.category });
+    this.contentFormGroup.patchValue({ text: entry.content?.text ?? '' });
+    this.settingsFormGroup.patchValue({ commentsAllowed: entry.commentsAllowed });
+    this.links = [...(entry.content?.links ?? [])];
+    this.base64Images = [...(entry.content?.images ?? [])];
+  }
+}
 

@@ -33,6 +33,7 @@ export class LeoBlogComponent implements OnInit, OnDestroy {
   isAdmin = false;
   role = '';
   selectedCategory = '';
+  editingEntry: BlogEntry | null = null;
   private refreshSub: Subscription | null = null;
 
   constructor(
@@ -71,6 +72,19 @@ export class LeoBlogComponent implements OnInit, OnDestroy {
 
   showEntryCreator(): void {
     this.isCreatorVisible = !this.isCreatorVisible;
+    if (!this.isCreatorVisible) {
+      this.editingEntry = null;
+    }
+  }
+
+  onEditRequested(entry: BlogEntry): void {
+    this.editingEntry = { ...entry, content: { ...entry.content } };
+    this.isCreatorVisible = true;
+  }
+
+  onEntrySaved(): void {
+    this.editingEntry = null;
+    this.isCreatorVisible = false;
   }
 
   onCategorySelected(category: string): void {

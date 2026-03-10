@@ -1,11 +1,11 @@
 <div class="blog-header">
   <button id="blogCreatorButton" mat-raised-button (click)="showEntryCreator()">
-    {{ isCreatorVisible ? 'Schließen' : 'Neuer Eintrag' }}
+    {{ isCreatorVisible ? 'Schließen' : (editingEntry ? 'Eintrag bearbeiten' : 'Neuer Eintrag') }}
   </button>
 </div>
 
 <div *ngIf="isCreatorVisible" id="createEntryDiv">
-  <app-blog-entry-creator></app-blog-entry-creator>
+  <app-blog-entry-creator [editEntry]="editingEntry" (saved)="onEntrySaved()"></app-blog-entry-creator>
 </div>
 
 <div class="blog-content">
@@ -20,8 +20,8 @@
     <app-blog-entry-display
       *ngFor="let entry of filteredEntries"
       [entry]="entry"
-      [isAdmin]="isAdmin">
+      [isAdmin]="isAdmin"
+      (editRequested)="onEditRequested($event)">
     </app-blog-entry-display>
   </div>
 </div>
-
